@@ -36,4 +36,4 @@ jobs:
           curl --fail --location https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default -o "$RUNNER_TEMP/butler.zip"
           unzip -q "$RUNNER_TEMP/butler.zip" -d "$RUNNER_TEMP/butler"
           chmod +x "$RUNNER_TEMP/butler/butler"
-          "$RUNNER_TEMP/butler/butler" push dist/web martindzejky/ld60:web --userversion "$GITHUB_REF_NAME"
+          "$RUNNER_TEMP/butler/butler" push dist/web martindzejky/while-the-lantern-burns:web --userversion "$GITHUB_REF_NAME"
