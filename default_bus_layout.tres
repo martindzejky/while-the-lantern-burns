@@ -4,8 +4,8 @@
 predelay_msec = 180.0
 room_size = 0.95
 damping = 0.6
-dry = 0.8
-wet = 0.4
+dry = 0.43
+wet = 0.63
 
 [resource]
 bus/1/name = &"Music"

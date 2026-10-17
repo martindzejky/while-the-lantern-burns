@@ -36,7 +36,8 @@ shader_parameter/ground_texture = SubResource("ground_texture")
 
 [node name="main" type="Node3D" unique_id=270892111]
 
-[node name="ambience" parent="." instance=ExtResource("12")]
+[node name="ambience" parent="." node_paths=PackedStringArray("target") instance=ExtResource("12")]
+target = NodePath("../player")
 
 [node name="environment" type="WorldEnvironment" parent="." unique_id=1644920340]
 environment = SubResource("environment")

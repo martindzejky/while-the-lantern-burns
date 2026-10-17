@@ -1,0 +1,31 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://71wl8ir5lbkh"]
+
+[ext_resource type="AudioStream" uid="uid://c8o1wcxyunpi5" path="res://ambience/water_drop_01.wav" id="1"]
+[ext_resource type="AudioStream" uid="uid://5flmf0u3uiyl" path="res://ambience/water_drop_02.wav" id="2"]
+[ext_resource type="AudioStream" uid="uid://bfipugplsp1a0" path="res://ambience/water_drop_03.wav" id="3"]
+[ext_resource type="AudioStream" uid="uid://cqfapo35ndvq8" path="res://ambience/water_drop_04.wav" id="4"]
+[ext_resource type="AudioStream" uid="uid://qtpa02glea4r" path="res://ambience/water_drop_05.wav" id="6"]
+[ext_resource type="AudioStream" uid="uid://the7w3gj21fw" path="res://ambience/rock_fall_01.wav" id="7"]
+[ext_resource type="AudioStream" uid="uid://ba5oslgvcppwn" path="res://ambience/rock_fall_02.wav" id="8"]
+[ext_resource type="AudioStream" uid="uid://c7j6bpl8c0nld" path="res://ambience/rock_fall_03.wav" id="9"]
+[ext_resource type="AudioStream" uid="uid://bdpuakwqvfxfl" path="res://ambience/rock_fall_04.wav" id="10"]
+[ext_resource type="AudioStream" uid="uid://bf462nmeobpqb" path="res://ambience/rock_fall_05.wav" id="11"]
+[ext_resource type="AudioStream" uid="uid://cluurq0hwwnad" path="res://ambience/bat_flutter_01.wav" id="12"]
+[ext_resource type="AudioStream" uid="uid://dlxorlyr8dsgv" path="res://ambience/bat_flutter_02.wav" id="13"]
+[ext_resource type="AudioStream" uid="uid://g05me0ub5tbm" path="res://ambience/bat_flutter_03.wav" id="14"]
+
+[resource]
+streams_count = 13
+stream_0/stream = ExtResource("1")
+stream_1/stream = ExtResource("2")
+stream_2/stream = ExtResource("3")
+stream_3/stream = ExtResource("4")
+stream_4/stream = ExtResource("6")
+stream_5/stream = ExtResource("7")
+stream_6/stream = ExtResource("8")
+stream_7/stream = ExtResource("9")
+stream_8/stream = ExtResource("10")
+stream_9/stream = ExtResource("11")
+stream_10/stream = ExtResource("12")
+stream_11/stream = ExtResource("13")
+stream_12/stream = ExtResource("14")

@@ -1,13 +1,23 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cjip80cip1fu2"]
 
-[ext_resource type="Script" path="res://ambience/controller.gd" id="1"]
-[ext_resource type="AudioStream" path="res://ambience/cave_hum.mp3" id="2"]
+[ext_resource type="Script" uid="uid://ded8a6qbhfnyw" path="res://ambience/controller.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://b2mtxadwlky3a" path="res://ambience/cave_hum.mp3" id="2"]
+[ext_resource type="AudioStream" path="res://ambience/one_shots.tres" id="3"]
 
-[node name="controller" type="Node"]
+[node name="controller" type="Node" unique_id=1271362179 node_paths=PackedStringArray("one_shots")]
 script = ExtResource("1")
+one_shots = NodePath("one_shots")
+min_distance = 5.0
+max_distance = 12.0
 
-[node name="hum" type="AudioStreamPlayer" parent="."]
+[node name="hum" type="AudioStreamPlayer" parent="." unique_id=75801626]
 stream = ExtResource("2")
+volume_db = -2.846
 autoplay = true
-volume_db = -12.0
 bus = &"Ambience"
+
+[node name="one_shots" type="AudioStreamPlayer3D" parent="." unique_id=1245468488]
+stream = ExtResource("3")
+volume_db = -18.062
+unit_size = 15.0
+bus = &"Ambience Reverb"
