@@ -1,6 +1,6 @@
-# Ludum Dare #60
+# While the Lantern Burns
 
-A game for the Ludum Dare 60 compo. Name and game to come during the jam.
+A game for the Ludum Dare #60 compo. Explore dark caverns, keep your lantern charged, and prepare your musket for what waits beyond the light.
 
 ## Theme
 
