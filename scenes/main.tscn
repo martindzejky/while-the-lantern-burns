@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://objects/enemy.tscn" id="9"]
 [ext_resource type="Script" uid="uid://lvfpqnu12jvv" path="res://scripts/player_light_debug.gd" id="10"]
 [ext_resource type="Script" path="res://scripts/ground.gd" id="11"]
+[ext_resource type="PackedScene" path="res://ambience/controller.tscn" id="12"]
 
 [sub_resource type="Environment" id="environment"]
 background_mode = 1
@@ -34,6 +35,8 @@ shader = ExtResource("4")
 shader_parameter/ground_texture = SubResource("ground_texture")
 
 [node name="main" type="Node3D" unique_id=270892111]
+
+[node name="ambience" parent="." instance=ExtResource("12")]
 
 [node name="environment" type="WorldEnvironment" parent="." unique_id=1644920340]
 environment = SubResource("environment")
