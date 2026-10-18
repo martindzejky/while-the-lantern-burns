@@ -64,6 +64,7 @@ position = Vector3(0, 1.12, -0.32)
 shape = SubResource("hitbox")
 
 [node name="visuals" type="Node3D" parent="." unique_id=34417323]
+position = Vector3(0, -0.2, 0)
 script = ExtResource("2")
 
 [node name="appearance" type="Node3D" parent="visuals"]
