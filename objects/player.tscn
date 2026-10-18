@@ -12,7 +12,7 @@ radius = 0.475
 height = 1.2
 
 [sub_resource type="Gradient" id="aim_color"]
-colors = PackedColorArray(1, 0.9, 0.6, 0.6, 1, 0.9, 0.6, 0.6)
+colors = PackedColorArray(1, 0.9, 0.6, 0.3, 1, 0.9, 0.6, 0.3)
 
 [sub_resource type="GradientTexture2D" id="aim_texture"]
 gradient = SubResource("aim_color")

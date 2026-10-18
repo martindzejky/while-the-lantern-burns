@@ -26,9 +26,13 @@ var _upper_body_blend: float = 0.0
 var _dead: bool = false
 var _facing_left: bool = false
 var _facing_back: bool = false
+var _aim_angle: float = 0.0
+var _aim_blend: float = 0.0
+var _aim_origin_bone: int
 
 
 func _ready() -> void:
+  _aim_origin_bone = skeleton.find_bone('shoulder_left')
   animation_tree.active = true
   animation_tree.set('parameters/life/transition_request', 'alive')
   animation_tree.set('parameters/equipment/transition_request', 'neutral')
@@ -45,6 +49,8 @@ func _process(delta: float) -> void:
   )
   animation_tree.set('parameters/locomotion/blend_amount', _movement_blend)
   animation_tree.set('parameters/upper_body/blend_amount', _upper_body_blend)
+  _aim_blend = move_toward(_aim_blend, 1.0 if _equipment_pose == EquipmentPose.MUSKET_AIM else 0.0, step)
+  animation_tree.set('parameters/aim/add_amount', _aim_angle / (PI * 0.5) * _aim_blend)
 
 
 func set_moving(moving: bool) -> void:
@@ -87,6 +93,16 @@ func _set_bone_depth(bone: int, depth: float) -> void:
 
 func is_facing_left() -> bool:
   return _facing_left
+
+
+func get_aim_origin() -> Vector3:
+  return skeleton.to_global(skeleton.get_bone_global_pose(_aim_origin_bone).origin)
+
+
+func set_aim_direction(direction: Vector2) -> void:
+  if _dead or direction.is_zero_approx():
+    return
+  _aim_angle = atan2(-direction.y, absf(direction.x))
 
 
 func set_equipment_pose(pose: EquipmentPose) -> void:

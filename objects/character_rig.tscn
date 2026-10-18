@@ -17,6 +17,8 @@
 [ext_resource type="Animation" path="res://animations/character/idle.tres" id="13_xf1mv"]
 [ext_resource type="Animation" path="res://animations/character/run.tres" id="14_8vffn"]
 
+[ext_resource type="Animation" path="res://animations/character/aim_offset.tres" id="aim_offset"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ajux4"]
 resource_local_to_scene = true
 render_priority = 0
@@ -54,6 +56,7 @@ resource_local_to_scene = true
 _data = {
 &"RESET": ExtResource("7_xdvdo"),
 &"aim_musket": ExtResource("8_5xyad"),
+&"aim_offset": ExtResource("aim_offset"),
 &"breathe": ExtResource("9_kbqru"),
 &"carry_lantern": ExtResource("10_yy2bs"),
 &"death": ExtResource("11_t27r0"),
@@ -127,6 +130,13 @@ animation = &"run"
 filter_enabled = true
 filters = [".:musket_angle", "flip/skeleton:arm_left", "flip/skeleton:arm_right", "flip/skeleton:hand_left", "flip/skeleton:hand_right", "flip/skeleton:head"]
 
+[sub_resource type="AnimationNodeAnimation" id="aim_offset"]
+animation = &"aim_offset"
+
+[sub_resource type="AnimationNodeAdd2" id="aim"]
+filter_enabled = true
+filters = ["flip/skeleton:shoulder_left", "flip/skeleton:shoulder_right", "flip/skeleton:neck"]
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b23ua"]
 nodes/idle/node = SubResource("AnimationNodeAnimation_sgsuk")
 nodes/idle/position = Vector2(-900, 0)
@@ -150,11 +160,15 @@ nodes/breathe/node = SubResource("AnimationNodeAnimation_83j6w")
 nodes/breathe/position = Vector2(-360, 400)
 nodes/breathing/node = SubResource("AnimationNodeAdd2_soh1n")
 nodes/breathing/position = Vector2(-80, 160)
+nodes/aim_offset/node = SubResource("aim_offset")
+nodes/aim_offset/position = Vector2(-80, -100)
+nodes/aim/node = SubResource("aim")
+nodes/aim/position = Vector2(180, 80)
 nodes/death/node = SubResource("AnimationNodeAnimation_w6wwh")
 nodes/death/position = Vector2(-80, 440)
 nodes/life/node = SubResource("AnimationNodeTransition_cvf3f")
-nodes/life/position = Vector2(180, 180)
-node_connections = [&"output", 0, &"life", &"locomotion", 0, &"idle", &"locomotion", 1, &"run", &"equipment", 0, &"pose_neutral", &"equipment", 1, &"pose_lantern", &"equipment", 2, &"pose_musket", &"equipment", 3, &"pose_aiming", &"upper_body", 0, &"locomotion", &"upper_body", 1, &"equipment", &"breathing", 0, &"upper_body", &"breathing", 1, &"breathe", &"life", 0, &"breathing", &"life", 1, &"death"]
+nodes/life/position = Vector2(450, 180)
+node_connections = [&"output", 0, &"life", &"locomotion", 0, &"idle", &"locomotion", 1, &"run", &"equipment", 0, &"pose_neutral", &"equipment", 1, &"pose_lantern", &"equipment", 2, &"pose_musket", &"equipment", 3, &"pose_aiming", &"upper_body", 0, &"locomotion", &"upper_body", 1, &"equipment", &"breathing", 0, &"upper_body", &"breathing", 1, &"breathe", &"aim", 0, &"breathing", &"aim", 1, &"aim_offset", &"life", 0, &"aim", &"life", 1, &"death"]
 
 [node name="character_rig" type="Node3D" unique_id=166766975 node_paths=PackedStringArray("animation", "animation_tree", "skeleton", "flip", "head", "torso", "left_hand_slot", "right_hand_slot", "back_slot")]
 script = ExtResource("1_5w654")
@@ -374,6 +388,7 @@ parameters/equipment/transition_request = ""
 parameters/equipment/current_index = -1
 parameters/upper_body/blend_amount = 0.0
 parameters/breathing/add_amount = 1.0
+parameters/aim/add_amount = 0.0
 parameters/life/current_state = ""
 parameters/life/transition_request = ""
 parameters/life/current_index = -1

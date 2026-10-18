@@ -12,6 +12,7 @@ signal ramrod_drag_changed(dragging: bool)
 @export var drop_slot: Marker3D
 @export var aim_line: Sprite3D
 @export var light_sensor: LightSensor
+@export var aim_height: float = 0.7
 @export var pickup_radius: float = 1.5
 @export var speed: float = 4.0
 @export var dash_speed: float = 14.0
@@ -250,6 +251,12 @@ func _update_equipment() -> void:
   elif musket.is_lit:
     pose = CharacterRig.EquipmentPose.MUSKET_READY
   rig.set_equipment_pose(pose)
+  if aiming:
+    var mouse := get_viewport().get_mouse_position()
+    var target := _get_aim_target(mouse)
+    rig.set_facing(Vector2(target.x - global_position.x, target.z - global_position.z))
+    var camera := get_viewport().get_camera_3d()
+    rig.set_aim_direction(mouse - camera.unproject_position(rig.get_aim_origin()))
   if not musket.is_owned:
     return
   var in_hands := aiming or musket.is_lit
@@ -270,14 +277,26 @@ func _aiming_requested() -> bool:
 
 func _update_aim_line(target: Vector3) -> void:
   var direction := global_position.direction_to(target)
-  var length := global_position.distance_to(target)
-  if is_zero_approx(length):
+  if direction.is_zero_approx():
     aim_line.hide()
     return
-  aim_line.global_position = (global_position + target) * 0.5 + Vector3.UP * 0.025
+  var length := musket.shot_range
+  aim_line.global_position = global_position + direction * length * 0.5 + Vector3.UP * 0.025
   aim_line.global_basis = Basis(direction, Vector3.UP.cross(direction), Vector3.UP).scaled_local(
     Vector3(length, 0.025, 1.0)
   )
+
+
+func _get_aim_target(mouse: Vector2) -> Vector3:
+  var camera := get_viewport().get_camera_3d()
+  var origin := camera.project_ray_origin(mouse)
+  var direction := camera.project_ray_normal(mouse)
+  var point: Variant = Plane(Vector3.UP, global_position.y + aim_height).intersects_ray(origin, direction)
+  if point == null:
+    return global_position
+  var target: Vector3 = point
+  target.y = global_position.y
+  return global_position + (target - global_position).limit_length(musket.shot_range)
 
 
 func _physics_process(_delta: float) -> void:
@@ -295,14 +314,14 @@ func _physics_process(_delta: float) -> void:
     velocity = Vector3(direction.x, 0.0, direction.y) * speed
 
   move_and_slide()
-  rig.set_facing(Vector2(velocity.x, velocity.z))
+  if not _aiming_requested():
+    rig.set_facing(Vector2(velocity.x, velocity.z))
   rig.set_moving(not velocity.is_zero_approx())
   _update_equipment()
   aim_line.visible = musket.is_aiming
   var target := global_position
   if musket.is_aiming:
-    var aim_direction := Vector3.LEFT if rig.is_facing_left() else Vector3.RIGHT
-    target = global_position + aim_direction * musket.shot_range
+    target = _get_aim_target(get_viewport().get_mouse_position())
     _update_aim_line(target)
   if _shot_requested or _fuse_shot_requested:
     _shot_requested = false
