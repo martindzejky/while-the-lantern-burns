@@ -1,0 +1,93 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/monster_preview.gd" id="preview"]
+[ext_resource type="PackedScene" path="res://objects/enemy.tscn" id="enemy"]
+
+[sub_resource type="Environment" id="environment"]
+background_mode = 1
+background_color = Color(0.008, 0.022, 0.012, 1)
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.25
+
+[sub_resource type="StandardMaterial3D" id="ground"]
+albedo_color = Color(0.95, 0.7402083, 0.44650003, 1)
+roughness = 1.0
+
+[node name="monster_preview" type="Node3D" node_paths=PackedStringArray("camera")]
+script = ExtResource("preview")
+camera = NodePath("camera")
+
+[node name="environment" type="WorldEnvironment" parent="."]
+environment = SubResource("environment")
+
+[node name="ground" type="CSGBox3D" parent="."]
+position = Vector3(0, -0.03, 1.5)
+size = Vector3(12, 0.06, 9)
+material = SubResource("ground")
+
+[node name="light" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-50, -25, 0)
+light_energy = 1.0
+shadow_enabled = true
+
+[node name="camera" type="Camera3D" parent="."]
+position = Vector3(0, 7, 10)
+rotation_degrees = Vector3(-40, 0, 0)
+current = true
+fov = 45.0
+
+[node name="monster_1" parent="." instance=ExtResource("enemy")]
+position = Vector3(-3.2, 0, 0)
+preview = true
+head_variant = 0
+body_variant = 0
+eye_variant = 0
+
+[node name="monster_2" parent="." instance=ExtResource("enemy")]
+position = Vector3(0, 0, 0)
+preview = true
+head_variant = 1
+body_variant = 1
+eye_variant = 1
+
+[node name="monster_3" parent="." instance=ExtResource("enemy")]
+position = Vector3(3.2, 0, 0)
+preview = true
+head_variant = 2
+body_variant = 2
+eye_variant = 2
+
+[node name="monster_4" parent="." instance=ExtResource("enemy")]
+position = Vector3(-3.2, 0, 3.2)
+preview = true
+head_variant = 0
+body_variant = 1
+eye_variant = 3
+
+[node name="monster_5" parent="." instance=ExtResource("enemy")]
+position = Vector3(0, 0, 3.2)
+preview = true
+head_variant = 1
+body_variant = 2
+eye_variant = 4
+
+[node name="monster_6" parent="." instance=ExtResource("enemy")]
+position = Vector3(3.2, 0, 3.2)
+preview = true
+head_variant = 2
+body_variant = 0
+eye_variant = 0
+
+[node name="hud" type="CanvasLayer" parent="."]
+
+[node name="instructions" type="Label" parent="hud"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 56.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 24
+text = "Click a monster to preview its bite"
+horizontal_alignment = 1
