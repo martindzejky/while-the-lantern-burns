@@ -1,6 +1,8 @@
 shader_type spatial;
 render_mode cull_disabled, specular_disabled;
 
+#include "res://shaders/ground_light_profile.gdshaderinc"
+
 uniform sampler2D ground_texture : source_color;
 
 void fragment() {
@@ -8,7 +10,6 @@ void fragment() {
 }
 
 void light() {
-  // Godot supplies attenuation for each light, including its shadows.
-  float lit = step(0.001, ATTENUATION);
+  float lit = ground_light_profile(ATTENUATION, LIGHT_COLOR, LIGHT_IS_DIRECTIONAL);
   DIFFUSE_LIGHT += lit * LIGHT_COLOR / PI;
 }
