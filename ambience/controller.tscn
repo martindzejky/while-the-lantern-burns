@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ded8a6qbhfnyw" path="res://ambience/controller.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://b2mtxadwlky3a" path="res://ambience/cave_hum.mp3" id="2"]
-[ext_resource type="AudioStream" path="res://ambience/one_shots.tres" id="3"]
+[ext_resource type="AudioStream" uid="uid://71wl8ir5lbkh" path="res://ambience/one_shots.tres" id="3"]
 
 [node name="controller" type="Node" unique_id=1271362179 node_paths=PackedStringArray("one_shots")]
 script = ExtResource("1")

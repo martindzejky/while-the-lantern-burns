@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cwsar4g8vkhkt" path="res://scripts/player.gd" id="1"]
 [ext_resource type="Script" uid="uid://dp4r0732t61ar" path="res://scripts/camera_facing.gd" id="2"]
 [ext_resource type="Shader" uid="uid://owwq0vhtovdm" path="res://shaders/player_lighting.gdshader" id="3"]
-[ext_resource type="PackedScene" path="res://objects/light_sensor.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://c616kmmr8did" path="res://objects/light_sensor.tscn" id="4"]
 
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.475
@@ -30,8 +30,8 @@ shader = ExtResource("3")
 shader_parameter/sprite_texture = SubResource("texture")
 
 [node name="player" type="CharacterBody3D" unique_id=1376385991 node_paths=PackedStringArray("flip", "lantern_slot", "drop_slot", "musket_back_slot", "musket_front_slot", "musket_aim_slot", "aim_line", "light_sensor")]
-motion_mode = 1
 collision_mask = 5
+motion_mode = 1
 script = ExtResource("1")
 flip = NodePath("visuals/flip")
 lantern_slot = NodePath("visuals/flip/lantern_slot")
@@ -80,6 +80,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.55, 0.15)
 [node name="drop_slot" type="Marker3D" parent="." unique_id=207987825]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.813, 0, 0.15)
 
-[node name="light_sensor" parent="." instance=ExtResource("4")]
+[node name="light_sensor" parent="." unique_id=324174042 instance=ExtResource("4")]
 
 [connection signal="light_changed" from="light_sensor" to="." method="_on_light_sensor_light_changed"]

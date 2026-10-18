@@ -4,8 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b23ljjugvy28f" path="res://sprites/lantern_ui_cap.png" id="cap"]
 [ext_resource type="Texture2D" uid="uid://bgt4blsdyiwfy" path="res://sprites/lantern_ui_knob.png" id="knob"]
 [ext_resource type="Texture2D" uid="uid://dm07hnfmw5wgj" path="res://sprites/lantern_ui_lever.png" id="lever"]
-
-[ext_resource type="Script" path="res://scripts/lantern_ui.gd" id="ui"]
+[ext_resource type="Script" uid="uid://bop1okto7t5je" path="res://scripts/lantern_ui.gd" id="ui"]
 
 [node name="lantern_ui" type="Control" unique_id=1816983245 node_paths=PackedStringArray("hover_offset", "reaction", "lever")]
 layout_mode = 3
@@ -20,20 +19,19 @@ offset_right = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
-
 script = ExtResource("ui")
 hover_offset = NodePath("hover_offset")
 reaction = NodePath("hover_offset/reaction")
 lever = NodePath("hover_offset/reaction/lever")
 
-[node name="hover_offset" type="Control" parent="."]
-layout_mode = 0
+[node name="hover_offset" type="Control" parent="." unique_id=1772334986]
+anchors_preset = 0
 mouse_filter = 2
 
-[node name="reaction" type="Control" parent="hover_offset"]
-layout_mode = 0
-mouse_filter = 2
+[node name="reaction" type="Control" parent="hover_offset" unique_id=1227063181]
+anchors_preset = 0
 pivot_offset = Vector2(150, 300)
+mouse_filter = 2
 
 [node name="body" type="Control" parent="hover_offset/reaction" unique_id=733818548]
 anchors_preset = 0
@@ -95,13 +93,11 @@ mouse_filter = 2
 texture = ExtResource("knob")
 expand_mode = 1
 
-[node name="click_target" type="Control" parent="hover_offset/reaction"]
-layout_mode = 0
+[node name="click_target" type="Control" parent="hover_offset/reaction" unique_id=582865830]
+anchors_preset = 0
 offset_left = 55.0
-offset_top = 0.0
 offset_right = 285.0
 offset_bottom = 382.0
-mouse_filter = 0
 mouse_default_cursor_shape = 2
 
 [connection signal="gui_input" from="hover_offset/reaction/click_target" to="." method="_on_click_input"]

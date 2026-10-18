@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://dp4r0732t61ar" path="res://scripts/camera_facing.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://gpswbtemjjy3" path="res://sprites/musket_world.png" id="3"]
 [ext_resource type="Shader" uid="uid://6hhe3yks1iro" path="res://shaders/sprite_lighting.gdshader" id="4"]
-[ext_resource type="PackedScene" path="res://effects/muzzle_flash.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://effects/musket_smoke.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://fe24h0njihi4" path="res://effects/muzzle_flash.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://pbep40okecmw" path="res://effects/musket_smoke.tscn" id="6"]
 
 [sub_resource type="ShaderMaterial" id="material"]
 render_priority = 0
@@ -44,7 +44,7 @@ script = ExtResource("2")
 material_override = SubResource("material")
 cast_shadow = 0
 offset = Vector2(478, -68)
-pixel_size = 0.0022594143
+pixel_size = 0.0022594144
 alpha_cut = 1
 texture = ExtResource("3")
 

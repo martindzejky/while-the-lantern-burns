@@ -1,7 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dnep4itj4mhsi"]
 
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1"]
-[ext_resource type="Script" path="res://scripts/camera_facing.gd" id="2"]
+[ext_resource type="Script" uid="uid://r0lhe7hcf37b" path="res://scripts/enemy.gd" id="1"]
+[ext_resource type="Script" uid="uid://dp4r0732t61ar" path="res://scripts/camera_facing.gd" id="2"]
 
 [sub_resource type="BoxShape3D" id="hitbox"]
 size = Vector3(1.4, 1.6, 1.8)
@@ -27,44 +27,38 @@ gradient = SubResource("eye_color")
 width = 16
 height = 8
 
-[node name="enemy" type="CharacterBody3D" node_paths=PackedStringArray("head")]
-motion_mode = 1
+[node name="enemy" type="CharacterBody3D" unique_id=67314845 node_paths=PackedStringArray("head")]
 collision_layer = 2
 collision_mask = 4
+motion_mode = 1
 script = ExtResource("1")
 head = NodePath("visuals/head")
 
-[node name="hitbox" type="CollisionShape3D" parent="."]
-position = Vector3(0, 0.7, -0.2)
+[node name="hitbox" type="CollisionShape3D" parent="." unique_id=1070230378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.2)
 shape = SubResource("hitbox")
 
-[node name="visuals" type="Node3D" parent="."]
+[node name="visuals" type="Node3D" parent="." unique_id=34417323]
 script = ExtResource("2")
 
-[node name="body" type="Sprite3D" parent="visuals"]
-position = Vector3(0, 0.3, 0)
-pixel_size = 0.01
+[node name="body" type="Sprite3D" parent="visuals" unique_id=703009130]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 alpha_cut = 1
-cast_shadow = 1
 texture = SubResource("body_texture")
 
-[node name="head" type="Sprite3D" parent="visuals"]
-position = Vector3(0, 0.8, 0)
-pixel_size = 0.01
+[node name="head" type="Sprite3D" parent="visuals" unique_id=1154797101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 alpha_cut = 1
-cast_shadow = 1
 texture = SubResource("head_texture")
 
-[node name="eye_left" type="Sprite3D" parent="visuals/head"]
-position = Vector3(-0.22, 0.03, 0.01)
-pixel_size = 0.01
-alpha_cut = 1
+[node name="eye_left" type="Sprite3D" parent="visuals/head" unique_id=350035251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, 0.03, 0.01)
 cast_shadow = 0
+alpha_cut = 1
 texture = SubResource("eye_texture")
 
-[node name="eye_right" type="Sprite3D" parent="visuals/head"]
-position = Vector3(0.22, 0.03, 0.01)
-pixel_size = 0.01
-alpha_cut = 1
+[node name="eye_right" type="Sprite3D" parent="visuals/head" unique_id=1029272322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 0.03, 0.01)
 cast_shadow = 0
+alpha_cut = 1
 texture = SubResource("eye_texture")
