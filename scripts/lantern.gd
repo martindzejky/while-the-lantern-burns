@@ -21,6 +21,10 @@ signal lever_changed(openness: float)
 @export var max_radius: float = 8.0
 @export var min_brightness: float = 0.15
 @export var max_brightness: float = 1.1
+## x: charge (0 = empty, 1 = full light); y: blend from minimum to maximum radius.
+@export var radius_curve: Curve
+## x: charge (0 = empty, 1 = full light); y: blend from minimum to maximum brightness.
+@export var brightness_curve: Curve
 @export var flicker_noise: Noise
 @export_range(0.0, 0.2, 0.005) var flicker_amount: float = 0.04
 
@@ -76,8 +80,12 @@ func _update_light() -> void:
   var charge := clampf(energy / (max_energy * full_light_threshold), 0.0, 1.0)
   var noise := clampf(flicker_noise.get_noise_1d(_flicker_time) * 0.5 + 0.5, 0.0, 1.0)
   charge *= 1.0 - noise * flicker_amount
-  light.omni_range = lerpf(min_radius, max_radius, charge)
-  light.light_energy = lerpf(min_brightness, max_brightness, charge)
+  light.omni_range = lerpf(
+    min_radius, max_radius, clampf(radius_curve.sample_baked(charge), 0.0, 1.0)
+  )
+  light.light_energy = lerpf(
+    min_brightness, max_brightness, clampf(brightness_curve.sample_baked(charge), 0.0, 1.0)
+  )
 
 
 func set_carried(carried: bool) -> void:

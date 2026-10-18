@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://ds3fqg0cq3s7i" path="res://scripts/lantern.gd" id="1"]
 [ext_resource type="Script" uid="uid://dp4r0732t61ar" path="res://scripts/camera_facing.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cy42a8y3lyufq" path="res://sprites/lantern_world.png" id="3"]
+[ext_resource type="Curve" uid="uid://v7etjfel6fgn" path="res://resources/lantern/brightness.tres" id="brightness_curve"]
+[ext_resource type="Curve" path="res://resources/lantern/radius.tres" id="radius_curve"]
 [ext_resource type="PackedScene" path="res://objects/drop_shadow.tscn" id="shadow"]
 
 [sub_resource type="FastNoiseLite" id="flicker_noise"]
@@ -16,14 +18,16 @@ light = NodePath("visuals/swing/light")
 visuals = NodePath("visuals")
 swing = NodePath("visuals/swing")
 min_radius = 0.6
+radius_curve = ExtResource("radius_curve")
+brightness_curve = ExtResource("brightness_curve")
 flicker_noise = SubResource("flicker_noise")
 flicker_amount = 0.03
 
 [node name="visuals" type="Node3D" parent="." unique_id=241417503]
 script = ExtResource("2")
 
-[node name="swing" type="Node3D" parent="visuals"]
-position = Vector3(0, 0.77, 0)
+[node name="swing" type="Node3D" parent="visuals" unique_id=930632651]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77, 0)
 
 [node name="sprite" type="Sprite3D" parent="visuals/swing" unique_id=418356784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7743641, 0)
@@ -35,7 +39,6 @@ texture = ExtResource("3")
 
 [node name="light" type="OmniLight3D" parent="visuals/swing" unique_id=876345472]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.365, 0)
-light_color = Color(1, 1, 1, 1)
 light_energy = 1.1
 light_specular = 0.0
 shadow_enabled = true
@@ -43,12 +46,12 @@ shadow_blur = 0.0
 omni_range = 6.0
 omni_attenuation = 0.0
 
+[node name="grip" type="Marker3D" parent="visuals" unique_id=1749751354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77, 0)
+
 [node name="shadow" parent="." unique_id=1594059550 node_paths=PackedStringArray("anchor") instance=ExtResource("shadow")]
 transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
 pixel_size = 0.0035
 anchor = NodePath("..")
 
 [connection signal="carried_changed" from="." to="shadow" method="set_carried"]
-
-[node name="grip" type="Marker3D" parent="visuals"]
-position = Vector3(0, 0.77, 0)
