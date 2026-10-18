@@ -19,6 +19,7 @@ signal lever_changed(openness: float)
 @export var swing_stiffness: float = 45.0
 @export var swing_damping: float = 5.0
 @export var max_energy: float = 100.0
+@export var initial_energy: float = 100.0
 @export var energy_drain: float = 5.0
 @export var energy_per_press: float = 15.0
 @export_range(0.01, 1.0, 0.01) var full_light_threshold: float = 0.7
@@ -48,7 +49,7 @@ var _lever_volume_db: float
 
 func _ready() -> void:
   _lever_volume_db = lever_audio.volume_db
-  energy = max_energy
+  energy = clampf(initial_energy, 0.0, max_energy)
   _update_light()
 
 

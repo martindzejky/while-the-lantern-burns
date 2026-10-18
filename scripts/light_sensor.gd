@@ -10,7 +10,7 @@ signal light_changed(lit: bool)
 @export var probe: Sprite3D
 @export var camera: Camera3D
 @export var viewport: SubViewport
-@export var threshold: float = 0.1
+@export var threshold: float = 0.02
 @export var sample_interval: float = 0.1
 
 var exposure: float = 0.0

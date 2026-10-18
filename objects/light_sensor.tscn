@@ -26,6 +26,7 @@ script = ExtResource("1")
 probe = NodePath("probe")
 camera = NodePath("viewport/camera")
 viewport = NodePath("viewport")
+threshold = 0.02
 
 [node name="probe" type="Sprite3D" parent="." unique_id=1706970169]
 transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0.025, 0)
