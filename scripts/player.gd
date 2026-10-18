@@ -6,16 +6,12 @@ signal light_changed(lit: bool)
 signal darkness_progress_changed(progress: float)
 signal ramrod_drag_changed(dragging: bool)
 
-@export var flip: Node3D
+@export var rig: CharacterRig
 @export var musket: Musket
 @export var lantern: Lantern
-@export var left_hand_slot: Marker3D
-@export var right_hand_slot: Marker3D
-@export var back_slot: Marker3D
 @export var drop_slot: Marker3D
 @export var aim_line: Sprite3D
 @export var light_sensor: LightSensor
-@export var aim_height: float = 0.7
 @export var pickup_radius: float = 1.5
 @export var speed: float = 4.0
 @export var dash_speed: float = 14.0
@@ -152,7 +148,7 @@ func die() -> void:
   _shot_requested = false
   _fuse_shot_requested = false
   _update_equipment()
-  flip.scale *= 0.5
+  rig.show_death()
   aim_line.hide()
   set_process(false)
   set_physics_process(false)
@@ -196,7 +192,7 @@ func _dash() -> void:
 func _interact() -> void:
   _set_dragging_ramrod(false)
   if not musket.is_owned and _within_reach(musket):
-    _attach(musket, back_slot)
+    _attach(musket, rig.get_back_slot())
     musket.equip()
   elif lantern.is_carried:
     lantern.reparent(_item_parent)
@@ -204,8 +200,8 @@ func _interact() -> void:
     lantern.set_carried(false)
   elif not musket.is_lit and _within_reach(lantern):
     lantern.set_carried(true)
-    _attach(lantern, left_hand_slot)
-    _align_grip(lantern, lantern.grip, left_hand_slot)
+    _attach(lantern, rig.get_right_hand_slot())
+    _align_grip(lantern, lantern.grip, rig.get_right_hand_slot())
   _update_equipment()
 
 
@@ -225,17 +221,22 @@ func _align_grip(item: Node3D, grip: Marker3D, slot: Marker3D) -> void:
 func _update_equipment() -> void:
   var aiming := _aiming_requested()
   musket.set_aiming(aiming)
+  var pose := CharacterRig.EquipmentPose.IDLE
+  if lantern.is_carried:
+    pose = CharacterRig.EquipmentPose.LANTERN
+  elif aiming:
+    pose = CharacterRig.EquipmentPose.MUSKET_AIM
+  elif musket.is_lit:
+    pose = CharacterRig.EquipmentPose.MUSKET_READY
+  rig.set_equipment_pose(pose)
   if not musket.is_owned:
     return
   var in_hands := aiming or musket.is_lit
-  var slot := right_hand_slot if in_hands else back_slot
+  var slot := rig.get_left_hand_slot() if in_hands else rig.get_back_slot()
   if musket.get_parent() != slot:
     _attach(musket, slot)
-  if aiming:
-    var camera := get_viewport().get_camera_3d()
-    var origin := camera.unproject_position(slot.global_position)
-    musket.aim(get_viewport().get_mouse_position() - origin)
   if in_hands:
+    musket.set_held_angle(rig.get_musket_angle())
     _align_grip(musket, musket.rear_grip, slot)
 
 
@@ -244,18 +245,6 @@ func _aiming_requested() -> bool:
     not is_dead and musket.is_owned and not lantern.is_carried and not _dragging_ramrod
     and Input.is_action_pressed('aim_musket')
   )
-
-
-func _get_aim_target(mouse: Vector2) -> Vector3:
-  var camera := get_viewport().get_camera_3d()
-  var origin := camera.project_ray_origin(mouse)
-  var direction := camera.project_ray_normal(mouse)
-  var target := global_position
-  var point: Variant = Plane(Vector3.UP, global_position.y + aim_height).intersects_ray(origin, direction)
-  if point != null:
-    target = point
-    target.y = global_position.y
-  return global_position + (target - global_position).limit_length(musket.shot_range)
 
 
 func _update_aim_line(target: Vector3) -> void:
@@ -285,11 +274,12 @@ func _physics_process(_delta: float) -> void:
     velocity = Vector3(direction.x, 0.0, direction.y) * speed
 
   move_and_slide()
+  rig.set_moving(not velocity.is_zero_approx())
   _update_equipment()
   aim_line.visible = musket.is_aiming
   var target := global_position
   if musket.is_aiming:
-    target = _get_aim_target(get_viewport().get_mouse_position())
+    target = global_position + Vector3.RIGHT * musket.shot_range
     _update_aim_line(target)
   if _shot_requested or _fuse_shot_requested:
     _shot_requested = false

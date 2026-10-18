@@ -19,14 +19,11 @@ gradient = SubResource("aim_color")
 width = 1
 height = 1
 
-[node name="player" type="CharacterBody3D" unique_id=1376385991 node_paths=PackedStringArray("flip", "left_hand_slot", "right_hand_slot", "back_slot", "drop_slot", "aim_line", "light_sensor")]
+[node name="player" type="CharacterBody3D" unique_id=1376385991 node_paths=PackedStringArray("rig", "drop_slot", "aim_line", "light_sensor")]
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1")
-flip = NodePath("visuals/flip")
-left_hand_slot = NodePath("visuals/flip/character_rig/skeleton/hand_left/slot")
-right_hand_slot = NodePath("visuals/flip/character_rig/skeleton/hand_right/slot")
-back_slot = NodePath("visuals/flip/character_rig/skeleton/back/slot")
+rig = NodePath("visuals/character_rig")
 drop_slot = NodePath("drop_slot")
 aim_line = NodePath("aim_line")
 light_sensor = NodePath("light_sensor")
@@ -44,9 +41,7 @@ texture = SubResource("aim_texture")
 [node name="visuals" type="Node3D" parent="." unique_id=1961632350]
 script = ExtResource("2")
 
-[node name="flip" type="Node3D" parent="visuals" unique_id=606544514]
-
-[node name="character_rig" parent="visuals/flip" instance=ExtResource("3")]
+[node name="character_rig" parent="visuals" instance=ExtResource("3")]
 
 [node name="drop_slot" type="Marker3D" parent="." unique_id=207987825]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.813, 0, 0.15)

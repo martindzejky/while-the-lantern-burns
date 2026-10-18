@@ -9,11 +9,12 @@
 frequency = 2.0
 fractal_octaves = 2
 
-[node name="lantern" type="Node3D" unique_id=709075666 node_paths=PackedStringArray("grip", "light", "visuals")]
+[node name="lantern" type="Node3D" unique_id=709075666 node_paths=PackedStringArray("grip", "light", "visuals", "swing")]
 script = ExtResource("1")
 grip = NodePath("visuals/grip")
-light = NodePath("visuals/light")
+light = NodePath("visuals/swing/light")
 visuals = NodePath("visuals")
+swing = NodePath("visuals/swing")
 min_radius = 0.6
 flicker_noise = SubResource("flicker_noise")
 flicker_amount = 0.03
@@ -21,16 +22,19 @@ flicker_amount = 0.03
 [node name="visuals" type="Node3D" parent="." unique_id=241417503]
 script = ExtResource("2")
 
-[node name="sprite" type="Sprite3D" parent="visuals" unique_id=418356784]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0043641143, 0)
+[node name="swing" type="Node3D" parent="visuals"]
+position = Vector3(0, 0.77, 0)
+
+[node name="sprite" type="Sprite3D" parent="visuals/swing" unique_id=418356784]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7743641, 0)
 cast_shadow = 0
 offset = Vector2(0, 255)
 pixel_size = 0.0015882353
 alpha_cut = 1
 texture = ExtResource("3")
 
-[node name="light" type="OmniLight3D" parent="visuals" unique_id=876345472]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.405, 0)
+[node name="light" type="OmniLight3D" parent="visuals/swing" unique_id=876345472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.365, 0)
 light_color = Color(1, 1, 1, 1)
 light_energy = 1.1
 light_specular = 0.0

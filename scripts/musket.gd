@@ -111,6 +111,10 @@ func set_aiming(aiming: bool) -> void:
   aiming_changed.emit(aiming)
 
 
+func set_held_angle(angle: float) -> void:
+  sprite.rotation.z = angle
+
+
 func aim(direction: Vector2) -> void:
   var mirror := -1.0 if sprite.global_basis.determinant() < 0.0 else 1.0
   sprite.rotation.z = Vector2(direction.x * mirror, -direction.y).angle()
