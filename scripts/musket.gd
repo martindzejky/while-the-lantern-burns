@@ -96,8 +96,10 @@ func warm_up_effects() -> void:
     await RenderingServer.frame_post_draw
     if not is_instance_valid(self):
       return
-  flash.queue_free()
-  smoke.queue_free()
+  if is_instance_valid(flash):
+    flash.queue_free()
+  if is_instance_valid(smoke):
+    smoke.queue_free()
   sparks.emitting = false
   spark_light.visible = false
 

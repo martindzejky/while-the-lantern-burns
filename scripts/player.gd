@@ -243,11 +243,11 @@ func _dash() -> void:
 
 func _interact() -> void:
   _set_dragging_ramrod(false)
-  if not musket.is_owned and _within_reach(musket):
+  if lantern.is_carried:
+    _drop_lantern()
+  elif not musket.is_owned and _within_reach(musket):
     _attach(musket, rig.get_back_slot())
     musket.equip()
-  elif lantern.is_carried:
-    _drop_lantern()
   elif not musket.is_lit and _within_reach(lantern):
     lantern.set_carried(true)
     _attach(lantern, rig.get_right_hand_slot())
