@@ -9,25 +9,22 @@
 [ext_resource type="Script" uid="uid://de8uuvch50dlp" path="res://scripts/effects_warmup.gd" id="8"]
 [ext_resource type="Script" uid="uid://2wksfmfp1kib" path="res://scripts/ground.gd" id="11"]
 [ext_resource type="PackedScene" uid="uid://cjip80cip1fu2" path="res://ambience/controller.tscn" id="12"]
-
+[ext_resource type="PackedScene" uid="uid://odumffg7yfr1" path="res://objects/big_rock_01.tscn" id="big_rock_01"]
+[ext_resource type="PackedScene" uid="uid://djk0sh2numjnd" path="res://objects/big_rock_02.tscn" id="big_rock_02"]
+[ext_resource type="PackedScene" uid="uid://bd1pkpe5kcxf6" path="res://objects/big_rock_03.tscn" id="big_rock_03"]
+[ext_resource type="PackedScene" uid="uid://bi4cxx4ajbs57" path="res://objects/big_rock_04.tscn" id="big_rock_04"]
+[ext_resource type="PackedScene" uid="uid://dyer8vsgv3sab" path="res://objects/big_rock_05.tscn" id="big_rock_05"]
+[ext_resource type="PackedScene" uid="uid://eusyopafqhvr" path="res://objects/big_rock_06.tscn" id="big_rock_06"]
+[ext_resource type="PackedScene" uid="uid://dswxislnonhiw" path="res://objects/big_rock_07.tscn" id="big_rock_07"]
+[ext_resource type="PackedScene" uid="uid://yrm4kbry3gfe" path="res://objects/big_rock_08.tscn" id="big_rock_08"]
 [ext_resource type="PackedScene" path="res://ui/death_feedback.tscn" id="death_ui"]
-
-[ext_resource type="PackedScene" path="res://objects/small_rock_01.tscn" id="small_rock_01"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_02.tscn" id="small_rock_02"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_03.tscn" id="small_rock_03"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_04.tscn" id="small_rock_04"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_05.tscn" id="small_rock_05"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_06.tscn" id="small_rock_06"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_07.tscn" id="small_rock_07"]
-
-[ext_resource type="PackedScene" path="res://objects/big_rock_01.tscn" id="big_rock_01"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_02.tscn" id="big_rock_02"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_03.tscn" id="big_rock_03"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_04.tscn" id="big_rock_04"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_05.tscn" id="big_rock_05"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_06.tscn" id="big_rock_06"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_07.tscn" id="big_rock_07"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_08.tscn" id="big_rock_08"]
+[ext_resource type="PackedScene" uid="uid://b8lgdc61td4pn" path="res://objects/small_rock_01.tscn" id="small_rock_01"]
+[ext_resource type="PackedScene" uid="uid://dttg14r21k1r7" path="res://objects/small_rock_02.tscn" id="small_rock_02"]
+[ext_resource type="PackedScene" uid="uid://nll0qokvvylc" path="res://objects/small_rock_03.tscn" id="small_rock_03"]
+[ext_resource type="PackedScene" uid="uid://70km5nkt7itn" path="res://objects/small_rock_04.tscn" id="small_rock_04"]
+[ext_resource type="PackedScene" uid="uid://djaxh1nftck06" path="res://objects/small_rock_05.tscn" id="small_rock_05"]
+[ext_resource type="PackedScene" uid="uid://by3tq6buv41kb" path="res://objects/small_rock_06.tscn" id="small_rock_06"]
+[ext_resource type="PackedScene" uid="uid://dyeqe4xfv5w37" path="res://objects/small_rock_07.tscn" id="small_rock_07"]
 
 [sub_resource type="Environment" id="environment"]
 background_mode = 1
@@ -38,7 +35,8 @@ ambient_light_energy = 0.05
 reflected_light_source = 2
 
 [sub_resource type="Gradient" id="ground_color"]
-colors = PackedColorArray(0.96862745, 0.89019608, 0.59215686, 1, 0.96862745, 0.89019608, 0.59215686, 1)
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.95, 0.7402083, 0.44650003, 1)
 
 [sub_resource type="GradientTexture2D" id="ground_texture"]
 gradient = SubResource("ground_color")
@@ -93,33 +91,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3541121, 0, 26.313349)
 [node name="rock_right7" parent="." unique_id=1877607670 instance=ExtResource("big_rock_02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2217264, 0, 25.320625)
 
-[node name="small_rock_01" parent="." instance=ExtResource("small_rock_01")]
-position = Vector3(-1.4, 0.012, 3.4)
+[node name="small_rock_01" parent="." unique_id=879812152 instance=ExtResource("small_rock_01")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0.012, 3.4)
 
-[node name="small_rock_02" parent="." instance=ExtResource("small_rock_02")]
-position = Vector3(-0.55, 0.012, 2.3)
+[node name="small_rock_02" parent="." unique_id=1317350460 instance=ExtResource("small_rock_02")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, 0.012, 2.3)
 
-[node name="small_rock_03" parent="." instance=ExtResource("small_rock_03")]
-position = Vector3(0.8, 0.012, 1.7)
+[node name="small_rock_03" parent="." unique_id=680613348 instance=ExtResource("small_rock_03")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.012, 1.7)
 
-[node name="small_rock_04" parent="." instance=ExtResource("small_rock_04")]
-position = Vector3(1.8, 0.012, 4.4)
+[node name="small_rock_04" parent="." unique_id=1330987716 instance=ExtResource("small_rock_04")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.012, 4.4)
 
-[node name="small_rock_05" parent="." instance=ExtResource("small_rock_05")]
-position = Vector3(-2, 0.012, 4.7)
+[node name="small_rock_05" parent="." unique_id=1723217552 instance=ExtResource("small_rock_05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.012, 4.7)
 
-[node name="small_rock_06" parent="." instance=ExtResource("small_rock_06")]
-position = Vector3(0.35, 0.012, 5.0)
+[node name="small_rock_06" parent="." unique_id=1591464861 instance=ExtResource("small_rock_06")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.012, 5)
 
-[node name="small_rock_07" parent="." instance=ExtResource("small_rock_07")]
-position = Vector3(2.45, 0.012, 2.1)
+[node name="small_rock_07" parent="." unique_id=1825349355 instance=ExtResource("small_rock_07")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45, 0.012, 2.1)
 
 [node name="player" parent="." unique_id=1253224889 node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 musket = NodePath("../musket")
 lantern = NodePath("../lantern")
 
-[node name="shadow" parent="player" node_paths=PackedStringArray("light_source")]
+[node name="shadow" parent="player" index="5" node_paths=PackedStringArray("light_source")]
+transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
 light_source = NodePath("../../lantern")
 
 [node name="camera" type="Camera3D" parent="player" unique_id=1545861327]
@@ -133,9 +132,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 
 [node name="musket" parent="." unique_id=1198564765 instance=ExtResource("5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
-
-[node name="shadow" parent="musket" node_paths=PackedStringArray("light_source")]
-light_source = NodePath("../../lantern")
 
 [node name="hud" type="CanvasLayer" parent="." unique_id=997754346]
 
