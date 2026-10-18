@@ -9,8 +9,9 @@
 frequency = 2.0
 fractal_octaves = 2
 
-[node name="lantern" type="Node3D" unique_id=709075666 node_paths=PackedStringArray("light", "visuals")]
+[node name="lantern" type="Node3D" unique_id=709075666 node_paths=PackedStringArray("grip", "light", "visuals")]
 script = ExtResource("1")
+grip = NodePath("visuals/grip")
 light = NodePath("visuals/light")
 visuals = NodePath("visuals")
 min_radius = 0.6
@@ -44,3 +45,6 @@ pixel_size = 0.0035
 anchor = NodePath("..")
 
 [connection signal="carried_changed" from="." to="shadow" method="set_carried"]
+
+[node name="grip" type="Marker3D" parent="visuals"]
+position = Vector3(0, 0.77, 0)

@@ -9,11 +9,10 @@ signal ramrod_drag_changed(dragging: bool)
 @export var flip: Node3D
 @export var musket: Musket
 @export var lantern: Lantern
-@export var lantern_slot: Marker3D
+@export var left_hand_slot: Marker3D
+@export var right_hand_slot: Marker3D
+@export var back_slot: Marker3D
 @export var drop_slot: Marker3D
-@export var musket_back_slot: Marker3D
-@export var musket_front_slot: Marker3D
-@export var musket_aim_slot: Marker3D
 @export var aim_line: Sprite3D
 @export var light_sensor: LightSensor
 @export var aim_height: float = 0.7
@@ -197,15 +196,16 @@ func _dash() -> void:
 func _interact() -> void:
   _set_dragging_ramrod(false)
   if not musket.is_owned and _within_reach(musket):
-    _attach(musket, musket_back_slot)
+    _attach(musket, back_slot)
     musket.equip()
   elif lantern.is_carried:
     lantern.reparent(_item_parent)
     lantern.global_transform = Transform3D(Basis.IDENTITY, drop_slot.global_position)
     lantern.set_carried(false)
   elif not musket.is_lit and _within_reach(lantern):
-    _attach(lantern, lantern_slot)
     lantern.set_carried(true)
+    _attach(lantern, left_hand_slot)
+    _align_grip(lantern, lantern.grip, left_hand_slot)
   _update_equipment()
 
 
@@ -218,20 +218,25 @@ func _attach(item: Node3D, slot: Marker3D) -> void:
   item.transform = Transform3D.IDENTITY
 
 
+func _align_grip(item: Node3D, grip: Marker3D, slot: Marker3D) -> void:
+  item.global_position += slot.global_position - grip.global_position
+
+
 func _update_equipment() -> void:
   var aiming := _aiming_requested()
   musket.set_aiming(aiming)
   if not musket.is_owned:
     return
-  var slot := musket_aim_slot if aiming else musket_back_slot
-  if musket.is_lit and not aiming:
-    slot = musket_front_slot
+  var in_hands := aiming or musket.is_lit
+  var slot := right_hand_slot if in_hands else back_slot
   if musket.get_parent() != slot:
     _attach(musket, slot)
   if aiming:
     var camera := get_viewport().get_camera_3d()
-    var origin := camera.unproject_position(musket.global_position)
+    var origin := camera.unproject_position(slot.global_position)
     musket.aim(get_viewport().get_mouse_position() - origin)
+  if in_hands:
+    _align_grip(musket, musket.rear_grip, slot)
 
 
 func _aiming_requested() -> bool:

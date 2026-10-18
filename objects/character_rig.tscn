@@ -81,6 +81,27 @@ bones/5/enabled = true
 bones/5/position = Vector3(0.146, 0.4, -0.012)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
 bones/5/scale = Vector3(1, 1, 1)
+bones/6/name = "hand_left"
+bones/6/parent = 2
+bones/6/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11, -0.46, 0.008)
+bones/6/enabled = true
+bones/6/position = Vector3(-0.11, -0.46, 0.008)
+bones/6/rotation = Quaternion(0, 0, 0, 1)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/name = "hand_right"
+bones/7/parent = 3
+bones/7/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, -0.46, 0.008)
+bones/7/enabled = true
+bones/7/position = Vector3(0.11, -0.46, 0.008)
+bones/7/rotation = Quaternion(0, 0, 0, 1)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/name = "back"
+bones/8/parent = 0
+bones/8/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, -0.7, -0.1)
+bones/8/enabled = true
+bones/8/position = Vector3(-0.35, -0.7, -0.1)
+bones/8/rotation = Quaternion(0, 0, 0, 1)
+bones/8/scale = Vector3(1, 1, 1)
 
 [node name="torso" type="BoneAttachment3D" parent="skeleton" unique_id=971306711]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
@@ -94,12 +115,6 @@ offset = Vector2(0, -188)
 pixel_size = 0.002
 alpha_cut = 1
 texture = ExtResource("2_5w654")
-
-[node name="musket_back_slot" type="Marker3D" parent="skeleton/torso" unique_id=1873117361]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, -0.7, -0.1)
-
-[node name="musket_front_slot" type="Marker3D" parent="skeleton/torso" unique_id=1211302342]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 0.15)
 
 [node name="head" type="BoneAttachment3D" parent="skeleton" unique_id=562309887]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008, 0.951, 0.012)
@@ -127,9 +142,6 @@ pixel_size = 0.002
 alpha_cut = 1
 texture = ExtResource("4_2cmcp")
 
-[node name="hand_slot" type="Marker3D" parent="skeleton/arm_left" unique_id=1963278299]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11, -0.46, 0.02)
-
 [node name="arm_right" type="BoneAttachment3D" parent="skeleton" unique_id=997899136]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161, 0.91999996, -0.006)
 bone_name = "arm_right"
@@ -143,15 +155,6 @@ flip_h = true
 pixel_size = 0.002
 alpha_cut = 1
 texture = ExtResource("4_2cmcp")
-
-[node name="hand_slot" type="Marker3D" parent="skeleton/arm_right" unique_id=1994666332]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, -0.46, 0.02)
-
-[node name="lantern_slot" type="Marker3D" parent="skeleton/arm_right" unique_id=815508279]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.59327054, -0.10003155, 0.15)
-
-[node name="musket_aim_slot" type="Marker3D" parent="skeleton/arm_right" unique_id=811852500]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03, -0.29, 0.1)
 
 [node name="leg_left" type="BoneAttachment3D" parent="skeleton" unique_id=1606073996]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.149, 0.4, -0.012)
@@ -179,3 +182,24 @@ flip_h = true
 pixel_size = 0.002
 alpha_cut = 1
 texture = ExtResource("5_f2jqx")
+
+[node name="hand_left" type="BoneAttachment3D" parent="skeleton" unique_id=893388758]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.271, 0.45999995, 0.014)
+bone_name = "hand_left"
+bone_idx = 6
+
+[node name="slot" type="Marker3D" parent="skeleton/hand_left" unique_id=996468729]
+
+[node name="hand_right" type="BoneAttachment3D" parent="skeleton" unique_id=667703085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.271, 0.45999995, 0.0020000003)
+bone_name = "hand_right"
+bone_idx = 7
+
+[node name="slot" type="Marker3D" parent="skeleton/hand_right" unique_id=1095214045]
+
+[node name="back" type="BoneAttachment3D" parent="skeleton" unique_id=1633488122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.34999996, -0.1)
+bone_name = "back"
+bone_idx = 8
+
+[node name="slot" type="Marker3D" parent="skeleton/back" unique_id=944712146]

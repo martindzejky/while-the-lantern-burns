@@ -10,6 +10,8 @@ signal fuse_expired
 
 enum ReloadState { EMPTY, BALL_INSERTED, RAMMED, LOADED }
 
+@export var rear_grip: Marker3D
+@export var front_grip: Marker3D
 @export var sprite: Sprite3D
 @export var visuals: CameraFacing
 @export var muzzle: Marker3D

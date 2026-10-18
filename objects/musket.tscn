@@ -29,8 +29,10 @@ size = Vector2(0.035, 0.035)
 [sub_resource type="Gradient" id="spark_fade"]
 colors = PackedColorArray(1, 0.85, 0.25, 1, 1, 0.25, 0.02, 0)
 
-[node name="musket" type="Node3D" unique_id=1358336505 node_paths=PackedStringArray("sprite", "visuals", "muzzle", "sparks")]
+[node name="musket" type="Node3D" unique_id=1358336505 node_paths=PackedStringArray("rear_grip", "front_grip", "sprite", "visuals", "muzzle", "sparks")]
 script = ExtResource("1")
+rear_grip = NodePath("visuals/sprite/rear_grip")
+front_grip = NodePath("visuals/sprite/front_grip")
 sprite = NodePath("visuals/sprite")
 visuals = NodePath("visuals")
 muzzle = NodePath("visuals/sprite/muzzle")
@@ -72,3 +74,9 @@ anchor = NodePath("..")
 pixel_size = 0.0055
 
 [connection signal="equipped" from="." to="shadow" method="hide"]
+
+[node name="rear_grip" type="Marker3D" parent="visuals/sprite"]
+position = Vector3(0.5, -0.05, 0)
+
+[node name="front_grip" type="Marker3D" parent="visuals/sprite"]
+position = Vector3(1.15, 0, 0)

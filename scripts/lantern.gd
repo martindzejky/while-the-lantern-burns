@@ -4,6 +4,7 @@ extends Node3D
 signal carried_changed(carried: bool)
 signal lever_changed(openness: float)
 
+@export var grip: Marker3D
 @export var light: OmniLight3D
 @export var visuals: CameraFacing
 @export var max_energy: float = 100.0
