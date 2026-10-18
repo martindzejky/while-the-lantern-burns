@@ -86,7 +86,7 @@ func _unhandled_input(event: InputEvent) -> void:
   elif event.is_action_pressed('ignite_musket'):
     if (
       not lantern.is_carried and _within_reach(lantern)
-      and lantern.energy >= lantern.max_energy * 0.3
+      and lantern.energy >= lantern.max_energy * 0.2
       and musket.reload_state == Musket.ReloadState.LOADED
     ):
       _set_dragging_ramrod(false)

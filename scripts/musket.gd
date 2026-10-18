@@ -9,7 +9,7 @@ signal reload_changed
 signal lit_changed(lit: bool)
 signal fuse_expired
 
-enum ReloadState { EMPTY, BALL_INSERTED, RAMMED, LOADED }
+enum ReloadState { EMPTY, BALL_INSERTED, LOADED }
 
 @export var rear_grip: Marker3D
 @export var front_grip: Marker3D
@@ -80,11 +80,8 @@ func move_ramrod(amount: float) -> void:
   if not can_use_ramrod():
     return
   ramrod_insertion = clampf(ramrod_insertion + amount, 0.0, 1.0)
-  if reload_state != ReloadState.LOADED:
-    if ramrod_insertion == 1.0:
-      reload_state = ReloadState.RAMMED
-    elif ramrod_insertion == 0.0 and reload_state == ReloadState.RAMMED:
-      reload_state = ReloadState.LOADED
+  if ramrod_insertion == 1.0:
+    reload_state = ReloadState.LOADED
   reload_changed.emit()
 
 
