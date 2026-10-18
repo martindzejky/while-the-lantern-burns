@@ -1,20 +1,36 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://c6caq2n25ojcn"]
 
 [ext_resource type="PackedScene" uid="uid://w6mjmcbcb6d" path="res://objects/player.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://d330qifnxgchu" path="res://objects/lantern.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://by2n7sl0bbq3j" path="res://objects/musket.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://by6jxo44b17at" path="res://ui/lantern_ui.tscn" id="6"]
+[ext_resource type="AudioStream" uid="uid://b67k30emqe11s" path="res://audio/player/step_01.wav" id="6_rqnht"]
 [ext_resource type="PackedScene" uid="uid://odlmbst42wxg" path="res://ui/musket_ui.tscn" id="7"]
+[ext_resource type="AudioStream" uid="uid://cwcylqhf0urp7" path="res://audio/player/step_02.wav" id="7_srvxn"]
+[ext_resource type="AudioStream" uid="uid://6jnlk73os5yr" path="res://audio/player/step_03.wav" id="8_sqtar"]
+[ext_resource type="AudioStream" uid="uid://cutkgxv2c161n" path="res://audio/player/step_04.wav" id="9_67d6o"]
+[ext_resource type="AudioStream" uid="uid://brasfbn4jeemx" path="res://audio/player/step_06.wav" id="10_5vu4g"]
+[ext_resource type="AudioStream" uid="uid://sjew2oaqluoc" path="res://audio/player/body_01.wav" id="11_s6y8e"]
 [ext_resource type="PackedScene" uid="uid://cjip80cip1fu2" path="res://ambience/controller.tscn" id="12"]
-[ext_resource type="PackedScene" path="res://ui/death_feedback.tscn" id="death_ui"]
-
-[ext_resource type="PackedScene" path="res://objects/ground.tscn" id="ground"]
-
-[ext_resource type="PackedScene" path="res://ui/world_post_processing.tscn" id="world_post_processing"]
-
-[ext_resource type="Script" path="res://scripts/game_session.gd" id="session"]
-[ext_resource type="PackedScene" path="res://objects/world_light.tscn" id="world_light"]
+[ext_resource type="AudioStream" uid="uid://cwik1ebawpj2b" path="res://audio/player/body_02.wav" id="12_s1tv7"]
+[ext_resource type="AudioStream" uid="uid://pxpxdop6yiuw" path="res://audio/enemy/growl_01.wav" id="18_37dvx"]
+[ext_resource type="AudioStream" uid="uid://r3j25a0vm43e" path="res://audio/enemy/growl_02.wav" id="19_p5dy6"]
+[ext_resource type="AudioStream" uid="uid://csnjyck16d06y" path="res://audio/enemy/growl_03.wav" id="20_o7tkd"]
+[ext_resource type="AudioStream" uid="uid://doygxytmbxcer" path="res://audio/enemy/growl_04.wav" id="21_81iov"]
+[ext_resource type="AudioStream" uid="uid://bkbjgtw04adkd" path="res://audio/enemy/growl_05.wav" id="22_slt2r"]
+[ext_resource type="AudioStream" uid="uid://25gbpetk41ed" path="res://audio/enemy/growl_06.wav" id="23_yjd84"]
+[ext_resource type="AudioStream" uid="uid://bhbmc7jy7xxgt" path="res://audio/enemy/bite_01.wav" id="24_wexui"]
+[ext_resource type="AudioStream" uid="uid://ngy3h1w8tg6q" path="res://audio/enemy/bite_02.wav" id="25_ww381"]
+[ext_resource type="AudioStream" uid="uid://cps01lv4uvcli" path="res://audio/enemy/death_01.wav" id="26_7qo25"]
+[ext_resource type="AudioStream" uid="uid://d0yyc7mxs5dqw" path="res://audio/enemy/death_02.wav" id="27_rynmh"]
+[ext_resource type="AudioStream" uid="uid://bm146vegk4pb6" path="res://audio/enemy/death_03.wav" id="28_fykia"]
 [ext_resource type="PackedScene" path="res://objects/camera_controller.tscn" id="camera_controller"]
+[ext_resource type="PackedScene" path="res://ui/death_feedback.tscn" id="death_ui"]
+[ext_resource type="PackedScene" uid="uid://dnep4itj4mhsi" path="res://objects/enemy.tscn" id="enemy"]
+[ext_resource type="PackedScene" path="res://objects/ground.tscn" id="ground"]
+[ext_resource type="Script" uid="uid://dy72qt3fyp76c" path="res://scripts/game_session.gd" id="session"]
+[ext_resource type="PackedScene" path="res://objects/world_light.tscn" id="world_light"]
+[ext_resource type="PackedScene" uid="uid://c3se2eoftldxs" path="res://ui/world_post_processing.tscn" id="world_post_processing"]
 
 [sub_resource type="Environment" id="environment"]
 background_mode = 1
@@ -24,7 +40,229 @@ ambient_light_color = Color(0.08, 0.16, 0.11, 1)
 ambient_light_energy = 0.05
 reflected_light_source = 2
 
-[node name="gameplay" type="Node3D" node_paths=PackedStringArray("player", "musket", "hud", "loading")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rqnht"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 5
+stream_0/stream = ExtResource("6_rqnht")
+stream_1/stream = ExtResource("7_srvxn")
+stream_2/stream = ExtResource("8_sqtar")
+stream_3/stream = ExtResource("9_67d6o")
+stream_4/stream = ExtResource("10_5vu4g")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_srvxn"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("11_s6y8e")
+stream_1/stream = ExtResource("12_s1tv7")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sqtar"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("18_37dvx")
+stream_1/stream = ExtResource("19_p5dy6")
+stream_2/stream = ExtResource("20_o7tkd")
+stream_3/stream = ExtResource("21_81iov")
+stream_4/stream = ExtResource("22_slt2r")
+stream_5/stream = ExtResource("23_yjd84")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_67d6o"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("24_wexui")
+stream_1/stream = ExtResource("25_ww381")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5vu4g"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("26_7qo25")
+stream_1/stream = ExtResource("27_rynmh")
+stream_2/stream = ExtResource("28_fykia")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s6y8e"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("18_37dvx")
+stream_1/stream = ExtResource("19_p5dy6")
+stream_2/stream = ExtResource("20_o7tkd")
+stream_3/stream = ExtResource("21_81iov")
+stream_4/stream = ExtResource("22_slt2r")
+stream_5/stream = ExtResource("23_yjd84")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s1tv7"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("24_wexui")
+stream_1/stream = ExtResource("25_ww381")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_37dvx"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("26_7qo25")
+stream_1/stream = ExtResource("27_rynmh")
+stream_2/stream = ExtResource("28_fykia")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p5dy6"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("18_37dvx")
+stream_1/stream = ExtResource("19_p5dy6")
+stream_2/stream = ExtResource("20_o7tkd")
+stream_3/stream = ExtResource("21_81iov")
+stream_4/stream = ExtResource("22_slt2r")
+stream_5/stream = ExtResource("23_yjd84")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o7tkd"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("24_wexui")
+stream_1/stream = ExtResource("25_ww381")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_81iov"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("26_7qo25")
+stream_1/stream = ExtResource("27_rynmh")
+stream_2/stream = ExtResource("28_fykia")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_slt2r"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("18_37dvx")
+stream_1/stream = ExtResource("19_p5dy6")
+stream_2/stream = ExtResource("20_o7tkd")
+stream_3/stream = ExtResource("21_81iov")
+stream_4/stream = ExtResource("22_slt2r")
+stream_5/stream = ExtResource("23_yjd84")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yjd84"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("24_wexui")
+stream_1/stream = ExtResource("25_ww381")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wexui"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("26_7qo25")
+stream_1/stream = ExtResource("27_rynmh")
+stream_2/stream = ExtResource("28_fykia")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ww381"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("18_37dvx")
+stream_1/stream = ExtResource("19_p5dy6")
+stream_2/stream = ExtResource("20_o7tkd")
+stream_3/stream = ExtResource("21_81iov")
+stream_4/stream = ExtResource("22_slt2r")
+stream_5/stream = ExtResource("23_yjd84")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7qo25"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("24_wexui")
+stream_1/stream = ExtResource("25_ww381")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rynmh"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("26_7qo25")
+stream_1/stream = ExtResource("27_rynmh")
+stream_2/stream = ExtResource("28_fykia")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fykia"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("18_37dvx")
+stream_1/stream = ExtResource("19_p5dy6")
+stream_2/stream = ExtResource("20_o7tkd")
+stream_3/stream = ExtResource("21_81iov")
+stream_4/stream = ExtResource("22_slt2r")
+stream_5/stream = ExtResource("23_yjd84")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7yuvj"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("24_wexui")
+stream_1/stream = ExtResource("25_ww381")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_h2nsf"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("26_7qo25")
+stream_1/stream = ExtResource("27_rynmh")
+stream_2/stream = ExtResource("28_fykia")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_urfw8"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("18_37dvx")
+stream_1/stream = ExtResource("19_p5dy6")
+stream_2/stream = ExtResource("20_o7tkd")
+stream_3/stream = ExtResource("21_81iov")
+stream_4/stream = ExtResource("22_slt2r")
+stream_5/stream = ExtResource("23_yjd84")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mgl3x"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("24_wexui")
+stream_1/stream = ExtResource("25_ww381")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_npgxv"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("26_7qo25")
+stream_1/stream = ExtResource("27_rynmh")
+stream_2/stream = ExtResource("28_fykia")
+
+[node name="gameplay" type="Node3D" unique_id=61242527 node_paths=PackedStringArray("player", "musket", "hud", "loading")]
 script = ExtResource("session")
 player = NodePath("player")
 musket = NodePath("musket")
@@ -34,16 +272,18 @@ loading = NodePath("loading")
 [node name="ambience" parent="." unique_id=1254964729 node_paths=PackedStringArray("target") instance=ExtResource("12")]
 target = NodePath("../player")
 
-[node name="world_post_processing" parent="." instance=ExtResource("world_post_processing")]
+[node name="world_post_processing" parent="." unique_id=1794444574 instance=ExtResource("world_post_processing")]
+visible = false
 
 [node name="environment" type="WorldEnvironment" parent="." unique_id=1644920340]
 environment = SubResource("environment")
 
 [node name="ground" parent="." unique_id=205520019 instance=ExtResource("ground")]
-polygon = PackedVector2Array(-6, -5, -5, -7, 4, -7, 6, -4, 6, 5, 3, 7, -4, 6, -6, 3)
+polygon = PackedVector2Array(-36.944, -5.294, -33.157, -3.951, -32.175, 0, -33.553032, 3.8120618, -34.867996, 6.7159452, -33.030014, 11.105373, -29.309074, 8.95109, -26.953041, 10.257406, -20.798, 9.883, -20.781, 9.907, -20.802094, 8.018377, -19.962318, 8.414936, -17.39634, 9.138076, -9.332, 13.33, -9.35, 13.376, -9.101, 13.443, -8.443, 14.101, -8.303, 14.623, -8.155, 14.59, -4.5341263, 20.36184, 4.74, 25.462, 11.273, 21.728, 11.274, 21.73, 12, 21.535, 13.416983, 20.299906, 12.75, 21.75, 16.916044, 21.909473, 22.982, 27.364, 22.977, 27.371, 23.028, 27.422, 29.89525, 31.908928, 29.82215, 28.94829, 31.01, 25.089, 35, 25.638, 38.435, 26.05, 41.764, 28.095, 42.891, 32, 40.285, 35.051, 39.723, 36.179, 44.101, 42.199, 44.077, 42.217, 44.179, 42.319, 44.362, 43, 44.179, 43.681, 44.094, 43.766, 44.315, 43.921, 37.315, 53.921, 37.29, 53.903, 36.803, 54.39, 36, 54.605, 35.879, 54.573, 35.85, 54.944, 23.931, 54.027, 22.168787, 54.34351, 20.502, 62.601, 20.461, 62.584, 20.401, 62.809, 19.809, 63.401, 19, 63.617, 17.480003, 67.48313, 12.218939, 69.597466, 5.863968, 68.67951, 4.3621197, 69.75465, 1.0316792, 68.6815, 1.10569, 65.27706, -4.036, 63.088, -14.998, 67.656, -14.652767, 71.82964, -15.664818, 75.92183, -18.601, 78.466, -18.647, 78.451, -19.68, 79.388, -20.280556, 81.02904, -28.684948, 83.933174, -33.901, 82.652, -44.044, 77.12, -55.089, 83.562, -55.09, 83.56, -55.096, 83.566, -55.183, 83.59, -57.237915, 87.62485, -54.234, 91.516, -52.822, 96, -55.114, 99.976, -56.89, 104.85, -59.898, 104.599, -59.527, 110.537, -48.142, 115.791, -42.175, 109.825, -42.135, 109.865, -41.694874, 108.57257, -39.56, 110.169, -39.538, 110.253, -37.536213, 114.33989, -32.34397, 113.41585, -27.359, 116.81, -27.364, 116.819, -27.324, 116.83, -26.734, 117.683, -23.642, 128.363, -18.68363, 131.54729, -9.728, 132.073, -2.5262434, 126.30386, 0, 126.487, 14.696, 134.782, 14.695, 134.783, 15.458189, 137.52383, 20.805, 138.992, 22.806, 138.004, 28, 136.646, 34.236, 136.198, 36.386, 142.158, 37.835, 147, 37.83, 147.085, 43.362, 148.191, 43.35, 148.249, 43.922, 148.402, 52.830894, 160.74284, 51.77485, 161.79889, 53.182915, 163.95499, 45.313, 174.766, 45.311, 174.765, 44.76, 175.316, 44, 175.52, 42.27679, 173.967, 29.843273, 173.96977, 24.398, 182.979, 24.371, 182.96, 23.853, 183.478, 22.325, 183.526, 9.283, 186.321, 9.274, 186.277, 5.301695, 187.67706, -2.6186733, 182.52882, -9.159388, 186.6769, -12.723555, 186.7209, -17.529936, 198.41995, -18.849997, 198.94797, -18.223, 200.346, -22.338, 203.933, -21.915, 204.755, -20.611, 210, -19.37, 216.714, -25.146, 220.139, -28.91437, 224.04044, -36.17471, 224.48045, -40.161, 215.902, -43.527, 217.344, -49.375328, 226.63655, -39.63, 236.354, -26.407, 232.576, -26.393, 232.624, -25.72, 233.5388, -23.255886, 233.7588, -16.755, 244.41, -3.795, 246.262, 6.272, 239.855, 6.279, 239.867, 6.322, 239.825, 7.1843853, 241.63834, 20.591093, 250.09952, 25.607328, 255.99579, 26.663376, 252.25562, 34, 249.9, 40.803, 255.217, 46.78, 259.621, 48.413, 267, 48.631, 275.447, 40.531, 278.312, 35.597, 281.618, 35.597, 282, 35.383, 282.799, 37.017063, 284.70914, 34.20093, 290.1654, 35.777, 294, 35.777, 303, 35.539, 303.888, 34.888, 304.539, 34, 304.777, 33.112, 304.539, 32.461, 303.888, 32.223, 303, 32.223, 294, 33.056877, 291.92548, 32.636, 282.818, 32.617, 282.799, 32.496, 282.347, 25.989, 280.875, 22.784, 273.476, 17.291, 267, 21.207, 259.614, 23.818, 257.703, 18.696, 251.074, 6.722, 242.785, 1.7409449, 248.04074, 0.068865776, 249.88884, -1.6032133, 250.81288, -3.9141111, 252.39706, -7.4342775, 248.74489, -17.74659, 245.7994, -19.572, 247.048, -19.596, 247.064, -27.073, 235.847, -39.272633, 239.17107, -40.240677, 237.895, -40.974, 238.974, -41.008, 239.008, -49.685295, 228.5651, -51.688, 227.297, -51.732, 227.278, -49.24332, 214.35999, -45.698, 214.371, -45.715, 214.331, -41.683, 212.603, -42.917, 210, -42.524, 203.347, -36.171, 201.044, -31, 197.097, -24.772, 199.214, -23.65, 201.39, -20.394, 198.405, -20.394, 198.403, -20.428, 198.388, -13.91161, 185.75285, -14.944, 185, -13.972, 183.316, -13.857, 183.286, -13.869, 183.261, 0.131, 176.261, 0.263, 176.527, 2.065, 176.783, 2.1, 176.743, 9.77, 183.454, 21.687, 180.9, 30, 170.065, 30.266, 170.137, 30.274, 170.085, 43.428, 171.964, 49.277, 161.937, 48.30005, 158.52895, 37.637, 150.809, 37.549, 152.513, 34.065, 157.506, 28, 156.467, 22.044, 157.316, 18.198, 152.659, 18.335, 147, 17.23, 140.892, 12.856, 137.456, 1.3459356, 129.12, -5.4390144, 134.97945, -7.6831207, 136.60753, -10.481, 135.803, -10.498, 135.867, -25.327942, 135.68349, -26.868013, 131.7233, -26.607, 130.402, -26.664, 130.416, -29.599, 118.673, -32.079956, 115.39594, -38.81227, 116.14398, -41.60687, 111.47671, -47.063126, 117.592995, -45.127033, 121.50918, -48.29518, 122.43322, -48.799, 119.732, -48.815, 119.767, -63.06889, 116.46504, -63.99293, 115.18899, -64.74097, 113.12089, -62.559, 112.097, -63.054, 104.172, -66.274, 103.403, -70.814, 101.089, -69.882, 96, -70.065, 91.344, -66.851, 87.598, -62, 88.248, -60.028, 87.902, -56.533882, 82.87262, -56.00586, 80.58451, -52.918716, 73.96016, -46.670425, 72.02407, -43.104, 73.358, -43.099, 73.348, -32.131, 79.33, -21.153, 76.797, -17.657, 65.043, -16.957, 64.343, -17.222984, 61.015614, -16.388203, 59.9304, -15.887335, 59.2904, -13.382994, 55.589542, -6.176056, 57.453884, -3.866497, 57.67649, -2.5586739, 59.23475, 5.654, 65.324, 17.641, 61.043, 19.71392, 58.18591, 19.77613, 56.785213, 19.403133, 53.74411, 18.23367, 52.56695, 19.583073, 50.51024, 22.025, 50.311, 23, 50.05, 23.147, 50.089, 23.15, 50.056, 26.152855, 52.36975, 33.28032, 52.515957, 35.44, 51.001, 41.176, 42.807, 38.056, 38.517, 35, 39.491, 31.98, 37.231, 28.256, 35.894, 26.422897, 34.06544, 23.060196, 33.407524, 20.647823, 33.66338, 21.046, 30.652, 21.023, 30.629, 21.018, 30.636, 11.620798, 23.682331, 8.518296, 25.68846, 5.9756455, 26.574888, 5, 28.44, 4.687, 28.356, 4.676, 28.403, -6.330311, 27.919811, -8.103169, 27.686539, -9.549447, 27.05671, -9.636, 24.945, -9.783, 24.396, -9.845, 24.41, -11.652, 16.276, -16.533237, 15.902927, -20.225, 12.847, -25.613, 16.696, -25.366798, 18.328575, -26.603134, 18.165285, -27, 17.573, -27.816141, 18.281921, -29.542345, 18.351902, -35.899246, 15.490864, -36.365784, 13.694679, -37.974, 13.687, -38.687, 12.974, -38.825, 12.456, -38.889, 12.472, -40.016, 7.966, -43.157, 5.468, -46.006, 3.467, -47.772, 0, -45.227, -3.018, -43.756, -6.506, -40, -7.281)
+edge_seed = 610
 
 [node name="player" parent="." unique_id=1253224889 node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 0)
 musket = NodePath("../musket")
 lantern = NodePath("../lantern")
 
@@ -54,19 +294,190 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
 light_source = NodePath("../../lantern")
 
-[node name="camera_controller" parent="." node_paths=PackedStringArray("target") instance=ExtResource("camera_controller")]
+[node name="footstep_audio" parent="player" index="7"]
+stream = SubResource("AudioStreamRandomizer_rqnht")
+
+[node name="body_audio" parent="player" index="8"]
+stream = SubResource("AudioStreamRandomizer_srvxn")
+
+[node name="camera_controller" parent="." unique_id=839260601 node_paths=PackedStringArray("target") instance=ExtResource("camera_controller")]
 target = NodePath("../player")
 
 [node name="lantern" parent="." unique_id=1329808312 instance=ExtResource("3")]
-position = Vector3(1000, 0, 1000)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0, -32)
+initial_energy = 0.0
 
 [node name="musket" parent="." unique_id=1198564765 instance=ExtResource("5")]
-position = Vector3(1002, 0, 1000)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62, 0, -96)
 
-[node name="ceiling_light" parent="." instance=ExtResource("world_light")]
-position = Vector3(0, 4, 1)
-light_energy = 0.35
+[node name="safe_lights" type="Node3D" parent="." unique_id=2120534385]
+
+[node name="starting_chamber" parent="safe_lights" unique_id=581695217 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 4, 0)
 omni_range = 12.0
+
+[node name="lit_passage" parent="safe_lights" unique_id=1484302140 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4, -15)
+light_energy = 0.23
+omni_range = 11.0
+
+[node name="lantern_discovery" parent="safe_lights" unique_id=1465581892 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 4, -32)
+light_energy = 0.25
+omni_range = 9.0
+
+[node name="musket_refuge" parent="safe_lights" unique_id=774614127 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62, 4, -96)
+omni_range = 12.0
+
+[node name="daylight_exit" parent="safe_lights" unique_id=1981183684 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 4, -303)
+light_color = Color(0.94, 0.97, 1, 1)
+light_energy = 0.65
+omni_range = 9.0
+
+[node name="entrance_path_01" parent="safe_lights" unique_id=1221204685 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 4, -12)
+light_energy = 0.23
+omni_range = 10.5
+
+[node name="entrance_path_02" parent="safe_lights" unique_id=1255274091 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 4, -16)
+light_energy = 0.23
+omni_range = 10.5
+
+[node name="entrance_path_03" parent="safe_lights" unique_id=787146736 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 4, -11)
+light_energy = 0.23
+omni_range = 10.5
+
+[node name="entrance_path_05" parent="safe_lights" unique_id=1113365650 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, -24)
+light_energy = 0.23
+omni_range = 10.5
+
+[node name="entrance_path_06" parent="safe_lights" unique_id=1412951896 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, -27)
+light_energy = 0.23
+omni_range = 10.5
+
+[node name="entrance_path_07" parent="safe_lights" unique_id=1949212952 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 4, -23)
+light_energy = 0.23
+omni_range = 10.5
+
+[node name="entrance_path_08" parent="safe_lights" unique_id=542576188 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, -29)
+light_energy = 0.23
+omni_range = 10.5
+
+[node name="important_points" type="Node3D" parent="." unique_id=551460817]
+
+[node name="01_start" type="Marker3D" parent="important_points" unique_id=1029848135]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 0)
+gizmo_extents = 2.0
+
+[node name="02_lantern_discovery" type="Marker3D" parent="important_points" unique_id=1570921986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0, -32)
+gizmo_extents = 2.0
+
+[node name="03_first_dark_crossing" type="Marker3D" parent="important_points" unique_id=380101585]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -61)
+gizmo_extents = 2.0
+
+[node name="04_musket_refuge_last_safe_light" type="Marker3D" parent="important_points" unique_id=1861308489]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62, 0, -96)
+gizmo_extents = 2.0
+
+[node name="05_first_encounter" type="Marker3D" parent="important_points" unique_id=1483842638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -147)
+gizmo_extents = 2.0
+
+[node name="06_pair_encounter" type="Marker3D" parent="important_points" unique_id=657857081]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0, -210)
+gizmo_extents = 2.0
+
+[node name="07_unlit_preparation" type="Marker3D" parent="important_points" unique_id=1631270988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -241)
+gizmo_extents = 2.0
+
+[node name="08_final_four_monsters" type="Marker3D" parent="important_points" unique_id=1058301641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -267)
+gizmo_extents = 2.0
+
+[node name="09_daylight_exit_future_win_trigger" type="Marker3D" parent="important_points" unique_id=785034434]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -300)
+gizmo_extents = 2.0
+
+[node name="enemy_first" parent="." unique_id=962468463 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -148)
+target = NodePath("../player")
+growl_stream = SubResource("AudioStreamRandomizer_sqtar")
+bite_stream = SubResource("AudioStreamRandomizer_67d6o")
+death_stream = SubResource("AudioStreamRandomizer_5vu4g")
+head_variant = 0
+body_variant = 1
+eye_variant = 0
+
+[node name="enemy_pair_left" parent="." unique_id=383591185 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -208)
+target = NodePath("../player")
+growl_stream = SubResource("AudioStreamRandomizer_s6y8e")
+bite_stream = SubResource("AudioStreamRandomizer_s1tv7")
+death_stream = SubResource("AudioStreamRandomizer_37dvx")
+head_variant = 1
+body_variant = 2
+eye_variant = 1
+
+[node name="enemy_pair_right" parent="." unique_id=1735724915 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, -214)
+target = NodePath("../player")
+growl_stream = SubResource("AudioStreamRandomizer_p5dy6")
+bite_stream = SubResource("AudioStreamRandomizer_o7tkd")
+death_stream = SubResource("AudioStreamRandomizer_81iov")
+head_variant = 2
+body_variant = 0
+eye_variant = 2
+
+[node name="enemy_final_left" parent="." unique_id=1404865262 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -265)
+target = NodePath("../player")
+growl_stream = SubResource("AudioStreamRandomizer_slt2r")
+bite_stream = SubResource("AudioStreamRandomizer_yjd84")
+death_stream = SubResource("AudioStreamRandomizer_wexui")
+head_variant = 0
+body_variant = 1
+eye_variant = 3
+
+[node name="enemy_final_right" parent="." unique_id=394417150 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -266)
+target = NodePath("../player")
+growl_stream = SubResource("AudioStreamRandomizer_ww381")
+bite_stream = SubResource("AudioStreamRandomizer_7qo25")
+death_stream = SubResource("AudioStreamRandomizer_rynmh")
+head_variant = 1
+body_variant = 2
+eye_variant = 4
+
+[node name="enemy_final_back_left" parent="." unique_id=831625643 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -275)
+target = NodePath("../player")
+growl_stream = SubResource("AudioStreamRandomizer_fykia")
+bite_stream = SubResource("AudioStreamRandomizer_7yuvj")
+death_stream = SubResource("AudioStreamRandomizer_h2nsf")
+head_variant = 2
+body_variant = 0
+eye_variant = 0
+
+[node name="enemy_final_back_right" parent="." unique_id=1827744505 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 0, -273)
+target = NodePath("../player")
+growl_stream = SubResource("AudioStreamRandomizer_urfw8")
+bite_stream = SubResource("AudioStreamRandomizer_mgl3x")
+death_stream = SubResource("AudioStreamRandomizer_npgxv")
+head_variant = 0
+body_variant = 1
+eye_variant = 1
 
 [node name="hud" type="CanvasLayer" parent="." unique_id=997754346]
 
@@ -80,10 +491,10 @@ lantern = NodePath("../../lantern")
 [node name="death_ui" parent="." unique_id=415196139 node_paths=PackedStringArray("player") instance=ExtResource("death_ui")]
 player = NodePath("../player")
 
-[node name="loading" type="CanvasLayer" parent="."]
+[node name="loading" type="CanvasLayer" parent="." unique_id=1405385157]
 layer = 100
 
-[node name="cover" type="ColorRect" parent="loading"]
+[node name="cover" type="ColorRect" parent="loading" unique_id=209373961]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -91,17 +502,37 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[connection signal="died" from="player" to="." method="_on_player_died"]
 [connection signal="died" from="player" to="hud" method="hide"]
 [connection signal="ramrod_drag_changed" from="player" to="hud/musket" method="_on_ramrod_drag_changed"]
 [connection signal="fired" from="musket" to="player" method="_on_musket_fired"]
 [connection signal="fuse_expired" from="musket" to="player" method="_on_musket_fuse_expired"]
 [connection signal="trigger_ready" from="musket" to="player" method="_on_musket_trigger_ready"]
+[connection signal="bite_finished" from="enemy_first" to="camera_controller" method="_on_bite_finished"]
+[connection signal="bite_landed" from="enemy_first" to="camera_controller" method="_on_bite_landed"]
+[connection signal="bite_started" from="enemy_first" to="camera_controller" method="_on_bite_started"]
+[connection signal="bite_finished" from="enemy_pair_left" to="camera_controller" method="_on_bite_finished"]
+[connection signal="bite_landed" from="enemy_pair_left" to="camera_controller" method="_on_bite_landed"]
+[connection signal="bite_started" from="enemy_pair_left" to="camera_controller" method="_on_bite_started"]
+[connection signal="bite_finished" from="enemy_pair_right" to="camera_controller" method="_on_bite_finished"]
+[connection signal="bite_landed" from="enemy_pair_right" to="camera_controller" method="_on_bite_landed"]
+[connection signal="bite_started" from="enemy_pair_right" to="camera_controller" method="_on_bite_started"]
+[connection signal="bite_finished" from="enemy_final_left" to="camera_controller" method="_on_bite_finished"]
+[connection signal="bite_landed" from="enemy_final_left" to="camera_controller" method="_on_bite_landed"]
+[connection signal="bite_started" from="enemy_final_left" to="camera_controller" method="_on_bite_started"]
+[connection signal="bite_finished" from="enemy_final_right" to="camera_controller" method="_on_bite_finished"]
+[connection signal="bite_landed" from="enemy_final_right" to="camera_controller" method="_on_bite_landed"]
+[connection signal="bite_started" from="enemy_final_right" to="camera_controller" method="_on_bite_started"]
+[connection signal="bite_finished" from="enemy_final_back_left" to="camera_controller" method="_on_bite_finished"]
+[connection signal="bite_landed" from="enemy_final_back_left" to="camera_controller" method="_on_bite_landed"]
+[connection signal="bite_started" from="enemy_final_back_left" to="camera_controller" method="_on_bite_started"]
+[connection signal="bite_finished" from="enemy_final_back_right" to="camera_controller" method="_on_bite_finished"]
+[connection signal="bite_landed" from="enemy_final_back_right" to="camera_controller" method="_on_bite_landed"]
+[connection signal="bite_started" from="enemy_final_back_right" to="camera_controller" method="_on_bite_started"]
 [connection signal="charge_requested" from="hud/lantern" to="player" method="_on_lantern_pressed"]
 [connection signal="ball_requested" from="hud/musket" to="player" method="_on_barrel_pressed"]
 [connection signal="ramrod_requested" from="hud/musket" to="player" method="_on_ramrod_gui_input"]
+[connection signal="menu_requested" from="death_ui" to="." method="_on_menu_requested"]
+[connection signal="retry_requested" from="death_ui" to="." method="_on_retry_requested"]
 
 [editable path="player"]
-
-[connection signal="died" from="player" to="." method="_on_player_died"]
-[connection signal="retry_requested" from="death_ui" to="." method="_on_retry_requested"]
-[connection signal="menu_requested" from="death_ui" to="." method="_on_menu_requested"]
