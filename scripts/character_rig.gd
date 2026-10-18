@@ -35,6 +35,7 @@ var _aim_origin_bone: int
 
 func _ready() -> void:
   _aim_origin_bone = skeleton.find_bone('shoulder_left')
+  animation_tree.tree_root = animation_tree.tree_root.duplicate(true)
   animation_tree.active = true
   animation_tree.set('parameters/life/transition_request', 'alive')
   animation_tree.set('parameters/equipment/transition_request', 'neutral')
@@ -111,6 +112,10 @@ func set_equipment_pose(pose: EquipmentPose) -> void:
   if _dead or _equipment_pose == pose:
     return
   _equipment_pose = pose
+  var blend_tree := animation_tree.tree_root as AnimationNodeBlendTree
+  var upper_body := blend_tree.get_node('upper_body') as AnimationNodeBlend2
+  upper_body.set_filter_path('flip/skeleton:arm_left', pose != EquipmentPose.LANTERN)
+  upper_body.set_filter_path('flip/skeleton:hand_left', pose != EquipmentPose.LANTERN)
   var state: String = ['neutral', 'lantern', 'musket', 'aiming'][pose]
   animation_tree.set('parameters/equipment/transition_request', state)
 

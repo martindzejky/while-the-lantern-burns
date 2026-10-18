@@ -7568,51 +7568,51 @@ metadata/small_rock_cluster_generated = true
 [node name="floor_cluster_15" parent="small_rock_clusters" unique_id=580781090 node_paths=PackedStringArray("ground") instance=ExtResource("small_cluster")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.624855, 0, -17.511488)
 ground = NodePath("../../ground")
-seed_value = 6171
+seed_value = 83015
 
-[node name="rock_01" parent="small_rock_clusters/floor_cluster_15" unique_id=227723606 instance=ExtResource("87_3tcuv")]
+[node name="rock_01" parent="small_rock_clusters/floor_cluster_15" unique_id=227723606 instance=ExtResource("83_qnjht")]
 transform = Transform3D(1.3458356, 0, 0, 0, 1.1752803, 0, 0, 0, 1.3458356, 0.19333413, 0, 0.12656312)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_02" parent="small_rock_clusters/floor_cluster_15" unique_id=1886015718 instance=ExtResource("88_5gdlg")]
+[node name="rock_02" parent="small_rock_clusters/floor_cluster_15" unique_id=1886015718 instance=ExtResource("84_ot3i6")]
 transform = Transform3D(1.679524, 0, 0, 0, 1.5013034, 0, 0, 0, 1.679524, 0.14516422, 0, 0.6486304)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_03" parent="small_rock_clusters/floor_cluster_15" unique_id=1145904892 instance=ExtResource("86_f1qtt")]
+[node name="rock_03" parent="small_rock_clusters/floor_cluster_15" unique_id=1145904892 instance=ExtResource("87_3tcuv")]
 transform = Transform3D(1.3304515, 0, 0, 0, 1.2063103, 0, 0, 0, 1.3304515, 0.6596521, 0, -0.44467327)
 metadata/small_rock_cluster_generated = true
 
 [node name="floor_cluster_13" parent="small_rock_clusters" unique_id=1972659022 node_paths=PackedStringArray("ground") instance=ExtResource("small_cluster")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.310192, 0, -1.0695701)
 ground = NodePath("../../ground")
-seed_value = 6171
+seed_value = 83013
 
-[node name="rock_01" parent="small_rock_clusters/floor_cluster_13" unique_id=747505657 instance=ExtResource("87_3tcuv")]
+[node name="rock_01" parent="small_rock_clusters/floor_cluster_13" unique_id=747505657 instance=ExtResource("84_ot3i6")]
 transform = Transform3D(1.3458356, 0, 0, 0, 1.1752803, 0, 0, 0, 1.3458356, 0.19333413, 0, 0.12656312)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_02" parent="small_rock_clusters/floor_cluster_13" unique_id=1407930704 instance=ExtResource("88_5gdlg")]
+[node name="rock_02" parent="small_rock_clusters/floor_cluster_13" unique_id=1407930704 instance=ExtResource("82_cao3t")]
 transform = Transform3D(1.679524, 0, 0, 0, 1.5013034, 0, 0, 0, 1.679524, 0.14516422, 0, 0.6486304)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_03" parent="small_rock_clusters/floor_cluster_13" unique_id=226619984 instance=ExtResource("86_f1qtt")]
+[node name="rock_03" parent="small_rock_clusters/floor_cluster_13" unique_id=226619984 instance=ExtResource("87_3tcuv")]
 transform = Transform3D(1.3304515, 0, 0, 0, 1.2063103, 0, 0, 0, 1.3304515, 0.6596521, 0, -0.44467327)
 metadata/small_rock_cluster_generated = true
 
 [node name="floor_cluster_14" parent="small_rock_clusters" unique_id=1635437249 node_paths=PackedStringArray("ground") instance=ExtResource("small_cluster")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.48628, -9.536743e-07, -3.2910686)
 ground = NodePath("../../ground")
-seed_value = 6171
+seed_value = 83014
 
-[node name="rock_01" parent="small_rock_clusters/floor_cluster_14" unique_id=1911354253 instance=ExtResource("87_3tcuv")]
+[node name="rock_01" parent="small_rock_clusters/floor_cluster_14" unique_id=1911354253 instance=ExtResource("83_qnjht")]
 transform = Transform3D(1.3458356, 0, 0, 0, 1.1752803, 0, 0, 0, 1.3458356, 0.19333413, 0, 0.12656312)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_02" parent="small_rock_clusters/floor_cluster_14" unique_id=10384266 instance=ExtResource("88_5gdlg")]
+[node name="rock_02" parent="small_rock_clusters/floor_cluster_14" unique_id=10384266 instance=ExtResource("85_lirey")]
 transform = Transform3D(1.679524, 0, 0, 0, 1.5013034, 0, 0, 0, 1.679524, 0.14516422, 0, 0.6486304)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_03" parent="small_rock_clusters/floor_cluster_14" unique_id=1475683249 instance=ExtResource("86_f1qtt")]
+[node name="rock_03" parent="small_rock_clusters/floor_cluster_14" unique_id=1475683249 instance=ExtResource("88_5gdlg")]
 transform = Transform3D(1.3304515, 0, 0, 0, 1.2063103, 0, 0, 0, 1.3304515, 0.6596521, 0, -0.44467327)
 metadata/small_rock_cluster_generated = true
 
@@ -7703,34 +7703,34 @@ metadata/small_rock_cluster_generated = true
 [node name="floor_cluster_08" parent="small_rock_clusters" unique_id=371128492 node_paths=PackedStringArray("ground") instance=ExtResource("small_cluster")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.341732, 0, -65.924835)
 ground = NodePath("../../ground")
-seed_value = 6175
+seed_value = 83008
 
-[node name="rock_01" parent="small_rock_clusters/floor_cluster_08" unique_id=2030773530 instance=ExtResource("85_lirey")]
+[node name="rock_01" parent="small_rock_clusters/floor_cluster_08" unique_id=2030773530 instance=ExtResource("88_5gdlg")]
 transform = Transform3D(1.1876677, 0, 0, 0, 1.3459204, 0, 0, 0, 1.1876677, -0.55990714, 0, 0.21281326)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_02" parent="small_rock_clusters/floor_cluster_08" unique_id=1006700885 instance=ExtResource("88_5gdlg")]
+[node name="rock_02" parent="small_rock_clusters/floor_cluster_08" unique_id=1006700885 instance=ExtResource("87_3tcuv")]
 transform = Transform3D(1.3619602, 0, 0, 0, 1.3780692, 0, 0, 0, 1.3619602, 0.2212582, 0, 0.58203536)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_03" parent="small_rock_clusters/floor_cluster_08" unique_id=2021103105 instance=ExtResource("85_lirey")]
+[node name="rock_03" parent="small_rock_clusters/floor_cluster_08" unique_id=2021103105 instance=ExtResource("87_3tcuv")]
 transform = Transform3D(1.3284564, 0, 0, 0, 1.4305973, 0, 0, 0, 1.3284564, -0.39142734, 0, -0.6516472)
 metadata/small_rock_cluster_generated = true
 
 [node name="floor_cluster_09" parent="small_rock_clusters" unique_id=732630326 node_paths=PackedStringArray("ground") instance=ExtResource("small_cluster")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.120617, 0, -62.555084)
 ground = NodePath("../../ground")
-seed_value = 6175
+seed_value = 83009
 
-[node name="rock_01" parent="small_rock_clusters/floor_cluster_09" unique_id=935669195 instance=ExtResource("85_lirey")]
+[node name="rock_01" parent="small_rock_clusters/floor_cluster_09" unique_id=935669195 instance=ExtResource("87_3tcuv")]
 transform = Transform3D(1.1876677, 0, 0, 0, 1.3459204, 0, 0, 0, 1.1876677, -0.55990714, 0, 0.21281326)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_02" parent="small_rock_clusters/floor_cluster_09" unique_id=491974639 instance=ExtResource("88_5gdlg")]
+[node name="rock_02" parent="small_rock_clusters/floor_cluster_09" unique_id=491974639 instance=ExtResource("87_3tcuv")]
 transform = Transform3D(1.3619602, 0, 0, 0, 1.3780692, 0, 0, 0, 1.3619602, 0.2212582, 0, 0.58203536)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_03" parent="small_rock_clusters/floor_cluster_09" unique_id=59378831 instance=ExtResource("85_lirey")]
+[node name="rock_03" parent="small_rock_clusters/floor_cluster_09" unique_id=59378831 instance=ExtResource("88_5gdlg")]
 transform = Transform3D(1.3284564, 0, 0, 0, 1.4305973, 0, 0, 0, 1.3284564, -0.39142734, 0, -0.6516472)
 metadata/small_rock_cluster_generated = true
 
@@ -7758,42 +7758,42 @@ metadata/small_rock_cluster_generated = true
 [node name="floor_cluster_10" parent="small_rock_clusters" unique_id=240664090 node_paths=PackedStringArray("ground") instance=ExtResource("small_cluster")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.34964, 0, -106.05248)
 ground = NodePath("../../ground")
-seed_value = 6176
+seed_value = 83010
 
-[node name="rock_01" parent="small_rock_clusters/floor_cluster_10" unique_id=569891149 instance=ExtResource("85_lirey")]
+[node name="rock_01" parent="small_rock_clusters/floor_cluster_10" unique_id=569891149 instance=ExtResource("83_qnjht")]
 transform = Transform3D(1.4530137, 0, 0, 0, 1.535475, 0, 0, 0, 1.4530137, 0.12320466, 0, -0.7094986)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_02" parent="small_rock_clusters/floor_cluster_10" unique_id=847076119 instance=ExtResource("82_cao3t")]
+[node name="rock_02" parent="small_rock_clusters/floor_cluster_10" unique_id=847076119 instance=ExtResource("88_5gdlg")]
 transform = Transform3D(1.1345633, 0, 0, 0, 1.1185049, 0, 0, 0, 1.1345633, -0.15592618, 0, -0.5487656)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_03" parent="small_rock_clusters/floor_cluster_10" unique_id=1641663257 instance=ExtResource("88_5gdlg")]
+[node name="rock_03" parent="small_rock_clusters/floor_cluster_10" unique_id=1641663257 instance=ExtResource("82_cao3t")]
 transform = Transform3D(1.3736292, 0, 0, 0, 1.3237982, 0, 0, 0, 1.3736292, 0.5714983, 0, 0.51488996)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_04" parent="small_rock_clusters/floor_cluster_10" unique_id=962561708 instance=ExtResource("84_ot3i6")]
+[node name="rock_04" parent="small_rock_clusters/floor_cluster_10" unique_id=962561708 instance=ExtResource("88_5gdlg")]
 transform = Transform3D(1.3608351, 0, 0, 0, 1.4890491, 0, 0, 0, 1.3608351, 0.22342053, 0, -0.15069991)
 metadata/small_rock_cluster_generated = true
 
 [node name="floor_cluster_11" parent="small_rock_clusters" unique_id=1343960089 node_paths=PackedStringArray("ground") instance=ExtResource("small_cluster")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6908875, 0, -106.79406)
 ground = NodePath("../../ground")
-seed_value = 6176
+seed_value = 83011
 
-[node name="rock_01" parent="small_rock_clusters/floor_cluster_11" unique_id=422702622 instance=ExtResource("85_lirey")]
+[node name="rock_01" parent="small_rock_clusters/floor_cluster_11" unique_id=422702622 instance=ExtResource("82_cao3t")]
 transform = Transform3D(1.4530137, 0, 0, 0, 1.535475, 0, 0, 0, 1.4530137, 0.12320466, 0, -0.7094986)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_02" parent="small_rock_clusters/floor_cluster_11" unique_id=1789154095 instance=ExtResource("82_cao3t")]
+[node name="rock_02" parent="small_rock_clusters/floor_cluster_11" unique_id=1789154095 instance=ExtResource("85_lirey")]
 transform = Transform3D(1.1345633, 0, 0, 0, 1.1185049, 0, 0, 0, 1.1345633, -0.15592618, 0, -0.5487656)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_03" parent="small_rock_clusters/floor_cluster_11" unique_id=1521457643 instance=ExtResource("88_5gdlg")]
+[node name="rock_03" parent="small_rock_clusters/floor_cluster_11" unique_id=1521457643 instance=ExtResource("86_f1qtt")]
 transform = Transform3D(1.3736292, 0, 0, 0, 1.3237982, 0, 0, 0, 1.3736292, 0.5714983, 0, 0.51488996)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_04" parent="small_rock_clusters/floor_cluster_11" unique_id=627408421 instance=ExtResource("84_ot3i6")]
+[node name="rock_04" parent="small_rock_clusters/floor_cluster_11" unique_id=627408421 instance=ExtResource("88_5gdlg")]
 transform = Transform3D(1.3608351, 0, 0, 0, 1.4890491, 0, 0, 0, 1.3608351, 0.22342053, 0, -0.15069991)
 metadata/small_rock_cluster_generated = true
 
@@ -7821,21 +7821,21 @@ metadata/small_rock_cluster_generated = true
 [node name="floor_cluster_12" parent="small_rock_clusters" unique_id=1447146675 node_paths=PackedStringArray("ground") instance=ExtResource("small_cluster")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.422028, 0, -133.84395)
 ground = NodePath("../../ground")
-seed_value = 6177
+seed_value = 83012
 
-[node name="rock_01" parent="small_rock_clusters/floor_cluster_12" unique_id=927553508 instance=ExtResource("86_f1qtt")]
+[node name="rock_01" parent="small_rock_clusters/floor_cluster_12" unique_id=927553508 instance=ExtResource("84_ot3i6")]
 transform = Transform3D(1.6520104, 0, 0, 0, 1.5694664, 0, 0, 0, 1.6520104, 0.044702023, 0, -0.76162004)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_02" parent="small_rock_clusters/floor_cluster_12" unique_id=170729713 instance=ExtResource("83_qnjht")]
+[node name="rock_02" parent="small_rock_clusters/floor_cluster_12" unique_id=170729713 instance=ExtResource("87_3tcuv")]
 transform = Transform3D(1.7313776, 0, 0, 0, 1.5522454, 0, 0, 0, 1.7313776, -0.5349614, 0, 0.5393764)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_03" parent="small_rock_clusters/floor_cluster_12" unique_id=204013195 instance=ExtResource("85_lirey")]
+[node name="rock_03" parent="small_rock_clusters/floor_cluster_12" unique_id=204013195 instance=ExtResource("87_3tcuv")]
 transform = Transform3D(0.9397859, 0, 0, 0, 0.9512049, 0, 0, 0, 0.9397859, -0.055671766, 0, 0.62453544)
 metadata/small_rock_cluster_generated = true
 
-[node name="rock_04" parent="small_rock_clusters/floor_cluster_12" unique_id=1960541449 instance=ExtResource("85_lirey")]
+[node name="rock_04" parent="small_rock_clusters/floor_cluster_12" unique_id=1960541449 instance=ExtResource("83_qnjht")]
 transform = Transform3D(1.5079982, 0, 0, 0, 1.5455781, 0, 0, 0, 1.5079982, -0.590092, 0, 0.16175692)
 metadata/small_rock_cluster_generated = true
 
