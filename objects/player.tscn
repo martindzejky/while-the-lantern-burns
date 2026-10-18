@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cwsar4g8vkhkt" path="res://scripts/player.gd" id="1"]
 [ext_resource type="Script" uid="uid://dp4r0732t61ar" path="res://scripts/camera_facing.gd" id="2"]
-[ext_resource type="Shader" uid="uid://owwq0vhtovdm" path="res://shaders/player_lighting.gdshader" id="3"]
+[ext_resource type="PackedScene" path="res://objects/character_rig.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://c616kmmr8did" path="res://objects/light_sensor.tscn" id="4"]
 
 [ext_resource type="PackedScene" path="res://objects/drop_shadow.tscn" id="shadow"]
@@ -19,28 +19,16 @@ gradient = SubResource("aim_color")
 width = 1
 height = 1
 
-[sub_resource type="Gradient" id="color"]
-colors = PackedColorArray(1, 0.65, 0.22, 1, 1, 0.65, 0.22, 1)
-
-[sub_resource type="GradientTexture2D" id="texture"]
-gradient = SubResource("color")
-height = 96
-
-[sub_resource type="ShaderMaterial" id="material"]
-render_priority = 0
-shader = ExtResource("3")
-shader_parameter/sprite_texture = SubResource("texture")
-
 [node name="player" type="CharacterBody3D" unique_id=1376385991 node_paths=PackedStringArray("flip", "lantern_slot", "drop_slot", "musket_back_slot", "musket_front_slot", "musket_aim_slot", "aim_line", "light_sensor")]
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1")
 flip = NodePath("visuals/flip")
-lantern_slot = NodePath("visuals/flip/lantern_slot")
+lantern_slot = NodePath("visuals/flip/character_rig/skeleton/arm_right/lantern_slot")
 drop_slot = NodePath("drop_slot")
-musket_back_slot = NodePath("visuals/flip/musket_back_slot")
-musket_front_slot = NodePath("visuals/flip/musket_front_slot")
-musket_aim_slot = NodePath("visuals/flip/musket_aim_slot")
+musket_back_slot = NodePath("visuals/flip/character_rig/skeleton/torso/musket_back_slot")
+musket_front_slot = NodePath("visuals/flip/character_rig/skeleton/torso/musket_front_slot")
+musket_aim_slot = NodePath("visuals/flip/character_rig/skeleton/arm_right/musket_aim_slot")
 aim_line = NodePath("aim_line")
 light_sensor = NodePath("light_sensor")
 
@@ -59,25 +47,7 @@ script = ExtResource("2")
 
 [node name="flip" type="Node3D" parent="visuals" unique_id=606544514]
 
-[node name="sprite" type="Sprite3D" parent="visuals/flip" unique_id=1425917564]
-material_override = SubResource("material")
-cast_shadow = 0
-offset = Vector2(0, 48)
-pixel_size = 0.015
-alpha_cut = 1
-texture = SubResource("texture")
-
-[node name="lantern_slot" type="Marker3D" parent="visuals/flip" unique_id=440290762]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81327057, 0.88996845, 0.15)
-
-[node name="musket_back_slot" type="Marker3D" parent="visuals/flip" unique_id=1333341864]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.35, -0.1)
-
-[node name="musket_aim_slot" type="Marker3D" parent="visuals/flip" unique_id=865572494]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.7, 0.1)
-
-[node name="musket_front_slot" type="Marker3D" parent="visuals/flip" unique_id=2110624294]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.55, 0.15)
+[node name="character_rig" parent="visuals/flip" instance=ExtResource("3")]
 
 [node name="drop_slot" type="Marker3D" parent="." unique_id=207987825]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.813, 0, 0.15)

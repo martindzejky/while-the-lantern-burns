@@ -61,12 +61,6 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-  var facing := velocity.x
-  if _aiming_requested():
-    var camera := get_viewport().get_camera_3d()
-    facing = get_viewport().get_mouse_position().x - camera.unproject_position(global_position).x
-  if not is_zero_approx(facing):
-    flip.scale.x = -1.0 if facing < 0.0 else 1.0
   _update_equipment()
 
 
