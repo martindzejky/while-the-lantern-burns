@@ -18,6 +18,10 @@ enum ReloadState { EMPTY, BALL_INSERTED, LOADED }
 @export var visuals: CameraFacing
 @export var muzzle: Marker3D
 @export var sparks: CPUParticles3D
+@export var spark_light: OmniLight3D
+@export var spark_flicker_noise: Noise
+@export_range(0.0, 3.0, 0.05) var spark_light_min_energy: float = 0.05
+@export_range(0.0, 3.0, 0.05) var spark_light_max_energy: float = 0.35
 @export var flash_scene: PackedScene
 @export var smoke_scene: PackedScene
 @export var pickup_audio: AudioStreamPlayer3D
@@ -45,6 +49,7 @@ var _fuse_timer: Timer = Timer.new()
 var _trigger_timer: Timer = Timer.new()
 var _ramrod_motion: float = 0.0
 var _ground_visuals_transform: Transform3D
+var _spark_flicker_time: float = 0.0
 
 
 func _ready() -> void:
@@ -58,11 +63,16 @@ func _ready() -> void:
   _trigger_timer.timeout.connect(_on_trigger_timer_timeout)
   add_child(_trigger_timer)
   ramrod_audio.volume_db = -80.0
+  spark_light.visible = false
 
 
 func _process(delta: float) -> void:
   _ramrod_motion = move_toward(_ramrod_motion, 0.0, delta * 6.0)
   ramrod_audio.volume_db = ramrod_volume_db + linear_to_db(maxf(_ramrod_motion, 0.0001))
+  if is_lit:
+    _spark_flicker_time += delta
+    var flicker := clampf(spark_flicker_noise.get_noise_1d(_spark_flicker_time) * 0.5 + 0.5, 0.0, 1.0)
+    spark_light.light_energy = lerpf(spark_light_min_energy, spark_light_max_energy, flicker)
 
 
 func warm_up_effects() -> void:
@@ -84,6 +94,8 @@ func ignite() -> void:
   if not is_owned or reload_state != ReloadState.LOADED or is_lit:
     return
   is_lit = true
+  spark_light.light_energy = spark_light_max_energy
+  spark_light.visible = true
   sparks.restart()
   sparks.emitting = true
   _fuse_timer.start(fuse_duration)
@@ -240,6 +252,7 @@ func _discharge(end: Vector3, hit: Dictionary) -> void:
   burning_audio.stop()
   shot_audio.play()
   sparks.emitting = false
+  spark_light.visible = false
   reload_state = ReloadState.EMPTY
   is_lit = false
   reload_changed.emit()

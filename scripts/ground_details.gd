@@ -3,6 +3,7 @@ extends Node3D
 
 @export var cracks: Array[Texture2D] = []
 @export var stones: Array[Texture2D] = []
+@export var stone_normals: Array[Texture2D] = []
 @export var patch_material: ShaderMaterial
 @export var seed_value: int = 60
 @export_range(0.0, 2.0, 0.01) var crack_density: float = 0.12
@@ -33,17 +34,19 @@ func generate(polygon: PackedVector2Array, ground_depth: float = 0.01) -> void:
   var random := RandomNumberGenerator.new()
   random.seed = seed_value
   _scatter(cracks, roundi(area * crack_density), crack_width, polygon, bounds, random, 'crack')
-  _scatter(stones, roundi(area * stone_density), stone_width, polygon, bounds, random, 'stone')
+  assert(stone_normals.size() == stones.size(), 'Each ground stone needs its matching normal map')
+  _scatter(stones, roundi(area * stone_density), stone_width, polygon, bounds, random, 'stone', stone_normals)
 
 
-func _scatter(textures: Array[Texture2D], count: int, widths: Vector2, polygon: PackedVector2Array, bounds: Rect2, random: RandomNumberGenerator, prefix: String) -> void:
+func _scatter(textures: Array[Texture2D], count: int, widths: Vector2, polygon: PackedVector2Array, bounds: Rect2, random: RandomNumberGenerator, prefix: String, normal_textures: Array[Texture2D] = []) -> void:
   if textures.is_empty():
     return
   var placed: int = 0
   for attempt: int in range(count * 20):
     if placed >= count:
       break
-    var texture: Texture2D = textures[random.randi_range(0, textures.size() - 1)]
+    var variant: int = random.randi_range(0, textures.size() - 1)
+    var texture: Texture2D = textures[variant]
     var width: float = random.randf_range(widths.x, widths.y)
     var size := Vector2(width, width * float(texture.get_height()) / float(texture.get_width()))
     var point := Vector2(random.randf_range(bounds.position.x, bounds.end.x), random.randf_range(bounds.position.y, bounds.end.y))
@@ -55,12 +58,16 @@ func _scatter(textures: Array[Texture2D], count: int, widths: Vector2, polygon: 
     var material := patch_material.duplicate() as ShaderMaterial
     material.set_shader_parameter('detail_texture', texture)
     material.set_shader_parameter('opacity', opacity)
+    material.set_shader_parameter('use_normal_map', not normal_textures.is_empty())
+    if not normal_textures.is_empty():
+      material.set_shader_parameter('detail_normal', normal_textures[variant])
     var patch := MeshInstance3D.new()
     patch.name = '%s_%03d' % [prefix, placed + 1]
     patch.mesh = mesh
     patch.material_override = material
     patch.position = Vector3(point.x, point.y, _surface_z)
-    patch.rotation.z = random.randf_range(-PI, PI)
+    var angle := random.randf_range(-PI, PI)
+    patch.rotation.z = angle if normal_textures.is_empty() else 0.0
     patch.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
     # exclude decoration from the light sensor camera, like the drop shadows.
     patch.layers = 4

@@ -27,6 +27,8 @@
 
 [ext_resource type="PackedScene" path="res://objects/ground.tscn" id="ground"]
 
+[ext_resource type="PackedScene" path="res://ui/world_post_processing.tscn" id="world_post_processing"]
+
 [sub_resource type="Environment" id="environment"]
 background_mode = 1
 background_color = Color(0.002, 0.006, 0.004, 1)
@@ -39,6 +41,8 @@ reflected_light_source = 2
 
 [node name="ambience" parent="." unique_id=1254964729 node_paths=PackedStringArray("target") instance=ExtResource("12")]
 target = NodePath("../player")
+
+[node name="world_post_processing" parent="." instance=ExtResource("world_post_processing")]
 
 [node name="environment" type="WorldEnvironment" parent="." unique_id=1644920340]
 environment = SubResource("environment")

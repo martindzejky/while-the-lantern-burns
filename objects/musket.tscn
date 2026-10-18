@@ -26,18 +26,24 @@ shader_parameter/omnidirectional = true
 
 [sub_resource type="StandardMaterial3D" id="spark_material"]
 transparency = 1
+blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="spark"]
 material = SubResource("spark_material")
-size = Vector2(0.035, 0.035)
+size = Vector2(0.1, 0.1)
 
 [sub_resource type="Gradient" id="spark_fade"]
-colors = PackedColorArray(1, 0.85, 0.25, 1, 1, 0.25, 0.02, 0)
+offsets = PackedFloat32Array(0, 0.35, 1)
+colors = PackedColorArray(1, 0.98, 0.8, 1, 1, 0.8, 0.25, 1, 1, 0.3, 0.03, 0)
 
-[node name="musket" type="Node3D" unique_id=1358336505 node_paths=PackedStringArray("rear_grip", "front_grip", "sprite", "visuals", "muzzle", "sparks", "pickup_audio", "ball_audio", "loaded_audio", "aim_audio", "ignite_audio", "burning_audio", "shot_audio", "click_audio", "ramrod_audio")]
+[sub_resource type="FastNoiseLite" id="spark_flicker_noise"]
+frequency = 22.0
+fractal_octaves = 2
+
+[node name="musket" type="Node3D" unique_id=1358336505 node_paths=PackedStringArray("rear_grip", "front_grip", "sprite", "visuals", "muzzle", "sparks", "spark_light", "pickup_audio", "ball_audio", "loaded_audio", "aim_audio", "ignite_audio", "burning_audio", "shot_audio", "click_audio", "ramrod_audio")]
 script = ExtResource("1")
 rear_grip = NodePath("visuals/sprite/rear_grip")
 front_grip = NodePath("visuals/sprite/front_grip")
@@ -45,6 +51,8 @@ sprite = NodePath("visuals/sprite")
 visuals = NodePath("visuals")
 muzzle = NodePath("visuals/sprite/muzzle")
 sparks = NodePath("visuals/sprite/sparks")
+spark_light = NodePath("visuals/sprite/spark_light")
+spark_flicker_noise = SubResource("spark_flicker_noise")
 flash_scene = ExtResource("5")
 smoke_scene = ExtResource("6")
 pickup_audio = NodePath("pickup_audio")
@@ -77,15 +85,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.525, 0.12, 0.03)
 cast_shadow = 0
 emitting = false
-amount = 10
-lifetime = 0.4
+amount = 18
+lifetime = 0.5
 mesh = SubResource("spark")
 direction = Vector3(0, 1, 0)
 spread = 65.0
 gravity = Vector3(0, -1, 0)
-initial_velocity_min = 0.2
-initial_velocity_max = 0.6
+initial_velocity_min = 0.3
+initial_velocity_max = 0.9
 color_ramp = SubResource("spark_fade")
+
+[node name="spark_light" type="OmniLight3D" parent="visuals/sprite"]
+position = Vector3(0.525, 0.12, 0.03)
+visible = false
+light_color = Color(1, 0.76, 0.3, 1)
+light_energy = 0.35
+light_specular = 0.0
+omni_range = 0.8
+omni_attenuation = 1.0
 
 [node name="rear_grip" type="Marker3D" parent="visuals/sprite" unique_id=387435652]
 transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.6692753, -0.14233214, 0)

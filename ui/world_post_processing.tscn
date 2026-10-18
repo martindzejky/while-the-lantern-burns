@@ -1,0 +1,49 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world_post_processing.gd" id="1"]
+[ext_resource type="Shader" path="res://shaders/world_post_processing.gdshader" id="2"]
+[ext_resource type="Shader" path="res://shaders/world_distance_blur.gdshader" id="3"]
+
+[sub_resource type="ShaderMaterial" id="color_material"]
+resource_local_to_scene = true
+shader = ExtResource("2")
+
+[sub_resource type="ShaderMaterial" id="blur_material"]
+resource_local_to_scene = true
+render_priority = -128
+shader = ExtResource("3")
+
+[sub_resource type="QuadMesh" id="quad"]
+size = Vector2(2, 2)
+
+[node name="world_post_processing" type="Node3D" node_paths=PackedStringArray("distance_blur", "overlay")]
+script = ExtResource("1")
+distance_blur = NodePath("distance_blur")
+overlay = NodePath("color/overlay")
+blur_radius_pixels = 12.0
+
+[node name="distance_blur" type="MeshInstance3D" parent="."]
+layers = 4
+cast_shadow = 0
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+material_override = SubResource("blur_material")
+mesh = SubResource("quad")
+
+[node name="color" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="overlay" type="ColorRect" parent="color"]
+material = SubResource("color_material")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="death_capture" type="CanvasLayer" parent="."]
+layer = 19
+
+[node name="back_buffer" type="BackBufferCopy" parent="death_capture"]
+copy_mode = 2
