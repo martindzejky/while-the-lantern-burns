@@ -354,7 +354,6 @@ victory = NodePath("victory")
 target = NodePath("../player")
 
 [node name="world_post_processing" parent="." unique_id=1794444574 instance=ExtResource("world_post_processing")]
-visible = false
 
 [node name="environment" type="WorldEnvironment" parent="." unique_id=1644920340]
 environment = SubResource("environment")
