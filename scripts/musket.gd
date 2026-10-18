@@ -76,7 +76,18 @@ func _process(delta: float) -> void:
 
 
 func warm_up_effects() -> void:
+  var spark_range: float = spark_light.omni_range
+  # reach visible materials while the loading cover hides the warm-up.
+  spark_light.omni_range = 64.0
+  spark_light.light_energy = spark_light_max_energy
+  spark_light.visible = true
   sparks.emitting = true
+  # compile the fuse-light combination before adding the shot's extra light.
+  for frame: int in range(2):
+    await RenderingServer.frame_post_draw
+    if not is_instance_valid(self):
+      return
+  spark_light.omni_range = spark_range
   var flash := flash_scene.instantiate() as MuzzleFlash
   add_child(flash)
   var smoke := smoke_scene.instantiate() as CPUParticles3D
@@ -88,6 +99,7 @@ func warm_up_effects() -> void:
   flash.queue_free()
   smoke.queue_free()
   sparks.emitting = false
+  spark_light.visible = false
 
 
 func ignite() -> void:
