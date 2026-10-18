@@ -17,7 +17,6 @@ wet = 0.18
 predelay_msec = 90.0
 room_size = 0.95
 damping = 0.45
-dry = 1.0
 wet = 0.55
 
 [resource]

@@ -12,6 +12,7 @@ signal ramrod_drag_changed(dragging: bool)
 @export var drop_slot: Marker3D
 @export var aim_line: Sprite3D
 @export var light_sensor: LightSensor
+@export var footstep_audio: AudioStreamPlayer3D
 @export var audio_listener: AudioListener3D
 @export var aim_height: float = 0.7
 @export var pickup_radius: float = 1.5
@@ -363,3 +364,8 @@ func _physics_process(_delta: float) -> void:
 
 func _on_dash_timer_timeout() -> void:
   _recovery_timer.start()
+
+
+func _on_rig_stepped() -> void:
+  if not is_dead and not velocity.is_zero_approx() and not musket.is_trigger_pending:
+    footstep_audio.play()

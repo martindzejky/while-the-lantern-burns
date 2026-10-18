@@ -1,6 +1,8 @@
 class_name CharacterRig
 extends Node3D
 
+signal stepped
+
 enum EquipmentPose { IDLE, LANTERN, MUSKET_READY, MUSKET_AIM }
 
 @export var animation: AnimationPlayer
@@ -165,3 +167,8 @@ func show_death() -> void:
     death.track_set_key_value(track, 0, current)
   animation.get_animation_library('').add_animation('death', death)
   animation_tree.set('parameters/life/transition_request', 'dead')
+
+
+func _step() -> void:
+  if _moving and not _dead and is_processing():
+    stepped.emit()

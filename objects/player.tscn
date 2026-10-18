@@ -7,6 +7,8 @@
 
 [ext_resource type="PackedScene" path="res://objects/drop_shadow.tscn" id="shadow"]
 
+[ext_resource type="AudioStream" path="res://audio/player/footsteps.tres" id="footsteps"]
+
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.475
 height = 1.2
@@ -19,7 +21,7 @@ gradient = SubResource("aim_color")
 width = 1
 height = 1
 
-[node name="player" type="CharacterBody3D" unique_id=1376385991 node_paths=PackedStringArray("rig", "drop_slot", "aim_line", "light_sensor", "audio_listener")]
+[node name="player" type="CharacterBody3D" unique_id=1376385991 node_paths=PackedStringArray("rig", "drop_slot", "aim_line", "light_sensor", "audio_listener", "footstep_audio")]
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1")
@@ -28,6 +30,7 @@ drop_slot = NodePath("drop_slot")
 aim_line = NodePath("aim_line")
 light_sensor = NodePath("light_sensor")
 audio_listener = NodePath("audio_listener")
+footstep_audio = NodePath("footstep_audio")
 
 [node name="audio_listener" type="AudioListener3D" parent="."]
 position = Vector3(0, 0.7, 0)
@@ -56,4 +59,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.813, 0, 0.15)
 anchor = NodePath("..")
 pixel_size = 0.008
 
+[node name="footstep_audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("footsteps")
+volume_db = -12.0
+max_polyphony = 1
+max_distance = 30.0
+bus = &"World SFX"
+
 [connection signal="light_changed" from="light_sensor" to="." method="_on_light_sensor_light_changed"]
+[connection signal="stepped" from="visuals/character_rig" to="." method="_on_rig_stepped"]

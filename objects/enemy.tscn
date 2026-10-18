@@ -18,6 +18,8 @@
 
 [ext_resource type="Animation" path="res://animations/enemy/bite.tres" id="bite"]
 
+[ext_resource type="AudioStream" path="res://audio/enemy/footsteps.tres" id="footsteps"]
+
 [sub_resource type="AnimationLibrary" id="animations"]
 _data = {
 &"bite": ExtResource("bite")
@@ -26,13 +28,14 @@ _data = {
 [sub_resource type="BoxShape3D" id="hitbox"]
 size = Vector3(1.4, 1.6, 1.8)
 
-[node name="enemy" type="CharacterBody3D" unique_id=67314845 node_paths=PackedStringArray("appearance", "head", "head_sprite", "body", "eyes", "mouth", "upper_teeth", "lower_teeth", "animation")]
+[node name="enemy" type="CharacterBody3D" unique_id=67314845 node_paths=PackedStringArray("appearance", "head", "head_sprite", "body", "eyes", "mouth", "upper_teeth", "lower_teeth", "animation", "footstep_audio")]
 collision_layer = 2
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1")
 appearance = NodePath("visuals/appearance")
 animation = NodePath("animation")
+footstep_audio = NodePath("footstep_audio")
 head = NodePath("visuals/appearance/head")
 head_sprite = NodePath("visuals/appearance/head/lift/sprite")
 body = NodePath("visuals/appearance/body")
@@ -104,5 +107,12 @@ cast_shadow = 0
 [node name="animation" type="AnimationPlayer" parent="."]
 callback_mode_process = 0
 libraries/ = SubResource("animations")
+
+[node name="footstep_audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("footsteps")
+volume_db = -6.0
+max_polyphony = 1
+max_distance = 30.0
+bus = &"Gunshot"
 
 [connection signal="animation_finished" from="animation" to="." method="_on_animation_finished"]

@@ -10,6 +10,7 @@ extends CharacterBody3D
 @export var mouth: Node3D
 @export var upper_teeth: Sprite3D
 @export var lower_teeth: Sprite3D
+@export var footstep_audio: AudioStreamPlayer3D
 @export var animation: AnimationPlayer
 @export var head_textures: Array[Texture2D]
 @export var body_textures: Array[Texture2D]
@@ -42,7 +43,10 @@ func _process(delta: float) -> void:
   if _biting:
     _head_bob_offset = 0.0
   elif preview or not velocity.is_zero_approx():
+    var previous_phase := _head_bob_phase
     _head_bob_phase += delta * TAU / head_bob_period
+    if not preview and floorf((_head_bob_phase + PI * 0.5) / PI) > floorf((previous_phase + PI * 0.5) / PI):
+      footstep_audio.play()
     _head_bob_offset = sin(_head_bob_phase) * head_bob_height
   else:
     _head_bob_offset = move_toward(_head_bob_offset, 0.0, delta * head_bob_height)
