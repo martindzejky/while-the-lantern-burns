@@ -22,7 +22,7 @@ ambient_light_energy = 0.05
 reflected_light_source = 2
 
 [sub_resource type="Gradient" id="ground_color"]
-colors = PackedColorArray(0.45, 0.45, 0.4, 1, 0.45, 0.45, 0.4, 1)
+colors = PackedColorArray(0.96862745, 0.89019608, 0.59215686, 1, 0.96862745, 0.89019608, 0.59215686, 1)
 
 [sub_resource type="GradientTexture2D" id="ground_texture"]
 gradient = SubResource("ground_color")

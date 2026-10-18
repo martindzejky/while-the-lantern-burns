@@ -15,7 +15,7 @@ signal lever_changed(openness: float)
 @export var min_radius: float = 0.7
 @export var max_radius: float = 8.0
 @export var min_brightness: float = 0.15
-@export var max_brightness: float = 1.8
+@export var max_brightness: float = 1.1
 @export var flicker_noise: Noise
 @export_range(0.0, 0.2, 0.005) var flicker_amount: float = 0.04
 

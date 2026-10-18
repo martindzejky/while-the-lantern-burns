@@ -31,8 +31,8 @@ texture = ExtResource("3")
 
 [node name="light" type="OmniLight3D" parent="visuals" unique_id=876345472]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.405, 0)
-light_color = Color(1, 0.75, 0.3, 1)
-light_energy = 1.8
+light_color = Color(1, 1, 1, 1)
+light_energy = 1.1
 light_specular = 0.0
 shadow_enabled = true
 shadow_blur = 0.0
