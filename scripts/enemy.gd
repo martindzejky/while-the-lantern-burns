@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 signal bite_started(enemy: Enemy)
 signal bite_finished(enemy: Enemy)
+signal bite_landed(enemy: Enemy)
 
 @export var target: Player
 @export var appearance: Node3D
@@ -159,6 +160,10 @@ func get_bite_windup_progress() -> float:
   return clampf(animation.current_animation_position / maxf(_bite_impact_time, 0.001), 0.0, 1.0)
 
 
+func get_bite_focus_position() -> Vector3:
+  return mouth.global_position
+
+
 func _get_bite_impact_time() -> float:
   var clip: Animation = animation.get_animation(&'bite')
   for track: int in range(clip.get_track_count()):
@@ -187,6 +192,7 @@ func _bite() -> void:
   vocal_audio.play()
   if not preview and not target.is_dead and _within_bite_range():
     target.take_bite()
+    bite_landed.emit(self)
 
 
 func _finish_bite() -> void:

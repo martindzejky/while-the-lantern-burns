@@ -3,16 +3,24 @@
 [ext_resource type="Script" path="res://scripts/death_feedback.gd" id="1"]
 [ext_resource type="Shader" path="res://shaders/death_feedback.gdshader" id="2"]
 
+[ext_resource type="Theme" path="res://resources/menu/theme.tres" id="theme"]
+[ext_resource type="FontFile" path="res://resources/menu/barlow_medium.ttf" id="medium"]
+[ext_resource type="PackedScene" path="res://ui/ui_audio.tscn" id="audio"]
+
 [sub_resource type="ShaderMaterial" id="material"]
 resource_local_to_scene = true
 shader = ExtResource("2")
 
-[node name="death_feedback" type="CanvasLayer" node_paths=PackedStringArray("overlay", "flash", "message")]
+[node name="death_feedback" type="CanvasLayer" node_paths=PackedStringArray("overlay", "flash", "message", "panel", "actions", "retry_button", "menu_button")]
 layer = 20
 script = ExtResource("1")
 overlay = NodePath("overlay")
 flash = NodePath("flash")
-message = NodePath("message")
+message = NodePath("panel/column/message")
+panel = NodePath("panel")
+actions = NodePath("panel/column/actions")
+retry_button = NodePath("panel/column/actions/retry")
+menu_button = NodePath("panel/column/actions/main_menu")
 
 [node name="overlay" type="ColorRect" parent="."]
 material = SubResource("material")
@@ -33,16 +41,58 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 0.025, 0.015, 1)
 
-[node name="message" type="Label" parent="."]
+[node name="panel" type="CenterContainer" parent="."]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+theme = ExtResource("theme")
+
+[node name="column" type="VBoxContainer" parent="panel"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="message" type="Label" parent="panel/column"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("medium")
 theme_override_colors/font_color = Color(1, 0.85, 0.8, 1)
 theme_override_font_sizes/font_size = 56
 text = "You are dead"
 horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="actions" type="HBoxContainer" parent="panel/column"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="retry" type="Button" parent="panel/column/actions"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "RETRY"
+
+[node name="main_menu" type="Button" parent="panel/column/actions"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "MAIN MENU"
+
+[node name="audio" parent="." instance=ExtResource("audio")]
+
+[connection signal="pressed" from="panel/column/actions/retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="panel/column/actions/main_menu" to="." method="_on_menu_pressed"]
+
+[connection signal="pressed" from="panel/column/actions/retry" to="audio" method="play_click"]
+
+[connection signal="mouse_entered" from="panel/column/actions/retry" to="audio" method="play_hover"]
+
+[connection signal="focus_entered" from="panel/column/actions/retry" to="audio" method="play_hover"]
+
+[connection signal="pressed" from="panel/column/actions/main_menu" to="audio" method="play_click"]
+
+[connection signal="mouse_entered" from="panel/column/actions/main_menu" to="audio" method="play_hover"]
+
+[connection signal="focus_entered" from="panel/column/actions/main_menu" to="audio" method="play_hover"]

@@ -2,6 +2,8 @@ class_name GameSession
 extends Node3D
 
 signal pause_requested
+signal retry_requested
+signal menu_requested
 signal prepared
 
 @export var player: Player
@@ -30,6 +32,18 @@ func set_active(active: bool) -> void:
   _active = active
   player.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
   hud.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
+
+
+func _on_player_died() -> void:
+  _active = false
+
+
+func _on_retry_requested() -> void:
+  retry_requested.emit()
+
+
+func _on_menu_requested() -> void:
+  menu_requested.emit()
 
 
 func _unhandled_input(event: InputEvent) -> void:

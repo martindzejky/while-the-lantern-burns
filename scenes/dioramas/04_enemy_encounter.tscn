@@ -73,7 +73,7 @@ light_source = NodePath("../../lantern")
 [node name="camera_controller" parent="." node_paths=PackedStringArray("target") instance=ExtResource("camera_controller")]
 target = NodePath("../player")
 follow_fov = 44.0
-bite_fov = 16.0
+bite_fov = 20.0
 
 [node name="passage_focus" parent="." instance=ExtResource("camera_focus")]
 position = Vector3(0, 0, 7.5)
@@ -263,3 +263,9 @@ collisions_enabled = false
 [connection signal="bite_finished" from="enemy_far_right" to="camera_controller" method="_on_bite_finished"]
 
 [editable path="player"]
+
+[connection signal="bite_landed" from="enemy_near" to="camera_controller" method="_on_bite_landed"]
+
+[connection signal="bite_landed" from="enemy_far_left" to="camera_controller" method="_on_bite_landed"]
+
+[connection signal="bite_landed" from="enemy_far_right" to="camera_controller" method="_on_bite_landed"]

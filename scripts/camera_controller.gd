@@ -7,13 +7,15 @@ extends Node3D
 @export_range(0.1, 20.0, 0.1) var follow_response: float = 6.0
 @export_group('Bite emphasis')
 @export var bite_zoom_enabled: bool = true
-@export_range(1.0, 120.0, 0.5) var bite_fov: float = 16.0
+@export_range(1.0, 120.0, 0.5) var bite_fov: float = 20.0
 @export_range(0.0, 1.0, 0.05) var bite_focus_weight: float = 0.5
 
 var _focus_points: Array[CameraFocus] = []
 var _biting_enemies: Array[Enemy] = []
 var _zoom_enemy: Enemy
 var _bite_start_fov: float
+var _death_closeup: bool = false
+var _death_focus: Vector3
 
 
 func _ready() -> void:
@@ -23,6 +25,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+  if _death_closeup:
+    global_position = global_position.lerp(_death_focus, 1.0 - exp(-follow_response * delta))
+    return
   var desired_position: Vector3 = target.global_position
   var strongest_weight: float = 0.0
   for index: int in range(_focus_points.size() - 1, -1, -1):
@@ -42,7 +47,9 @@ func _process(delta: float) -> void:
       _zoom_enemy = biting_enemy
       _bite_start_fov = camera.fov
     var progress: float = smoothstep(0.0, 1.0, biting_enemy.get_bite_windup_progress())
-    var bite_position: Vector3 = target.global_position.lerp(biting_enemy.global_position, bite_focus_weight)
+    var mouth_position: Vector3 = biting_enemy.get_bite_focus_position()
+    var bite_position: Vector3 = target.global_position.lerp(mouth_position, bite_focus_weight)
+    bite_position.y = mouth_position.y
     desired_position = desired_position.lerp(bite_position, progress)
     camera.fov = lerpf(_bite_start_fov, bite_fov, progress)
   else:
@@ -84,3 +91,13 @@ func _on_bite_started(enemy: Enemy) -> void:
 
 func _on_bite_finished(enemy: Enemy) -> void:
   _biting_enemies.erase(enemy)
+
+
+func _on_bite_landed(enemy: Enemy) -> void:
+  if not bite_zoom_enabled or enemy.target != target or not target.is_dead:
+    return
+  var mouth_position: Vector3 = enemy.get_bite_focus_position()
+  _death_focus = target.global_position.lerp(mouth_position, bite_focus_weight)
+  _death_focus.y = mouth_position.y
+  camera.fov = bite_fov
+  _death_closeup = true

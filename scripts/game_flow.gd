@@ -44,6 +44,8 @@ func _on_start_requested() -> void:
   var game: GameSession = game_scene.instantiate() as GameSession
   game.start_inactive = true
   game.pause_requested.connect(_on_pause_requested)
+  game.retry_requested.connect(_on_start_requested)
+  game.menu_requested.connect(_on_menu_requested)
   _screen = game
   screen_host.add_child(game)
   if not game.is_prepared:

@@ -101,3 +101,7 @@ color = Color(0, 0, 0, 1)
 [connection signal="ramrod_requested" from="hud/musket" to="player" method="_on_ramrod_gui_input"]
 
 [editable path="player"]
+
+[connection signal="died" from="player" to="." method="_on_player_died"]
+[connection signal="retry_requested" from="death_ui" to="." method="_on_retry_requested"]
+[connection signal="menu_requested" from="death_ui" to="." method="_on_menu_requested"]
