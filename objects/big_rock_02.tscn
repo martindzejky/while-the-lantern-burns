@@ -1,7 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://djk0sh2numjnd"]
 
-[ext_resource type="Texture2D" path="res://sprites/big_rock_02.png" id="albedo"]
-[ext_resource type="Texture2D" path="res://sprites/big_rock_02_normal.png" id="normal"]
+[ext_resource type="Texture2D" uid="uid://ctdf0x3e7x2cs" path="res://sprites/big_rock_02.png" id="albedo"]
+[ext_resource type="Texture2D" uid="uid://ddj6e81xs0r3i" path="res://sprites/big_rock_02_normal.png" id="normal"]
 
 [sub_resource type="CylinderShape3D" id="shape"]
 height = 1.0
@@ -10,23 +10,25 @@ radius = 0.884
 [sub_resource type="StandardMaterial3D" id="material"]
 transparency = 2
 alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 cull_mode = 2
 diffuse_mode = 1
 specular_mode = 2
-metallic_specular = 0.0
 albedo_texture = ExtResource("albedo")
+metallic_specular = 0.0
 normal_enabled = true
 normal_texture = ExtResource("normal")
 billboard_mode = 1
 billboard_keep_scale = true
 
-[node name="big_rock_02" type="StaticBody3D"]
+[node name="big_rock_02" type="StaticBody3D" unique_id=1665101125]
 
-[node name="shape" type="CollisionShape3D" parent="."]
-position = Vector3(0, 0.5, 0)
+[node name="shape" type="CollisionShape3D" parent="." unique_id=1476761696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("shape")
 
-[node name="sprite" type="Sprite3D" parent="."]
+[node name="sprite" type="Sprite3D" parent="." unique_id=2090428502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.44727564, 0)
 material_override = SubResource("material")
 offset = Vector2(0, 177.5)
 pixel_size = 0.004

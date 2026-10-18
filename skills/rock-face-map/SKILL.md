@@ -45,6 +45,8 @@ The first seven examples are `sprites/small_rock_01` through `small_rock_07`, ea
 
 The mapping uses the current 40-degree camera pitch: yellow top faces are artistically tilted toward the front, only **15 degrees above the horizontal ground plane**, so low lanterns can light them. Their tangent normal is `(0, sin(-25°), cos(-25°))`, encoded RGB **(128, 74, 243)**. This replaces the original vertical-up mapping, which left the tops too dark. The remaining directions are front `(0, -sin(40°), cos(40°))`, left/right `(±1, 0, 0)`, and diagonal front faces with X `±sqrt(0.5)` and the front vector multiplied by `sqrt(0.5)`. Left uses negative X. Encode each component as `(component * 0.5 + 0.5) * 255`. Recheck the camera basis if its pitch changes.
 
+Martin manually lowered each rock's sprite child into the ground to hide the rounded billboard bottom and improve contact shadows. These per-variant negative Y offsets are approved art adjustments: preserve them when regenerating textures or editing scenes. Do not reset them to zero or move the collision root to compensate. Some bottom detail is intentionally buried as a jam compromise.
+
 Exports can shift the exact label RGB values. Identify the dominant exported colors corresponding to the palette, then resolve blended seam/edge pixels from adjacent known labels. Do not invent a face category absent from the artwork because an antialiased seam happens to resemble it.
 
 Native left/right/overhead lighting was verified for the first collection. Repeat a one-rock check when the converter, camera basis or material changes. Processing artwork does not authorize unrelated gameplay edits.
