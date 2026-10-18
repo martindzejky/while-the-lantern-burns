@@ -1,0 +1,262 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://objects/player.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://objects/lantern.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://objects/musket.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://ui/lantern_ui.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://ui/musket_ui.tscn" id="7"]
+[ext_resource type="Script" path="res://scripts/effects_warmup.gd" id="8"]
+[ext_resource type="PackedScene" path="res://ambience/controller.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://ui/death_feedback.tscn" id="death_ui"]
+
+[ext_resource type="PackedScene" path="res://objects/ground.tscn" id="ground"]
+
+[ext_resource type="PackedScene" path="res://ui/world_post_processing.tscn" id="world_post_processing"]
+
+[ext_resource type="PackedScene" path="res://objects/big_rock_01.tscn" id="rock_1"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_02.tscn" id="rock_2"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_03.tscn" id="rock_3"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_04.tscn" id="rock_4"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_05.tscn" id="rock_5"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_06.tscn" id="rock_6"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_07.tscn" id="rock_7"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_08.tscn" id="rock_8"]
+
+[ext_resource type="PackedScene" path="res://objects/world_light.tscn" id="world_light"]
+
+[ext_resource type="PackedScene" path="res://objects/background_rock.tscn" id="background_rock"]
+[ext_resource type="Texture2D" path="res://sprites/big_rock_04.png" id="background_4"]
+[ext_resource type="Texture2D" path="res://sprites/big_rock_05.png" id="background_5"]
+[ext_resource type="Texture2D" path="res://sprites/big_rock_06.png" id="background_6"]
+
+[ext_resource type="PackedScene" path="res://objects/stalagmite_cluster.tscn" id="stalagmites"]
+
+[sub_resource type="Environment" id="environment"]
+background_mode = 1
+background_color = Color(0.002, 0.006, 0.004, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.08, 0.16, 0.11, 1)
+ambient_light_energy = 0.07
+reflected_light_source = 2
+
+[node name="musket_discovery" type="Node3D"]
+
+[node name="ambience" parent="." node_paths=PackedStringArray("target") instance=ExtResource("12")]
+target = NodePath("../player")
+
+[node name="world_post_processing" parent="." instance=ExtResource("world_post_processing")]
+
+[node name="environment" type="WorldEnvironment" parent="."]
+environment = SubResource("environment")
+
+[node name="ground" parent="." instance=ExtResource("ground")]
+polygon = PackedVector2Array(-8.5, -8, -9, -5, -8, -2, -6.5, -0, -6, 3, -5, 6.5, -2.5, 8, 1, 8.5, 4.5, 7, 6, 4, 5.5, 1, 3.5, -1, 0, -1.8, -2.8, -1, -4, -2.3, -5, -4.5, -5.2, -7.5, -6.5, -8.8)
+edge_seed = 603
+edge_roughness = 0.2
+
+[node name="player" parent="." node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8, 0, 5.3)
+musket = NodePath("../musket")
+lantern = NodePath("../lantern")
+
+[node name="audio_listener" parent="player" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="shadow" parent="player" index="6" node_paths=PackedStringArray("light_source")]
+transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
+light_source = NodePath("../../lantern")
+
+[node name="camera" type="Camera3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 10, 12)
+cull_mask = 5
+current = true
+fov = 40.0
+
+[node name="lantern" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 5.2)
+max_brightness = 0.75
+
+[node name="musket" parent="." instance=ExtResource("5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0, -4.6)
+
+[node name="hud" type="CanvasLayer" parent="."]
+
+[node name="lantern" parent="hud" node_paths=PackedStringArray("lantern") instance=ExtResource("6")]
+lantern = NodePath("../../lantern")
+
+[node name="musket" parent="hud" node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("7")]
+musket = NodePath("../../musket")
+lantern = NodePath("../../lantern")
+
+[node name="death_ui" parent="." node_paths=PackedStringArray("player") instance=ExtResource("death_ui")]
+player = NodePath("../player")
+
+[node name="loading" type="CanvasLayer" parent="." node_paths=PackedStringArray("musket")]
+layer = 100
+script = ExtResource("8")
+musket = NodePath("../musket")
+
+[node name="cover" type="ColorRect" parent="loading"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.002, 0.006, 0.004, 1)
+
+[node name="scenery" type="Node3D" parent="."]
+
+[node name="entrance_left" parent="scenery" instance=ExtResource("rock_7")]
+position = Vector3(-9.8, 0, 6.8)
+scale = Vector3(1.8, 1.8, 1.8)
+
+[node name="entrance_chip" parent="scenery" instance=ExtResource("rock_1")]
+position = Vector3(-9.5, 0, 3.3)
+scale = Vector3(0.85, 0.85, 0.85)
+
+[node name="entrance_right" parent="scenery" instance=ExtResource("rock_4")]
+position = Vector3(-4.5, 0, 7.5)
+scale = Vector3(2.1, 2.1, 2.1)
+
+[node name="entrance_right_foot" parent="scenery" instance=ExtResource("rock_2")]
+position = Vector3(-4.35, 0, 5.6)
+scale = Vector3(0.85, 0.85, 0.85)
+
+[node name="bend_spire" parent="scenery" instance=ExtResource("rock_5")]
+position = Vector3(-8.7, 0, 0.65)
+scale = Vector3(2.8, 2.8, 2.8)
+
+[node name="bend_boulder" parent="scenery" instance=ExtResource("rock_8")]
+position = Vector3(-7.5, 0, -1)
+scale = Vector3(1.2, 1.2, 1.2)
+
+[node name="left_wall" parent="scenery" instance=ExtResource("rock_6")]
+position = Vector3(-7, 0, -4.2)
+scale = Vector3(1.6, 1.6, 1.6)
+
+[node name="left_wall_foot" parent="scenery" instance=ExtResource("rock_1")]
+position = Vector3(-6.75, 0, -6.4)
+scale = Vector3(1.1, 1.1, 1.1)
+
+[node name="back_left" parent="scenery" instance=ExtResource("rock_8")]
+position = Vector3(-4.4, 0, -8.3)
+scale = Vector3(1.75, 1.75, 1.75)
+
+[node name="back_left_chip" parent="scenery" instance=ExtResource("rock_3")]
+position = Vector3(-2.1, 0, -9)
+scale = Vector3(1.0, 1.0, 1.0)
+
+[node name="alcove_spire" parent="scenery" instance=ExtResource("rock_4")]
+position = Vector3(1.2, 0, -8.9)
+scale = Vector3(2.8, 2.8, 2.8)
+
+[node name="alcove_boulder" parent="scenery" instance=ExtResource("rock_2")]
+position = Vector3(3.9, 0, -8.3)
+scale = Vector3(1.65, 1.65, 1.65)
+
+[node name="right_wall" parent="scenery" instance=ExtResource("rock_7")]
+position = Vector3(7, 0, -5.3)
+scale = Vector3(2.05, 2.05, 2.05)
+
+[node name="right_wall_foot" parent="scenery" instance=ExtResource("rock_1")]
+position = Vector3(6.7, 0, -3.4)
+scale = Vector3(1.15, 1.15, 1.15)
+
+[node name="right_foreground" parent="scenery" instance=ExtResource("rock_8")]
+position = Vector3(6.3, 0, -0.1)
+scale = Vector3(1.65, 1.65, 1.65)
+
+[node name="right_foreground_spire" parent="scenery" instance=ExtResource("rock_5")]
+position = Vector3(5.25, 0, 1.6)
+scale = Vector3(2.2, 2.2, 2.2)
+
+[node name="near_shelf" parent="scenery" instance=ExtResource("rock_3")]
+position = Vector3(1.75, 0, 2.75)
+scale = Vector3(1.25, 1.25, 1.25)
+
+[node name="near_shelf_chip" parent="scenery" instance=ExtResource("rock_1")]
+position = Vector3(-0.3, 0, 2.6)
+scale = Vector3(0.8, 0.8, 0.8)
+
+[node name="musket_frame" parent="scenery" instance=ExtResource("rock_1")]
+position = Vector3(2.8, 0, -5.4)
+scale = Vector3(0.8, 0.8, 0.8)
+
+[node name="musket_frame_chip" parent="scenery" instance=ExtResource("rock_2")]
+position = Vector3(3.8, 0, -6.2)
+scale = Vector3(0.65, 0.65, 0.65)
+
+[node name="ceiling_light" type="Node3D" parent="."]
+
+[node name="entrance" parent="ceiling_light" instance=ExtResource("world_light")]
+position = Vector3(-6.5, 3.8, 5)
+light_color = Color(0.69, 0.79, 1, 1)
+light_energy = 0.18
+shadow_enabled = true
+omni_range = 9
+omni_attenuation = 0.0
+
+[node name="bend" parent="ceiling_light" instance=ExtResource("world_light")]
+position = Vector3(-5, 3.6, 0.3)
+light_color = Color(0.72, 0.83, 1, 1)
+light_energy = 0.16
+shadow_enabled = true
+omni_range = 10
+omni_attenuation = 0.0
+
+[node name="practice" parent="ceiling_light" instance=ExtResource("world_light")]
+position = Vector3(0, 4, -3.3)
+light_color = Color(0.76, 0.85, 1, 1)
+light_energy = 0.22
+shadow_enabled = true
+omni_range = 11
+omni_attenuation = 0.0
+
+[node name="musket" parent="ceiling_light" instance=ExtResource("world_light")]
+position = Vector3(1.4, 2.5, -4.6)
+light_color = Color(1, 0.91, 0.72, 1)
+light_energy = 0.08
+shadow_enabled = true
+omni_range = 5
+omni_attenuation = 0.0
+
+[node name="background_rocks" type="Node3D" parent="."]
+
+[node name="distant_rock_1" parent="background_rocks" instance=ExtResource("background_rock")]
+position = Vector3(-15, -0.8, -3)
+scale = Vector3(5.2, 4.5, 1)
+
+[node name="distant_rock_2" parent="background_rocks" instance=ExtResource("background_rock")]
+position = Vector3(12, -0.8, -9)
+scale = Vector3(4.6, 4.8, 1)
+offset = Vector2(0, 234.5)
+texture = ExtResource("background_6")
+
+[node name="distant_rock_3" parent="background_rocks" instance=ExtResource("background_rock")]
+position = Vector3(-7, -0.8, -16)
+scale = Vector3(4.4, 6, 1)
+offset = Vector2(0, 179)
+texture = ExtResource("background_5")
+
+[node name="distant_rock_4" parent="background_rocks" instance=ExtResource("background_rock")]
+position = Vector3(3, -0.8, -17)
+scale = Vector3(4.2, 5.5, 1)
+offset = Vector2(0, 212)
+texture = ExtResource("background_4")
+modulate = Color(0.06, 0.09, 0.07, 1)
+
+[node name="stalagmites" parent="." instance=ExtResource("stalagmites")]
+position = Vector3(3.7, 0, -7.0)
+seed_value = 103
+collisions_enabled = false
+
+[connection signal="died" from="player" to="hud" method="hide"]
+[connection signal="ramrod_drag_changed" from="player" to="hud/musket" method="_on_ramrod_drag_changed"]
+[connection signal="fired" from="musket" to="player" method="_on_musket_fired"]
+[connection signal="fuse_expired" from="musket" to="player" method="_on_musket_fuse_expired"]
+[connection signal="trigger_ready" from="musket" to="player" method="_on_musket_trigger_ready"]
+[connection signal="charge_requested" from="hud/lantern" to="player" method="_on_lantern_pressed"]
+[connection signal="ball_requested" from="hud/musket" to="player" method="_on_barrel_pressed"]
+[connection signal="ramrod_requested" from="hud/musket" to="player" method="_on_ramrod_gui_input"]
+
+[editable path="player"]

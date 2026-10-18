@@ -1,4 +1,5 @@
 uniform sampler2D ground_light_curve : filter_linear, repeat_disable;
+uniform sampler2D world_light_curve : filter_linear, repeat_disable;
 uniform float light_edge_noise_strength : hint_range(0.0, 0.1, 0.001) = 0.025;
 uniform float light_edge_noise_scale : hint_range(0.1, 10.0, 0.1) = 1.8;
 
@@ -23,7 +24,7 @@ float ground_noise(vec2 position) {
   );
 }
 
-float ground_light_profile(float attenuation, vec3 light_color, bool directional) {
+float ground_light_profile(float attenuation, vec3 light_color, bool directional, float specular_amount) {
   if (directional) {
     return step(0.001, attenuation);
   }
@@ -32,6 +33,10 @@ float ground_light_profile(float attenuation, vec3 light_color, bool directional
   float edge_noise = ground_noise(ground_world_position * light_edge_noise_scale);
   // only shrink the boundary, keeping light within its actual range and shadows.
   radius += edge_noise * light_edge_noise_strength * radius * radius * radius;
-  float profile = texture(ground_light_curve, vec2(clamp(1.0 - radius, 0.0, 1.0), 0.5)).r;
+  vec2 curve_uv = vec2(clamp(1.0 - radius, 0.0, 1.0), 0.5);
+  // world_light.tscn tags external lights; lantern and musket lights use specular zero.
+  float profile = specular_amount > 0.5
+    ? texture(world_light_curve, curve_uv).r
+    : texture(ground_light_curve, curve_uv).r;
   return profile * step(radius, 1.0) * step(0.001, attenuation);
 }

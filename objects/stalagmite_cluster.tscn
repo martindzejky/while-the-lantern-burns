@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/stalagmite_cluster.gd" id="script"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_04.tscn" id="rock_04"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_05.tscn" id="rock_05"]
+
+[node name="stalagmite_cluster" type="Node3D"]
+script = ExtResource("script")
+rock_scenes = Array[PackedScene]([ExtResource("rock_04"), ExtResource("rock_05")])

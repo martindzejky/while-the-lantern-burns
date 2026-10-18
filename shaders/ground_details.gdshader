@@ -29,7 +29,7 @@ void light() {
   if (use_normal_map) {
     DIFFUSE_LIGHT += max(dot(NORMAL, LIGHT), 0.0) * ATTENUATION * LIGHT_COLOR / PI;
   } else {
-    float lit = ground_light_profile(ATTENUATION, LIGHT_COLOR, LIGHT_IS_DIRECTIONAL);
+    float lit = ground_light_profile(ATTENUATION, LIGHT_COLOR, LIGHT_IS_DIRECTIONAL, SPECULAR_AMOUNT);
     DIFFUSE_LIGHT += lit * LIGHT_COLOR / PI;
   }
 }

@@ -31,9 +31,12 @@
 
 [ext_resource type="Texture2D" path="res://resources/ground/light_profile.tres" id="light_profile"]
 
+[ext_resource type="Texture2D" path="res://resources/ground/world_light_profile.tres" id="world_light_profile"]
+
 [sub_resource type="ShaderMaterial" id="material"]
 shader = ExtResource("shader")
 shader_parameter/ground_light_curve = ExtResource("light_profile")
+shader_parameter/world_light_curve = ExtResource("world_light_profile")
 
 [sub_resource type="ShaderMaterial" id="stone_material"]
 shader = ExtResource("stone_shader")

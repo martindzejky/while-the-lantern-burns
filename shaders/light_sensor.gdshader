@@ -10,6 +10,6 @@ void fragment() {
 }
 
 void light() {
-  float lit = ground_light_profile(ATTENUATION, LIGHT_COLOR, LIGHT_IS_DIRECTIONAL);
+  float lit = ground_light_profile(ATTENUATION, LIGHT_COLOR, LIGHT_IS_DIRECTIONAL, SPECULAR_AMOUNT);
   DIFFUSE_LIGHT += lit * LIGHT_COLOR / PI;
 }
