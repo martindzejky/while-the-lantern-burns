@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dswxislnonhiw" path="res://objects/big_rock_07.tscn" id="big_rock_07"]
 [ext_resource type="PackedScene" uid="uid://yrm4kbry3gfe" path="res://objects/big_rock_08.tscn" id="big_rock_08"]
 [ext_resource type="PackedScene" path="res://ui/death_feedback.tscn" id="death_ui"]
-[ext_resource type="PackedScene" path="res://objects/enemy.tscn" id="enemy"]
+[ext_resource type="PackedScene" uid="uid://dnep4itj4mhsi" path="res://objects/enemy.tscn" id="enemy"]
 [ext_resource type="PackedScene" uid="uid://b8lgdc61td4pn" path="res://objects/small_rock_01.tscn" id="small_rock_01"]
 [ext_resource type="PackedScene" uid="uid://dttg14r21k1r7" path="res://objects/small_rock_02.tscn" id="small_rock_02"]
 [ext_resource type="PackedScene" uid="uid://nll0qokvvylc" path="res://objects/small_rock_03.tscn" id="small_rock_03"]
@@ -118,7 +118,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 musket = NodePath("../musket")
 lantern = NodePath("../lantern")
 
-[node name="shadow" parent="player" index="5" node_paths=PackedStringArray("light_source")]
+[node name="audio_listener" parent="player" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="shadow" parent="player" index="6" node_paths=PackedStringArray("light_source")]
 transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
 light_source = NodePath("../../lantern")
 
@@ -134,8 +137,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 [node name="musket" parent="." unique_id=1198564765 instance=ExtResource("5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
 
-[node name="enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
-position = Vector3(4.8, 0, -4)
+[node name="enemy" parent="." unique_id=1153954632 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 0, -4)
 target = NodePath("../player")
 
 [node name="hud" type="CanvasLayer" parent="." unique_id=997754346]

@@ -12,6 +12,7 @@ signal ramrod_drag_changed(dragging: bool)
 @export var drop_slot: Marker3D
 @export var aim_line: Sprite3D
 @export var light_sensor: LightSensor
+@export var audio_listener: AudioListener3D
 @export var aim_height: float = 0.7
 @export var pickup_radius: float = 1.5
 @export var speed: float = 4.0
@@ -40,6 +41,7 @@ var _dragging_ramrod: bool = false
 
 
 func _ready() -> void:
+  audio_listener.make_current()
   _item_parent = lantern.get_parent()
   _dash_timer.wait_time = dash_duration
   _recovery_timer.wait_time = dash_recovery

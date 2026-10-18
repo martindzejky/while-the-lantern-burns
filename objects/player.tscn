@@ -19,7 +19,7 @@ gradient = SubResource("aim_color")
 width = 1
 height = 1
 
-[node name="player" type="CharacterBody3D" unique_id=1376385991 node_paths=PackedStringArray("rig", "drop_slot", "aim_line", "light_sensor")]
+[node name="player" type="CharacterBody3D" unique_id=1376385991 node_paths=PackedStringArray("rig", "drop_slot", "aim_line", "light_sensor", "audio_listener")]
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1")
@@ -27,6 +27,10 @@ rig = NodePath("visuals/character_rig")
 drop_slot = NodePath("drop_slot")
 aim_line = NodePath("aim_line")
 light_sensor = NodePath("light_sensor")
+audio_listener = NodePath("audio_listener")
+
+[node name="audio_listener" type="AudioListener3D" parent="."]
+position = Vector3(0, 0.7, 0)
 
 [node name="shape" type="CollisionShape3D" parent="." unique_id=2138894733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)

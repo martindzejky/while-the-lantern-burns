@@ -8,6 +8,12 @@ signal lever_changed(openness: float)
 @export var light: OmniLight3D
 @export var visuals: CameraFacing
 @export var swing: Node3D
+@export var pickup_audio: AudioStreamPlayer3D
+@export var drop_audio: AudioStreamPlayer3D
+@export var lever_audio: AudioStreamPlayer3D
+@export var carry_audio: AudioStreamPlayer3D
+@export var carry_swing_threshold_degrees: float = 1.5
+@export var carry_speed_threshold_degrees: float = 8.0
 @export var swing_limit_degrees: float = 30.0
 @export var swing_response: float = 0.65
 @export var swing_stiffness: float = 45.0
@@ -46,6 +52,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
   _update_swing(delta)
+  _update_carry_audio()
   _flicker_time += delta
   energy = maxf(energy - energy_drain * delta, 0.0)
   if lever_openness < 1.0:
@@ -76,6 +83,16 @@ func _update_swing(delta: float) -> void:
     _swing_velocity = 0.0
 
 
+func _update_carry_audio() -> void:
+  if not is_carried or carry_audio.playing:
+    return
+  if (
+    absf(swing.rotation.z) >= deg_to_rad(carry_swing_threshold_degrees)
+    or absf(_swing_velocity) >= deg_to_rad(carry_speed_threshold_degrees)
+  ):
+    carry_audio.play()
+
+
 func _update_light() -> void:
   var charge := clampf(energy / (max_energy * full_light_threshold), 0.0, 1.0)
   var noise := clampf(flicker_noise.get_noise_1d(_flicker_time) * 0.5 + 0.5, 0.0, 1.0)
@@ -97,6 +114,10 @@ func set_carried(carried: bool) -> void:
   visuals.set_process(not carried)
   if carried:
     visuals.transform = Transform3D.IDENTITY
+    pickup_audio.play()
+  else:
+    carry_audio.stop()
+    drop_audio.play()
   carried_changed.emit(carried)
 
 
@@ -104,5 +125,6 @@ func charge() -> void:
   var stroke := lever_openness * lever_openness
   energy = minf(energy + energy_per_press * stroke, max_energy)
   lever_openness = 0.0
+  lever_audio.play()
   lever_changed.emit(lever_openness)
   _update_light()

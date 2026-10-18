@@ -7,6 +7,12 @@ damping = 0.6
 dry = 0.43
 wet = 0.63
 
+[sub_resource type="AudioEffectReverb" id="world_reverb"]
+predelay_msec = 35.0
+room_size = 0.68
+damping = 0.6
+wet = 0.18
+
 [resource]
 bus/1/name = &"Music"
 bus/1/solo = false
@@ -34,3 +40,17 @@ bus/4/volume_db = 0.0
 bus/4/send = &"Ambience"
 bus/4/effect/0/effect = SubResource("cave_reverb")
 bus/4/effect/0/enabled = true
+bus/5/name = &"World SFX"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = &"SFX"
+bus/5/effect/0/effect = SubResource("world_reverb")
+bus/5/effect/0/enabled = true
+bus/6/name = &"UI SFX"
+bus/6/solo = false
+bus/6/mute = false
+bus/6/bypass_fx = false
+bus/6/volume_db = 0.0
+bus/6/send = &"SFX"
