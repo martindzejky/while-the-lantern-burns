@@ -11,6 +11,8 @@
 
 [ext_resource type="AudioStream" path="res://audio/player/body.tres" id="body_audio"]
 
+[ext_resource type="PackedScene" path="res://objects/darkness_audio.tscn" id="darkness_audio"]
+
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.475
 height = 1.2
@@ -76,5 +78,13 @@ max_polyphony = 1
 max_distance = 30.0
 bus = &"World SFX"
 
+[node name="darkness_audio" parent="." instance=ExtResource("darkness_audio")]
+
 [connection signal="light_changed" from="light_sensor" to="." method="_on_light_sensor_light_changed"]
 [connection signal="stepped" from="visuals/character_rig" to="." method="_on_rig_stepped"]
+
+[connection signal="darkness_progress_changed" from="." to="darkness_audio" method="_on_darkness_progress_changed"]
+[connection signal="darkness_killed" from="." to="darkness_audio" method="_on_darkness_killed"]
+[connection signal="died" from="." to="darkness_audio" method="_on_player_died"]
+
+[connection signal="exposure_changed" from="light_sensor" to="." method="_on_light_sensor_exposure_changed"]

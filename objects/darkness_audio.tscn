@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/darkness_audio.gd" id="script"]
+[ext_resource type="AudioStream" path="res://audio/player/darkness_rumble.tres" id="rumble"]
+[ext_resource type="AudioStream" path="res://audio/enemy/growl.tres" id="growl"]
+[ext_resource type="AudioStream" path="res://audio/enemy/bite.tres" id="bite"]
+
+[node name="darkness_audio" type="Node" node_paths=PackedStringArray("rumble", "growl", "bite")]
+script = ExtResource("script")
+rumble = NodePath("rumble")
+growl = NodePath("growl")
+bite = NodePath("bite")
+
+[node name="rumble" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("rumble")
+volume_db = 0.0
+bus = &"World SFX"
+
+[node name="growl" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("growl")
+volume_db = -17.0
+bus = &"World SFX"
+
+[node name="bite" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("bite")
+volume_db = -8.0
+bus = &"World SFX"

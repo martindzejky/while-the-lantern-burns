@@ -165,10 +165,11 @@ lantern = NodePath("../../lantern")
 [node name="death_ui" parent="." node_paths=PackedStringArray("player") instance=ExtResource("death_ui")]
 player = NodePath("../player")
 
-[node name="loading" type="CanvasLayer" parent="." node_paths=PackedStringArray("musket")]
+[node name="loading" type="CanvasLayer" parent="." node_paths=PackedStringArray("musket", "player")]
 layer = 100
 script = ExtResource("8")
 musket = NodePath("../musket")
+player = NodePath("../player")
 
 [node name="cover" type="ColorRect" parent="loading"]
 anchors_preset = 15

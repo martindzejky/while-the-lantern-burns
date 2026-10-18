@@ -30,6 +30,7 @@ func _ready() -> void:
 
 func set_active(active: bool) -> void:
   _active = active
+  player.set_darkness_enabled(active)
   player.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
   hud.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
 

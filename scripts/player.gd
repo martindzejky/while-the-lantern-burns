@@ -4,6 +4,7 @@ extends CharacterBody3D
 signal died
 signal light_changed(lit: bool)
 signal darkness_progress_changed(progress: float)
+signal darkness_killed
 signal ramrod_drag_changed(dragging: bool)
 
 @export var rig: CharacterRig
@@ -33,18 +34,18 @@ var _shot_requested: bool = false
 var _fuse_shot_requested: bool = false
 var _dragging_ramrod: bool = false
 var _locked_aim_target: Vector3
+var _darkness_allowed: bool = true
+var _darkness_enabled: bool = false
 
 
 func _ready() -> void:
   audio_listener.make_current()
   _item_parent = lantern.get_parent()
   _darkness_timer.wait_time = darkness_grace
-  _darkness_timer.timeout.connect(die)
+  _darkness_timer.timeout.connect(_on_darkness_expired)
   _darkness_timer.one_shot = true
   _darkness_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
   add_child(_darkness_timer)
-  if not is_lit:
-    _darkness_timer.start()
 
 
 func _process(_delta: float) -> void:
@@ -105,13 +106,29 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_light_sensor_light_changed(lit: bool) -> void:
-  if not is_dead:
+  if not is_dead and _darkness_enabled:
     if lit:
       _darkness_timer.stop()
     else:
       _darkness_timer.start()
     _set_darkness_progress(0.0)
   light_changed.emit(lit)
+
+
+func set_darkness_enabled(enabled: bool) -> void:
+  _darkness_allowed = enabled
+  _darkness_enabled = false
+  _darkness_timer.stop()
+  _set_darkness_progress(0.0)
+
+
+func _on_light_sensor_exposure_changed(_exposure: float) -> void:
+  # wait for a fresh light sample after loading before starting the grace timer.
+  if not _darkness_allowed or _darkness_enabled or is_dead:
+    return
+  _darkness_enabled = true
+  if not is_lit:
+    _darkness_timer.start()
 
 
 func _set_darkness_progress(progress: float) -> void:
@@ -149,6 +166,13 @@ func _on_musket_fired(hit: Dictionary) -> void:
 
 
 func take_bite() -> void:
+  die()
+
+
+func _on_darkness_expired() -> void:
+  if is_dead:
+    return
+  darkness_killed.emit()
   die()
 
 
