@@ -15,7 +15,7 @@ Fill each complete rock silhouette with solid **`#508563`** (sRGB RGB **80, 133,
 
 | Face direction | Label color | Exact hex |
 | --- | --- | --- |
-| Upward-facing top | Yellow | `#FFFF00` |
+| Top face, tilted forward for lantern lighting | Yellow | `#FFFF00` |
 | Left-facing side | Red | `#FF0000` |
 | Diagonally left/front | Purple | `#8000FF` |
 | Front, toward the camera | Blue | `#0000FF` |
@@ -41,9 +41,9 @@ Left/right refer to the pictured rock as seen on screen, not the lantern's posit
 
 ## Existing project setup
 
-The first seven examples are `sprites/small_rock_01` through `small_rock_07`, each with albedo, `_faces` and `_normal` PNGs. Scriptless scenes in `objects/` use native `StandardMaterial3D` normal mapping, alpha scissor, no specular, billboard mode with scale preserved, and bottom-centered Sprite3D artwork. Normal imports use `compress/normal_map=1` without green-channel inversion or sRGB conversion. New sheets should follow these examples.
+The first seven examples are `sprites/small_rock_01` through `small_rock_07`, each with albedo, `_faces` and `_normal` PNGs. Scriptless scenes in `objects/` use native `StandardMaterial3D` normal mapping, alpha scissor, no specular, billboard mode with scale preserved, and bottom-centered Sprite3D artwork. Normal imports use `compress/normal_map=1` without green-channel inversion or sRGB conversion. New sheets should follow these examples. Larger blocking variants are `big_rock_01` through `big_rock_08`, with native material sprites under StaticBody3D roots. All small and big rock scenes have their own CylinderShape3D: radius is half the visible alpha silhouette width multiplied by pixel_size, excluding transparent padding. Height is 1 and the shape is centered at Y .5; no jumping is supported. Keep visual sprites bottom-centered and scale the whole root when resizing a placed rock so collisions scale with it. The old placeholder rock scene and SVG have been removed. Small rocks use pixel_size .0025; the larger 2048-pixel sheet uses .004. Keep new size choices consistent with the artwork and verify them in the level.
 
-The verified mapping uses the current 40-degree camera pitch: top `(0, cos(40°), sin(40°))`, front `(0, -sin(40°), cos(40°))`, left/right `(±1, 0, 0)`, and diagonal front faces with X `±sqrt(0.5)` and the front vector multiplied by `sqrt(0.5)`. Left uses negative X. Encode each component as `(component * 0.5 + 0.5) * 255`. Recheck the camera basis if its pitch changes.
+The mapping uses the current 40-degree camera pitch: yellow top faces are artistically tilted toward the front, only **15 degrees above the horizontal ground plane**, so low lanterns can light them. Their tangent normal is `(0, sin(-25°), cos(-25°))`, encoded RGB **(128, 74, 243)**. This replaces the original vertical-up mapping, which left the tops too dark. The remaining directions are front `(0, -sin(40°), cos(40°))`, left/right `(±1, 0, 0)`, and diagonal front faces with X `±sqrt(0.5)` and the front vector multiplied by `sqrt(0.5)`. Left uses negative X. Encode each component as `(component * 0.5 + 0.5) * 255`. Recheck the camera basis if its pitch changes.
 
 Exports can shift the exact label RGB values. Identify the dominant exported colors corresponding to the palette, then resolve blended seam/edge pixels from adjacent known labels. Do not invent a face category absent from the artwork because an antialiased seam happens to resemble it.
 
