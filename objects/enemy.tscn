@@ -33,6 +33,28 @@ _data = {
 [sub_resource type="BoxShape3D" id="hitbox"]
 size = Vector3(2.24, 2.56, 2.88)
 
+[sub_resource type="StandardMaterial3D" id="body_material"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+cull_mode = 2
+specular_mode = 2
+albedo_texture = ExtResource("monster_body_01")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="StandardMaterial3D" id="head_material"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+cull_mode = 2
+specular_mode = 2
+albedo_texture = ExtResource("monster_head_01")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
 [node name="enemy" type="CharacterBody3D" unique_id=67314845 node_paths=PackedStringArray("appearance", "head", "head_sprite", "body", "eyes", "mouth", "upper_teeth", "lower_teeth", "animation", "footstep_audio", "vocal_audio", "head_lift")]
 collision_layer = 2
 collision_mask = 4
@@ -71,6 +93,7 @@ script = ExtResource("2")
 scale = Vector3(1.6, 1.6, 1.6)
 
 [node name="body" type="Sprite3D" parent="visuals/appearance" unique_id=703009130]
+material_override = SubResource("body_material")
 pixel_size = 0.0035
 shaded = true
 alpha_cut = 1
@@ -82,6 +105,7 @@ position = Vector3(0, 0.85, 0.005)
 [node name="lift" type="Node3D" parent="visuals/appearance/head"]
 
 [node name="sprite" type="Sprite3D" parent="visuals/appearance/head/lift"]
+material_override = SubResource("head_material")
 pixel_size = 0.004
 shaded = true
 alpha_cut = 1

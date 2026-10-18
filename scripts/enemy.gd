@@ -31,6 +31,8 @@ extends CharacterBody3D
 @export var bite_range: float = 1.15
 @export var head_bob_height: float = 0.025
 @export_range(1.0, 10.0, 0.5) var head_bob_period: float = 3.0
+@export var hit_flash_duration: float = 0.3
+@export var head_collapse_distance: float = 0.45
 
 var _dead: bool = false
 var _growl_timer: RandomTimer
@@ -72,6 +74,8 @@ func _process(delta: float) -> void:
 func _set_appearance() -> void:
   head_sprite.texture = _pick_texture(head_textures, head_variant)
   body.texture = _pick_texture(body_textures, body_variant)
+  (body.material_override as StandardMaterial3D).albedo_texture = body.texture
+  (head_sprite.material_override as StandardMaterial3D).albedo_texture = head_sprite.texture
   eyes.texture = _pick_texture(eye_textures, eye_variant)
   appearance.scale *= randf_range(1.0 - size_variation, 1.0 + size_variation)
   var body_height := body.texture.get_height() * body.pixel_size
@@ -126,8 +130,12 @@ func take_shot() -> void:
   vocal_audio.bus = &'World SFX Heavy Reverb'
   vocal_audio.volume_db += 3.0
   vocal_audio.play()
-  var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-  tween.tween_property(head, 'position:y', _head_base_y - 0.12, 0.25)
+  var tween := create_tween().set_parallel(true).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+  for sprite: Sprite3D in [body, head_sprite]:
+    var material := sprite.material_override as StandardMaterial3D
+    material.emission_energy_multiplier = 1.0
+    tween.tween_property(material, 'emission_energy_multiplier', 0.0, hit_flash_duration)
+  tween.tween_property(head, 'position:y', _head_base_y - head_collapse_distance, 0.25)
 
 
 func _within_bite_range() -> bool:

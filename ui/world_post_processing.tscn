@@ -10,7 +10,7 @@ render_priority = -128
 shader = ExtResource("3")
 shader_parameter/far_blur_start = 18.0
 shader_parameter/far_blur_end = 26.0
-shader_parameter/blur_radius_pixels = 9.1
+shader_parameter/blur_radius_pixels = 5.7
 
 [sub_resource type="QuadMesh" id="quad"]
 size = Vector2(2, 2)
@@ -36,7 +36,7 @@ saturation = 1.04
 tint = Color(0.9954166, 0.9648089, 0.8734078, 1)
 vignette_strength = 0.63
 vignette_start = 0.61
-blur_radius_pixels = 9.1
+blur_radius_pixels = 5.7
 
 [node name="distance_blur" type="MeshInstance3D" parent="." unique_id=1960852398]
 layers = 4
