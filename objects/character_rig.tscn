@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bbv6nfm1yqhik" path="res://sprites/character_head_front.png" id="3_8obkq"]
 [ext_resource type="Texture2D" uid="uid://c2etkmqcj25l1" path="res://sprites/character_arm.png" id="4_2cmcp"]
 [ext_resource type="Texture2D" uid="uid://btqymc4cu6r8u" path="res://sprites/character_leg.png" id="5_f2jqx"]
+[ext_resource type="Texture2D" path="res://sprites/character_head_back.png" id="head_back"]
+[ext_resource type="Texture2D" path="res://sprites/character_torso_back.png" id="torso_back"]
 [ext_resource type="Animation" path="res://animations/character/reset.tres" id="7_xdvdo"]
 [ext_resource type="Animation" path="res://animations/character/aim_musket.tres" id="8_5xyad"]
 [ext_resource type="Animation" uid="uid://cmsv4ti6kpdlf" path="res://animations/character/breathe.tres" id="9_kbqru"]
@@ -16,11 +18,13 @@
 [ext_resource type="Animation" path="res://animations/character/run.tres" id="14_8vffn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ajux4"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_p5miq")
 shader_parameter/sprite_texture = ExtResource("2_5w654")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m8dkn"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_p5miq")
 shader_parameter/sprite_texture = ExtResource("3_8obkq")
@@ -63,7 +67,7 @@ animation = &"breathe"
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_soh1n"]
 filter_enabled = true
-filters = ["skeleton:torso"]
+filters = ["flip/skeleton:torso"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w6wwh"]
 animation = &"death"
@@ -121,7 +125,7 @@ animation = &"run"
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_wpflv"]
 filter_enabled = true
-filters = [".:musket_angle", "skeleton:arm_left", "skeleton:arm_right", "skeleton:hand_left", "skeleton:hand_right", "skeleton:head"]
+filters = [".:musket_angle", "flip/skeleton:arm_left", "flip/skeleton:arm_right", "flip/skeleton:hand_left", "flip/skeleton:hand_right", "flip/skeleton:head"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b23ua"]
 nodes/idle/node = SubResource("AnimationNodeAnimation_sgsuk")
@@ -152,16 +156,25 @@ nodes/life/node = SubResource("AnimationNodeTransition_cvf3f")
 nodes/life/position = Vector2(180, 180)
 node_connections = [&"output", 0, &"life", &"locomotion", 0, &"idle", &"locomotion", 1, &"run", &"equipment", 0, &"pose_neutral", &"equipment", 1, &"pose_lantern", &"equipment", 2, &"pose_musket", &"equipment", 3, &"pose_aiming", &"upper_body", 0, &"locomotion", &"upper_body", 1, &"equipment", &"breathing", 0, &"upper_body", &"breathing", 1, &"breathe", &"life", 0, &"breathing", &"life", 1, &"death"]
 
-[node name="character_rig" type="Node3D" unique_id=166766975 node_paths=PackedStringArray("animation", "animation_tree", "skeleton", "left_hand_slot", "right_hand_slot", "back_slot")]
+[node name="character_rig" type="Node3D" unique_id=166766975 node_paths=PackedStringArray("animation", "animation_tree", "skeleton", "flip", "head", "torso", "left_hand_slot", "right_hand_slot", "back_slot")]
 script = ExtResource("1_5w654")
 animation = NodePath("animation")
 animation_tree = NodePath("animation_tree")
-skeleton = NodePath("skeleton")
-left_hand_slot = NodePath("skeleton/hand_left/slot")
-right_hand_slot = NodePath("skeleton/hand_right/slot")
-back_slot = NodePath("skeleton/back/slot")
+skeleton = NodePath("flip/skeleton")
+flip = NodePath("flip")
+head = NodePath("flip/skeleton/head/sprite")
+torso = NodePath("flip/skeleton/torso/sprite")
+head_front_texture = ExtResource("3_8obkq")
+head_back_texture = ExtResource("head_back")
+torso_front_texture = ExtResource("2_5w654")
+torso_back_texture = ExtResource("torso_back")
+left_hand_slot = NodePath("flip/skeleton/hand_left/slot")
+right_hand_slot = NodePath("flip/skeleton/hand_right/slot")
+back_slot = NodePath("flip/skeleton/back/slot")
 
-[node name="skeleton" type="Skeleton3D" parent="." unique_id=376383922]
+[node name="flip" type="Node3D" parent="."]
+
+[node name="skeleton" type="Skeleton3D" parent="flip" unique_id=376383922]
 bones/0/name = "torso"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
@@ -247,12 +260,12 @@ bones/11/position = Vector3(-0.35, -0.05, -0.1)
 bones/11/rotation = Quaternion(0, 0, 0, 1)
 bones/11/scale = Vector3(1, 1, 1)
 
-[node name="torso" type="BoneAttachment3D" parent="skeleton" unique_id=971306711]
+[node name="torso" type="BoneAttachment3D" parent="flip/skeleton" unique_id=971306711]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 bone_name = "torso"
 bone_idx = 0
 
-[node name="sprite" type="Sprite3D" parent="skeleton/torso" unique_id=731161041]
+[node name="sprite" type="Sprite3D" parent="flip/skeleton/torso" unique_id=731161041]
 position = Vector3(0, 0.65, 0)
 material_override = SubResource("ShaderMaterial_ajux4")
 cast_shadow = 0
@@ -261,12 +274,12 @@ pixel_size = 0.002
 alpha_cut = 1
 texture = ExtResource("2_5w654")
 
-[node name="head" type="BoneAttachment3D" parent="skeleton" unique_id=562309887]
+[node name="head" type="BoneAttachment3D" parent="flip/skeleton" unique_id=562309887]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008, 0.951, 0.012)
 bone_name = "head"
 bone_idx = 2
 
-[node name="sprite" type="Sprite3D" parent="skeleton/head" unique_id=333135360]
+[node name="sprite" type="Sprite3D" parent="flip/skeleton/head" unique_id=333135360]
 material_override = SubResource("ShaderMaterial_m8dkn")
 cast_shadow = 0
 offset = Vector2(0, 112)
@@ -274,12 +287,12 @@ pixel_size = 0.002
 alpha_cut = 1
 texture = ExtResource("3_8obkq")
 
-[node name="arm_left" type="BoneAttachment3D" parent="skeleton" unique_id=1392530483]
+[node name="arm_left" type="BoneAttachment3D" parent="flip/skeleton" unique_id=1392530483]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.161, 0.91999996, 0.006)
 bone_name = "arm_left"
 bone_idx = 4
 
-[node name="sprite" type="Sprite3D" parent="skeleton/arm_left" unique_id=1224444216]
+[node name="sprite" type="Sprite3D" parent="flip/skeleton/arm_left" unique_id=1224444216]
 material_override = SubResource("ShaderMaterial_l8te8")
 cast_shadow = 0
 offset = Vector2(-36, -117.5)
@@ -287,12 +300,12 @@ pixel_size = 0.002
 alpha_cut = 1
 texture = ExtResource("4_2cmcp")
 
-[node name="arm_right" type="BoneAttachment3D" parent="skeleton" unique_id=997899136]
+[node name="arm_right" type="BoneAttachment3D" parent="flip/skeleton" unique_id=997899136]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161, 0.91999996, -0.006)
 bone_name = "arm_right"
 bone_idx = 6
 
-[node name="sprite" type="Sprite3D" parent="skeleton/arm_right" unique_id=1224384864]
+[node name="sprite" type="Sprite3D" parent="flip/skeleton/arm_right" unique_id=1224384864]
 material_override = SubResource("ShaderMaterial_g05q8")
 cast_shadow = 0
 offset = Vector2(36, -117.5)
@@ -301,12 +314,12 @@ pixel_size = 0.002
 alpha_cut = 1
 texture = ExtResource("4_2cmcp")
 
-[node name="leg_left" type="BoneAttachment3D" parent="skeleton" unique_id=1606073996]
+[node name="leg_left" type="BoneAttachment3D" parent="flip/skeleton" unique_id=1606073996]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.149, 0.4, -0.012)
 bone_name = "leg_left"
 bone_idx = 7
 
-[node name="sprite" type="Sprite3D" parent="skeleton/leg_left" unique_id=1766128015]
+[node name="sprite" type="Sprite3D" parent="flip/skeleton/leg_left" unique_id=1766128015]
 material_override = SubResource("ShaderMaterial_xdvdo")
 cast_shadow = 0
 offset = Vector2(0, -95)
@@ -314,12 +327,12 @@ pixel_size = 0.002
 alpha_cut = 1
 texture = ExtResource("5_f2jqx")
 
-[node name="leg_right" type="BoneAttachment3D" parent="skeleton" unique_id=1779312427]
+[node name="leg_right" type="BoneAttachment3D" parent="flip/skeleton" unique_id=1779312427]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.146, 0.4, -0.018)
 bone_name = "leg_right"
 bone_idx = 8
 
-[node name="sprite" type="Sprite3D" parent="skeleton/leg_right" unique_id=199365971]
+[node name="sprite" type="Sprite3D" parent="flip/skeleton/leg_right" unique_id=199365971]
 material_override = SubResource("ShaderMaterial_5xyad")
 cast_shadow = 0
 offset = Vector2(0, -95)
@@ -328,26 +341,26 @@ pixel_size = 0.002
 alpha_cut = 1
 texture = ExtResource("5_f2jqx")
 
-[node name="hand_left" type="BoneAttachment3D" parent="skeleton" unique_id=893388758]
+[node name="hand_left" type="BoneAttachment3D" parent="flip/skeleton" unique_id=893388758]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.271, 0.45999995, 0.014)
 bone_name = "hand_left"
 bone_idx = 9
 
-[node name="slot" type="Marker3D" parent="skeleton/hand_left" unique_id=996468729]
+[node name="slot" type="Marker3D" parent="flip/skeleton/hand_left" unique_id=996468729]
 
-[node name="hand_right" type="BoneAttachment3D" parent="skeleton" unique_id=667703085]
+[node name="hand_right" type="BoneAttachment3D" parent="flip/skeleton" unique_id=667703085]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.271, 0.45999995, 0.0020000003)
 bone_name = "hand_right"
 bone_idx = 10
 
-[node name="slot" type="Marker3D" parent="skeleton/hand_right" unique_id=1095214045]
+[node name="slot" type="Marker3D" parent="flip/skeleton/hand_right" unique_id=1095214045]
 
-[node name="back" type="BoneAttachment3D" parent="skeleton" unique_id=1633488122]
+[node name="back" type="BoneAttachment3D" parent="flip/skeleton" unique_id=1633488122]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.34999996, -0.1)
 bone_name = "back"
 bone_idx = 11
 
-[node name="slot" type="Marker3D" parent="skeleton/back" unique_id=944712146]
+[node name="slot" type="Marker3D" parent="flip/skeleton/back" unique_id=944712146]
 
 [node name="animation" type="AnimationPlayer" parent="." unique_id=502817960]
 libraries/ = SubResource("AnimationLibrary_rjf8f")

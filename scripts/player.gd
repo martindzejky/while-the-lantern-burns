@@ -163,14 +163,21 @@ func _drop_equipment() -> void:
     _drop_lantern()
   if musket.is_owned:
     musket.reparent(_item_parent)
-    musket.global_transform = Transform3D(Basis.IDENTITY, global_position - drop_slot.position)
+    musket.global_transform = Transform3D(Basis.IDENTITY, global_position * 2.0 - _get_drop_position())
     musket.drop()
 
 
 func _drop_lantern() -> void:
   lantern.reparent(_item_parent)
-  lantern.global_transform = Transform3D(Basis.IDENTITY, drop_slot.global_position)
+  lantern.global_transform = Transform3D(Basis.IDENTITY, _get_drop_position())
   lantern.set_carried(false)
+
+
+func _get_drop_position() -> Vector3:
+  var offset := drop_slot.global_position - global_position
+  if rig.is_facing_left():
+    offset.x = -offset.x
+  return global_position + offset
 
 
 func _on_barrel_pressed() -> void:
@@ -288,12 +295,14 @@ func _physics_process(_delta: float) -> void:
     velocity = Vector3(direction.x, 0.0, direction.y) * speed
 
   move_and_slide()
+  rig.set_facing(Vector2(velocity.x, velocity.z))
   rig.set_moving(not velocity.is_zero_approx())
   _update_equipment()
   aim_line.visible = musket.is_aiming
   var target := global_position
   if musket.is_aiming:
-    target = global_position + Vector3.RIGHT * musket.shot_range
+    var aim_direction := Vector3.LEFT if rig.is_facing_left() else Vector3.RIGHT
+    target = global_position + aim_direction * musket.shot_range
     _update_aim_line(target)
   if _shot_requested or _fuse_shot_requested:
     _shot_requested = false

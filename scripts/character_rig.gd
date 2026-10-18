@@ -6,6 +6,13 @@ enum EquipmentPose { IDLE, LANTERN, MUSKET_READY, MUSKET_AIM }
 @export var animation: AnimationPlayer
 @export var animation_tree: AnimationTree
 @export var skeleton: Skeleton3D
+@export var flip: Node3D
+@export var head: Sprite3D
+@export var torso: Sprite3D
+@export var head_front_texture: Texture2D
+@export var head_back_texture: Texture2D
+@export var torso_front_texture: Texture2D
+@export var torso_back_texture: Texture2D
 @export var left_hand_slot: Marker3D
 @export var right_hand_slot: Marker3D
 @export var back_slot: Marker3D
@@ -17,6 +24,8 @@ var _moving: bool = false
 var _movement_blend: float = 0.0
 var _upper_body_blend: float = 0.0
 var _dead: bool = false
+var _facing_left: bool = false
+var _facing_back: bool = false
 
 
 func _ready() -> void:
@@ -40,6 +49,44 @@ func _process(delta: float) -> void:
 
 func set_moving(moving: bool) -> void:
   _moving = moving
+
+
+func set_facing(direction: Vector2) -> void:
+  if _dead:
+    return
+  if not is_zero_approx(direction.x) and _facing_left != (direction.x < 0.0):
+    _facing_left = direction.x < 0.0
+    flip.scale = Vector3(-1.0 if _facing_left else 1.0, 1.0, 1.0)
+  if is_zero_approx(direction.y) or _facing_back == (direction.y < 0.0):
+    return
+  _facing_back = direction.y < 0.0
+  head.texture = head_back_texture if _facing_back else head_front_texture
+  torso.texture = torso_back_texture if _facing_back else torso_front_texture
+  (head.material_override as ShaderMaterial).set_shader_parameter('sprite_texture', head.texture)
+  (torso.material_override as ShaderMaterial).set_shader_parameter('sprite_texture', torso.texture)
+  var depth_bones: Array[StringName] = [
+    &'shoulder_left', &'shoulder_right', &'hand_left', &'hand_right', &'back'
+  ]
+  for bone: StringName in depth_bones:
+    var index := skeleton.find_bone(bone)
+    var depth := skeleton.get_bone_rest(index).origin.z
+    _set_bone_depth(index, -depth if _facing_back else depth)
+  var left := skeleton.find_bone('leg_left')
+  var right := skeleton.find_bone('leg_right')
+  var left_depth := skeleton.get_bone_rest(left).origin.z
+  var right_depth := skeleton.get_bone_rest(right).origin.z
+  _set_bone_depth(left, right_depth if _facing_back else left_depth)
+  _set_bone_depth(right, left_depth if _facing_back else right_depth)
+
+
+func _set_bone_depth(bone: int, depth: float) -> void:
+  var bone_position := skeleton.get_bone_pose_position(bone)
+  bone_position.z = depth
+  skeleton.set_bone_pose_position(bone, bone_position)
+
+
+func is_facing_left() -> bool:
+  return _facing_left
 
 
 func set_equipment_pose(pose: EquipmentPose) -> void:
