@@ -5,6 +5,7 @@ extends Node3D
 @export var stones: Array[Texture2D] = []
 @export var stone_normals: Array[Texture2D] = []
 @export var patch_material: ShaderMaterial
+@export var stone_material: ShaderMaterial
 @export var seed_value: int = 60
 @export_range(0.0, 2.0, 0.01) var crack_density: float = 0.12
 @export_range(0.0, 2.0, 0.01) var stone_density: float = 0.22
@@ -55,12 +56,16 @@ func _scatter(textures: Array[Texture2D], count: int, widths: Vector2, polygon: 
       continue
     var mesh := QuadMesh.new()
     mesh.size = size
-    var material := patch_material.duplicate() as ShaderMaterial
+    var is_stone: bool = not normal_textures.is_empty()
+    if is_stone:
+      # bury a little of the rounded bottom to keep contact with the ground.
+      mesh.center_offset.y = size.y * 0.35
+    var material := (stone_material if is_stone else patch_material).duplicate() as ShaderMaterial
     material.set_shader_parameter('detail_texture', texture)
-    material.set_shader_parameter('opacity', opacity)
-    material.set_shader_parameter('use_normal_map', not normal_textures.is_empty())
-    if not normal_textures.is_empty():
+    if is_stone:
       material.set_shader_parameter('detail_normal', normal_textures[variant])
+    else:
+      material.set_shader_parameter('opacity', opacity)
     var patch := MeshInstance3D.new()
     patch.name = '%s_%03d' % [prefix, placed + 1]
     patch.mesh = mesh
