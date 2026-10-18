@@ -2,14 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ds3fqg0cq3s7i" path="res://scripts/lantern.gd" id="1"]
 [ext_resource type="Script" uid="uid://dp4r0732t61ar" path="res://scripts/camera_facing.gd" id="2"]
-
-[sub_resource type="Gradient" id="color"]
-colors = PackedColorArray(1, 0.95, 0.5, 1, 1, 0.95, 0.5, 1)
-
-[sub_resource type="GradientTexture2D" id="texture"]
-gradient = SubResource("color")
-width = 24
-height = 36
+[ext_resource type="Texture2D" uid="uid://cy42a8y3lyufq" path="res://sprites/lantern_world.png" id="3"]
 
 [node name="lantern" type="Node3D" unique_id=709075666 node_paths=PackedStringArray("light", "visuals")]
 script = ExtResource("1")
@@ -21,14 +14,15 @@ min_radius = 0.6
 script = ExtResource("2")
 
 [node name="sprite" type="Sprite3D" parent="visuals" unique_id=418356784]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0043641143, 0)
 cast_shadow = 0
-offset = Vector2(0, 18)
-pixel_size = 0.015
+offset = Vector2(0, 255)
+pixel_size = 0.0015882353
 alpha_cut = 1
-texture = SubResource("texture")
+texture = ExtResource("3")
 
 [node name="light" type="OmniLight3D" parent="visuals" unique_id=876345472]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.405, 0)
 light_color = Color(1, 0.75, 0.3, 1)
 light_energy = 1.8
 light_specular = 0.0
