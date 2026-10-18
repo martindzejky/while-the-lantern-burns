@@ -88,6 +88,8 @@ ignite_musket={
 
 [rendering]
 
+limits/opengl/max_lights_per_object=16
+
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.03137255, 0.03137255, 0.03137255, 1)

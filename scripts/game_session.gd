@@ -10,6 +10,7 @@ signal prepared
 @export var musket: Musket
 @export var hud: CanvasLayer
 @export var loading: CanvasLayer
+@export var victory: VictoryScreen
 @export var start_inactive: bool = false
 
 var _active: bool = false
@@ -45,6 +46,15 @@ func _on_retry_requested() -> void:
 
 func _on_menu_requested() -> void:
   menu_requested.emit()
+
+
+func _on_exit_body_entered(body: Node3D) -> void:
+  if body != player or not _active or player.is_dead:
+    return
+  set_active(false)
+  hud.hide()
+  process_mode = Node.PROCESS_MODE_DISABLED
+  victory.open()
 
 
 func _unhandled_input(event: InputEvent) -> void:
