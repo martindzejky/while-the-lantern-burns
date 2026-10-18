@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/random_big_rock.gd" id="script"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_01.tscn" id="rock_01"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_02.tscn" id="rock_02"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_03.tscn" id="rock_03"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_04.tscn" id="rock_04"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_05.tscn" id="rock_05"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_06.tscn" id="rock_06"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_07.tscn" id="rock_07"]
+[ext_resource type="PackedScene" path="res://objects/big_rock_08.tscn" id="rock_08"]
+
+[node name="random_big_rock" type="Node3D"]
+script = ExtResource("script")
+rock_scenes = Array[PackedScene]([ExtResource("rock_01"), ExtResource("rock_02"), ExtResource("rock_03"), ExtResource("rock_04"), ExtResource("rock_05"), ExtResource("rock_06"), ExtResource("rock_07"), ExtResource("rock_08")])

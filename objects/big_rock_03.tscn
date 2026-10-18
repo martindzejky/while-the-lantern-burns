@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c2f8ln15f0iu0" path="res://sprites/big_rock_03_normal.png" id="normal"]
 
 [sub_resource type="CylinderShape3D" id="shape"]
-height = 1.0
-radius = 0.928
+height = 20.0
+radius = 0.464
 
 [sub_resource type="StandardMaterial3D" id="material"]
 transparency = 2
@@ -24,7 +24,7 @@ billboard_keep_scale = true
 [node name="big_rock_03" type="StaticBody3D" unique_id=20366013]
 
 [node name="shape" type="CollisionShape3D" parent="." unique_id=1026584788]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 shape = SubResource("shape")
 
 [node name="sprite" type="Sprite3D" parent="." unique_id=1645527144]
