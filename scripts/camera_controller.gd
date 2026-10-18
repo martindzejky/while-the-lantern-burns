@@ -3,7 +3,7 @@ extends Node3D
 
 @export var target: Player
 @export var camera: Camera3D
-@export_range(1.0, 120.0, 0.5) var follow_fov: float = 40.0
+@export_range(1.0, 120.0, 0.5) var follow_fov: float = 43.0
 @export_range(0.1, 20.0, 0.1) var follow_response: float = 6.0
 @export_group('Bite emphasis')
 @export var bite_zoom_enabled: bool = true
