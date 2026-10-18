@@ -27,14 +27,12 @@
 [ext_resource type="PackedScene" path="res://objects/camera_controller.tscn" id="camera_controller"]
 [ext_resource type="PackedScene" path="res://ui/death_feedback.tscn" id="death_ui"]
 [ext_resource type="PackedScene" uid="uid://dnep4itj4mhsi" path="res://objects/enemy.tscn" id="enemy"]
+[ext_resource type="PackedScene" path="res://ui/gameplay_prompts.tscn" id="gameplay_prompts"]
 [ext_resource type="PackedScene" path="res://objects/ground.tscn" id="ground"]
 [ext_resource type="Script" uid="uid://dy72qt3fyp76c" path="res://scripts/game_session.gd" id="session"]
+[ext_resource type="PackedScene" path="res://ui/victory_screen.tscn" id="victory_screen"]
 [ext_resource type="PackedScene" path="res://objects/world_light.tscn" id="world_light"]
 [ext_resource type="PackedScene" uid="uid://c3se2eoftldxs" path="res://ui/world_post_processing.tscn" id="world_post_processing"]
-
-[ext_resource type="PackedScene" path="res://ui/gameplay_prompts.tscn" id="gameplay_prompts"]
-
-[ext_resource type="PackedScene" path="res://ui/victory_screen.tscn" id="victory_screen"]
 
 [sub_resource type="Environment" id="environment"]
 background_mode = 1
@@ -44,7 +42,7 @@ ambient_light_color = Color(0.08, 0.16, 0.11, 1)
 ambient_light_energy = 0.05
 reflected_light_source = 2
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rqnht"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sqtar"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -55,7 +53,7 @@ stream_2/stream = ExtResource("8_sqtar")
 stream_3/stream = ExtResource("9_67d6o")
 stream_4/stream = ExtResource("10_5vu4g")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_srvxn"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_67d6o"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -63,7 +61,7 @@ streams_count = 2
 stream_0/stream = ExtResource("11_s6y8e")
 stream_1/stream = ExtResource("12_s1tv7")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sqtar"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5vu4g"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -74,161 +72,132 @@ stream_2/stream = ExtResource("20_o7tkd")
 stream_3/stream = ExtResource("21_81iov")
 stream_4/stream = ExtResource("22_slt2r")
 stream_5/stream = ExtResource("23_yjd84")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_67d6o"]
-resource_local_to_scene = true
-random_pitch = 1.04
-random_volume_offset_db = 1.0
-streams_count = 2
-stream_0/stream = ExtResource("24_wexui")
-stream_1/stream = ExtResource("25_ww381")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5vu4g"]
-resource_local_to_scene = true
-random_pitch = 1.04
-random_volume_offset_db = 1.0
-streams_count = 3
-stream_0/stream = ExtResource("26_7qo25")
-stream_1/stream = ExtResource("27_rynmh")
-stream_2/stream = ExtResource("28_fykia")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s6y8e"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 6
-stream_0/stream = ExtResource("18_37dvx")
-stream_1/stream = ExtResource("19_p5dy6")
-stream_2/stream = ExtResource("20_o7tkd")
-stream_3/stream = ExtResource("21_81iov")
-stream_4/stream = ExtResource("22_slt2r")
-stream_5/stream = ExtResource("23_yjd84")
+streams_count = 2
+stream_0/stream = ExtResource("24_wexui")
+stream_1/stream = ExtResource("25_ww381")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s1tv7"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 2
-stream_0/stream = ExtResource("24_wexui")
-stream_1/stream = ExtResource("25_ww381")
+streams_count = 3
+stream_0/stream = ExtResource("26_7qo25")
+stream_1/stream = ExtResource("27_rynmh")
+stream_2/stream = ExtResource("28_fykia")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_37dvx"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 3
-stream_0/stream = ExtResource("26_7qo25")
-stream_1/stream = ExtResource("27_rynmh")
-stream_2/stream = ExtResource("28_fykia")
+streams_count = 6
+stream_0/stream = ExtResource("18_37dvx")
+stream_1/stream = ExtResource("19_p5dy6")
+stream_2/stream = ExtResource("20_o7tkd")
+stream_3/stream = ExtResource("21_81iov")
+stream_4/stream = ExtResource("22_slt2r")
+stream_5/stream = ExtResource("23_yjd84")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p5dy6"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 6
-stream_0/stream = ExtResource("18_37dvx")
-stream_1/stream = ExtResource("19_p5dy6")
-stream_2/stream = ExtResource("20_o7tkd")
-stream_3/stream = ExtResource("21_81iov")
-stream_4/stream = ExtResource("22_slt2r")
-stream_5/stream = ExtResource("23_yjd84")
+streams_count = 2
+stream_0/stream = ExtResource("24_wexui")
+stream_1/stream = ExtResource("25_ww381")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o7tkd"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 2
-stream_0/stream = ExtResource("24_wexui")
-stream_1/stream = ExtResource("25_ww381")
+streams_count = 3
+stream_0/stream = ExtResource("26_7qo25")
+stream_1/stream = ExtResource("27_rynmh")
+stream_2/stream = ExtResource("28_fykia")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_81iov"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 3
-stream_0/stream = ExtResource("26_7qo25")
-stream_1/stream = ExtResource("27_rynmh")
-stream_2/stream = ExtResource("28_fykia")
+streams_count = 6
+stream_0/stream = ExtResource("18_37dvx")
+stream_1/stream = ExtResource("19_p5dy6")
+stream_2/stream = ExtResource("20_o7tkd")
+stream_3/stream = ExtResource("21_81iov")
+stream_4/stream = ExtResource("22_slt2r")
+stream_5/stream = ExtResource("23_yjd84")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_slt2r"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 6
-stream_0/stream = ExtResource("18_37dvx")
-stream_1/stream = ExtResource("19_p5dy6")
-stream_2/stream = ExtResource("20_o7tkd")
-stream_3/stream = ExtResource("21_81iov")
-stream_4/stream = ExtResource("22_slt2r")
-stream_5/stream = ExtResource("23_yjd84")
+streams_count = 2
+stream_0/stream = ExtResource("24_wexui")
+stream_1/stream = ExtResource("25_ww381")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yjd84"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 2
-stream_0/stream = ExtResource("24_wexui")
-stream_1/stream = ExtResource("25_ww381")
+streams_count = 3
+stream_0/stream = ExtResource("26_7qo25")
+stream_1/stream = ExtResource("27_rynmh")
+stream_2/stream = ExtResource("28_fykia")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wexui"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 3
-stream_0/stream = ExtResource("26_7qo25")
-stream_1/stream = ExtResource("27_rynmh")
-stream_2/stream = ExtResource("28_fykia")
+streams_count = 6
+stream_0/stream = ExtResource("18_37dvx")
+stream_1/stream = ExtResource("19_p5dy6")
+stream_2/stream = ExtResource("20_o7tkd")
+stream_3/stream = ExtResource("21_81iov")
+stream_4/stream = ExtResource("22_slt2r")
+stream_5/stream = ExtResource("23_yjd84")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ww381"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 6
-stream_0/stream = ExtResource("18_37dvx")
-stream_1/stream = ExtResource("19_p5dy6")
-stream_2/stream = ExtResource("20_o7tkd")
-stream_3/stream = ExtResource("21_81iov")
-stream_4/stream = ExtResource("22_slt2r")
-stream_5/stream = ExtResource("23_yjd84")
+streams_count = 2
+stream_0/stream = ExtResource("24_wexui")
+stream_1/stream = ExtResource("25_ww381")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7qo25"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 2
-stream_0/stream = ExtResource("24_wexui")
-stream_1/stream = ExtResource("25_ww381")
+streams_count = 3
+stream_0/stream = ExtResource("26_7qo25")
+stream_1/stream = ExtResource("27_rynmh")
+stream_2/stream = ExtResource("28_fykia")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rynmh"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 3
-stream_0/stream = ExtResource("26_7qo25")
-stream_1/stream = ExtResource("27_rynmh")
-stream_2/stream = ExtResource("28_fykia")
+streams_count = 6
+stream_0/stream = ExtResource("18_37dvx")
+stream_1/stream = ExtResource("19_p5dy6")
+stream_2/stream = ExtResource("20_o7tkd")
+stream_3/stream = ExtResource("21_81iov")
+stream_4/stream = ExtResource("22_slt2r")
+stream_5/stream = ExtResource("23_yjd84")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fykia"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
-streams_count = 6
-stream_0/stream = ExtResource("18_37dvx")
-stream_1/stream = ExtResource("19_p5dy6")
-stream_2/stream = ExtResource("20_o7tkd")
-stream_3/stream = ExtResource("21_81iov")
-stream_4/stream = ExtResource("22_slt2r")
-stream_5/stream = ExtResource("23_yjd84")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7yuvj"]
-resource_local_to_scene = true
-random_pitch = 1.04
-random_volume_offset_db = 1.0
 streams_count = 2
 stream_0/stream = ExtResource("24_wexui")
 stream_1/stream = ExtResource("25_ww381")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_h2nsf"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7yuvj"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -237,7 +206,7 @@ stream_0/stream = ExtResource("26_7qo25")
 stream_1/stream = ExtResource("27_rynmh")
 stream_2/stream = ExtResource("28_fykia")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_urfw8"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_h2nsf"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -249,7 +218,7 @@ stream_3/stream = ExtResource("21_81iov")
 stream_4/stream = ExtResource("22_slt2r")
 stream_5/stream = ExtResource("23_yjd84")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mgl3x"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_urfw8"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -257,7 +226,36 @@ streams_count = 2
 stream_0/stream = ExtResource("24_wexui")
 stream_1/stream = ExtResource("25_ww381")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mgl3x"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("26_7qo25")
+stream_1/stream = ExtResource("27_rynmh")
+stream_2/stream = ExtResource("28_fykia")
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_npgxv"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("18_37dvx")
+stream_1/stream = ExtResource("19_p5dy6")
+stream_2/stream = ExtResource("20_o7tkd")
+stream_3/stream = ExtResource("21_81iov")
+stream_4/stream = ExtResource("22_slt2r")
+stream_5/stream = ExtResource("23_yjd84")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_w6xft"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("24_wexui")
+stream_1/stream = ExtResource("25_ww381")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lx1vx"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -287,7 +285,7 @@ visible = false
 environment = SubResource("environment")
 
 [node name="ground" parent="." unique_id=205520019 instance=ExtResource("ground")]
-polygon = PackedVector2Array(-36.944, -5.294, -33.157, -3.951, -32.175, 0.0, -33.553, 3.812, -34.868, 6.716, -35.026, 8.727, -32.537, 6.08, -33.766, 7.483, -29.737, 8.627, -29.72, 8.651, -29.741, 6.763, -28.901, 7.159, -27.136, 7.562, -23.271, 10.074, -23.289, 10.12, -23.04, 10.187, -22.382, 10.845, -22.242, 11.367, -22.094, 11.334, -19.169, 13.973, -16.407, 16.274, -13.666, 14.472, -12.939, 14.279, -11.522, 13.044, -12.189, 14.494, -9.59, 13.714, -7.244, 17.042, -7.226, 17.094, -5.882, 18.193, -5.477, 18.286, -2.333, 19.012, -2.354, 18.176, -1.166, 14.317, 2.824, 14.866, 6.259, 15.278, 9.588, 17.323, 10.715, 21.228, 8.109, 24.279, 7.547, 25.407, 10.784, 29.858, 10.76, 29.876, 10.862, 29.978, 11.045, 30.659, 10.862, 31.34, 10.777, 31.425, 10.998, 31.58, 6.798, 37.58, 6.773, 37.562, 6.286, 38.049, 5.483, 38.264, 5.362, 38.232, 5.333, 38.603, -1.158, 37.515, -1.817, 37.501, -3.038, 40.553, -3.215, 42.66, -3.256, 42.643, -3.316, 42.868, -3.908, 43.46, -4.512, 43.603, -5.003, 47.101, -8.13, 48.453, -12.347, 46.772, -13.755, 47.813, -16.297, 47.266, -15.68, 44.552, -16.494, 44.009, -18.929, 43.296, -24.557, 45.639, -23.724, 48.351, -24.205, 50.849, -26.718, 52.125, -26.764, 52.11, -27.797, 53.047, -28.026, 54.602, -32.984, 56.711, -36.818, 55.111, -42.179, 51.756, -48.637, 55.225, -48.721, 55.23, -50.328, 58.22, -47.324, 62.111, -45.912, 66.595, -48.204, 70.571, -49.98, 75.445, -52.988, 75.194, -52.745, 79.088, -49.831, 80.543, -47.444, 78.157, -47.404, 78.197, -46.964, 76.904, -45.291, 78.252, -45.3, 78.319, -45.294, 78.721, -43.141, 79.88, -42.244, 79.254, -40.428, 80.942, -40.393, 80.962, -39.803, 81.815, -38.328, 86.027, -38.088, 86.372, -35.211, 87.139, -34.227, 86.983, -31.73, 84.036, -29.869, 84.619, -23.573, 88.114, -23.625, 88.566, -22.376, 89.547, -21.128, 90.528, -19.377, 90.821, -17.376, 89.833, -12.182, 88.475, -5.946, 88.027, -3.796, 93.987, -2.347, 98.829, -2.352, 98.914, 2.27, 99.838, 2.258, 99.896, 2.83, 100.049, 6.949, 105.205, 5.883, 106.246, 7.469, 108.097, 3.621, 112.013, 3.068, 112.563, 2.308, 112.767, 2.032, 112.217, -2.546, 111.563, -2.863, 111.579, -4.694, 115.426, -4.721, 115.407, -5.239, 115.925, -6.192, 115.85, -11.409, 116.968, -11.418, 116.924, -14.93, 118.727, -15.687, 115.964, -18.092, 118.044, -19.813, 116.601, -20.516, 118.24, -21.685, 121.28, -21.817, 121.277, -21.973, 121.641, -22.724, 121.319, -22.452, 121.726, -22.216, 121.984, -22.256, 122.021, -21.966, 122.456, -25.664, 125.661, -25.241, 126.483, -23.937, 131.728, -22.696, 138.442, -28.472, 141.867, -41.421, 135.857, -42.915, 136.497, -40.146, 144.375, -38.294, 143.973, -36.752, 147.998, -32.154, 149.092, -28.127, 146.529, -28.077, 146.499, -27.95, 146.839, -27.936, 146.83, -27.399, 147.673, -26.829, 146.851, -21.629, 150.451, -22.03, 151.03, -21.953, 151.071, -21.427, 150.638, -20.595, 151.648, -17.68, 155.188, -16.784, 152.013, -9.447, 149.658, -2.644, 154.975, 3.333, 159.379, 4.966, 166.758, 5.184, 175.205, -2.916, 178.07, -7.85, 181.376, -7.85, 181.758, -8.064, 182.557, -6.43, 184.467, -8.447, 186.477, -8.447, 188.052, -7.67, 188.808, -7.67, 192.408, -7.908, 193.296, -8.559, 193.947, -9.447, 194.185, -10.335, 193.947, -10.986, 193.296, -11.224, 192.408, -11.224, 188.808, -10.447, 188.035, -10.447, 187.248, -10.811, 182.576, -10.83, 182.557, -10.951, 182.105, -17.458, 180.633, -20.663, 173.234, -26.156, 166.758, -22.24, 159.372, -19.629, 157.461, -23.275, 152.505, -26.878, 149.25, -27.088, 149.105, -28.498, 152.067, -28.954, 153.141, -29.661, 153.451, -31.713, 154.871, -33.276, 151.498, -33.889, 151.185, -37.54, 150.663, -37.399, 149.673, -38.231, 150.228, -38.258, 150.188, -38.971, 150.721, -38.995, 150.738, -40.784, 146.467, -45.689, 147.707, -45.844, 147.412, -45.924, 147.435, -46.035, 147.046, -46.288, 146.563, -46.906, 147.181, -46.926, 147.16, -47.173, 147.447, -47.207, 147.482, -48.209, 145.877, -50.906, 143.181, -50.371, 142.646, -51.887, 141.77, -51.931, 141.752, -52.415, 135.968, -48.897, 136.045, -48.914, 136.005, -45.009, 134.331, -46.243, 131.728, -45.85, 125.075, -39.497, 122.772, -34.326, 118.825, -28.098, 120.942, -26.976, 123.118, -24.009, 120.398, -24.037, 120.376, -22.702, 118.265, -21.56, 115.601, -22.255, 115.224, -21.464, 113.963, -21.349, 113.933, -21.361, 113.908, -15.761, 111.108, -15.629, 111.374, -13.827, 111.63, -13.792, 111.59, -11.554, 114.236, -6.787, 113.214, -3.292, 108.512, -3.026, 108.584, -3.018, 108.532, 1.291, 109.973, 3.616, 107.02, 3.725, 106.833, 3.775, 106.25, 2.761, 104.729, -2.545, 102.638, -2.633, 104.342, -6.117, 109.335, -12.182, 108.296, -18.138, 109.145, -21.984, 104.488, -21.847, 98.829, -22.952, 92.721, -25.272, 90.868, -27.532, 88.619, -29.697, 87.382, -31.061, 90.563, -31.884, 91.338, -34.35, 90.335, -34.367, 90.399, -40.862, 92.438, -41.737, 88.655, -41.476, 87.334, -41.533, 87.348, -42.093, 83.114, -42.197, 82.66, -43.935, 81.724, -46.387, 83.234, -46.486, 80.963, -48.182, 82.659, -46.196, 85.641, -49.364, 86.565, -49.868, 83.864, -49.884, 83.899, -56.338, 84.197, -57.262, 82.921, -58.01, 80.853, -55.828, 79.829, -56.144, 74.767, -59.364, 73.998, -63.904, 71.684, -62.972, 66.595, -63.155, 61.939, -59.941, 58.193, -55.09, 58.843, -53.118, 58.497, -52.19, 57.289, -51.578, 55.861, -50.636, 53.665, -50.047, 53.917, -50.02, 53.539, -50.221, 53.195, -49.987, 53.058, -49.968, 52.786, -48.955, 47.372, -44.909, 46.72, -41.621, 48.217, -35.525, 51.899, -28.938, 50.379, -27.374, 43.502, -26.674, 42.802, -27.231, 39.596, -26.835, 38.693, -26.596, 38.162, -25.471, 35.036, -20.455, 37.813, -18.384, 38.135, -17.149, 39.645, -12.908, 43.541, -5.715, 40.973, -5.059, 40.22, -4.64, 39.174, -4.703, 38.749, -5.475, 36.705, -6.743, 35.773, -5.734, 34.569, -3.292, 34.37, -2.317, 34.109, -2.17, 34.148, -2.168, 34.115, -1.373, 35.128, 4.311, 35.566, 4.621, 35.091, 8.148, 30.863, 5.88, 27.745, 2.824, 28.719, -0.196, 26.459, -3.92, 25.122, -5.753, 23.294, -7.865, 22.924, -9.291, 23.408, -8.893, 20.396, -8.916, 20.373, -11.549, 17.744, -12.951, 16.903, -15.943, 18.613, -16.142, 18.264, -16.439, 19.184, -16.752, 19.1, -16.763, 19.147, -22.491, 19.882, -23.397, 19.849, -24.488, 19.301, -24.575, 17.189, -24.722, 16.64, -24.784, 16.654, -25.099, 13.217, -27.812, 13.711, -28.653, 11.226, -31.347, 13.151, -30.806, 14.573, -32.042, 14.41, -32.439, 13.817, -33.255, 14.526, -34.291, 14.872, -37.414, 13.305, -37.37, 11.713, -38.413, 11.931, -39.126, 11.218, -39.264, 10.7, -39.328, 10.716, -40.016, 7.966, -43.157, 5.468, -46.006, 3.467, -47.772, 0.0, -45.227, -3.018, -43.756, -6.506, -40.0, -7.281)
+polygon = PackedVector2Array(-36.944, -5.294, -33.157, -3.951, -32.175, 0, -33.553, 3.812, -34.868, 6.716, -35.026, 8.727, -33.766, 7.483, -29.737, 8.627, -29.72, 8.651, -29.741, 6.763, -28.901, 7.159, -27.136, 7.562, -23.271, 10.074, -23.289, 10.12, -23.04, 10.187, -22.382, 10.845, -22.094, 11.334, -19.169, 13.973, -16.407, 16.274, -13.666, 14.472, -12.939, 14.279, -11.522, 13.044, -11.137934, 14.0709505, -9.59, 13.714, -7.244, 17.042, -7.226, 17.094, -5.882, 18.193, -5.477, 18.286, -2.333, 19.012, -2.354, 18.176, -1.166, 14.317, 2.824, 14.866, 6.259, 15.278, 9.588, 17.323, 10.715, 21.228, 8.109, 24.279, 7.547, 25.407, 10.784, 29.858, 10.76, 29.876, 10.862, 29.978, 11.045, 30.659, 10.862, 31.34, 10.777, 31.425, 10.998, 31.58, 6.798, 37.58, 6.773, 37.562, 6.286, 38.049, 5.483, 38.264, 5.362, 38.232, 5.333, 38.603, -1.158, 37.515, -1.817, 37.501, -3.038, 40.553, -3.215, 42.66, -3.256, 42.643, -3.316, 42.868, -3.908, 43.46, -4.512, 43.603, -5.003, 47.101, -8.13, 48.453, -12.347, 46.772, -13.755, 47.813, -16.297, 47.266, -15.68, 44.552, -16.494, 44.009, -18.929, 43.296, -24.557, 45.639, -23.724, 48.351, -24.205, 50.849, -26.718, 52.125, -26.764, 52.11, -27.797, 53.047, -28.026, 54.602, -32.984, 56.711, -36.818, 55.111, -42.179, 51.756, -48.637, 55.225, -48.721, 55.23, -50.328, 58.22, -47.324, 62.111, -45.912, 66.595, -48.204, 70.571, -49.98, 75.445, -52.988, 75.194, -52.745, 79.088, -49.831, 80.543, -47.444, 78.157, -47.404, 78.197, -46.964, 76.904, -45.291, 78.252, -45.3, 78.319, -45.294, 78.721, -43.141, 79.88, -42.244, 79.254, -40.428, 80.942, -40.393, 80.962, -39.803, 81.815, -38.328, 86.027, -38.088, 86.372, -35.211, 87.139, -34.227, 86.983, -31.73, 84.036, -29.869, 84.619, -23.573, 88.114, -23.625, 88.566, -22.376, 89.547, -21.128, 90.528, -19.377, 90.821, -17.376, 89.833, -12.182, 88.475, -5.946, 88.027, -3.796, 93.987, -2.347, 98.829, -2.352, 98.914, 2.27, 99.838, 2.258, 99.896, 2.83, 100.049, 6.949, 105.205, 5.883, 106.246, 7.469, 108.097, 3.621, 112.013, 3.068, 112.563, 2.308, 112.767, 2.032, 112.217, -2.546, 111.563, -2.863, 111.579, -4.694, 115.426, -4.721, 115.407, -5.239, 115.925, -6.192, 115.85, -11.409, 116.968, -11.418, 116.924, -14.93, 118.727, -15.687, 115.964, -18.092, 118.044, -19.813, 116.601, -20.516, 118.24, -21.685, 121.28, -21.817, 121.277, -21.973, 121.641, -22.724, 121.319, -22.452, 121.726, -22.216, 121.984, -22.256, 122.021, -21.966, 122.456, -25.664, 125.661, -25.241, 126.483, -23.937, 131.728, -22.696, 138.442, -28.472, 141.867, -41.421, 135.857, -42.915, 136.497, -40.146, 144.375, -38.294, 143.973, -36.752, 147.998, -32.154, 149.092, -28.127, 146.529, -28.077, 146.499, -27.95, 146.839, -27.936, 146.83, -27.399, 147.673, -26.829, 146.851, -21.629, 150.451, -22.03, 151.03, -21.953, 151.071, -21.427, 150.638, -20.595, 151.648, -17.68, 155.188, -16.784, 152.013, -9.447, 149.658, -2.644, 154.975, 3.333, 159.379, 4.966, 166.758, 5.184, 175.205, -2.916, 178.07, -7.85, 181.376, -7.85, 181.758, -8.064, 182.557, -6.43, 184.467, -8.447, 186.477, -8.447, 188.052, -7.67, 188.808, -7.67, 192.408, -7.908, 193.296, -8.559, 193.947, -9.447, 194.185, -10.335, 193.947, -10.986, 193.296, -11.224, 192.408, -11.224, 188.808, -10.447, 188.035, -10.447, 187.248, -10.811, 182.576, -10.83, 182.557, -10.951, 182.105, -17.458, 180.633, -20.663, 173.234, -26.156, 166.758, -22.24, 159.372, -19.629, 157.461, -23.275, 152.505, -26.878, 149.25, -27.088, 149.105, -28.498, 152.067, -28.954, 153.141, -29.661, 153.451, -31.713, 154.871, -33.276, 151.498, -33.889, 151.185, -37.54, 150.663, -37.399, 149.673, -38.231, 150.228, -38.258, 150.188, -38.971, 150.721, -38.995, 150.738, -40.784, 146.467, -45.689, 147.707, -45.844, 147.412, -45.924, 147.435, -46.035, 147.046, -46.288, 146.563, -46.906, 147.181, -46.926, 147.16, -47.173, 147.447, -47.207, 147.482, -48.209, 145.877, -50.906, 143.181, -50.371, 142.646, -51.887, 141.77, -51.931, 141.752, -52.415, 135.968, -48.897, 136.045, -48.914, 136.005, -45.009, 134.331, -46.243, 131.728, -45.85, 125.075, -39.497, 122.772, -34.326, 118.825, -28.098, 120.942, -26.976, 123.118, -24.009, 120.398, -24.037, 120.376, -22.702, 118.265, -21.56, 115.601, -22.255, 115.224, -21.464, 113.963, -21.349, 113.933, -21.361, 113.908, -15.761, 111.108, -15.629, 111.374, -13.827, 111.63, -13.792, 111.59, -11.554, 114.236, -6.787, 113.214, -3.292, 108.512, -3.026, 108.584, -3.018, 108.532, 1.291, 109.973, 3.616, 107.02, 3.725, 106.833, 3.775, 106.25, 2.761, 104.729, -2.545, 102.638, -2.633, 104.342, -6.117, 109.335, -12.182, 108.296, -18.138, 109.145, -21.984, 104.488, -21.847, 98.829, -22.952, 92.721, -25.272, 90.868, -27.532, 88.619, -29.697, 87.382, -31.061, 90.563, -31.884, 91.338, -34.35, 90.335, -34.367, 90.399, -40.862, 92.438, -41.737, 88.655, -41.476, 87.334, -41.533, 87.348, -42.093, 83.114, -42.197, 82.66, -43.935, 81.724, -46.387, 83.234, -46.486, 80.963, -48.182, 82.659, -46.196, 85.641, -49.364, 86.565, -49.868, 83.864, -49.884, 83.899, -56.338, 84.197, -57.262, 82.921, -58.01, 80.853, -55.828, 79.829, -56.144, 74.767, -59.364, 73.998, -63.904, 71.684, -62.972, 66.595, -63.155, 61.939, -59.941, 58.193, -55.09, 58.843, -53.118, 58.497, -52.19, 57.289, -51.578, 55.861, -50.636, 53.665, -50.047, 53.917, -50.02, 53.539, -50.221, 53.195, -49.987, 53.058, -49.968, 52.786, -48.955, 47.372, -44.909, 46.72, -41.621, 48.217, -35.525, 51.899, -28.938, 50.379, -27.374, 43.502, -26.674, 42.802, -27.231, 39.596, -26.835, 38.693, -26.596, 38.162, -25.471, 35.036, -20.455, 37.813, -18.384, 38.135, -17.149, 39.645, -12.908, 43.541, -5.715, 40.973, -5.059, 40.22, -4.64, 39.174, -4.703, 38.749, -5.475, 36.705, -6.743, 35.773, -5.734, 34.569, -3.292, 34.37, -2.317, 34.109, -2.17, 34.148, -2.168, 34.115, -1.373, 35.128, 4.311, 35.566, 4.621, 35.091, 8.148, 30.863, 5.88, 27.745, 2.824, 28.719, -0.196, 26.459, -3.92, 25.122, -5.753, 23.294, -7.865, 22.924, -9.291, 23.408, -8.893, 20.396, -8.916, 20.373, -11.549, 17.744, -12.951, 16.903, -15.943, 18.613, -16.142, 18.264, -16.439, 19.184, -16.752, 19.1, -16.763, 19.147, -22.491, 19.882, -23.397, 19.849, -24.488, 19.301, -24.575, 17.189, -24.722, 16.64, -25.636133, 16.208683, -25.099, 13.217, -27.812, 13.711, -28.653, 11.226, -31.347, 13.151, -30.806, 14.573, -32.042, 14.41, -32.439, 13.817, -33.255, 14.526, -34.291, 14.872, -37.414, 13.305, -37.37, 11.713, -38.413, 11.931, -39.126, 11.218, -39.264, 10.7, -39.328, 10.716, -40.016, 7.966, -43.157, 5.468, -46.006, 3.467, -47.772, 0, -45.227, -3.018, -43.756, -6.506, -40, -7.281)
 edge_seed = 610
 
 [node name="player" parent="." unique_id=1253224889 node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("1")]
@@ -303,10 +301,10 @@ transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
 light_source = NodePath("../../lantern")
 
 [node name="footstep_audio" parent="player" index="7"]
-stream = SubResource("AudioStreamRandomizer_rqnht")
+stream = SubResource("AudioStreamRandomizer_sqtar")
 
 [node name="body_audio" parent="player" index="8"]
-stream = SubResource("AudioStreamRandomizer_srvxn")
+stream = SubResource("AudioStreamRandomizer_67d6o")
 
 [node name="camera_controller" parent="." unique_id=839260601 node_paths=PackedStringArray("target") instance=ExtResource("camera_controller")]
 target = NodePath("../player")
@@ -316,7 +314,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.824055, 0, -21.228134)
 initial_energy = 0.0
 
 [node name="musket" parent="." unique_id=1198564765 instance=ExtResource("5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.089981, 0, -66.594863)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.08998, 0, -66.594864)
 
 [node name="safe_lights" type="Node3D" parent="." unique_id=2120534385]
 
@@ -325,7 +323,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 4, 0)
 omni_range = 12.0
 
 [node name="lit_passage" parent="safe_lights" unique_id=1484302140 instance=ExtResource("world_light")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.938907, 4, -11.744373)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.938908, 4, -11.744373)
 light_energy = 0.23
 omni_range = 11.0
 
@@ -335,37 +333,37 @@ light_energy = 0.25
 omni_range = 9.0
 
 [node name="musket_refuge" parent="safe_lights" unique_id=774614127 instance=ExtResource("world_light")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.089981, 4, -66.594863)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.08998, 4, -66.594864)
 omni_range = 12.0
 
 [node name="daylight_exit" parent="safe_lights" unique_id=1981183684 instance=ExtResource("world_light")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.446997, 4, -192.407714)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.446997, 4, -192.40771)
 light_color = Color(0.94, 0.97, 1, 1)
 light_energy = 0.65
 omni_range = 9.0
 
 [node name="entrance_path_01" parent="safe_lights" unique_id=1221204685 instance=ExtResource("world_light")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.438907, 4, -10.244373)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.438908, 4, -10.244373)
 light_energy = 0.23
 omni_range = 10.5
 
 [node name="entrance_path_02" parent="safe_lights" unique_id=1255274091 instance=ExtResource("world_light")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.438907, 4, -12.244373)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.438908, 4, -12.244373)
 light_energy = 0.23
 omni_range = 10.5
 
 [node name="entrance_path_03" parent="safe_lights" unique_id=787146736 instance=ExtResource("world_light")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.938907, 4, -9.744373)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.938908, 4, -9.744373)
 light_energy = 0.23
 omni_range = 10.5
 
 [node name="entrance_path_05" parent="safe_lights" unique_id=1113365650 instance=ExtResource("world_light")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.938907, 4, -16.244373)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.938908, 4, -16.244373)
 light_energy = 0.23
 omni_range = 10.5
 
 [node name="entrance_path_06" parent="safe_lights" unique_id=1412951896 instance=ExtResource("world_light")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.438907, 4, -17.744373)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.438908, 4, -17.744373)
 light_energy = 0.23
 omni_range = 10.5
 
@@ -394,109 +392,108 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.517344, 0, -41.45871)
 gizmo_extents = 2.0
 
 [node name="04_musket_refuge_last_safe_light" type="Marker3D" parent="important_points" unique_id=1861308489]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.089981, 0, -66.594863)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.08998, 0, -66.594864)
 gizmo_extents = 2.0
 
 [node name="05_first_encounter" type="Marker3D" parent="important_points" unique_id=1483842638]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.181801, 0, -98.828745)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.181801, 0, -98.82874)
 gizmo_extents = 2.0
 
 [node name="06_pair_encounter" type="Marker3D" parent="important_points" unique_id=657857081]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.326398, 0, -131.728225)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.326397, 0, -131.72823)
 gizmo_extents = 2.0
 
 [node name="07_unlit_preparation" type="Marker3D" parent="important_points" unique_id=1631270988]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.398703, 0, -147.673499)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.398703, 0, -147.6735)
 gizmo_extents = 2.0
 
 [node name="08_final_four_monsters" type="Marker3D" parent="important_points" unique_id=1058301641]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.446997, 0, -166.757714)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.446997, 0, -166.75772)
 gizmo_extents = 2.0
 
 [node name="09_daylight_exit_future_win_trigger" type="Marker3D" parent="important_points" unique_id=785034434]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.446997, 0, -191.207714)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.446997, 0, -191.20772)
 gizmo_extents = 2.0
 
 [node name="enemy_first" parent="." unique_id=962468463 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.181801, 0, -99.828745)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.181801, 0, -99.82874)
 target = NodePath("../player")
-growl_stream = SubResource("AudioStreamRandomizer_sqtar")
-bite_stream = SubResource("AudioStreamRandomizer_67d6o")
-death_stream = SubResource("AudioStreamRandomizer_5vu4g")
+growl_stream = SubResource("AudioStreamRandomizer_5vu4g")
+bite_stream = SubResource("AudioStreamRandomizer_s6y8e")
+death_stream = SubResource("AudioStreamRandomizer_s1tv7")
 head_variant = 0
 body_variant = 1
 eye_variant = 0
 
 [node name="enemy_pair_left" parent="." unique_id=383591185 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.326398, 0, -129.728225)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.326397, 0, -129.72823)
 target = NodePath("../player")
-growl_stream = SubResource("AudioStreamRandomizer_s6y8e")
-bite_stream = SubResource("AudioStreamRandomizer_s1tv7")
-death_stream = SubResource("AudioStreamRandomizer_37dvx")
+growl_stream = SubResource("AudioStreamRandomizer_37dvx")
+bite_stream = SubResource("AudioStreamRandomizer_p5dy6")
+death_stream = SubResource("AudioStreamRandomizer_o7tkd")
 head_variant = 1
 body_variant = 2
 eye_variant = 1
 
 [node name="enemy_pair_right" parent="." unique_id=1735724915 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.326398, 0, -135.728225)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.326399, 0, -135.72823)
 target = NodePath("../player")
-growl_stream = SubResource("AudioStreamRandomizer_p5dy6")
-bite_stream = SubResource("AudioStreamRandomizer_o7tkd")
-death_stream = SubResource("AudioStreamRandomizer_81iov")
+growl_stream = SubResource("AudioStreamRandomizer_81iov")
+bite_stream = SubResource("AudioStreamRandomizer_slt2r")
+death_stream = SubResource("AudioStreamRandomizer_yjd84")
 head_variant = 2
 body_variant = 0
 eye_variant = 2
 
 [node name="enemy_final_left" parent="." unique_id=1404865262 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.446997, 0, -164.757714)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.446997, 0, -164.75772)
 target = NodePath("../player")
-growl_stream = SubResource("AudioStreamRandomizer_slt2r")
-bite_stream = SubResource("AudioStreamRandomizer_yjd84")
-death_stream = SubResource("AudioStreamRandomizer_wexui")
+growl_stream = SubResource("AudioStreamRandomizer_wexui")
+bite_stream = SubResource("AudioStreamRandomizer_ww381")
+death_stream = SubResource("AudioStreamRandomizer_7qo25")
 head_variant = 0
 body_variant = 1
 eye_variant = 3
 
 [node name="enemy_final_right" parent="." unique_id=394417150 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.446997, 0, -165.757714)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.446997, 0, -165.75772)
 target = NodePath("../player")
-growl_stream = SubResource("AudioStreamRandomizer_ww381")
-bite_stream = SubResource("AudioStreamRandomizer_7qo25")
-death_stream = SubResource("AudioStreamRandomizer_rynmh")
+growl_stream = SubResource("AudioStreamRandomizer_rynmh")
+bite_stream = SubResource("AudioStreamRandomizer_fykia")
+death_stream = SubResource("AudioStreamRandomizer_7yuvj")
 head_variant = 1
 body_variant = 2
 eye_variant = 4
 
 [node name="enemy_final_back_left" parent="." unique_id=831625643 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.446997, 0, -174.757714)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.446997, 0, -174.75772)
 target = NodePath("../player")
-growl_stream = SubResource("AudioStreamRandomizer_fykia")
-bite_stream = SubResource("AudioStreamRandomizer_7yuvj")
-death_stream = SubResource("AudioStreamRandomizer_h2nsf")
+growl_stream = SubResource("AudioStreamRandomizer_h2nsf")
+bite_stream = SubResource("AudioStreamRandomizer_urfw8")
+death_stream = SubResource("AudioStreamRandomizer_mgl3x")
 head_variant = 2
 body_variant = 0
 eye_variant = 0
 
 [node name="enemy_final_back_right" parent="." unique_id=1827744505 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.446997, 0, -172.757714)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.446997, 0, -172.75772)
 target = NodePath("../player")
-growl_stream = SubResource("AudioStreamRandomizer_urfw8")
-bite_stream = SubResource("AudioStreamRandomizer_mgl3x")
-death_stream = SubResource("AudioStreamRandomizer_npgxv")
+growl_stream = SubResource("AudioStreamRandomizer_npgxv")
+bite_stream = SubResource("AudioStreamRandomizer_w6xft")
+death_stream = SubResource("AudioStreamRandomizer_lx1vx")
 head_variant = 0
 body_variant = 1
 eye_variant = 1
 
-[node name="exit" type="Area3D" parent="."]
-position = Vector3(-9.446997, 1, -191.207714)
+[node name="exit" type="Area3D" parent="." unique_id=386718596]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.446997, 1, -191.20772)
 collision_layer = 0
-collision_mask = 1
 monitorable = false
 
-[node name="shape" type="CollisionShape3D" parent="exit"]
+[node name="shape" type="CollisionShape3D" parent="exit" unique_id=1916318658]
 shape = SubResource("exit_shape")
 
-[node name="victory" parent="." instance=ExtResource("victory_screen")]
+[node name="victory" parent="." unique_id=482090997 instance=ExtResource("victory_screen")]
 
 [node name="hud" type="CanvasLayer" parent="." unique_id=997754346]
 
@@ -507,7 +504,7 @@ lantern = NodePath("../../lantern")
 musket = NodePath("../../musket")
 lantern = NodePath("../../lantern")
 
-[node name="gameplay_prompts" parent="hud" node_paths=PackedStringArray("player", "lantern", "musket") instance=ExtResource("gameplay_prompts")]
+[node name="gameplay_prompts" parent="hud" unique_id=1478039485 node_paths=PackedStringArray("player", "lantern", "musket") instance=ExtResource("gameplay_prompts")]
 player = NodePath("../../player")
 lantern = NodePath("../../lantern")
 musket = NodePath("../../musket")
@@ -553,6 +550,8 @@ color = Color(0, 0, 0, 1)
 [connection signal="bite_finished" from="enemy_final_back_right" to="camera_controller" method="_on_bite_finished"]
 [connection signal="bite_landed" from="enemy_final_back_right" to="camera_controller" method="_on_bite_landed"]
 [connection signal="bite_started" from="enemy_final_back_right" to="camera_controller" method="_on_bite_started"]
+[connection signal="body_entered" from="exit" to="." method="_on_exit_body_entered"]
+[connection signal="menu_requested" from="victory" to="." method="_on_menu_requested"]
 [connection signal="charge_requested" from="hud/lantern" to="player" method="_on_lantern_pressed"]
 [connection signal="ball_requested" from="hud/musket" to="player" method="_on_barrel_pressed"]
 [connection signal="ramrod_requested" from="hud/musket" to="player" method="_on_ramrod_gui_input"]
@@ -560,7 +559,3 @@ color = Color(0, 0, 0, 1)
 [connection signal="retry_requested" from="death_ui" to="." method="_on_retry_requested"]
 
 [editable path="player"]
-
-[connection signal="body_entered" from="exit" to="." method="_on_exit_body_entered"]
-
-[connection signal="menu_requested" from="victory" to="." method="_on_menu_requested"]

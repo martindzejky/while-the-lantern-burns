@@ -27,10 +27,36 @@ func regenerate_edges() -> void:
     return
   # retry more gently around narrow passages; gameplay always uses the original outline.
   for attempt: int in range(4):
-    var outline := _rough_outline(edge_roughness * pow(0.5, attempt))
+    var outline := _repair_outline(_rough_outline(edge_roughness * pow(0.5, attempt)))
     if _is_simple_polygon(outline) and _covers_base_polygon(outline):
       polygon = outline
       return
+
+
+func _repair_outline(outline: PackedVector2Array) -> PackedVector2Array:
+  # union keeps the authored floor while resolving chips that cross at sharp corners.
+  var pieces: Array[PackedVector2Array] = Geometry2D.merge_polygons(_base_polygon, outline)
+  var result: PackedVector2Array = _base_polygon
+  var largest_area: float = 0.0
+  for piece: PackedVector2Array in pieces:
+    var area: float = absf(_signed_area(piece))
+    if area > largest_area:
+      largest_area = area
+      result = piece
+  var cleaned := PackedVector2Array()
+  var seen: Dictionary[Vector2, int] = {}
+  for point: Vector2 in result:
+    if seen.has(point):
+      var keep: int = seen[point] + 1
+      while cleaned.size() > keep:
+        seen.erase(cleaned[cleaned.size() - 1])
+        cleaned.resize(cleaned.size() - 1)
+    elif cleaned.is_empty() or cleaned[cleaned.size() - 1].distance_squared_to(point) > 0.000004:
+      seen[point] = cleaned.size()
+      cleaned.append(point)
+  if cleaned.size() > 2 and cleaned[0].distance_squared_to(cleaned[cleaned.size() - 1]) <= 0.000004:
+    cleaned.resize(cleaned.size() - 1)
+  return cleaned
 
 
 func _rough_outline(amplitude: float) -> PackedVector2Array:
