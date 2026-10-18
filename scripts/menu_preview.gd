@@ -9,6 +9,8 @@ signal start_requested
 @export var buttons: VBoxContainer
 @export var settings: AudioSettings
 @export var settings_button: Button
+@export var controls: ControlsScreen
+@export var controls_button: Button
 
 
 func _ready() -> void:
@@ -41,3 +43,15 @@ func _on_settings_closed() -> void:
 
 func _on_quit_pressed() -> void:
   get_tree().quit()
+
+
+func _on_controls_pressed() -> void:
+  buttons.hide()
+  title.hide()
+  controls.open()
+
+
+func _on_controls_closed() -> void:
+  title.show()
+  buttons.show()
+  controls_button.grab_focus()

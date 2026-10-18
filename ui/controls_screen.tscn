@@ -1,0 +1,45 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/controls_screen.gd" id="script"]
+[ext_resource type="PackedScene" path="res://ui/ui_audio.tscn" id="audio"]
+
+[node name="controls_screen" type="VBoxContainer" node_paths=PackedStringArray("back_button", "audio")]
+custom_minimum_size = Vector2(440, 0)
+theme_override_constants/separation = 12
+script = ExtResource("script")
+back_button = NodePath("back")
+audio = NodePath("audio")
+
+[node name="audio" parent="." instance=ExtResource("audio")]
+
+[node name="heading" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "CONTROLS"
+
+[node name="instructions" type="Label" parent="."]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+theme_override_constants/line_spacing = 6
+text = "WASD / Arrow keys: Move
+E / Enter: Pick up or put down
+R / Shift / Space: Light the fuse
+Left click: Use item or fire
+Left click + drag: Move the ramrod
+Hold right mouse: Aim
+Escape: Pause"
+autowrap_mode = 2
+
+[node name="back" type="Button" parent="."]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "BACK"
+alignment = 0
+
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="back" to="audio" method="play_click"]
+[connection signal="mouse_entered" from="back" to="audio" method="play_hover"]
+[connection signal="focus_entered" from="back" to="audio" method="play_hover"]

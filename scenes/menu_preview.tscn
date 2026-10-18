@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" path="res://ui/audio_settings.tscn" id="settings"]
 [ext_resource type="PackedScene" path="res://ui/ui_audio.tscn" id="ui_audio"]
 
+[ext_resource type="PackedScene" path="res://ui/controls_screen.tscn" id="controls"]
+
 [ext_resource type="Theme" path="res://resources/menu/theme.tres" id="theme"]
 [ext_resource type="PackedScene" path="res://ambience/controller.tscn" id="ambience"]
 
@@ -27,7 +29,7 @@ ambient_light_color = Color(0.09, 0.18, 0.13, 1)
 ambient_light_energy = 0.11
 reflected_light_source = 2
 
-[node name="menu_preview" type="Node3D" unique_id=462274930 node_paths=PackedStringArray("start_button", "quit_button", "title", "buttons", "settings", "settings_button")]
+[node name="menu_preview" type="Node3D" unique_id=462274930 node_paths=PackedStringArray("start_button", "quit_button", "title", "buttons", "settings", "settings_button", "controls", "controls_button")]
 script = ExtResource("script")
 start_button = NodePath("ui/layout/column/buttons/start")
 quit_button = NodePath("ui/layout/column/buttons/quit")
@@ -35,6 +37,8 @@ title = NodePath("ui/layout/column/title")
 buttons = NodePath("ui/layout/column/buttons")
 settings = NodePath("ui/layout/column/settings")
 settings_button = NodePath("ui/layout/column/buttons/settings")
+controls = NodePath("ui/layout/column/controls")
+controls_button = NodePath("ui/layout/column/buttons/controls")
 
 [node name="ambience" parent="." node_paths=PackedStringArray("target") instance=ExtResource("ambience")]
 target = NodePath("../scenery/lantern")
@@ -130,6 +134,13 @@ mouse_default_cursor_shape = 2
 text = "START"
 alignment = 0
 
+[node name="controls" type="Button" parent="ui/layout/column/buttons"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "CONTROLS"
+alignment = 0
+
 [node name="settings" type="Button" parent="ui/layout/column/buttons"]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
@@ -145,6 +156,10 @@ text = "QUIT"
 alignment = 0
 
 [node name="settings" parent="ui/layout/column" instance=ExtResource("settings")]
+visible = false
+layout_mode = 2
+
+[node name="controls" parent="ui/layout/column" instance=ExtResource("controls")]
 visible = false
 layout_mode = 2
 
@@ -173,3 +188,9 @@ layout_mode = 2
 [connection signal="focus_entered" from="ui/layout/column/buttons/quit" to="ui_audio" method="play_hover"]
 
 [connection signal="pressed" from="ui/layout/column/buttons/quit" to="ui_audio" method="play_click"]
+
+[connection signal="closed" from="ui/layout/column/controls" to="." method="_on_controls_closed"]
+[connection signal="pressed" from="ui/layout/column/buttons/controls" to="." method="_on_controls_pressed"]
+[connection signal="mouse_entered" from="ui/layout/column/buttons/controls" to="ui_audio" method="play_hover"]
+[connection signal="focus_entered" from="ui/layout/column/buttons/controls" to="ui_audio" method="play_hover"]
+[connection signal="pressed" from="ui/layout/column/buttons/controls" to="ui_audio" method="play_click"]
