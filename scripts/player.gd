@@ -147,14 +147,30 @@ func die() -> void:
   _set_dragging_ramrod(false)
   _shot_requested = false
   _fuse_shot_requested = false
-  _update_equipment()
+  musket.set_aiming(false)
   rig.show_death()
+  _drop_equipment()
   aim_line.hide()
   set_process(false)
   set_physics_process(false)
   set_process_input(false)
   set_process_unhandled_input(false)
   died.emit()
+
+
+func _drop_equipment() -> void:
+  if lantern.is_carried:
+    _drop_lantern()
+  if musket.is_owned:
+    musket.reparent(_item_parent)
+    musket.global_transform = Transform3D(Basis.IDENTITY, global_position - drop_slot.position)
+    musket.drop()
+
+
+func _drop_lantern() -> void:
+  lantern.reparent(_item_parent)
+  lantern.global_transform = Transform3D(Basis.IDENTITY, drop_slot.global_position)
+  lantern.set_carried(false)
 
 
 func _on_barrel_pressed() -> void:
@@ -195,9 +211,7 @@ func _interact() -> void:
     _attach(musket, rig.get_back_slot())
     musket.equip()
   elif lantern.is_carried:
-    lantern.reparent(_item_parent)
-    lantern.global_transform = Transform3D(Basis.IDENTITY, drop_slot.global_position)
-    lantern.set_carried(false)
+    _drop_lantern()
   elif not musket.is_lit and _within_reach(lantern):
     lantern.set_carried(true)
     _attach(lantern, rig.get_right_hand_slot())

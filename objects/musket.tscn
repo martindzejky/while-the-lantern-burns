@@ -6,7 +6,6 @@
 [ext_resource type="Shader" uid="uid://6hhe3yks1iro" path="res://shaders/sprite_lighting.gdshader" id="4"]
 [ext_resource type="PackedScene" uid="uid://fe24h0njihi4" path="res://effects/muzzle_flash.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://pbep40okecmw" path="res://effects/musket_smoke.tscn" id="6"]
-
 [ext_resource type="PackedScene" path="res://objects/drop_shadow.tscn" id="shadow"]
 
 [sub_resource type="ShaderMaterial" id="material"]
@@ -45,6 +44,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
 script = ExtResource("2")
 
 [node name="sprite" type="Sprite3D" parent="visuals" unique_id=1559881363]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 material_override = SubResource("material")
 cast_shadow = 0
 offset = Vector2(478, -68)
@@ -69,14 +69,16 @@ initial_velocity_min = 0.2
 initial_velocity_max = 0.6
 color_ramp = SubResource("spark_fade")
 
-[node name="shadow" parent="." node_paths=PackedStringArray("anchor") instance=ExtResource("shadow")]
+[node name="rear_grip" type="Marker3D" parent="visuals/sprite" unique_id=387435652]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.6692753, -0.14233214, 0)
+
+[node name="front_grip" type="Marker3D" parent="visuals/sprite" unique_id=1533420710]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 1.3192751, -0.092332155, 0)
+
+[node name="shadow" parent="." unique_id=507534789 node_paths=PackedStringArray("anchor") instance=ExtResource("shadow")]
+transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
+pixel_size = 0.0033
 anchor = NodePath("..")
-pixel_size = 0.0055
 
 [connection signal="equipped" from="." to="shadow" method="hide"]
-
-[node name="rear_grip" type="Marker3D" parent="visuals/sprite"]
-position = Vector3(0.5, -0.05, 0)
-
-[node name="front_grip" type="Marker3D" parent="visuals/sprite"]
-position = Vector3(1.15, 0, 0)
+[connection signal="unequipped" from="." to="shadow" method="show"]

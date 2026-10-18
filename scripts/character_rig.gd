@@ -5,6 +5,7 @@ enum EquipmentPose { IDLE, LANTERN, MUSKET_READY, MUSKET_AIM }
 
 @export var animation: AnimationPlayer
 @export var animation_tree: AnimationTree
+@export var skeleton: Skeleton3D
 @export var left_hand_slot: Marker3D
 @export var right_hand_slot: Marker3D
 @export var back_slot: Marker3D
@@ -69,4 +70,29 @@ func show_death() -> void:
   if _dead:
     return
   _dead = true
+  var death := animation.get_animation('death').duplicate() as Animation
+  for track in death.get_track_count():
+    var path := death.track_get_path(track)
+    var type := death.track_get_type(track)
+    var current: Variant
+    if path.get_subname_count() > 0 and type != Animation.TYPE_VALUE:
+      var bone := skeleton.find_bone(path.get_subname(0))
+      match type:
+        Animation.TYPE_POSITION_3D:
+          current = skeleton.get_bone_pose_position(bone)
+        Animation.TYPE_ROTATION_3D:
+          current = skeleton.get_bone_pose_rotation(bone)
+        Animation.TYPE_SCALE_3D:
+          current = skeleton.get_bone_pose_scale(bone)
+      death.track_insert_key(track, death.length, death.track_get_key_value(track, 0))
+    else:
+      match type:
+        Animation.TYPE_POSITION_3D:
+          current = position
+        Animation.TYPE_ROTATION_3D:
+          current = quaternion
+        Animation.TYPE_VALUE:
+          current = musket_angle
+    death.track_set_key_value(track, 0, current)
+  animation.get_animation_library('').add_animation('death', death)
   animation_tree.set('parameters/life/transition_request', 'dead')

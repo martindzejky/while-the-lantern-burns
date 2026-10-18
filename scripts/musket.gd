@@ -2,6 +2,7 @@ class_name Musket
 extends Node3D
 
 signal equipped
+signal unequipped
 signal aiming_changed(aiming: bool)
 signal fired(hit: Dictionary)
 signal reload_changed
@@ -28,9 +29,11 @@ var reload_state: ReloadState = ReloadState.EMPTY
 var ramrod_insertion: float = 0.0
 var is_lit: bool = false
 var _fuse_timer: Timer = Timer.new()
+var _ground_visuals_transform: Transform3D
 
 
 func _ready() -> void:
+  _ground_visuals_transform = visuals.transform
   _fuse_timer.one_shot = true
   _fuse_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
   _fuse_timer.timeout.connect(_on_fuse_timer_timeout)
@@ -100,6 +103,15 @@ func equip() -> void:
   visuals.transform = Transform3D.IDENTITY
   sprite.rotation.z = 1.0
   equipped.emit()
+
+
+func drop() -> void:
+  is_owned = false
+  set_aiming(false)
+  sprite.rotation.z = 0.0
+  visuals.transform = _ground_visuals_transform
+  visuals.set_process(true)
+  unequipped.emit()
 
 
 func set_aiming(aiming: bool) -> void:

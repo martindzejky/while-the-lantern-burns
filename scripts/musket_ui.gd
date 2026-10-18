@@ -38,6 +38,7 @@ func _ready() -> void:
   hover_offset.position.y = tucked_distance
   _last_state = musket.reload_state
   musket.equipped.connect(_refresh)
+  musket.unequipped.connect(_refresh)
   musket.aiming_changed.connect(_refresh)
   lantern.carried_changed.connect(_refresh)
   musket.lit_changed.connect(_refresh)

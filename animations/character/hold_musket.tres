@@ -36,7 +36,7 @@ tracks/4/enabled = true
 tracks/4/path = NodePath("skeleton:arm_left")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0.554599, 0.83211774)
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0.52268726, 0.8525245)
 tracks/5/type = "rotation_3d"
 tracks/5/imported = false
 tracks/5/enabled = true
@@ -50,7 +50,7 @@ tracks/6/enabled = true
 tracks/6/path = NodePath("skeleton:arm_right")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
-tracks/6/keys = PackedFloat32Array(0, 1, 0, 0, 0.8443477, 0.5357956)
+tracks/6/keys = PackedFloat32Array(0, 1, 0, 0, 0.5438348, 0.83919233)
 tracks/7/type = "rotation_3d"
 tracks/7/imported = false
 tracks/7/enabled = true
@@ -71,14 +71,14 @@ tracks/9/enabled = true
 tracks/9/path = NodePath("skeleton:hand_left")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
-tracks/9/keys = PackedFloat32Array(0, 1, 0, 0, -0.554599, 0.83211774)
+tracks/9/keys = PackedFloat32Array(0, 1, 0, 0, -0.52268726, 0.8525245)
 tracks/10/type = "rotation_3d"
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/path = NodePath("skeleton:hand_right")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
-tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, -0.8443477, 0.5357956)
+tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, -0.5438348, 0.83919233)
 tracks/11/type = "rotation_3d"
 tracks/11/imported = false
 tracks/11/enabled = true
@@ -106,7 +106,7 @@ tracks/14/enabled = true
 tracks/14/path = NodePath("skeleton:arm_right")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
-tracks/14/keys = PackedFloat32Array(0, 1, 0.161, -0.13, 0)
+tracks/14/keys = PackedFloat32Array(0, 1, 0.03919646, -0.104216166, 0)
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
@@ -117,5 +117,5 @@ tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.0]
+"values": [0.6]
 }
