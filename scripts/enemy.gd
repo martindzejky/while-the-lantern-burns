@@ -4,12 +4,19 @@ extends CharacterBody3D
 @export var target: Player
 @export var appearance: Node3D
 @export var head: Node3D
+@export var head_lift: Node3D
 @export var head_sprite: Sprite3D
 @export var body: Sprite3D
 @export var eyes: Sprite3D
 @export var mouth: Node3D
 @export var upper_teeth: Sprite3D
 @export var lower_teeth: Sprite3D
+@export var vocal_audio: AudioStreamPlayer3D
+@export var growl_stream: AudioStream
+@export var bite_stream: AudioStream
+@export var death_stream: AudioStream
+@export var growl_min_time: float = 8.0
+@export var growl_max_time: float = 18.0
 @export var footstep_audio: AudioStreamPlayer3D
 @export var animation: AnimationPlayer
 @export var head_textures: Array[Texture2D]
@@ -25,6 +32,8 @@ extends CharacterBody3D
 @export var head_bob_height: float = 0.025
 @export_range(1.0, 10.0, 0.5) var head_bob_period: float = 3.0
 
+var _dead: bool = false
+var _growl_timer: RandomTimer
 var _biting: bool = false
 var _head_base_y: float
 var _head_bob_phase: float
@@ -37,6 +46,13 @@ func _ready() -> void:
   _head_bob_phase = randf() * TAU
   if preview:
     set_physics_process(false)
+  else:
+    _growl_timer = RandomTimer.new()
+    _growl_timer.min_time = growl_min_time
+    _growl_timer.max_time = growl_max_time
+    add_child(_growl_timer)
+    _growl_timer.timeout.connect(_on_growl_timer_timeout)
+    _growl_timer.start()
 
 
 func _process(delta: float) -> void:
@@ -92,11 +108,26 @@ func _physics_process(_delta: float) -> void:
 
 
 func take_shot() -> void:
+  if _dead:
+    return
+  _dead = true
+  _biting = false
+  velocity = Vector3.ZERO
   set_physics_process(false)
+  set_process(false)
+  if _growl_timer:
+    _growl_timer.stop()
   animation.stop()
-  collision_layer = 0
-  hide()
-  queue_free()
+  footstep_audio.stop()
+  eyes.hide()
+  mouth.hide()
+  head_lift.position = Vector3.ZERO
+  vocal_audio.stream = death_stream
+  vocal_audio.bus = &'World SFX Heavy Reverb'
+  vocal_audio.volume_db += 3.0
+  vocal_audio.play()
+  var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+  tween.tween_property(head, 'position:y', _head_base_y - 0.12, 0.25)
 
 
 func _within_bite_range() -> bool:
@@ -104,18 +135,29 @@ func _within_bite_range() -> bool:
 
 
 func bite() -> void:
-  if _biting or is_queued_for_deletion():
+  if _dead or _biting or is_queued_for_deletion() or (not preview and target.is_dead):
     return
   _biting = true
+  vocal_audio.stream = growl_stream
+  vocal_audio.play()
   animation.play('bite')
 
 
 func _bite() -> void:
-  if is_queued_for_deletion():
+  if _dead or is_queued_for_deletion():
     return
+  vocal_audio.stream = bite_stream
+  vocal_audio.play()
   if not preview and not target.is_dead and _within_bite_range():
     target.take_bite()
 
 
 func _on_animation_finished(_animation_name: StringName) -> void:
   _biting = false
+
+
+func _on_growl_timer_timeout() -> void:
+  if _dead or _biting or target.is_dead or vocal_audio.playing:
+    return
+  vocal_audio.stream = growl_stream
+  vocal_audio.play()

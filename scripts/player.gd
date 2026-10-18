@@ -12,6 +12,7 @@ signal ramrod_drag_changed(dragging: bool)
 @export var drop_slot: Marker3D
 @export var aim_line: Sprite3D
 @export var light_sensor: LightSensor
+@export var body_audio: AudioStreamPlayer3D
 @export var footstep_audio: AudioStreamPlayer3D
 @export var audio_listener: AudioListener3D
 @export var aim_height: float = 0.7
@@ -175,6 +176,7 @@ func die() -> void:
   _fuse_shot_requested = false
   musket.set_aiming(false)
   rig.show_death()
+  body_audio.play()
   _drop_equipment()
   aim_line.hide()
   set_process(false)

@@ -9,6 +9,8 @@
 
 [ext_resource type="AudioStream" path="res://audio/player/footsteps.tres" id="footsteps"]
 
+[ext_resource type="AudioStream" path="res://audio/player/body.tres" id="body_audio"]
+
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.475
 height = 1.2
@@ -21,7 +23,7 @@ gradient = SubResource("aim_color")
 width = 1
 height = 1
 
-[node name="player" type="CharacterBody3D" unique_id=1376385991 node_paths=PackedStringArray("rig", "drop_slot", "aim_line", "light_sensor", "audio_listener", "footstep_audio")]
+[node name="player" type="CharacterBody3D" unique_id=1376385991 node_paths=PackedStringArray("rig", "drop_slot", "aim_line", "light_sensor", "audio_listener", "footstep_audio", "body_audio")]
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1")
@@ -31,6 +33,7 @@ aim_line = NodePath("aim_line")
 light_sensor = NodePath("light_sensor")
 audio_listener = NodePath("audio_listener")
 footstep_audio = NodePath("footstep_audio")
+body_audio = NodePath("body_audio")
 
 [node name="audio_listener" type="AudioListener3D" parent="."]
 position = Vector3(0, 0.7, 0)
@@ -62,6 +65,13 @@ pixel_size = 0.008
 [node name="footstep_audio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("footsteps")
 volume_db = -12.0
+max_polyphony = 1
+max_distance = 30.0
+bus = &"World SFX"
+
+[node name="body_audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("body_audio")
+volume_db = -10.0
 max_polyphony = 1
 max_distance = 30.0
 bus = &"World SFX"

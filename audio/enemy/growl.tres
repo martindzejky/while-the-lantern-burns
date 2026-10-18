@@ -1,0 +1,21 @@
+[gd_resource type="AudioStreamRandomizer" format=3]
+
+[ext_resource type="AudioStream" path="res://audio/enemy/growl_01.wav" id="1"]
+[ext_resource type="AudioStream" path="res://audio/enemy/growl_02.wav" id="2"]
+[ext_resource type="AudioStream" path="res://audio/enemy/growl_03.wav" id="3"]
+[ext_resource type="AudioStream" path="res://audio/enemy/growl_04.wav" id="4"]
+[ext_resource type="AudioStream" path="res://audio/enemy/growl_05.wav" id="5"]
+[ext_resource type="AudioStream" path="res://audio/enemy/growl_06.wav" id="6"]
+
+[resource]
+resource_local_to_scene = true
+playback_mode = 0
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("1")
+stream_1/stream = ExtResource("2")
+stream_2/stream = ExtResource("3")
+stream_3/stream = ExtResource("4")
+stream_4/stream = ExtResource("5")
+stream_5/stream = ExtResource("6")
