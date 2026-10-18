@@ -1,6 +1,6 @@
-[gd_resource type="Theme" format=3]
+[gd_resource type="Theme" format=3 uid="uid://drxw11x7lxcwj"]
 
-[ext_resource type="FontFile" path="res://resources/menu/barlow_regular.ttf" id="font"]
+[ext_resource type="FontFile" uid="uid://btyhd1mo7xa10" path="res://resources/menu/barlow_regular.ttf" id="font"]
 
 [sub_resource type="StyleBoxEmpty" id="empty"]
 content_margin_top = 6.0
