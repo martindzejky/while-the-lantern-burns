@@ -1,0 +1,45 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/game_flow.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/menu_preview.tscn" id="menu"]
+[ext_resource type="PackedScene" path="res://scenes/gameplay.tscn" id="game"]
+[ext_resource type="AudioStream" path="res://audio/ui/transition.tres" id="transition"]
+
+[ext_resource type="PackedScene" path="res://ui/pause_menu.tscn" id="pause_menu"]
+
+[node name="game_flow" type="Node" node_paths=PackedStringArray("screen_host", "fade", "transition_audio", "pause_menu")]
+process_mode = 3
+script = ExtResource("script")
+menu_scene = ExtResource("menu")
+game_scene = ExtResource("game")
+screen_host = NodePath("screens")
+fade = NodePath("transition/fade")
+transition_audio = NodePath("transition_audio")
+pause_menu = NodePath("pause/menu")
+
+[node name="screens" type="Node" parent="."]
+process_mode = 1
+
+[node name="transition_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("transition")
+volume_db = 12.0412
+bus = &"UI SFX"
+
+[node name="transition" type="CanvasLayer" parent="."]
+layer = 110
+
+[node name="fade" type="ColorRect" parent="transition"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="pause" type="CanvasLayer" parent="."]
+layer = 105
+
+[node name="menu" parent="pause" instance=ExtResource("pause_menu")]
+
+[connection signal="continue_requested" from="pause/menu" to="." method="_on_continue_requested"]
+[connection signal="menu_requested" from="pause/menu" to="." method="_on_menu_requested"]

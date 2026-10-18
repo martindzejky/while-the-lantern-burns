@@ -1,0 +1,103 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://w6mjmcbcb6d" path="res://objects/player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://d330qifnxgchu" path="res://objects/lantern.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://by2n7sl0bbq3j" path="res://objects/musket.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://by6jxo44b17at" path="res://ui/lantern_ui.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://odlmbst42wxg" path="res://ui/musket_ui.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://cjip80cip1fu2" path="res://ambience/controller.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://ui/death_feedback.tscn" id="death_ui"]
+
+[ext_resource type="PackedScene" path="res://objects/ground.tscn" id="ground"]
+
+[ext_resource type="PackedScene" path="res://ui/world_post_processing.tscn" id="world_post_processing"]
+
+[ext_resource type="Script" path="res://scripts/game_session.gd" id="session"]
+[ext_resource type="PackedScene" path="res://objects/world_light.tscn" id="world_light"]
+[ext_resource type="PackedScene" path="res://objects/camera_controller.tscn" id="camera_controller"]
+
+[sub_resource type="Environment" id="environment"]
+background_mode = 1
+background_color = Color(0.002, 0.006, 0.004, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.08, 0.16, 0.11, 1)
+ambient_light_energy = 0.05
+reflected_light_source = 2
+
+[node name="gameplay" type="Node3D" node_paths=PackedStringArray("player", "musket", "hud", "loading")]
+script = ExtResource("session")
+player = NodePath("player")
+musket = NodePath("musket")
+hud = NodePath("hud")
+loading = NodePath("loading")
+
+[node name="ambience" parent="." unique_id=1254964729 node_paths=PackedStringArray("target") instance=ExtResource("12")]
+target = NodePath("../player")
+
+[node name="world_post_processing" parent="." instance=ExtResource("world_post_processing")]
+
+[node name="environment" type="WorldEnvironment" parent="." unique_id=1644920340]
+environment = SubResource("environment")
+
+[node name="ground" parent="." unique_id=205520019 instance=ExtResource("ground")]
+polygon = PackedVector2Array(-6, -5, -5, -7, 4, -7, 6, -4, 6, 5, 3, 7, -4, 6, -6, 3)
+
+[node name="player" parent="." unique_id=1253224889 node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+musket = NodePath("../musket")
+lantern = NodePath("../lantern")
+
+[node name="audio_listener" parent="player" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="shadow" parent="player" index="6" node_paths=PackedStringArray("light_source")]
+transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
+light_source = NodePath("../../lantern")
+
+[node name="camera_controller" parent="." node_paths=PackedStringArray("target") instance=ExtResource("camera_controller")]
+target = NodePath("../player")
+
+[node name="lantern" parent="." unique_id=1329808312 instance=ExtResource("3")]
+position = Vector3(1000, 0, 1000)
+
+[node name="musket" parent="." unique_id=1198564765 instance=ExtResource("5")]
+position = Vector3(1002, 0, 1000)
+
+[node name="ceiling_light" parent="." instance=ExtResource("world_light")]
+position = Vector3(0, 4, 1)
+light_energy = 0.35
+omni_range = 12.0
+
+[node name="hud" type="CanvasLayer" parent="." unique_id=997754346]
+
+[node name="lantern" parent="hud" unique_id=2037850372 node_paths=PackedStringArray("lantern") instance=ExtResource("6")]
+lantern = NodePath("../../lantern")
+
+[node name="musket" parent="hud" unique_id=273416607 node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("7")]
+musket = NodePath("../../musket")
+lantern = NodePath("../../lantern")
+
+[node name="death_ui" parent="." unique_id=415196139 node_paths=PackedStringArray("player") instance=ExtResource("death_ui")]
+player = NodePath("../player")
+
+[node name="loading" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="cover" type="ColorRect" parent="loading"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="died" from="player" to="hud" method="hide"]
+[connection signal="ramrod_drag_changed" from="player" to="hud/musket" method="_on_ramrod_drag_changed"]
+[connection signal="fired" from="musket" to="player" method="_on_musket_fired"]
+[connection signal="fuse_expired" from="musket" to="player" method="_on_musket_fuse_expired"]
+[connection signal="trigger_ready" from="musket" to="player" method="_on_musket_trigger_ready"]
+[connection signal="charge_requested" from="hud/lantern" to="player" method="_on_lantern_pressed"]
+[connection signal="ball_requested" from="hud/musket" to="player" method="_on_barrel_pressed"]
+[connection signal="ramrod_requested" from="hud/musket" to="player" method="_on_ramrod_gui_input"]
+
+[editable path="player"]

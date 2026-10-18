@@ -13,6 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://70km5nkt7itn" path="res://objects/small_rock_04.tscn" id="small_4"]
 [ext_resource type="PackedScene" path="res://objects/world_light.tscn" id="world_light"]
 
+[ext_resource type="PackedScene" path="res://ui/audio_settings.tscn" id="settings"]
+[ext_resource type="PackedScene" path="res://ui/ui_audio.tscn" id="ui_audio"]
+
+[ext_resource type="Theme" path="res://resources/menu/theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://ambience/controller.tscn" id="ambience"]
+
 [sub_resource type="Environment" id="environment"]
 background_mode = 1
 background_color = Color(0.003, 0.016, 0.01, 1)
@@ -21,30 +27,17 @@ ambient_light_color = Color(0.09, 0.18, 0.13, 1)
 ambient_light_energy = 0.11
 reflected_light_source = 2
 
-[sub_resource type="StyleBoxEmpty" id="empty"]
-content_margin_top = 6.0
-content_margin_bottom = 6.0
-
-[sub_resource type="Theme" id="theme"]
-default_font = ExtResource("regular")
-default_font_size = 25
-Button/colors/font_color = Color(0.91, 0.885, 0.81, 1)
-Button/colors/font_focus_color = Color(1, 0.73, 0.4, 1)
-Button/colors/font_hover_color = Color(1, 0.73, 0.4, 1)
-Button/colors/font_pressed_color = Color(1, 0.58, 0.24, 1)
-Button/styles/disabled = SubResource("empty")
-Button/styles/focus = SubResource("empty")
-Button/styles/hover = SubResource("empty")
-Button/styles/normal = SubResource("empty")
-Button/styles/pressed = SubResource("empty")
-Label/colors/font_color = Color(0.94, 0.91, 0.83, 1)
-
-[node name="menu_preview" type="Node3D" unique_id=462274930 node_paths=PackedStringArray("start_button", "quit_button", "title")]
+[node name="menu_preview" type="Node3D" unique_id=462274930 node_paths=PackedStringArray("start_button", "quit_button", "title", "buttons", "settings", "settings_button")]
 script = ExtResource("script")
-game_scene = "res://scenes/main.tscn"
 start_button = NodePath("ui/layout/column/buttons/start")
 quit_button = NodePath("ui/layout/column/buttons/quit")
 title = NodePath("ui/layout/column/title")
+buttons = NodePath("ui/layout/column/buttons")
+settings = NodePath("ui/layout/column/settings")
+settings_button = NodePath("ui/layout/column/buttons/settings")
+
+[node name="ambience" parent="." node_paths=PackedStringArray("target") instance=ExtResource("ambience")]
+target = NodePath("../scenery/lantern")
 
 [node name="environment" type="WorldEnvironment" parent="." unique_id=1922090716]
 environment = SubResource("environment")
@@ -106,7 +99,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = SubResource("theme")
+theme = ExtResource("theme")
 
 [node name="column" type="VBoxContainer" parent="ui/layout" unique_id=1621019664]
 layout_mode = 0
@@ -137,6 +130,13 @@ mouse_default_cursor_shape = 2
 text = "START"
 alignment = 0
 
+[node name="settings" type="Button" parent="ui/layout/column/buttons"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "SETTINGS"
+alignment = 0
+
 [node name="quit" type="Button" parent="ui/layout/column/buttons" unique_id=370688061]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
@@ -144,5 +144,32 @@ mouse_default_cursor_shape = 2
 text = "QUIT"
 alignment = 0
 
+[node name="settings" parent="ui/layout/column" instance=ExtResource("settings")]
+visible = false
+layout_mode = 2
+
+[node name="ui_audio" parent="." instance=ExtResource("ui_audio")]
+
+[connection signal="closed" from="ui/layout/column/settings" to="." method="_on_settings_closed"]
+[connection signal="pressed" from="ui/layout/column/buttons/settings" to="." method="_on_settings_pressed"]
+
 [connection signal="pressed" from="ui/layout/column/buttons/start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="ui/layout/column/buttons/quit" to="." method="_on_quit_pressed"]
+
+[connection signal="mouse_entered" from="ui/layout/column/buttons/start" to="ui_audio" method="play_hover"]
+
+[connection signal="focus_entered" from="ui/layout/column/buttons/start" to="ui_audio" method="play_hover"]
+
+[connection signal="pressed" from="ui/layout/column/buttons/start" to="ui_audio" method="play_click"]
+
+[connection signal="mouse_entered" from="ui/layout/column/buttons/settings" to="ui_audio" method="play_hover"]
+
+[connection signal="focus_entered" from="ui/layout/column/buttons/settings" to="ui_audio" method="play_hover"]
+
+[connection signal="pressed" from="ui/layout/column/buttons/settings" to="ui_audio" method="play_click"]
+
+[connection signal="mouse_entered" from="ui/layout/column/buttons/quit" to="ui_audio" method="play_hover"]
+
+[connection signal="focus_entered" from="ui/layout/column/buttons/quit" to="ui_audio" method="play_hover"]
+
+[connection signal="pressed" from="ui/layout/column/buttons/quit" to="ui_audio" method="play_click"]

@@ -1,0 +1,92 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/audio_settings.gd" id="script"]
+[ext_resource type="PackedScene" path="res://ui/ui_audio.tscn" id="audio"]
+
+[node name="audio_settings" type="VBoxContainer" node_paths=PackedStringArray("sliders", "back_button", "audio")]
+custom_minimum_size = Vector2(330, 0)
+theme_override_constants/separation = 12
+script = ExtResource("script")
+sliders = [NodePath("master"), NodePath("sfx"), NodePath("ambience"), NodePath("music")]
+back_button = NodePath("back")
+audio = NodePath("audio")
+
+[node name="audio" parent="." instance=ExtResource("audio")]
+
+[node name="master_label" type="Label" parent="."]
+layout_mode = 2
+text = "Master"
+
+[node name="master" type="HSlider" parent="."]
+custom_minimum_size = Vector2(300, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="sfx_label" type="Label" parent="."]
+layout_mode = 2
+text = "Sound effects"
+
+[node name="sfx" type="HSlider" parent="."]
+custom_minimum_size = Vector2(300, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="ambience_label" type="Label" parent="."]
+layout_mode = 2
+text = "Ambience"
+
+[node name="ambience" type="HSlider" parent="."]
+custom_minimum_size = Vector2(300, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="music_label" type="Label" parent="."]
+visible = false
+layout_mode = 2
+text = "Music"
+
+[node name="music" type="HSlider" parent="."]
+visible = false
+custom_minimum_size = Vector2(300, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="back" type="Button" parent="."]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "BACK"
+alignment = 0
+
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="back" to="audio" method="play_click"]
+[connection signal="mouse_entered" from="back" to="audio" method="play_hover"]
+[connection signal="focus_entered" from="back" to="audio" method="play_hover"]
+
+[connection signal="value_changed" from="master" to="." method="_on_volume_changed"]
+[connection signal="drag_ended" from="master" to="." method="_on_drag_ended"]
+[connection signal="mouse_entered" from="master" to="audio" method="play_hover"]
+
+[connection signal="value_changed" from="sfx" to="." method="_on_volume_changed"]
+[connection signal="drag_ended" from="sfx" to="." method="_on_drag_ended"]
+[connection signal="mouse_entered" from="sfx" to="audio" method="play_hover"]
+
+[connection signal="value_changed" from="ambience" to="." method="_on_volume_changed"]
+[connection signal="drag_ended" from="ambience" to="." method="_on_drag_ended"]
+[connection signal="mouse_entered" from="ambience" to="audio" method="play_hover"]
+
+[connection signal="value_changed" from="music" to="." method="_on_volume_changed"]
+[connection signal="drag_ended" from="music" to="." method="_on_drag_ended"]
+[connection signal="mouse_entered" from="music" to="audio" method="play_hover"]

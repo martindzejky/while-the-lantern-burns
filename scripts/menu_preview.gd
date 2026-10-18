@@ -1,9 +1,14 @@
+class_name MainMenu
 extends Node3D
 
-@export_file('*.tscn') var game_scene: String
+signal start_requested
+
 @export var start_button: Button
 @export var quit_button: Button
 @export var title: Label
+@export var buttons: VBoxContainer
+@export var settings: AudioSettings
+@export var settings_button: Button
 
 
 func _ready() -> void:
@@ -19,9 +24,19 @@ func _update_type_size() -> void:
 
 
 func _on_start_pressed() -> void:
-  var error := get_tree().change_scene_to_file(game_scene)
-  if error != OK:
-    push_error('Could not open game scene: %s' % error_string(error))
+  start_requested.emit()
+
+
+func _on_settings_pressed() -> void:
+  buttons.hide()
+  title.hide()
+  settings.open()
+
+
+func _on_settings_closed() -> void:
+  title.show()
+  buttons.show()
+  settings_button.grab_focus()
 
 
 func _on_quit_pressed() -> void:

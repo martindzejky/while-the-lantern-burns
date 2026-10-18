@@ -1,6 +1,9 @@
 class_name Enemy
 extends CharacterBody3D
 
+signal bite_started(enemy: Enemy)
+signal bite_finished(enemy: Enemy)
+
 @export var target: Player
 @export var appearance: Node3D
 @export var head: Node3D
@@ -28,6 +31,7 @@ extends CharacterBody3D
 @export var preview: bool = false
 @export_range(0.0, 0.25) var size_variation: float = 0.1
 @export var speed: float = 0.8
+@export var engagement_distance: float = 8.0
 @export var bite_range: float = 1.15
 @export var head_bob_height: float = 0.025
 @export_range(1.0, 10.0, 0.5) var head_bob_period: float = 3.0
@@ -35,14 +39,17 @@ extends CharacterBody3D
 @export var head_collapse_distance: float = 0.45
 
 var _dead: bool = false
+var _engaged: bool = false
 var _growl_timer: RandomTimer
 var _biting: bool = false
 var _head_base_y: float
 var _head_bob_phase: float
 var _head_bob_offset: float = 0.0
+var _bite_impact_time: float
 
 
 func _ready() -> void:
+  _bite_impact_time = _get_bite_impact_time()
   _set_appearance()
   _head_base_y = head.position.y
   _head_bob_phase = randf() * TAU
@@ -54,7 +61,6 @@ func _ready() -> void:
     _growl_timer.max_time = growl_max_time
     add_child(_growl_timer)
     _growl_timer.timeout.connect(_on_growl_timer_timeout)
-    _growl_timer.start()
 
 
 func _process(delta: float) -> void:
@@ -104,6 +110,11 @@ func _physics_process(_delta: float) -> void:
   velocity = Vector3.ZERO
   if target.is_dead or _biting:
     return
+  if not _engaged:
+    if global_position.distance_squared_to(target.global_position) > engagement_distance * engagement_distance:
+      return
+    _engaged = true
+    _growl_timer.start()
   if _within_bite_range():
     bite()
   else:
@@ -115,7 +126,7 @@ func take_shot() -> void:
   if _dead:
     return
   _dead = true
-  _biting = false
+  _finish_bite()
   velocity = Vector3.ZERO
   set_physics_process(false)
   set_process(false)
@@ -142,6 +153,23 @@ func _within_bite_range() -> bool:
   return global_position.distance_squared_to(target.global_position) <= bite_range * bite_range
 
 
+func get_bite_windup_progress() -> float:
+  if not _biting:
+    return 0.0
+  return clampf(animation.current_animation_position / maxf(_bite_impact_time, 0.001), 0.0, 1.0)
+
+
+func _get_bite_impact_time() -> float:
+  var clip: Animation = animation.get_animation(&'bite')
+  for track: int in range(clip.get_track_count()):
+    if clip.track_get_type(track) != Animation.TYPE_METHOD:
+      continue
+    for key: int in range(clip.track_get_key_count(track)):
+      if clip.method_track_get_name(track, key) == &'_bite':
+        return clip.track_get_key_time(track, key)
+  return clip.length
+
+
 func bite() -> void:
   if _dead or _biting or is_queued_for_deletion() or (not preview and target.is_dead):
     return
@@ -149,6 +177,7 @@ func bite() -> void:
   vocal_audio.stream = growl_stream
   vocal_audio.play()
   animation.play('bite')
+  bite_started.emit(self)
 
 
 func _bite() -> void:
@@ -160,12 +189,20 @@ func _bite() -> void:
     target.take_bite()
 
 
-func _on_animation_finished(_animation_name: StringName) -> void:
+func _finish_bite() -> void:
+  if not _biting:
+    return
   _biting = false
+  bite_finished.emit(self)
+
+
+func _on_animation_finished(animation_name: StringName) -> void:
+  if animation_name == &'bite':
+    _finish_bite()
 
 
 func _on_growl_timer_timeout() -> void:
-  if _dead or _biting or target.is_dead or vocal_audio.playing:
+  if _dead or not _engaged or _biting or target.is_dead or vocal_audio.playing:
     return
   vocal_audio.stream = growl_stream
   vocal_audio.play()

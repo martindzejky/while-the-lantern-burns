@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui_audio.gd" id="script"]
+[ext_resource type="AudioStream" path="res://audio/ui/hover.tres" id="hover"]
+[ext_resource type="AudioStream" path="res://audio/ui/click.tres" id="click"]
+
+[node name="ui_audio" type="Node" node_paths=PackedStringArray("hover_audio", "click_audio")]
+script = ExtResource("script")
+hover_audio = NodePath("hover")
+click_audio = NodePath("click")
+
+[node name="hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("hover")
+volume_db = -6.0
+bus = &"UI SFX"
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("click")
+volume_db = -6.0
+bus = &"UI SFX"

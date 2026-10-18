@@ -18,10 +18,7 @@ signal ramrod_drag_changed(dragging: bool)
 @export var aim_height: float = 0.7
 @export var pickup_radius: float = 1.5
 @export var speed: float = 4.0
-@export var dash_speed: float = 14.0
-@export var dash_duration: float = 0.18
-@export var dash_recovery: float = 0.5
-@export var dash_cooldown: float = 4.0
+@export_range(0.0, 1.0, 0.05) var aim_speed_multiplier: float = 0.5
 @export var ramrod_drag_distance: float = 150.0
 @export var darkness_grace: float = 2.0
 
@@ -30,11 +27,6 @@ var darkness_progress: float = 0.0
 var is_lit: bool:
   get:
     return light_sensor.is_lit
-var _last_direction: Vector2 = Vector2.DOWN
-var _dash_direction: Vector2 = Vector2.DOWN
-var _dash_timer: Timer = Timer.new()
-var _recovery_timer: Timer = Timer.new()
-var _cooldown_timer: Timer = Timer.new()
 var _darkness_timer: Timer = Timer.new()
 var _item_parent: Node
 var _shot_requested: bool = false
@@ -46,23 +38,22 @@ var _locked_aim_target: Vector3
 func _ready() -> void:
   audio_listener.make_current()
   _item_parent = lantern.get_parent()
-  _dash_timer.wait_time = dash_duration
-  _recovery_timer.wait_time = dash_recovery
-  _cooldown_timer.wait_time = dash_cooldown
   _darkness_timer.wait_time = darkness_grace
-  _dash_timer.timeout.connect(_on_dash_timer_timeout)
   _darkness_timer.timeout.connect(die)
-  var timers: Array[Timer] = [_dash_timer, _recovery_timer, _cooldown_timer, _darkness_timer]
-  for timer: Timer in timers:
-    timer.one_shot = true
-    timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
-    add_child(timer)
+  _darkness_timer.one_shot = true
+  _darkness_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+  add_child(_darkness_timer)
   if not is_lit:
     _darkness_timer.start()
 
 
 func _process(_delta: float) -> void:
   _update_equipment()
+
+
+func _notification(what: int) -> void:
+  if what == NOTIFICATION_PAUSED and is_node_ready():
+    _set_dragging_ramrod(false)
 
 
 func _input(event: InputEvent) -> void:
@@ -107,11 +98,7 @@ func _unhandled_input(event: InputEvent) -> void:
         if _locked_aim_target.is_equal_approx(global_position):
           _locked_aim_target += Vector3.LEFT if rig.is_facing_left() else Vector3.RIGHT
         velocity = Vector3.ZERO
-        _dash_timer.stop()
-        _recovery_timer.stop()
         rig.set_frozen(true)
-  elif event.is_action_pressed('dash'):
-    _dash()
   else:
     return
   get_viewport().set_input_as_handled()
@@ -228,19 +215,6 @@ func _set_dragging_ramrod(dragging: bool) -> void:
     musket.cancel_ramrod()
 
 
-func _dash() -> void:
-  if (
-    not _cooldown_timer.is_stopped() or not _dash_timer.is_stopped()
-    or not _recovery_timer.is_stopped()
-  ):
-    return
-
-  var direction := Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
-  _dash_direction = _last_direction if direction.is_zero_approx() else direction.normalized()
-  _dash_timer.start()
-  _cooldown_timer.start()
-
-
 func _interact() -> void:
   _set_dragging_ramrod(false)
   if lantern.is_carried:
@@ -335,15 +309,10 @@ func _physics_process(_delta: float) -> void:
   if musket.is_trigger_pending:
     velocity = Vector3.ZERO
   else:
+    var aiming := _aiming_requested()
     var direction := Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
-    if not direction.is_zero_approx():
-      _last_direction = direction.normalized()
-    if not _dash_timer.is_stopped():
-      velocity = Vector3(_dash_direction.x, 0.0, _dash_direction.y) * dash_speed
-    elif not _recovery_timer.is_stopped():
-      velocity = Vector3.ZERO
-    else:
-      velocity = Vector3(direction.x, 0.0, direction.y) * speed
+    var movement_speed := speed * aim_speed_multiplier if aiming else speed
+    velocity = Vector3(direction.x, 0.0, direction.y) * movement_speed
     move_and_slide()
     if not _aiming_requested():
       rig.set_facing(Vector2(velocity.x, velocity.z))
@@ -362,10 +331,6 @@ func _physics_process(_delta: float) -> void:
       musket.fire_upwards()
     _fuse_shot_requested = false
     _update_equipment()
-
-
-func _on_dash_timer_timeout() -> void:
-  _recovery_timer.start()
 
 
 func _on_rig_stepped() -> void:

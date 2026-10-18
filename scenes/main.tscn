@@ -51,7 +51,7 @@ light_source = NodePath("../../lantern")
 transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 10, 12)
 cull_mask = 5
 current = true
-fov = 28.0
+fov = 40.0
 
 [node name="lantern" parent="." unique_id=1329808312 instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
