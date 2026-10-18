@@ -1,11 +1,15 @@
 ---
 name: rock-face-map
-description: Interpret Martin's color-labeled rock face maps and prepare normal maps for the game's Sprite3D rocks. Use when supplied rock artwork includes a separate faces PNG.
+description: Slice Martin's color-labeled rock sheets and generate flat green albedos and normal maps for the game's Sprite3D rocks.
 ---
 
 # Rock face maps
 
-Martin draws green rock artwork in Procreate and a separate, aligned layer group marking its flat faces. These colors are categorical direction labels, NOT encoded normals or lighting colors. Preserve this palette across agents.
+Martin supplies only the color-labeled face sheet. He may call this the normal-map image, but these colors are categorical direction labels, NOT encoded normals or lighting colors. Generate both the green base sprites and encoded normal maps from it. Preserve this palette across agents.
+
+## Approved base color
+
+Fill each complete rock silhouette with solid **`#508563`** (sRGB RGB **80, 133, 99**), retaining the source alpha exactly, including antialiased edges and holes. This is the approved lit-face green; dynamic lighting supplies the face shading. Do not bake the colored face labels or additional highlights into the albedo. Earlier darker bases `#123a28` and `#2b6245` were rejected as too dark.
 
 ## Authoring palette
 
@@ -22,18 +26,25 @@ Left/right refer to the pictured rock as seen on screen, not the lantern's posit
 
 ## Procreate exports
 
-- Draw the silhouette and green artwork normally. Keep painted directional highlights/shadows restrained if dynamic normals will supply them.
-- Create a separate faces group. Duplicate the silhouette into this group and fill it blue, then paint the other face labels over it. Every interior pixel should have a direction label rather than showing the green artwork underneath.
+- Draw the silhouette and fill it blue, then paint the other face labels over it. Every interior pixel should have a direction label.
 - Use opaque, solid fills without texture, gradients, shading, or soft transitions between faces. Preserve separate face layers or masks for easy edits.
-- Export `rock_name_albedo.png` with only the green artwork visible, and `rock_name_faces.png` with only the direction map visible. Both have identical canvas dimensions, placement, orientation, and transparent exterior. Keep the layered source file.
-- Never trim or rescale the two exports independently. Apply the same crop to both when preparing sprites.
+- Export only the direction-map PNG or sheet with a transparent exterior. Keep the layered source file. A separate green albedo export is not required.
+- Slice each rock once; use identical crop dimensions, placement and alpha for its generated albedo, preserved `_faces.png`, and `_normal.png`. Preserve relative sizes across the sheet.
 
 ## Processing and verification
 
-1. Check alignment and label colors. Do not treat the faces image as a ready-to-use normal map or infer normals from the brightness of the green artwork.
+1. Check transparency and label colors, then generate the approved flat albedo from the full alpha silhouette. Do not treat the supplied faces image as a ready-to-use normal map.
 2. Translate labels into chosen surface directions and encode a normal-map texture. Keep each face flat; do not automatically round or bevel it. Keep palette interpretation separate from tunable face slopes.
 3. Classify labels before filtering/resizing, since interpolating label RGB values invents false directions. Resolve antialiased edge colors against adjacent known labels while preserving the artwork's alpha silhouette. Inspect unexplained interior colors instead of assigning arbitrary faces.
 4. Inspect the current rock shader/material and billboard orientation before wiring normals. Use Godot's OpenGL-style tangent-space convention, not the label colors; import normal data without sRGB color conversion. Verify direction signs against the actual camera/billboard basis, especially the upward-facing top.
 5. Test ONE rock with light moved left, right, and above before processing a collection. Check appropriate faces brighten and the green palette remains useful. Normals affect lighting, not silhouette geometry or volumetric cast-shadow shape.
 
-This skill records an authoring agreement, not proof of an implemented converter or verified normal-mapped shader. Check current project files before claiming either exists. Processing artwork does not authorize unrelated gameplay edits.
+## Existing project setup
+
+The first seven examples are `sprites/small_rock_01` through `small_rock_07`, each with albedo, `_faces` and `_normal` PNGs. Scriptless scenes in `objects/` use native `StandardMaterial3D` normal mapping, alpha scissor, no specular, billboard mode with scale preserved, and bottom-centered Sprite3D artwork. Normal imports use `compress/normal_map=1` without green-channel inversion or sRGB conversion. New sheets should follow these examples.
+
+The verified mapping uses the current 40-degree camera pitch: top `(0, cos(40°), sin(40°))`, front `(0, -sin(40°), cos(40°))`, left/right `(±1, 0, 0)`, and diagonal front faces with X `±sqrt(0.5)` and the front vector multiplied by `sqrt(0.5)`. Left uses negative X. Encode each component as `(component * 0.5 + 0.5) * 255`. Recheck the camera basis if its pitch changes.
+
+Exports can shift the exact label RGB values. Identify the dominant exported colors corresponding to the palette, then resolve blended seam/edge pixels from adjacent known labels. Do not invent a face category absent from the artwork because an antialiased seam happens to resemble it.
+
+Native left/right/overhead lighting was verified for the first collection. Repeat a one-rock check when the converter, camera basis or material changes. Processing artwork does not authorize unrelated gameplay edits.
