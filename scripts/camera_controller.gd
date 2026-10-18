@@ -7,8 +7,9 @@ extends Node3D
 @export_range(0.1, 20.0, 0.1) var follow_response: float = 6.0
 @export_group('Bite emphasis')
 @export var bite_zoom_enabled: bool = true
-@export_range(1.0, 120.0, 0.5) var bite_fov: float = 20.0
-@export_range(0.0, 1.0, 0.05) var bite_focus_weight: float = 0.5
+@export_range(1.0, 120.0, 0.5) var bite_fov: float = 32.0
+@export_range(0.0, 1.0, 0.05) var bite_focus_weight: float = 0.3
+@export_range(0.1, 20.0, 0.1) var bite_response: float = 3.0
 
 var _focus_points: Array[CameraFocus] = []
 var _biting_enemies: Array[Enemy] = []
@@ -26,6 +27,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
   if _death_closeup:
+    camera.fov = lerpf(camera.fov, bite_fov, 1.0 - exp(-bite_response * delta))
     global_position = global_position.lerp(_death_focus, 1.0 - exp(-follow_response * delta))
     return
   var desired_position: Vector3 = target.global_position
@@ -51,7 +53,9 @@ func _process(delta: float) -> void:
     var bite_position: Vector3 = target.global_position.lerp(mouth_position, bite_focus_weight)
     bite_position.y = mouth_position.y
     desired_position = desired_position.lerp(bite_position, progress)
-    camera.fov = lerpf(_bite_start_fov, bite_fov, progress)
+    blend = 1.0 - exp(-bite_response * delta)
+    var desired_fov: float = lerpf(_bite_start_fov, bite_fov, progress)
+    camera.fov = lerpf(camera.fov, desired_fov, blend)
   else:
     _zoom_enemy = null
     camera.fov = lerpf(camera.fov, follow_fov, blend)
@@ -99,5 +103,4 @@ func _on_bite_landed(enemy: Enemy) -> void:
   var mouth_position: Vector3 = enemy.get_bite_focus_position()
   _death_focus = target.global_position.lerp(mouth_position, bite_focus_weight)
   _death_focus.y = mouth_position.y
-  camera.fov = bite_fov
   _death_closeup = true
