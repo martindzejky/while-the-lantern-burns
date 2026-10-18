@@ -5,7 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://bgt4blsdyiwfy" path="res://sprites/lantern_ui_knob.png" id="knob"]
 [ext_resource type="Texture2D" uid="uid://dm07hnfmw5wgj" path="res://sprites/lantern_ui_lever.png" id="lever"]
 
-[node name="lantern_ui" type="Control" unique_id=1816983245]
+[ext_resource type="Script" path="res://scripts/lantern_ui.gd" id="ui"]
+
+[node name="lantern_ui" type="Control" unique_id=1816983245 node_paths=PackedStringArray("hover_offset", "reaction", "lever")]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -19,14 +21,28 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="body" type="Control" parent="." unique_id=733818548]
+script = ExtResource("ui")
+hover_offset = NodePath("hover_offset")
+reaction = NodePath("hover_offset/reaction")
+lever = NodePath("hover_offset/reaction/lever")
+
+[node name="hover_offset" type="Control" parent="."]
+layout_mode = 0
+mouse_filter = 2
+
+[node name="reaction" type="Control" parent="hover_offset"]
+layout_mode = 0
+mouse_filter = 2
+pivot_offset = Vector2(150, 300)
+
+[node name="body" type="Control" parent="hover_offset/reaction" unique_id=733818548]
 anchors_preset = 0
 offset_left = 95.0
 offset_right = 290.0
 offset_bottom = 382.0
 mouse_filter = 2
 
-[node name="sprite" type="TextureRect" parent="body" unique_id=672344850]
+[node name="sprite" type="TextureRect" parent="hover_offset/reaction/body" unique_id=672344850]
 z_as_relative = false
 layout_mode = 0
 offset_right = 180.0
@@ -35,7 +51,7 @@ mouse_filter = 2
 texture = ExtResource("body")
 expand_mode = 1
 
-[node name="lever" type="Control" parent="." unique_id=1532074841]
+[node name="lever" type="Control" parent="hover_offset/reaction" unique_id=1532074841]
 anchors_preset = 0
 offset_left = 138.0
 offset_top = 262.0
@@ -43,7 +59,7 @@ offset_right = 138.0
 offset_bottom = 262.0
 mouse_filter = 2
 
-[node name="handle" type="TextureRect" parent="lever" unique_id=1434853150]
+[node name="handle" type="TextureRect" parent="hover_offset/reaction/lever" unique_id=1434853150]
 z_index = 1
 z_as_relative = false
 layout_mode = 0
@@ -55,7 +71,7 @@ mouse_filter = 2
 texture = ExtResource("lever")
 expand_mode = 1
 
-[node name="cap" type="TextureRect" parent="lever" unique_id=398250613]
+[node name="cap" type="TextureRect" parent="hover_offset/reaction/lever" unique_id=398250613]
 z_index = 3
 z_as_relative = false
 layout_mode = 0
@@ -67,7 +83,7 @@ mouse_filter = 2
 texture = ExtResource("cap")
 expand_mode = 1
 
-[node name="knob" type="TextureRect" parent="." unique_id=1880199193]
+[node name="knob" type="TextureRect" parent="hover_offset/reaction" unique_id=1880199193]
 z_index = 2
 z_as_relative = false
 layout_mode = 0
@@ -78,3 +94,14 @@ offset_bottom = 284.0
 mouse_filter = 2
 texture = ExtResource("knob")
 expand_mode = 1
+
+[node name="click_target" type="Control" parent="hover_offset/reaction"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 0.0
+offset_right = 285.0
+offset_bottom = 382.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+
+[connection signal="gui_input" from="hover_offset/reaction/click_target" to="." method="_on_click_input"]

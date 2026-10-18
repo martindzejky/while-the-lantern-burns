@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://by6jxo44b17at" path="res://ui/lantern_ui.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://ui/musket_ui.tscn" id="7"]
 [ext_resource type="Script" uid="uid://de8uuvch50dlp" path="res://scripts/effects_warmup.gd" id="8"]
-[ext_resource type="PackedScene" path="res://objects/enemy.tscn" id="9"]
-[ext_resource type="Script" uid="uid://lvfpqnu12jvv" path="res://scripts/player_light_debug.gd" id="10"]
 [ext_resource type="Script" uid="uid://2wksfmfp1kib" path="res://scripts/ground.gd" id="11"]
 [ext_resource type="PackedScene" uid="uid://cjip80cip1fu2" path="res://ambience/controller.tscn" id="12"]
 
@@ -94,37 +92,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 [node name="musket" parent="." unique_id=1198564765 instance=ExtResource("5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
 
-[node name="enemy" parent="." unique_id=914935408 node_paths=PackedStringArray("target") instance=ExtResource("9")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
-target = NodePath("../player")
-
 [node name="hud" type="CanvasLayer" parent="." unique_id=997754346]
 
-[node name="controls" type="Label" parent="hud" unique_id=4274535]
-offset_left = 24.0
-offset_top = 20.0
-theme_override_font_sizes/font_size = 20
-text = "WASD / Arrow keys - Move
-E / Enter - Pick up or drop
-RMB - Aim musket / LMB - Fire"
+[node name="lantern" parent="hud" unique_id=2037850372 node_paths=PackedStringArray("lantern") instance=ExtResource("6")]
+lantern = NodePath("../../lantern")
 
-[node name="player_light_debug" type="Label" parent="hud" unique_id=974984504 node_paths=PackedStringArray("player")]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = -50.0
-offset_right = 320.0
-offset_bottom = -24.0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 20
-script = ExtResource("10")
-player = NodePath("../../player")
-
-[node name="lantern" parent="hud" unique_id=2037850372 instance=ExtResource("6")]
-
-[node name="musket" parent="hud" unique_id=273416607 instance=ExtResource("7")]
+[node name="musket" parent="hud" unique_id=273416607 node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("7")]
 layout_mode = 3
+musket = NodePath("../../musket")
+lantern = NodePath("../../lantern")
 
 [node name="death_ui" type="CanvasLayer" parent="." unique_id=415196139]
 
@@ -157,5 +133,10 @@ color = Color(0.002, 0.006, 0.004, 1)
 [connection signal="died" from="player" to="death_ui/message" method="show"]
 [connection signal="fired" from="musket" to="player" method="_on_musket_fired"]
 [connection signal="fuse_expired" from="musket" to="player" method="_on_musket_fuse_expired"]
+
+[connection signal="charge_requested" from="hud/lantern" to="player" method="_on_lantern_pressed"]
+[connection signal="ball_requested" from="hud/musket" to="player" method="_on_barrel_pressed"]
+[connection signal="ramrod_requested" from="hud/musket" to="player" method="_on_ramrod_gui_input"]
+[connection signal="ramrod_drag_changed" from="player" to="hud/musket" method="_on_ramrod_drag_changed"]
 
 [editable path="player"]

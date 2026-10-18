@@ -3,8 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://bar5xujkn8xx3" path="res://sprites/musket_ui_ball.png" id="ball"]
 [ext_resource type="Texture2D" uid="uid://d2t15p7ts47hj" path="res://sprites/musket_ui_body.png" id="body"]
 [ext_resource type="Texture2D" uid="uid://hfre4w84e2tw" path="res://sprites/musket_ui_ramrod.png" id="ramrod"]
+[ext_resource type="Script" uid="uid://cw0kb0d56ln71" path="res://scripts/musket_ui.gd" id="ui"]
 
-[node name="musket_ui" type="Control" unique_id=315397576]
+[node name="musket_ui" type="Control" unique_id=315397576 node_paths=PackedStringArray("hover_offset", "lit_offset", "reaction", "ball_motion", "ramrod", "detach", "drag", "chamber", "barrel_target", "ramrod_target")]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -14,8 +15,36 @@ offset_top = -650.0
 offset_right = 300.0
 grow_vertical = 0
 mouse_filter = 2
+script = ExtResource("ui")
+hover_offset = NodePath("lit_offset/hover_offset")
+lit_offset = NodePath("lit_offset")
+reaction = NodePath("lit_offset/hover_offset/reaction")
+ball_motion = NodePath("lit_offset/hover_offset/reaction/ball_motion")
+ramrod = NodePath("lit_offset/hover_offset/reaction/ramrod")
+detach = NodePath("lit_offset/hover_offset/reaction/ramrod/detach")
+drag = NodePath("lit_offset/hover_offset/reaction/ramrod/detach/drag")
+chamber = NodePath("lit_offset/hover_offset/reaction/chamber")
+barrel_target = NodePath("lit_offset/hover_offset/reaction/barrel_target")
+ramrod_target = NodePath("lit_offset/hover_offset/reaction/ramrod/detach/drag/ramrod_target")
 
-[node name="ball" type="TextureRect" parent="." unique_id=1223930507]
+[node name="lit_offset" type="Control" parent="." unique_id=2070312016]
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="hover_offset" type="Control" parent="lit_offset" unique_id=1980047587]
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="reaction" type="Control" parent="lit_offset/hover_offset" unique_id=58439149]
+anchors_preset = 0
+pivot_offset = Vector2(150, 300)
+mouse_filter = 2
+
+[node name="ball_motion" type="Control" parent="lit_offset/hover_offset/reaction" unique_id=1925063903]
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="ball" type="TextureRect" parent="lit_offset/hover_offset/reaction/ball_motion" unique_id=1223930507]
 z_as_relative = false
 layout_mode = 0
 offset_left = 59.000004
@@ -27,7 +56,7 @@ mouse_filter = 2
 texture = ExtResource("ball")
 expand_mode = 1
 
-[node name="ramrod" type="Control" parent="." unique_id=426170040]
+[node name="ramrod" type="Control" parent="lit_offset/hover_offset/reaction" unique_id=426170040]
 anchors_preset = 0
 offset_left = 97.0
 offset_top = 153.0
@@ -35,7 +64,15 @@ offset_right = 137.0
 offset_bottom = 332.0
 mouse_filter = 2
 
-[node name="shaft" type="TextureRect" parent="ramrod" unique_id=680969252]
+[node name="detach" type="Control" parent="lit_offset/hover_offset/reaction/ramrod" unique_id=334795133]
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="drag" type="Control" parent="lit_offset/hover_offset/reaction/ramrod/detach" unique_id=2022781412]
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="shaft" type="TextureRect" parent="lit_offset/hover_offset/reaction/ramrod/detach/drag" unique_id=680969252]
 z_as_relative = false
 layout_mode = 0
 offset_left = -16.0
@@ -47,7 +84,15 @@ mouse_filter = 2
 texture = ExtResource("ramrod")
 expand_mode = 1
 
-[node name="body" type="TextureRect" parent="." unique_id=751284225]
+[node name="ramrod_target" type="Control" parent="lit_offset/hover_offset/reaction/ramrod/detach/drag" unique_id=1241671223]
+anchors_preset = 0
+offset_left = -25.0
+offset_top = -15.0
+offset_right = 13.0
+offset_bottom = 251.0
+mouse_default_cursor_shape = 2
+
+[node name="body" type="TextureRect" parent="lit_offset/hover_offset/reaction" unique_id=751284225]
 z_index = 1
 z_as_relative = false
 layout_mode = 0
@@ -59,3 +104,17 @@ scale = Vector2(1.5445852, 1.5445852)
 mouse_filter = 2
 texture = ExtResource("body")
 expand_mode = 1
+
+[node name="chamber" type="Marker2D" parent="lit_offset/hover_offset/reaction" unique_id=1181229123]
+position = Vector2(76, -70)
+
+[node name="barrel_target" type="Control" parent="lit_offset/hover_offset/reaction" unique_id=1745187369]
+anchors_preset = 0
+offset_left = 44.0
+offset_top = 130.0
+offset_right = 100.0
+offset_bottom = 239.0
+mouse_default_cursor_shape = 2
+
+[connection signal="gui_input" from="lit_offset/hover_offset/reaction/ramrod/detach/drag/ramrod_target" to="." method="_on_ramrod_input"]
+[connection signal="gui_input" from="lit_offset/hover_offset/reaction/barrel_target" to="." method="_on_barrel_input"]

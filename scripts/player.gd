@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 signal died
 signal light_changed(lit: bool)
+signal ramrod_drag_changed(dragging: bool)
 
 @export var flip: Node3D
 @export var musket: Musket
@@ -71,10 +72,17 @@ func _input(event: InputEvent) -> void:
   if not _dragging_ramrod:
     return
   if event is InputEventMouseMotion:
+    var previous_insertion := musket.ramrod_insertion
     musket.move_ramrod(event.relative.y / ramrod_drag_distance)
+    if (
+      previous_insertion > 0.0 and musket.reload_state == Musket.ReloadState.LOADED
+      and musket.ramrod_insertion == 0.0
+    ):
+      _set_dragging_ramrod(false)
     get_viewport().set_input_as_handled()
   elif event.is_action_released('fire_musket'):
-    _dragging_ramrod = false
+    _set_dragging_ramrod(false)
+    get_viewport().set_input_as_handled()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -87,7 +95,9 @@ func _unhandled_input(event: InputEvent) -> void:
     if (
       not lantern.is_carried and _within_reach(lantern)
       and lantern.energy >= lantern.max_energy * 0.3
+      and musket.reload_state == Musket.ReloadState.LOADED
     ):
+      _set_dragging_ramrod(false)
       musket.ignite()
   elif event.is_action_pressed('fire_musket'):
     _shot_requested = _aiming_requested()
@@ -135,7 +145,7 @@ func die() -> void:
   is_dead = true
   _darkness_timer.stop()
   velocity = Vector3.ZERO
-  _dragging_ramrod = false
+  _set_dragging_ramrod(false)
   _shot_requested = false
   _fuse_shot_requested = false
   _update_equipment()
@@ -155,7 +165,16 @@ func _on_barrel_pressed() -> void:
 
 func _on_ramrod_gui_input(event: InputEvent) -> void:
   if not is_dead and event.is_action_pressed('fire_musket') and not lantern.is_carried:
-    _dragging_ramrod = musket.reload_state in [Musket.ReloadState.BALL_INSERTED, Musket.ReloadState.RAMMED]
+    _set_dragging_ramrod(musket.can_use_ramrod())
+
+
+func _set_dragging_ramrod(dragging: bool) -> void:
+  if _dragging_ramrod == dragging:
+    return
+  _dragging_ramrod = dragging
+  ramrod_drag_changed.emit(dragging)
+  if not dragging:
+    musket.cancel_ramrod()
 
 
 func _dash() -> void:
@@ -172,7 +191,7 @@ func _dash() -> void:
 
 
 func _interact() -> void:
-  _dragging_ramrod = false
+  _set_dragging_ramrod(false)
   if not musket.is_owned and _within_reach(musket):
     _attach(musket, musket_back_slot)
     musket.equip()

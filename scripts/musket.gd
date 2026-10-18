@@ -67,14 +67,28 @@ func insert_ball() -> void:
   reload_changed.emit()
 
 
+func can_use_ramrod() -> bool:
+  return is_owned and not is_aiming and not is_lit and reload_state != ReloadState.EMPTY
+
+
 func move_ramrod(amount: float) -> void:
-  if not is_owned or is_aiming or reload_state not in [ReloadState.BALL_INSERTED, ReloadState.RAMMED]:
+  if not can_use_ramrod():
     return
   ramrod_insertion = clampf(ramrod_insertion + amount, 0.0, 1.0)
-  if ramrod_insertion == 1.0:
-    reload_state = ReloadState.RAMMED
-  elif ramrod_insertion == 0.0 and reload_state == ReloadState.RAMMED:
-    reload_state = ReloadState.LOADED
+  if reload_state != ReloadState.LOADED:
+    if ramrod_insertion == 1.0:
+      reload_state = ReloadState.RAMMED
+    elif ramrod_insertion == 0.0 and reload_state == ReloadState.RAMMED:
+      reload_state = ReloadState.LOADED
+  reload_changed.emit()
+
+
+func cancel_ramrod() -> void:
+  if reload_state == ReloadState.EMPTY:
+    return
+  ramrod_insertion = 0.0
+  if reload_state != ReloadState.LOADED:
+    reload_state = ReloadState.BALL_INSERTED
   reload_changed.emit()
 
 
