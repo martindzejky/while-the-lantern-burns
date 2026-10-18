@@ -43,9 +43,11 @@ var _swing_started: bool = false
 var _previous_grip_position: Vector3
 var _previous_velocity: float = 0.0
 var _swing_velocity: float = 0.0
+var _lever_volume_db: float
 
 
 func _ready() -> void:
+  _lever_volume_db = lever_audio.volume_db
   energy = max_energy
   _update_light()
 
@@ -125,6 +127,7 @@ func charge() -> void:
   var stroke := lever_openness * lever_openness
   energy = minf(energy + energy_per_press * stroke, max_energy)
   lever_openness = 0.0
+  lever_audio.volume_db = _lever_volume_db + linear_to_db(maxf(stroke, 0.0001))
   lever_audio.play()
   lever_changed.emit(lever_openness)
   _update_light()

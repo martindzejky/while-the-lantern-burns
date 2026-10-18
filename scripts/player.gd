@@ -38,6 +38,7 @@ var _item_parent: Node
 var _shot_requested: bool = false
 var _fuse_shot_requested: bool = false
 var _dragging_ramrod: bool = false
+var _locked_aim_target: Vector3
 
 
 func _ready() -> void:
@@ -63,6 +64,9 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+  if musket.is_trigger_pending:
+    get_viewport().set_input_as_handled()
+    return
   if not _dragging_ramrod:
     return
   if event is InputEventMouseMotion:
@@ -94,7 +98,16 @@ func _unhandled_input(event: InputEvent) -> void:
       _set_dragging_ramrod(false)
       musket.ignite()
   elif event.is_action_pressed('fire_musket'):
-    _shot_requested = _aiming_requested()
+    if _aiming_requested():
+      _update_equipment()
+      if musket.pull_trigger():
+        _locked_aim_target = _get_aim_target(get_viewport().get_mouse_position())
+        if _locked_aim_target.is_equal_approx(global_position):
+          _locked_aim_target += Vector3.LEFT if rig.is_facing_left() else Vector3.RIGHT
+        velocity = Vector3.ZERO
+        _dash_timer.stop()
+        _recovery_timer.stop()
+        rig.set_frozen(true)
   elif event.is_action_pressed('dash'):
     _dash()
   else:
@@ -131,7 +144,16 @@ func _on_musket_fuse_expired() -> void:
     _fuse_shot_requested = true
 
 
+func _on_musket_trigger_ready() -> void:
+  if is_dead:
+    musket.fire_upwards()
+  else:
+    _shot_requested = true
+
+
 func _on_musket_fired(hit: Dictionary) -> void:
+  if not is_dead:
+    rig.set_frozen(false)
   var enemy := hit.get('collider') as Enemy
   if enemy:
     enemy.take_shot()
@@ -197,6 +219,7 @@ func _set_dragging_ramrod(dragging: bool) -> void:
   if _dragging_ramrod == dragging:
     return
   _dragging_ramrod = dragging
+  musket.set_ramrod_dragging(dragging)
   ramrod_drag_changed.emit(dragging)
   if not dragging:
     musket.cancel_ramrod()
@@ -243,6 +266,8 @@ func _align_grip(item: Node3D, grip: Marker3D, slot: Marker3D) -> void:
 
 
 func _update_equipment() -> void:
+  if musket.is_trigger_pending:
+    return
   var aiming := _aiming_requested()
   musket.set_aiming(aiming)
   var pose := CharacterRig.EquipmentPose.IDLE
@@ -273,7 +298,7 @@ func _update_equipment() -> void:
 func _aiming_requested() -> bool:
   return (
     not is_dead and musket.is_owned and not lantern.is_carried and not _dragging_ramrod
-    and Input.is_action_pressed('aim_musket')
+    and (musket.is_trigger_pending or Input.is_action_pressed('aim_musket'))
   )
 
 
@@ -304,26 +329,27 @@ func _get_aim_target(mouse: Vector2) -> Vector3:
 func _physics_process(_delta: float) -> void:
   if not _darkness_timer.is_stopped():
     _set_darkness_progress(clampf(1.0 - _darkness_timer.time_left / darkness_grace, 0.0, 1.0))
-  var direction := Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
-  if not direction.is_zero_approx():
-    _last_direction = direction.normalized()
-
-  if not _dash_timer.is_stopped():
-    velocity = Vector3(_dash_direction.x, 0.0, _dash_direction.y) * dash_speed
-  elif not _recovery_timer.is_stopped():
+  if musket.is_trigger_pending:
     velocity = Vector3.ZERO
   else:
-    velocity = Vector3(direction.x, 0.0, direction.y) * speed
-
-  move_and_slide()
-  if not _aiming_requested():
-    rig.set_facing(Vector2(velocity.x, velocity.z))
-  rig.set_moving(not velocity.is_zero_approx())
+    var direction := Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
+    if not direction.is_zero_approx():
+      _last_direction = direction.normalized()
+    if not _dash_timer.is_stopped():
+      velocity = Vector3(_dash_direction.x, 0.0, _dash_direction.y) * dash_speed
+    elif not _recovery_timer.is_stopped():
+      velocity = Vector3.ZERO
+    else:
+      velocity = Vector3(direction.x, 0.0, direction.y) * speed
+    move_and_slide()
+    if not _aiming_requested():
+      rig.set_facing(Vector2(velocity.x, velocity.z))
+    rig.set_moving(not velocity.is_zero_approx())
   _update_equipment()
   aim_line.visible = musket.is_aiming
   var target := global_position
   if musket.is_aiming:
-    target = _get_aim_target(get_viewport().get_mouse_position())
+    target = _locked_aim_target if musket.is_trigger_pending else _get_aim_target(get_viewport().get_mouse_position())
     _update_aim_line(target)
   if _shot_requested or _fuse_shot_requested:
     _shot_requested = false

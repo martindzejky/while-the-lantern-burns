@@ -13,6 +13,13 @@ room_size = 0.68
 damping = 0.6
 wet = 0.18
 
+[sub_resource type="AudioEffectReverb" id="gunshot_reverb"]
+predelay_msec = 90.0
+room_size = 0.95
+damping = 0.45
+dry = 1.0
+wet = 0.55
+
 [resource]
 bus/1/name = &"Music"
 bus/1/solo = false
@@ -54,3 +61,11 @@ bus/6/mute = false
 bus/6/bypass_fx = false
 bus/6/volume_db = 0.0
 bus/6/send = &"SFX"
+bus/7/name = &"Gunshot"
+bus/7/solo = false
+bus/7/mute = false
+bus/7/bypass_fx = false
+bus/7/volume_db = 0.0
+bus/7/send = &"SFX"
+bus/7/effect/0/effect = SubResource("gunshot_reverb")
+bus/7/effect/0/enabled = true

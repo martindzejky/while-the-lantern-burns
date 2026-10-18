@@ -8,6 +8,7 @@ signal fired(hit: Dictionary)
 signal reload_changed
 signal lit_changed(lit: bool)
 signal fuse_expired
+signal trigger_ready
 
 enum ReloadState { EMPTY, BALL_INSERTED, LOADED }
 
@@ -19,6 +20,17 @@ enum ReloadState { EMPTY, BALL_INSERTED, LOADED }
 @export var sparks: CPUParticles3D
 @export var flash_scene: PackedScene
 @export var smoke_scene: PackedScene
+@export var pickup_audio: AudioStreamPlayer3D
+@export var ball_audio: AudioStreamPlayer
+@export var loaded_audio: AudioStreamPlayer
+@export var aim_audio: AudioStreamPlayer3D
+@export var ignite_audio: AudioStreamPlayer3D
+@export var burning_audio: AudioStreamPlayer3D
+@export var shot_audio: AudioStreamPlayer3D
+@export var click_audio: AudioStreamPlayer3D
+@export var ramrod_audio: AudioStreamPlayer
+@export var ramrod_volume_db: float = -14.0
+@export_range(0.05, 2.0, 0.05) var trigger_delay: float = 0.5
 @export var shot_range: float = 30.0
 @export var ray_height: float = 0.1
 @export_range(0.1, 30.0, 0.1) var fuse_duration: float = 10.0
@@ -28,7 +40,10 @@ var is_aiming: bool = false
 var reload_state: ReloadState = ReloadState.EMPTY
 var ramrod_insertion: float = 0.0
 var is_lit: bool = false
+var is_trigger_pending: bool = false
 var _fuse_timer: Timer = Timer.new()
+var _trigger_timer: Timer = Timer.new()
+var _ramrod_motion: float = 0.0
 var _ground_visuals_transform: Transform3D
 
 
@@ -38,6 +53,16 @@ func _ready() -> void:
   _fuse_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
   _fuse_timer.timeout.connect(_on_fuse_timer_timeout)
   add_child(_fuse_timer)
+  _trigger_timer.one_shot = true
+  _trigger_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+  _trigger_timer.timeout.connect(_on_trigger_timer_timeout)
+  add_child(_trigger_timer)
+  ramrod_audio.volume_db = -80.0
+
+
+func _process(delta: float) -> void:
+  _ramrod_motion = move_toward(_ramrod_motion, 0.0, delta * 6.0)
+  ramrod_audio.volume_db = ramrod_volume_db + linear_to_db(maxf(_ramrod_motion, 0.0001))
 
 
 func warm_up_effects() -> void:
@@ -62,6 +87,8 @@ func ignite() -> void:
   sparks.restart()
   sparks.emitting = true
   _fuse_timer.start(fuse_duration)
+  ignite_audio.play()
+  burning_audio.play()
   lit_changed.emit(true)
 
 
@@ -69,6 +96,7 @@ func insert_ball() -> void:
   if not is_owned or is_aiming or reload_state != ReloadState.EMPTY:
     return
   reload_state = ReloadState.BALL_INSERTED
+  ball_audio.play()
   reload_changed.emit()
 
 
@@ -79,13 +107,18 @@ func can_use_ramrod() -> bool:
 func move_ramrod(amount: float) -> void:
   if not can_use_ramrod():
     return
+  var previous_insertion := ramrod_insertion
   ramrod_insertion = clampf(ramrod_insertion + amount, 0.0, 1.0)
-  if ramrod_insertion == 1.0:
+  var speed := absf(ramrod_insertion - previous_insertion) / maxf(get_process_delta_time(), 0.001)
+  _ramrod_motion = maxf(_ramrod_motion, clampf(speed / 4.0, 0.0, 1.0))
+  if ramrod_insertion == 1.0 and reload_state != ReloadState.LOADED:
     reload_state = ReloadState.LOADED
+    loaded_audio.play()
   reload_changed.emit()
 
 
 func cancel_ramrod() -> void:
+  set_ramrod_dragging(false)
   if reload_state == ReloadState.EMPTY:
     return
   ramrod_insertion = 0.0
@@ -94,11 +127,23 @@ func cancel_ramrod() -> void:
   reload_changed.emit()
 
 
+func set_ramrod_dragging(dragging: bool) -> void:
+  if dragging:
+    if not ramrod_audio.playing:
+      ramrod_audio.play()
+    ramrod_audio.stream_paused = false
+  else:
+    _ramrod_motion = 0.0
+    ramrod_audio.volume_db = -80.0
+    ramrod_audio.stream_paused = true
+
+
 func equip() -> void:
   is_owned = true
   visuals.set_process(false)
   visuals.transform = Transform3D.IDENTITY
   sprite.rotation.z = 1.0
+  pickup_audio.play()
   equipped.emit()
 
 
@@ -108,6 +153,8 @@ func drop() -> void:
   sprite.rotation.z = 0.0
   visuals.transform = _ground_visuals_transform
   visuals.set_process(true)
+  set_ramrod_dragging(false)
+  pickup_audio.play()
   unequipped.emit()
 
 
@@ -115,6 +162,7 @@ func set_aiming(aiming: bool) -> void:
   if is_aiming == aiming:
     return
   is_aiming = aiming
+  aim_audio.play()
   if not aiming:
     sprite.rotation.z = 1.0
   aiming_changed.emit(aiming)
@@ -127,6 +175,22 @@ func set_held_angle(angle: float) -> void:
 func aim(direction: Vector2) -> void:
   var mirror := -1.0 if sprite.global_basis.determinant() < 0.0 else 1.0
   sprite.rotation.z = Vector2(direction.x * mirror, -direction.y).angle()
+
+
+func pull_trigger() -> bool:
+  if not is_owned or not is_aiming or is_trigger_pending:
+    return false
+  click_audio.play()
+  if reload_state != ReloadState.LOADED or not is_lit:
+    return false
+  is_trigger_pending = true
+  _trigger_timer.start(trigger_delay)
+  return true
+
+
+func _on_trigger_timer_timeout() -> void:
+  if is_trigger_pending and is_lit:
+    trigger_ready.emit()
 
 
 func fire(origin: Vector3, target: Vector3, excluded_body: RID) -> Dictionary:
@@ -171,6 +235,10 @@ func _discharge(end: Vector3, hit: Dictionary) -> void:
   smoke.position.y = 0.0
   get_tree().current_scene.add_child(smoke)
   _fuse_timer.stop()
+  _trigger_timer.stop()
+  is_trigger_pending = false
+  burning_audio.stop()
+  shot_audio.play()
   sparks.emitting = false
   reload_state = ReloadState.EMPTY
   is_lit = false

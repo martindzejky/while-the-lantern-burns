@@ -129,10 +129,16 @@ func get_musket_angle() -> float:
   return musket_angle
 
 
+func set_frozen(frozen: bool) -> void:
+  set_process(not frozen)
+  animation_tree.process_mode = Node.PROCESS_MODE_DISABLED if frozen else Node.PROCESS_MODE_INHERIT
+
+
 func show_death() -> void:
   if _dead:
     return
   _dead = true
+  set_frozen(false)
   var death := animation.get_animation('death').duplicate() as Animation
   for track in death.get_track_count():
     var path := death.track_get_path(track)
