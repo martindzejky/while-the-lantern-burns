@@ -118,8 +118,8 @@ anchor = NodePath("..")
 [node name="pickup_audio" type="AudioStreamPlayer3D" parent="."]
 position = Vector3(0, 0.5, 0)
 stream = ExtResource("pickup_audio")
-volume_db = 6.0
-max_db = 6.0
+volume_db = 16.0
+max_db = 16.0
 max_distance = 30.0
 bus = &"World SFX"
 

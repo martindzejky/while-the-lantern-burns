@@ -71,7 +71,7 @@ scale = Vector3(1.6, 1.6, 1.6)
 
 [node name="body" type="Sprite3D" parent="visuals/appearance" unique_id=703009130]
 pixel_size = 0.0035
-shaded = false
+shaded = true
 alpha_cut = 1
 texture = ExtResource("monster_body_01")
 
@@ -82,7 +82,7 @@ position = Vector3(0, 0.85, 0.005)
 
 [node name="sprite" type="Sprite3D" parent="visuals/appearance/head/lift"]
 pixel_size = 0.004
-shaded = false
+shaded = true
 alpha_cut = 1
 texture = ExtResource("monster_head_01")
 
