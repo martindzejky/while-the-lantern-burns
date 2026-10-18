@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://2wksfmfp1kib" path="res://scripts/ground.gd" id="11"]
 [ext_resource type="PackedScene" uid="uid://cjip80cip1fu2" path="res://ambience/controller.tscn" id="12"]
 
+[ext_resource type="PackedScene" path="res://ui/death_feedback.tscn" id="death_ui"]
+
 [sub_resource type="Environment" id="environment"]
 background_mode = 1
 background_color = Color(0.002, 0.006, 0.004, 1)
@@ -107,19 +109,8 @@ lantern = NodePath("../../lantern")
 musket = NodePath("../../musket")
 lantern = NodePath("../../lantern")
 
-[node name="death_ui" type="CanvasLayer" parent="." unique_id=415196139]
-
-[node name="message" type="Label" parent="death_ui" unique_id=1096060158]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 56
-text = "You are dead"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="death_ui" parent="." unique_id=415196139 node_paths=PackedStringArray("player") instance=ExtResource("death_ui")]
+player = NodePath("../player")
 
 [node name="loading" type="CanvasLayer" parent="." unique_id=1017660554 node_paths=PackedStringArray("musket")]
 layer = 100
@@ -135,7 +126,6 @@ grow_vertical = 2
 color = Color(0.002, 0.006, 0.004, 1)
 
 [connection signal="died" from="player" to="hud" method="hide"]
-[connection signal="died" from="player" to="death_ui/message" method="show"]
 [connection signal="ramrod_drag_changed" from="player" to="hud/musket" method="_on_ramrod_drag_changed"]
 [connection signal="fired" from="musket" to="player" method="_on_musket_fired"]
 [connection signal="fuse_expired" from="musket" to="player" method="_on_musket_fuse_expired"]

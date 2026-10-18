@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 signal died
 signal light_changed(lit: bool)
+signal darkness_progress_changed(progress: float)
 signal ramrod_drag_changed(dragging: bool)
 
 @export var flip: Node3D
@@ -26,6 +27,7 @@ signal ramrod_drag_changed(dragging: bool)
 @export var darkness_grace: float = 2.0
 
 var is_dead: bool = false
+var darkness_progress: float = 0.0
 var is_lit: bool:
   get:
     return light_sensor.is_lit
@@ -114,7 +116,15 @@ func _on_light_sensor_light_changed(lit: bool) -> void:
       _darkness_timer.stop()
     else:
       _darkness_timer.start()
+    _set_darkness_progress(0.0)
   light_changed.emit(lit)
+
+
+func _set_darkness_progress(progress: float) -> void:
+  if is_equal_approx(darkness_progress, progress):
+    return
+  darkness_progress = progress
+  darkness_progress_changed.emit(progress)
 
 
 func _on_lantern_pressed() -> void:
@@ -262,6 +272,8 @@ func _update_aim_line(target: Vector3) -> void:
 
 
 func _physics_process(_delta: float) -> void:
+  if not _darkness_timer.is_stopped():
+    _set_darkness_progress(clampf(1.0 - _darkness_timer.time_left / darkness_grace, 0.0, 1.0))
   var direction := Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
   if not direction.is_zero_approx():
     _last_direction = direction.normalized()
