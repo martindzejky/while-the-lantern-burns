@@ -2,12 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://w6mjmcbcb6d" path="res://objects/player.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://d330qifnxgchu" path="res://objects/lantern.tscn" id="3"]
-[ext_resource type="Shader" uid="uid://bn1p42cqm4tj0" path="res://shaders/ground_lighting.gdshader" id="4"]
 [ext_resource type="PackedScene" uid="uid://by2n7sl0bbq3j" path="res://objects/musket.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://by6jxo44b17at" path="res://ui/lantern_ui.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://odlmbst42wxg" path="res://ui/musket_ui.tscn" id="7"]
 [ext_resource type="Script" uid="uid://de8uuvch50dlp" path="res://scripts/effects_warmup.gd" id="8"]
-[ext_resource type="Script" uid="uid://2wksfmfp1kib" path="res://scripts/ground.gd" id="11"]
 [ext_resource type="PackedScene" uid="uid://cjip80cip1fu2" path="res://ambience/controller.tscn" id="12"]
 [ext_resource type="PackedScene" uid="uid://odumffg7yfr1" path="res://objects/big_rock_01.tscn" id="big_rock_01"]
 [ext_resource type="PackedScene" uid="uid://djk0sh2numjnd" path="res://objects/big_rock_02.tscn" id="big_rock_02"]
@@ -27,6 +25,8 @@
 [ext_resource type="PackedScene" uid="uid://by3tq6buv41kb" path="res://objects/small_rock_06.tscn" id="small_rock_06"]
 [ext_resource type="PackedScene" uid="uid://dyeqe4xfv5w37" path="res://objects/small_rock_07.tscn" id="small_rock_07"]
 
+[ext_resource type="PackedScene" path="res://objects/ground.tscn" id="ground"]
+
 [sub_resource type="Environment" id="environment"]
 background_mode = 1
 background_color = Color(0.002, 0.006, 0.004, 1)
@@ -34,20 +34,6 @@ ambient_light_source = 3
 ambient_light_color = Color(0.08, 0.16, 0.11, 1)
 ambient_light_energy = 0.05
 reflected_light_source = 2
-
-[sub_resource type="Gradient" id="ground_color"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.95, 0.7402083, 0.44650003, 1)
-
-[sub_resource type="GradientTexture2D" id="ground_texture"]
-gradient = SubResource("ground_color")
-width = 20
-height = 16
-
-[sub_resource type="ShaderMaterial" id="ground_material"]
-render_priority = 0
-shader = ExtResource("4")
-shader_parameter/ground_texture = SubResource("ground_texture")
 
 [node name="main" type="Node3D" unique_id=270892111]
 
@@ -57,13 +43,8 @@ target = NodePath("../player")
 [node name="environment" type="WorldEnvironment" parent="." unique_id=1644920340]
 environment = SubResource("environment")
 
-[node name="ground" type="CSGPolygon3D" parent="." unique_id=205520019]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-cast_shadow = 0
+[node name="ground" parent="." unique_id=205520019 instance=ExtResource("ground")]
 polygon = PackedVector2Array(-7, -6, -10.051549, -14.92685, -17.142384, -16.616467, -17.262762, -22.555105, -11.564877, -28.373367, -2.0951552, -27.37022, 1.8371892, -23.19712, -1.5333915, -17.418985, -1.905983, -12.96068, -2, -7, 1, -5, 6, -6, 8, -2, 6, 1, 7, 5, 3, 7, 0, 5, -5, 6, -8, 2, -6, 0)
-depth = 0.01
-material = SubResource("ground_material")
-script = ExtResource("11")
 
 [node name="rock_left" parent="." unique_id=1503433654 instance=ExtResource("big_rock_02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)

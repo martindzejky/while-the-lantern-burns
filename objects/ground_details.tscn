@@ -1,0 +1,33 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ground_details.gd" id="script"]
+[ext_resource type="Shader" path="res://shaders/ground_details.gdshader" id="shader"]
+[ext_resource type="Texture2D" path="res://sprites/crack_01.png" id="crack_01"]
+[ext_resource type="Texture2D" path="res://sprites/crack_02.png" id="crack_02"]
+[ext_resource type="Texture2D" path="res://sprites/crack_03.png" id="crack_03"]
+[ext_resource type="Texture2D" path="res://sprites/crack_04.png" id="crack_04"]
+[ext_resource type="Texture2D" path="res://sprites/crack_05.png" id="crack_05"]
+[ext_resource type="Texture2D" path="res://sprites/crack_06.png" id="crack_06"]
+[ext_resource type="Texture2D" path="res://sprites/crack_07.png" id="crack_07"]
+[ext_resource type="Texture2D" path="res://sprites/crack_08.png" id="crack_08"]
+[ext_resource type="Texture2D" path="res://sprites/crack_09.png" id="crack_09"]
+[ext_resource type="Texture2D" path="res://sprites/crack_10.png" id="crack_10"]
+[ext_resource type="Texture2D" path="res://sprites/small_rock_01.png" id="small_rock_01"]
+[ext_resource type="Texture2D" path="res://sprites/small_rock_02.png" id="small_rock_02"]
+[ext_resource type="Texture2D" path="res://sprites/small_rock_03.png" id="small_rock_03"]
+[ext_resource type="Texture2D" path="res://sprites/small_rock_04.png" id="small_rock_04"]
+[ext_resource type="Texture2D" path="res://sprites/small_rock_05.png" id="small_rock_05"]
+[ext_resource type="Texture2D" path="res://sprites/small_rock_06.png" id="small_rock_06"]
+[ext_resource type="Texture2D" path="res://sprites/small_rock_07.png" id="small_rock_07"]
+
+[ext_resource type="Texture2D" path="res://resources/ground/light_profile.tres" id="light_profile"]
+
+[sub_resource type="ShaderMaterial" id="material"]
+shader = ExtResource("shader")
+shader_parameter/ground_light_curve = ExtResource("light_profile")
+
+[node name="ground_details" type="Node3D"]
+script = ExtResource("script")
+cracks = Array[Texture2D]([ExtResource("crack_01"), ExtResource("crack_02"), ExtResource("crack_03"), ExtResource("crack_04"), ExtResource("crack_05"), ExtResource("crack_06"), ExtResource("crack_07"), ExtResource("crack_08"), ExtResource("crack_09"), ExtResource("crack_10")])
+stones = Array[Texture2D]([ExtResource("small_rock_01"), ExtResource("small_rock_02"), ExtResource("small_rock_03"), ExtResource("small_rock_04"), ExtResource("small_rock_05"), ExtResource("small_rock_06"), ExtResource("small_rock_07")])
+patch_material = SubResource("material")

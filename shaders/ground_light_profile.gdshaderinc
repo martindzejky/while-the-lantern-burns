@@ -1,22 +1,37 @@
-// profile: inner radius, brightness before step, after step, at outer edge.
-const vec4 MINIMUM_LIGHT_PROFILE = vec4(0.3, 0.94, 0.8, 0.3);
-const vec4 FULL_LIGHT_PROFILE = vec4(0.4, 0.94, 0.8, 0.3);
-// total width of the inner transition, as a fraction of the light radius.
-const float INNER_TRANSITION_WIDTH = 0.03;
+uniform sampler2D ground_light_curve : filter_linear, repeat_disable;
+uniform float light_edge_noise_strength : hint_range(0.0, 0.1, 0.001) = 0.025;
+uniform float light_edge_noise_scale : hint_range(0.1, 10.0, 0.1) = 1.8;
+
+varying vec2 ground_world_position;
+
+void vertex() {
+  ground_world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz;
+}
+
+float ground_hash(vec2 position) {
+  return fract(sin(dot(position, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+float ground_noise(vec2 position) {
+  vec2 cell = floor(position);
+  vec2 fraction = fract(position);
+  vec2 blend = fraction * fraction * (3.0 - 2.0 * fraction);
+  return mix(
+    mix(ground_hash(cell), ground_hash(cell + vec2(1.0, 0.0)), blend.x),
+    mix(ground_hash(cell + vec2(0.0, 1.0)), ground_hash(cell + vec2(1.0)), blend.x),
+    blend.y
+  );
+}
 
 float ground_light_profile(float attenuation, vec3 light_color, bool directional) {
   if (directional) {
     return step(0.001, attenuation);
   }
-  // invert Godot's (1 - distance^4)^2 range falloff with omni_attenuation = 0.
-  // zero attenuation includes real cast shadows, so they remain completely dark.
+  // invert Godot's range falloff with omni_attenuation = 0; shadows stay dark.
   float radius = pow(max(1.0 - sqrt(clamp(attenuation, 0.0, 1.0)), 0.0), 0.25);
-  float energy = max(light_color.r, max(light_color.g, light_color.b)) / PI;
-  float charge = clamp((energy - 0.15) / (1.1 - 0.15), 0.0, 1.0);
-  vec4 profile = mix(MINIMUM_LIGHT_PROFILE, FULL_LIGHT_PROFILE, charge);
-  float inner = mix(1.0, profile.y, clamp(radius / profile.x, 0.0, 1.0));
-  float outer = mix(profile.z, profile.w, clamp((radius - profile.x) / (1.0 - profile.x), 0.0, 1.0));
-  float half_width = max(INNER_TRANSITION_WIDTH * 0.5, 0.0001);
-  float transition = smoothstep(profile.x - half_width, profile.x + half_width, radius);
-  return mix(inner, outer, transition) * step(0.001, attenuation);
+  float edge_noise = ground_noise(ground_world_position * light_edge_noise_scale);
+  // only shrink the boundary, keeping light within its actual range and shadows.
+  radius += edge_noise * light_edge_noise_strength * radius * radius * radius;
+  float profile = texture(ground_light_curve, vec2(clamp(1.0 - radius, 0.0, 1.0), 0.5)).r;
+  return profile * step(radius, 1.0) * step(0.001, attenuation);
 }

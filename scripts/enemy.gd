@@ -73,7 +73,7 @@ func _set_appearance() -> void:
   head_sprite.texture = _pick_texture(head_textures, head_variant)
   body.texture = _pick_texture(body_textures, body_variant)
   eyes.texture = _pick_texture(eye_textures, eye_variant)
-  appearance.scale = Vector3.ONE * randf_range(1.0 - size_variation, 1.0 + size_variation)
+  appearance.scale *= randf_range(1.0 - size_variation, 1.0 + size_variation)
   var body_height := body.texture.get_height() * body.pixel_size
   var head_height := head_sprite.texture.get_height() * head_sprite.pixel_size
   body.offset.y = body.texture.get_height() * 0.5
