@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://by6jxo44b17at"]
+
+[ext_resource type="Texture2D" uid="uid://d2c47kpmb73um" path="res://sprites/lantern_ui_body.png" id="body"]
+[ext_resource type="Texture2D" uid="uid://b23ljjugvy28f" path="res://sprites/lantern_ui_cap.png" id="cap"]
+[ext_resource type="Texture2D" uid="uid://bgt4blsdyiwfy" path="res://sprites/lantern_ui_knob.png" id="knob"]
+[ext_resource type="Texture2D" uid="uid://dm07hnfmw5wgj" path="res://sprites/lantern_ui_lever.png" id="lever"]
+
+[node name="lantern_ui" type="Control" unique_id=1816983245]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -430.0
+offset_right = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="body" type="Control" parent="." unique_id=733818548]
+anchors_preset = 0
+offset_left = 95.0
+offset_right = 290.0
+offset_bottom = 382.0
+mouse_filter = 2
+
+[node name="sprite" type="TextureRect" parent="body" unique_id=672344850]
+z_as_relative = false
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 382.0
+mouse_filter = 2
+texture = ExtResource("body")
+expand_mode = 1
+
+[node name="lever" type="Control" parent="." unique_id=1532074841]
+anchors_preset = 0
+offset_left = 138.0
+offset_top = 262.0
+offset_right = 138.0
+offset_bottom = 262.0
+mouse_filter = 2
+
+[node name="handle" type="TextureRect" parent="lever" unique_id=1434853150]
+z_index = 1
+z_as_relative = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 89.0
+mouse_filter = 2
+texture = ExtResource("lever")
+expand_mode = 1
+
+[node name="cap" type="TextureRect" parent="lever" unique_id=398250613]
+z_index = 3
+z_as_relative = false
+layout_mode = 0
+offset_left = -9.0
+offset_top = -10.0
+offset_right = 9.0
+offset_bottom = 10.0
+mouse_filter = 2
+texture = ExtResource("cap")
+expand_mode = 1
+
+[node name="knob" type="TextureRect" parent="." unique_id=1880199193]
+z_index = 2
+z_as_relative = false
+layout_mode = 0
+offset_left = 117.0
+offset_top = 239.0
+offset_right = 159.0
+offset_bottom = 284.0
+mouse_filter = 2
+texture = ExtResource("knob")
+expand_mode = 1
