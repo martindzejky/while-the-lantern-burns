@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/drop_shadow.gd" id="1"]
+
+[sub_resource type="Gradient" id="circle"]
+interpolation_mode = 1
+colors = PackedColorArray(0, 0, 0, 0.32, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="texture"]
+gradient = SubResource("circle")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="drop_shadow" type="Sprite3D" node_paths=PackedStringArray("anchor")]
+rotation = Vector3(-1.5707963, 0, 0)
+layers = 4
+cast_shadow = 0
+pixel_size = 0.008
+texture = SubResource("texture")
+script = ExtResource("1")

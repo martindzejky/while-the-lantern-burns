@@ -80,9 +80,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 musket = NodePath("../musket")
 lantern = NodePath("../lantern")
 
+[node name="shadow" parent="player" node_paths=PackedStringArray("light_source")]
+light_source = NodePath("../../lantern")
+
 [node name="camera" type="Camera3D" parent="player" unique_id=1545861327]
 transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 10, 12)
-cull_mask = 1
+cull_mask = 5
 current = true
 fov = 55.0
 
@@ -91,6 +94,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 
 [node name="musket" parent="." unique_id=1198564765 instance=ExtResource("5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
+
+[node name="shadow" parent="musket" node_paths=PackedStringArray("light_source")]
+light_source = NodePath("../../lantern")
 
 [node name="hud" type="CanvasLayer" parent="." unique_id=997754346]
 

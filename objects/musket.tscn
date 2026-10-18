@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://fe24h0njihi4" path="res://effects/muzzle_flash.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://pbep40okecmw" path="res://effects/musket_smoke.tscn" id="6"]
 
+[ext_resource type="PackedScene" path="res://objects/drop_shadow.tscn" id="shadow"]
+
 [sub_resource type="ShaderMaterial" id="material"]
 render_priority = 0
 shader = ExtResource("4")
@@ -64,3 +66,9 @@ gravity = Vector3(0, -1, 0)
 initial_velocity_min = 0.2
 initial_velocity_max = 0.6
 color_ramp = SubResource("spark_fade")
+
+[node name="shadow" parent="." node_paths=PackedStringArray("anchor") instance=ExtResource("shadow")]
+anchor = NodePath("..")
+pixel_size = 0.0055
+
+[connection signal="equipped" from="." to="shadow" method="hide"]

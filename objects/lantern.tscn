@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://dp4r0732t61ar" path="res://scripts/camera_facing.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cy42a8y3lyufq" path="res://sprites/lantern_world.png" id="3"]
 
+[ext_resource type="PackedScene" path="res://objects/drop_shadow.tscn" id="shadow"]
+
 [node name="lantern" type="Node3D" unique_id=709075666 node_paths=PackedStringArray("light", "visuals")]
 script = ExtResource("1")
 light = NodePath("visuals/light")
@@ -30,3 +32,9 @@ shadow_enabled = true
 shadow_blur = 0.0
 omni_range = 6.0
 omni_attenuation = 0.0
+
+[node name="shadow" parent="." node_paths=PackedStringArray("anchor") instance=ExtResource("shadow")]
+anchor = NodePath("..")
+pixel_size = 0.0035
+
+[connection signal="carried_changed" from="." to="shadow" method="set_carried"]

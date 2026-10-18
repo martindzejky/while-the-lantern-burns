@@ -5,6 +5,8 @@
 [ext_resource type="Shader" uid="uid://owwq0vhtovdm" path="res://shaders/player_lighting.gdshader" id="3"]
 [ext_resource type="PackedScene" uid="uid://c616kmmr8did" path="res://objects/light_sensor.tscn" id="4"]
 
+[ext_resource type="PackedScene" path="res://objects/drop_shadow.tscn" id="shadow"]
+
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.475
 height = 1.2
@@ -81,5 +83,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.55, 0.15)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.813, 0, 0.15)
 
 [node name="light_sensor" parent="." unique_id=324174042 instance=ExtResource("4")]
+
+[node name="shadow" parent="." node_paths=PackedStringArray("anchor") instance=ExtResource("shadow")]
+anchor = NodePath("..")
+pixel_size = 0.008
 
 [connection signal="light_changed" from="light_sensor" to="." method="_on_light_sensor_light_changed"]
