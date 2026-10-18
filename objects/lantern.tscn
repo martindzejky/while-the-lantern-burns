@@ -3,14 +3,19 @@
 [ext_resource type="Script" uid="uid://ds3fqg0cq3s7i" path="res://scripts/lantern.gd" id="1"]
 [ext_resource type="Script" uid="uid://dp4r0732t61ar" path="res://scripts/camera_facing.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cy42a8y3lyufq" path="res://sprites/lantern_world.png" id="3"]
-
 [ext_resource type="PackedScene" path="res://objects/drop_shadow.tscn" id="shadow"]
+
+[sub_resource type="FastNoiseLite" id="flicker_noise"]
+frequency = 2.0
+fractal_octaves = 2
 
 [node name="lantern" type="Node3D" unique_id=709075666 node_paths=PackedStringArray("light", "visuals")]
 script = ExtResource("1")
 light = NodePath("visuals/light")
 visuals = NodePath("visuals")
 min_radius = 0.6
+flicker_noise = SubResource("flicker_noise")
+flicker_amount = 0.03
 
 [node name="visuals" type="Node3D" parent="." unique_id=241417503]
 script = ExtResource("2")
@@ -33,8 +38,9 @@ shadow_blur = 0.0
 omni_range = 6.0
 omni_attenuation = 0.0
 
-[node name="shadow" parent="." node_paths=PackedStringArray("anchor") instance=ExtResource("shadow")]
-anchor = NodePath("..")
+[node name="shadow" parent="." unique_id=1594059550 node_paths=PackedStringArray("anchor") instance=ExtResource("shadow")]
+transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
 pixel_size = 0.0035
+anchor = NodePath("..")
 
 [connection signal="carried_changed" from="." to="shadow" method="set_carried"]
