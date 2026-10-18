@@ -51,6 +51,11 @@ func _on_menu_requested() -> void:
 func _on_exit_body_entered(body: Node3D) -> void:
   if body != player or not _active or player.is_dead:
     return
+  _active = false
+  _finish_escape.call_deferred()
+
+
+func _finish_escape() -> void:
   set_active(false)
   hud.hide()
   process_mode = Node.PROCESS_MODE_DISABLED
