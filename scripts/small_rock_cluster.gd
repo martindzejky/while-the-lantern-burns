@@ -51,7 +51,8 @@ func generate() -> void:
     rock.scale = Vector3(size, size * random.randf_range(0.85, 1.15), size)
     rock.set_meta('small_rock_cluster_generated', true)
     add_child(rock)
-    rock.owner = owner if owner != null else self
+    # previews in the template scene must not become inherited rocks
+    rock.owner = owner
 
 
 func _inside_ground(local_position: Vector3, size: float) -> bool:

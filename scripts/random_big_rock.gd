@@ -29,7 +29,8 @@ func generate() -> void:
   rock.scale = Vector3(size, size * random.randf_range(height_range.x, height_range.y), size)
   rock.set_meta('random_big_rock_generated', true)
   add_child(rock)
-  rock.owner = owner if owner != null else self
+  # previews in the template scene must not become inherited rocks
+  rock.owner = owner
 
 
 func get_footprint_radius() -> float:

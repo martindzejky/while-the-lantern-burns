@@ -12,19 +12,3 @@
 [node name="small_rock_cluster" type="Node3D" unique_id=265888818]
 script = ExtResource("script")
 rock_scenes = Array[PackedScene]([ExtResource("rock_01"), ExtResource("rock_02"), ExtResource("rock_03"), ExtResource("rock_04"), ExtResource("rock_05"), ExtResource("rock_06"), ExtResource("rock_07")])
-
-[node name="rock_01" type="StaticBody3D" parent="." unique_id=433123781 instance=ExtResource("rock_07")]
-transform = Transform3D(1.1997397, 0, 0, 0, 1.3517332, 0, 0, 0, 1.1997397, -0.70139796, 0, -0.28003755)
-metadata/small_rock_cluster_generated = true
-
-[node name="rock_02" type="StaticBody3D" parent="." unique_id=1280082663 instance=ExtResource("rock_07")]
-transform = Transform3D(1.4785404, 0, 0, 0, 1.5699953, 0, 0, 0, 1.4785404, -0.2559961, 0, 0.71696424)
-metadata/small_rock_cluster_generated = true
-
-[node name="rock_03" type="StaticBody3D" parent="." unique_id=1728641663 instance=ExtResource("rock_02")]
-transform = Transform3D(1.4734348, 0, 0, 0, 1.472741, 0, 0, 0, 1.4734348, 0.6066065, 0, 0.055541284)
-metadata/small_rock_cluster_generated = true
-
-[node name="rock_04" type="StaticBody3D" parent="." unique_id=198676513 instance=ExtResource("rock_05")]
-transform = Transform3D(1.1969452, 0, 0, 0, 1.1880214, 0, 0, 0, 1.1969452, -0.20288761, 0, -0.5025797)
-metadata/small_rock_cluster_generated = true

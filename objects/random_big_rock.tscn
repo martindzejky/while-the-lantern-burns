@@ -13,7 +13,3 @@
 [node name="random_big_rock" type="Node3D" unique_id=294755677]
 script = ExtResource("script")
 rock_scenes = Array[PackedScene]([ExtResource("rock_01"), ExtResource("rock_02"), ExtResource("rock_03"), ExtResource("rock_04"), ExtResource("rock_05"), ExtResource("rock_06"), ExtResource("rock_07"), ExtResource("rock_08")])
-
-[node name="rock" type="StaticBody3D" parent="." unique_id=20366013 instance=ExtResource("rock_03")]
-transform = Transform3D(1.0709323, 0, 0, 0, 1.0158887, 0, 0, 0, 1.0709323, 0, 0, 0)
-metadata/random_big_rock_generated = true
