@@ -48,5 +48,5 @@ These are what I wanted to try out:
 - VS Code - My code editor of choice.
 - Codex - Coding agent writing the code (I make the choices).
 - ElevenLabs - Used their audio samples for sound effects and ambience in the game.
-- Ableton - Making music for the game, editing audio, composing sounds.
+- Ableton - Editing and layering sounds.
 - LosslessCut - Quick cropping of audio samples.
