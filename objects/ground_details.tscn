@@ -1,47 +1,51 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dlg408i3gtgkm"]
 
-[ext_resource type="Script" path="res://scripts/ground_details.gd" id="script"]
-[ext_resource type="Shader" path="res://shaders/ground_details.gdshader" id="shader"]
-[ext_resource type="Shader" path="res://shaders/ground_pebbles.gdshader" id="stone_shader"]
-[ext_resource type="Texture2D" path="res://sprites/crack_01.png" id="crack_01"]
-[ext_resource type="Texture2D" path="res://sprites/crack_02.png" id="crack_02"]
-[ext_resource type="Texture2D" path="res://sprites/crack_03.png" id="crack_03"]
-[ext_resource type="Texture2D" path="res://sprites/crack_04.png" id="crack_04"]
-[ext_resource type="Texture2D" path="res://sprites/crack_05.png" id="crack_05"]
-[ext_resource type="Texture2D" path="res://sprites/crack_06.png" id="crack_06"]
-[ext_resource type="Texture2D" path="res://sprites/crack_07.png" id="crack_07"]
-[ext_resource type="Texture2D" path="res://sprites/crack_08.png" id="crack_08"]
-[ext_resource type="Texture2D" path="res://sprites/crack_09.png" id="crack_09"]
-[ext_resource type="Texture2D" path="res://sprites/crack_10.png" id="crack_10"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_01.png" id="small_rock_01"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_02.png" id="small_rock_02"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_03.png" id="small_rock_03"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_04.png" id="small_rock_04"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_05.png" id="small_rock_05"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_06.png" id="small_rock_06"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_07.png" id="small_rock_07"]
-
-[ext_resource type="Texture2D" path="res://sprites/small_rock_01_normal.png" id="normal_01"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_02_normal.png" id="normal_02"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_03_normal.png" id="normal_03"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_04_normal.png" id="normal_04"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_05_normal.png" id="normal_05"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_06_normal.png" id="normal_06"]
-[ext_resource type="Texture2D" path="res://sprites/small_rock_07_normal.png" id="normal_07"]
-
+[ext_resource type="Texture2D" uid="uid://d0ivp2rmf0dr6" path="res://sprites/crack_01.png" id="crack_01"]
+[ext_resource type="Texture2D" uid="uid://csgoygasre0bk" path="res://sprites/crack_02.png" id="crack_02"]
+[ext_resource type="Texture2D" uid="uid://bbe258pb3bwb7" path="res://sprites/crack_03.png" id="crack_03"]
+[ext_resource type="Texture2D" uid="uid://yyg5g7iqjcw4" path="res://sprites/crack_04.png" id="crack_04"]
+[ext_resource type="Texture2D" uid="uid://bx8krblolkoc7" path="res://sprites/crack_05.png" id="crack_05"]
+[ext_resource type="Texture2D" uid="uid://xabvetxhxam8" path="res://sprites/crack_06.png" id="crack_06"]
+[ext_resource type="Texture2D" uid="uid://chc63pu7rk8ab" path="res://sprites/crack_07.png" id="crack_07"]
+[ext_resource type="Texture2D" uid="uid://cx1sdai0kmoq4" path="res://sprites/crack_08.png" id="crack_08"]
+[ext_resource type="Texture2D" uid="uid://c201xe2rf1yli" path="res://sprites/crack_09.png" id="crack_09"]
+[ext_resource type="Texture2D" uid="uid://cdsm0wctg2gmo" path="res://sprites/crack_10.png" id="crack_10"]
 [ext_resource type="Texture2D" path="res://resources/ground/light_profile.tres" id="light_profile"]
-
+[ext_resource type="Texture2D" uid="uid://de7i6d7ukcrv4" path="res://sprites/small_rock_01_normal.png" id="normal_01"]
+[ext_resource type="Texture2D" uid="uid://caa2fswbrqf8a" path="res://sprites/small_rock_02_normal.png" id="normal_02"]
+[ext_resource type="Texture2D" uid="uid://csobroyncy1qo" path="res://sprites/small_rock_03_normal.png" id="normal_03"]
+[ext_resource type="Texture2D" uid="uid://dgw73pqd6m5up" path="res://sprites/small_rock_04_normal.png" id="normal_04"]
+[ext_resource type="Texture2D" uid="uid://no8jkfuqn5ay" path="res://sprites/small_rock_05_normal.png" id="normal_05"]
+[ext_resource type="Texture2D" uid="uid://cufbysias648g" path="res://sprites/small_rock_06_normal.png" id="normal_06"]
+[ext_resource type="Texture2D" uid="uid://bjwmym5b3uawg" path="res://sprites/small_rock_07_normal.png" id="normal_07"]
+[ext_resource type="Script" uid="uid://b22vr2w0jnx02" path="res://scripts/ground_details.gd" id="script"]
+[ext_resource type="Shader" uid="uid://chc6ykcrryc8p" path="res://shaders/ground_details.gdshader" id="shader"]
+[ext_resource type="Texture2D" uid="uid://beilaquq2oe81" path="res://sprites/small_rock_01.png" id="small_rock_01"]
+[ext_resource type="Texture2D" uid="uid://b4dw23sime06l" path="res://sprites/small_rock_02.png" id="small_rock_02"]
+[ext_resource type="Texture2D" uid="uid://ldtwiynrdc87" path="res://sprites/small_rock_03.png" id="small_rock_03"]
+[ext_resource type="Texture2D" uid="uid://dk4024tygtfiy" path="res://sprites/small_rock_04.png" id="small_rock_04"]
+[ext_resource type="Texture2D" uid="uid://cwoy7o3qqvitf" path="res://sprites/small_rock_05.png" id="small_rock_05"]
+[ext_resource type="Texture2D" uid="uid://ihonfis1di4t" path="res://sprites/small_rock_06.png" id="small_rock_06"]
+[ext_resource type="Texture2D" uid="uid://lqrqmsg4brhk" path="res://sprites/small_rock_07.png" id="small_rock_07"]
+[ext_resource type="Shader" uid="uid://bhovwctme3phi" path="res://shaders/ground_pebbles.gdshader" id="stone_shader"]
 [ext_resource type="Texture2D" path="res://resources/ground/world_light_profile.tres" id="world_light_profile"]
 
 [sub_resource type="ShaderMaterial" id="material"]
+render_priority = 0
 shader = ExtResource("shader")
 shader_parameter/ground_light_curve = ExtResource("light_profile")
 shader_parameter/world_light_curve = ExtResource("world_light_profile")
+shader_parameter/light_edge_noise_strength = 0.025
+shader_parameter/light_edge_noise_scale = 1.8
+shader_parameter/use_normal_map = false
+shader_parameter/opacity = 0.8
 
 [sub_resource type="ShaderMaterial" id="stone_material"]
+render_priority = 0
 shader = ExtResource("stone_shader")
+shader_parameter/minimum_brightness = 0.04
 
-[node name="ground_details" type="Node3D"]
+[node name="ground_details" type="Node3D" unique_id=2137737590]
 script = ExtResource("script")
 cracks = Array[Texture2D]([ExtResource("crack_01"), ExtResource("crack_02"), ExtResource("crack_03"), ExtResource("crack_04"), ExtResource("crack_05"), ExtResource("crack_06"), ExtResource("crack_07"), ExtResource("crack_08"), ExtResource("crack_09"), ExtResource("crack_10")])
 stones = Array[Texture2D]([ExtResource("small_rock_01"), ExtResource("small_rock_02"), ExtResource("small_rock_03"), ExtResource("small_rock_04"), ExtResource("small_rock_05"), ExtResource("small_rock_06"), ExtResource("small_rock_07")])

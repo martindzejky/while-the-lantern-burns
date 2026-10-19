@@ -2,16 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cwsar4g8vkhkt" path="res://scripts/player.gd" id="1"]
 [ext_resource type="Script" uid="uid://dp4r0732t61ar" path="res://scripts/camera_facing.gd" id="2"]
-[ext_resource type="PackedScene" path="res://objects/character_rig.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cjb60o8i680x1" path="res://objects/character_rig.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://c616kmmr8did" path="res://objects/light_sensor.tscn" id="4"]
-
-[ext_resource type="PackedScene" path="res://objects/drop_shadow.tscn" id="shadow"]
-
-[ext_resource type="AudioStream" path="res://audio/player/footsteps.tres" id="footsteps"]
-
 [ext_resource type="AudioStream" path="res://audio/player/body.tres" id="body_audio"]
-
-[ext_resource type="PackedScene" path="res://objects/darkness_audio.tscn" id="darkness_audio"]
+[ext_resource type="PackedScene" uid="uid://niw08um2kh46" path="res://objects/darkness_audio.tscn" id="darkness_audio"]
+[ext_resource type="AudioStream" path="res://audio/player/footsteps.tres" id="footsteps"]
+[ext_resource type="PackedScene" uid="uid://djy410esc62bm" path="res://objects/drop_shadow.tscn" id="shadow"]
 
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.475
@@ -25,7 +21,7 @@ gradient = SubResource("aim_color")
 width = 1
 height = 1
 
-[node name="player" type="CharacterBody3D" unique_id=1376385991 node_paths=PackedStringArray("rig", "drop_slot", "aim_line", "light_sensor", "audio_listener", "footstep_audio", "body_audio")]
+[node name="player" type="CharacterBody3D" unique_id=1376385991 node_paths=PackedStringArray("rig", "drop_slot", "aim_line", "light_sensor", "body_audio", "footstep_audio", "audio_listener")]
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1")
@@ -33,12 +29,12 @@ rig = NodePath("visuals/character_rig")
 drop_slot = NodePath("drop_slot")
 aim_line = NodePath("aim_line")
 light_sensor = NodePath("light_sensor")
-audio_listener = NodePath("audio_listener")
-footstep_audio = NodePath("footstep_audio")
 body_audio = NodePath("body_audio")
+footstep_audio = NodePath("footstep_audio")
+audio_listener = NodePath("audio_listener")
 
-[node name="audio_listener" type="AudioListener3D" parent="."]
-position = Vector3(0, 0.7, 0)
+[node name="audio_listener" type="AudioListener3D" parent="." unique_id=276460405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="shape" type="CollisionShape3D" parent="." unique_id=2138894733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
@@ -53,38 +49,33 @@ texture = SubResource("aim_texture")
 [node name="visuals" type="Node3D" parent="." unique_id=1961632350]
 script = ExtResource("2")
 
-[node name="character_rig" parent="visuals" instance=ExtResource("3")]
+[node name="character_rig" parent="visuals" unique_id=61604420 instance=ExtResource("3")]
 
 [node name="drop_slot" type="Marker3D" parent="." unique_id=207987825]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.813, 0, 0.15)
 
 [node name="light_sensor" parent="." unique_id=324174042 instance=ExtResource("4")]
 
-[node name="shadow" parent="." node_paths=PackedStringArray("anchor") instance=ExtResource("shadow")]
+[node name="shadow" parent="." unique_id=1776978813 node_paths=PackedStringArray("anchor") instance=ExtResource("shadow")]
 anchor = NodePath("..")
-pixel_size = 0.008
 
-[node name="footstep_audio" type="AudioStreamPlayer3D" parent="."]
+[node name="footstep_audio" type="AudioStreamPlayer3D" parent="." unique_id=1882856814]
 stream = ExtResource("footsteps")
 volume_db = -15.0
-max_polyphony = 1
 max_distance = 30.0
 bus = &"World SFX"
 
-[node name="body_audio" type="AudioStreamPlayer3D" parent="."]
+[node name="body_audio" type="AudioStreamPlayer3D" parent="." unique_id=1333383196]
 stream = ExtResource("body_audio")
 volume_db = -10.0
-max_polyphony = 1
 max_distance = 30.0
 bus = &"World SFX"
 
-[node name="darkness_audio" parent="." instance=ExtResource("darkness_audio")]
+[node name="darkness_audio" parent="." unique_id=812645579 instance=ExtResource("darkness_audio")]
 
-[connection signal="light_changed" from="light_sensor" to="." method="_on_light_sensor_light_changed"]
-[connection signal="stepped" from="visuals/character_rig" to="." method="_on_rig_stepped"]
-
-[connection signal="darkness_progress_changed" from="." to="darkness_audio" method="_on_darkness_progress_changed"]
 [connection signal="darkness_killed" from="." to="darkness_audio" method="_on_darkness_killed"]
+[connection signal="darkness_progress_changed" from="." to="darkness_audio" method="_on_darkness_progress_changed"]
 [connection signal="died" from="." to="darkness_audio" method="_on_player_died"]
-
+[connection signal="stepped" from="visuals/character_rig" to="." method="_on_rig_stepped"]
 [connection signal="exposure_changed" from="light_sensor" to="." method="_on_light_sensor_exposure_changed"]
+[connection signal="light_changed" from="light_sensor" to="." method="_on_light_sensor_light_changed"]

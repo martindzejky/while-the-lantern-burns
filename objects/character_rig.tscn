@@ -6,8 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bbv6nfm1yqhik" path="res://sprites/character_head_front.png" id="3_8obkq"]
 [ext_resource type="Texture2D" uid="uid://c2etkmqcj25l1" path="res://sprites/character_arm.png" id="4_2cmcp"]
 [ext_resource type="Texture2D" uid="uid://btqymc4cu6r8u" path="res://sprites/character_leg.png" id="5_f2jqx"]
-[ext_resource type="Texture2D" path="res://sprites/character_head_back.png" id="head_back"]
-[ext_resource type="Texture2D" path="res://sprites/character_torso_back.png" id="torso_back"]
 [ext_resource type="Animation" path="res://animations/character/reset.tres" id="7_xdvdo"]
 [ext_resource type="Animation" path="res://animations/character/aim_musket.tres" id="8_5xyad"]
 [ext_resource type="Animation" uid="uid://cmsv4ti6kpdlf" path="res://animations/character/breathe.tres" id="9_kbqru"]
@@ -15,9 +13,10 @@
 [ext_resource type="Animation" path="res://animations/character/death.tres" id="11_t27r0"]
 [ext_resource type="Animation" path="res://animations/character/hold_musket.tres" id="12_r1ivy"]
 [ext_resource type="Animation" path="res://animations/character/idle.tres" id="13_xf1mv"]
-[ext_resource type="Animation" path="res://animations/character/run.tres" id="14_8vffn"]
-
+[ext_resource type="Animation" uid="uid://stpy6bbndvr3" path="res://animations/character/run.tres" id="14_8vffn"]
 [ext_resource type="Animation" path="res://animations/character/aim_offset.tres" id="aim_offset"]
+[ext_resource type="Texture2D" uid="uid://b8g0sr2836jtp" path="res://sprites/character_head_back.png" id="head_back"]
+[ext_resource type="Texture2D" uid="uid://sjslryl8e2cy" path="res://sprites/character_torso_back.png" id="torso_back"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ajux4"]
 resource_local_to_scene = true
@@ -64,6 +63,13 @@ _data = {
 &"idle": ExtResource("13_xf1mv"),
 &"run": ExtResource("14_8vffn")
 }
+
+[sub_resource type="AnimationNodeAdd2" id="aim"]
+filter_enabled = true
+filters = ["flip/skeleton:neck", "flip/skeleton:shoulder_left", "flip/skeleton:shoulder_right"]
+
+[sub_resource type="AnimationNodeAnimation" id="aim_offset"]
+animation = &"aim_offset"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_83j6w"]
 animation = &"breathe"
@@ -130,13 +136,6 @@ animation = &"run"
 filter_enabled = true
 filters = [".:musket_angle", "flip/skeleton:arm_left", "flip/skeleton:arm_right", "flip/skeleton:hand_left", "flip/skeleton:hand_right", "flip/skeleton:head"]
 
-[sub_resource type="AnimationNodeAnimation" id="aim_offset"]
-animation = &"aim_offset"
-
-[sub_resource type="AnimationNodeAdd2" id="aim"]
-filter_enabled = true
-filters = ["flip/skeleton:shoulder_left", "flip/skeleton:shoulder_right", "flip/skeleton:neck"]
-
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b23ua"]
 nodes/idle/node = SubResource("AnimationNodeAnimation_sgsuk")
 nodes/idle/position = Vector2(-900, 0)
@@ -186,7 +185,7 @@ left_hand_slot = NodePath("flip/skeleton/hand_left/slot")
 right_hand_slot = NodePath("flip/skeleton/hand_right/slot")
 back_slot = NodePath("flip/skeleton/back/slot")
 
-[node name="flip" type="Node3D" parent="."]
+[node name="flip" type="Node3D" parent="." unique_id=29636951]
 
 [node name="skeleton" type="Skeleton3D" parent="flip" unique_id=376383922]
 bones/0/name = "torso"
@@ -280,7 +279,7 @@ bone_name = "torso"
 bone_idx = 0
 
 [node name="sprite" type="Sprite3D" parent="flip/skeleton/torso" unique_id=731161041]
-position = Vector3(0, 0.65, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 material_override = SubResource("ShaderMaterial_ajux4")
 cast_shadow = 0
 offset = Vector2(0, -188)
@@ -370,7 +369,7 @@ bone_idx = 10
 [node name="slot" type="Marker3D" parent="flip/skeleton/hand_right" unique_id=1095214045]
 
 [node name="back" type="BoneAttachment3D" parent="flip/skeleton" unique_id=1633488122]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.34999996, -0.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.35, -0.1)
 bone_name = "back"
 bone_idx = 11
 

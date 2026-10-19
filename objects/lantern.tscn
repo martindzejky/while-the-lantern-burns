@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" path="res://audio/lantern/lever.tres" id="lever_audio"]
 [ext_resource type="AudioStream" path="res://audio/lantern/pickup.tres" id="pickup_audio"]
 [ext_resource type="Curve" uid="uid://cm2dtqwm0w056" path="res://resources/lantern/radius.tres" id="radius_curve"]
-[ext_resource type="PackedScene" path="res://objects/drop_shadow.tscn" id="shadow"]
+[ext_resource type="PackedScene" uid="uid://djy410esc62bm" path="res://objects/drop_shadow.tscn" id="shadow"]
 
 [sub_resource type="FastNoiseLite" id="flicker_noise"]
 frequency = 2.0
@@ -25,7 +25,6 @@ pickup_audio = NodePath("pickup_audio")
 drop_audio = NodePath("drop_audio")
 lever_audio = NodePath("lever_audio")
 carry_audio = NodePath("carry_audio")
-initial_energy = 100.0
 min_radius = 0.6
 max_brightness = 1.4
 radius_curve = ExtResource("radius_curve")
@@ -61,7 +60,6 @@ omni_attenuation = 0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77, 0)
 
 [node name="shadow" parent="." unique_id=1594059550 node_paths=PackedStringArray("anchor") instance=ExtResource("shadow")]
-transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
 pixel_size = 0.0035
 anchor = NodePath("..")
 

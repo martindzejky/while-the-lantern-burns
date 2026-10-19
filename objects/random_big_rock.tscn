@@ -1,15 +1,19 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://j8olerx61rht"]
 
-[ext_resource type="Script" path="res://scripts/random_big_rock.gd" id="script"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_01.tscn" id="rock_01"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_02.tscn" id="rock_02"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_03.tscn" id="rock_03"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_04.tscn" id="rock_04"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_05.tscn" id="rock_05"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_06.tscn" id="rock_06"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_07.tscn" id="rock_07"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_08.tscn" id="rock_08"]
+[ext_resource type="PackedScene" uid="uid://odumffg7yfr1" path="res://objects/big_rock_01.tscn" id="rock_01"]
+[ext_resource type="PackedScene" uid="uid://djk0sh2numjnd" path="res://objects/big_rock_02.tscn" id="rock_02"]
+[ext_resource type="PackedScene" uid="uid://bd1pkpe5kcxf6" path="res://objects/big_rock_03.tscn" id="rock_03"]
+[ext_resource type="PackedScene" uid="uid://bi4cxx4ajbs57" path="res://objects/big_rock_04.tscn" id="rock_04"]
+[ext_resource type="PackedScene" uid="uid://dyer8vsgv3sab" path="res://objects/big_rock_05.tscn" id="rock_05"]
+[ext_resource type="PackedScene" uid="uid://eusyopafqhvr" path="res://objects/big_rock_06.tscn" id="rock_06"]
+[ext_resource type="PackedScene" uid="uid://dswxislnonhiw" path="res://objects/big_rock_07.tscn" id="rock_07"]
+[ext_resource type="PackedScene" uid="uid://yrm4kbry3gfe" path="res://objects/big_rock_08.tscn" id="rock_08"]
+[ext_resource type="Script" uid="uid://c6gh6v1sawggb" path="res://scripts/random_big_rock.gd" id="script"]
 
-[node name="random_big_rock" type="Node3D"]
+[node name="random_big_rock" type="Node3D" unique_id=294755677]
 script = ExtResource("script")
 rock_scenes = Array[PackedScene]([ExtResource("rock_01"), ExtResource("rock_02"), ExtResource("rock_03"), ExtResource("rock_04"), ExtResource("rock_05"), ExtResource("rock_06"), ExtResource("rock_07"), ExtResource("rock_08")])
+
+[node name="rock" type="StaticBody3D" parent="." unique_id=20366013 instance=ExtResource("rock_03")]
+transform = Transform3D(1.0709323, 0, 0, 0, 1.0158887, 0, 0, 0, 1.0709323, 0, 0, 0)
+metadata/random_big_rock_generated = true

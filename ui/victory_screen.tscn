@@ -1,11 +1,11 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dnvi0br5xmw6g"]
 
-[ext_resource type="Script" path="res://scripts/victory_screen.gd" id="script"]
-[ext_resource type="Theme" path="res://resources/menu/theme.tres" id="theme"]
-[ext_resource type="FontFile" path="res://resources/menu/barlow_medium.ttf" id="medium"]
-[ext_resource type="PackedScene" path="res://ui/ui_audio.tscn" id="audio"]
+[ext_resource type="PackedScene" uid="uid://bc8cqpt06nl08" path="res://ui/ui_audio.tscn" id="audio"]
+[ext_resource type="FontFile" uid="uid://edm7qhympbho" path="res://resources/menu/barlow_medium.ttf" id="medium"]
+[ext_resource type="Script" uid="uid://cfrdjgss1fy2d" path="res://scripts/victory_screen.gd" id="script"]
+[ext_resource type="Theme" uid="uid://drxw11x7lxcwj" path="res://resources/menu/theme.tres" id="theme"]
 
-[node name="victory_screen" type="CanvasLayer" node_paths=PackedStringArray("panel", "menu_button")]
+[node name="victory_screen" type="CanvasLayer" unique_id=220950513 node_paths=PackedStringArray("panel", "menu_button")]
 process_mode = 3
 layer = 100
 visible = false
@@ -13,7 +13,7 @@ script = ExtResource("script")
 panel = NodePath("panel")
 menu_button = NodePath("panel/center/column/main_menu")
 
-[node name="panel" type="Control" parent="."]
+[node name="panel" type="Control" parent="." unique_id=1168189035]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,9 +22,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("theme")
 
-[node name="background" type="ColorRect" parent="panel"]
+[node name="background" type="ColorRect" parent="panel" unique_id=1862621713]
 layout_mode = 0
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -32,20 +31,19 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.98, 0.93, 0.8, 0.98)
 
-[node name="center" type="CenterContainer" parent="panel"]
+[node name="center" type="CenterContainer" parent="panel" unique_id=337074285]
 layout_mode = 0
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="column" type="VBoxContainer" parent="panel/center"]
+[node name="column" type="VBoxContainer" parent="panel/center" unique_id=676181113]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="title" type="Label" parent="panel/center/column"]
+[node name="title" type="Label" parent="panel/center/column" unique_id=1481056229]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.05, 0.15, 0.1, 1)
 theme_override_fonts/font = ExtResource("medium")
@@ -53,19 +51,19 @@ theme_override_font_sizes/font_size = 56
 text = "You found the daylight"
 horizontal_alignment = 1
 
-[node name="main_menu" type="Button" parent="panel/center/column"]
+[node name="main_menu" type="Button" parent="panel/center/column" unique_id=961209509]
 custom_minimum_size = Vector2(240, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.05, 0.15, 0.1, 1)
-theme_override_colors/font_hover_color = Color(0.4, 0.25, 0.1, 1)
 theme_override_colors/font_focus_color = Color(0.4, 0.25, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0.4, 0.25, 0.1, 1)
 text = "MAIN MENU"
 
-[node name="audio" parent="." instance=ExtResource("audio")]
+[node name="audio" parent="." unique_id=438617750 instance=ExtResource("audio")]
 
-[connection signal="pressed" from="panel/center/column/main_menu" to="audio" method="play_click"]
-[connection signal="pressed" from="panel/center/column/main_menu" to="." method="_on_menu_pressed"]
-[connection signal="mouse_entered" from="panel/center/column/main_menu" to="audio" method="play_hover"]
 [connection signal="focus_entered" from="panel/center/column/main_menu" to="audio" method="play_hover"]
+[connection signal="mouse_entered" from="panel/center/column/main_menu" to="audio" method="play_hover"]
+[connection signal="pressed" from="panel/center/column/main_menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="panel/center/column/main_menu" to="audio" method="play_click"]

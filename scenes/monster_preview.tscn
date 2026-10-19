@@ -1,7 +1,18 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b3fhibx4vtv06"]
 
-[ext_resource type="Script" path="res://scripts/monster_preview.gd" id="preview"]
-[ext_resource type="PackedScene" path="res://objects/enemy.tscn" id="enemy"]
+[ext_resource type="AudioStream" uid="uid://pxpxdop6yiuw" path="res://audio/enemy/growl_01.wav" id="3_q84vy"]
+[ext_resource type="AudioStream" uid="uid://r3j25a0vm43e" path="res://audio/enemy/growl_02.wav" id="4_ac856"]
+[ext_resource type="AudioStream" uid="uid://csnjyck16d06y" path="res://audio/enemy/growl_03.wav" id="5_67s6m"]
+[ext_resource type="AudioStream" uid="uid://doygxytmbxcer" path="res://audio/enemy/growl_04.wav" id="6_m6ots"]
+[ext_resource type="AudioStream" uid="uid://bkbjgtw04adkd" path="res://audio/enemy/growl_05.wav" id="7_jltox"]
+[ext_resource type="AudioStream" uid="uid://25gbpetk41ed" path="res://audio/enemy/growl_06.wav" id="8_dqoiv"]
+[ext_resource type="AudioStream" uid="uid://bhbmc7jy7xxgt" path="res://audio/enemy/bite_01.wav" id="9_s8f6o"]
+[ext_resource type="AudioStream" uid="uid://ngy3h1w8tg6q" path="res://audio/enemy/bite_02.wav" id="10_1rkuc"]
+[ext_resource type="AudioStream" uid="uid://cps01lv4uvcli" path="res://audio/enemy/death_01.wav" id="11_2ug37"]
+[ext_resource type="AudioStream" uid="uid://d0yyc7mxs5dqw" path="res://audio/enemy/death_02.wav" id="12_pwmj3"]
+[ext_resource type="AudioStream" uid="uid://bm146vegk4pb6" path="res://audio/enemy/death_03.wav" id="13_wvq61"]
+[ext_resource type="PackedScene" uid="uid://dnep4itj4mhsi" path="res://objects/enemy.tscn" id="enemy"]
+[ext_resource type="Script" uid="uid://dmip656mn0m77" path="res://scripts/monster_preview.gd" id="preview"]
 
 [sub_resource type="Environment" id="environment"]
 background_mode = 1
@@ -12,82 +23,269 @@ ambient_light_energy = 0.25
 
 [sub_resource type="StandardMaterial3D" id="ground"]
 albedo_color = Color(0.95, 0.7402083, 0.44650003, 1)
-roughness = 1.0
 
-[node name="monster_preview" type="Node3D" node_paths=PackedStringArray("camera")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nyuq6"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("3_q84vy")
+stream_1/stream = ExtResource("4_ac856")
+stream_2/stream = ExtResource("5_67s6m")
+stream_3/stream = ExtResource("6_m6ots")
+stream_4/stream = ExtResource("7_jltox")
+stream_5/stream = ExtResource("8_dqoiv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_38ga2"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("9_s8f6o")
+stream_1/stream = ExtResource("10_1rkuc")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cy4ql"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("11_2ug37")
+stream_1/stream = ExtResource("12_pwmj3")
+stream_2/stream = ExtResource("13_wvq61")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vldur"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("3_q84vy")
+stream_1/stream = ExtResource("4_ac856")
+stream_2/stream = ExtResource("5_67s6m")
+stream_3/stream = ExtResource("6_m6ots")
+stream_4/stream = ExtResource("7_jltox")
+stream_5/stream = ExtResource("8_dqoiv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5hrts"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("9_s8f6o")
+stream_1/stream = ExtResource("10_1rkuc")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_daact"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("11_2ug37")
+stream_1/stream = ExtResource("12_pwmj3")
+stream_2/stream = ExtResource("13_wvq61")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0n1a7"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("3_q84vy")
+stream_1/stream = ExtResource("4_ac856")
+stream_2/stream = ExtResource("5_67s6m")
+stream_3/stream = ExtResource("6_m6ots")
+stream_4/stream = ExtResource("7_jltox")
+stream_5/stream = ExtResource("8_dqoiv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ryv7k"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("9_s8f6o")
+stream_1/stream = ExtResource("10_1rkuc")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tq6hb"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("11_2ug37")
+stream_1/stream = ExtResource("12_pwmj3")
+stream_2/stream = ExtResource("13_wvq61")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ng78q"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("3_q84vy")
+stream_1/stream = ExtResource("4_ac856")
+stream_2/stream = ExtResource("5_67s6m")
+stream_3/stream = ExtResource("6_m6ots")
+stream_4/stream = ExtResource("7_jltox")
+stream_5/stream = ExtResource("8_dqoiv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xmwa6"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("9_s8f6o")
+stream_1/stream = ExtResource("10_1rkuc")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yf210"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("11_2ug37")
+stream_1/stream = ExtResource("12_pwmj3")
+stream_2/stream = ExtResource("13_wvq61")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yqd16"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("3_q84vy")
+stream_1/stream = ExtResource("4_ac856")
+stream_2/stream = ExtResource("5_67s6m")
+stream_3/stream = ExtResource("6_m6ots")
+stream_4/stream = ExtResource("7_jltox")
+stream_5/stream = ExtResource("8_dqoiv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_53n83"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("9_s8f6o")
+stream_1/stream = ExtResource("10_1rkuc")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3ywy3"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("11_2ug37")
+stream_1/stream = ExtResource("12_pwmj3")
+stream_2/stream = ExtResource("13_wvq61")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_83rt0"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("3_q84vy")
+stream_1/stream = ExtResource("4_ac856")
+stream_2/stream = ExtResource("5_67s6m")
+stream_3/stream = ExtResource("6_m6ots")
+stream_4/stream = ExtResource("7_jltox")
+stream_5/stream = ExtResource("8_dqoiv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0ltvu"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("9_s8f6o")
+stream_1/stream = ExtResource("10_1rkuc")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vinyl"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("11_2ug37")
+stream_1/stream = ExtResource("12_pwmj3")
+stream_2/stream = ExtResource("13_wvq61")
+
+[node name="monster_preview" type="Node3D" unique_id=956015186 node_paths=PackedStringArray("camera")]
 script = ExtResource("preview")
 camera = NodePath("camera")
 
-[node name="environment" type="WorldEnvironment" parent="."]
+[node name="environment" type="WorldEnvironment" parent="." unique_id=226656303]
 environment = SubResource("environment")
 
-[node name="ground" type="CSGBox3D" parent="."]
-position = Vector3(0, -0.03, 1.5)
+[node name="ground" type="CSGBox3D" parent="." unique_id=971991444]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03, 1.5)
 size = Vector3(12, 0.06, 9)
 material = SubResource("ground")
 
-[node name="light" type="DirectionalLight3D" parent="."]
-rotation_degrees = Vector3(-50, -25, 0)
-light_energy = 1.0
+[node name="light" type="DirectionalLight3D" parent="." unique_id=1027877248]
+transform = Transform3D(0.90630776, 0.3237444, -0.2716538, 0, 0.64278764, 0.76604444, 0.42261827, -0.69427204, 0.5825634, 0, 0, 0)
 shadow_enabled = true
 
-[node name="camera" type="Camera3D" parent="."]
-position = Vector3(0, 7, 10)
-rotation_degrees = Vector3(-40, 0, 0)
+[node name="camera" type="Camera3D" parent="." unique_id=339210228]
+transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 7, 10)
 current = true
 fov = 45.0
 
-[node name="monster_1" parent="." instance=ExtResource("enemy")]
-position = Vector3(-3.2, 0, 0)
-preview = true
+[node name="monster_1" parent="." unique_id=203381311 instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0, 0)
+growl_stream = SubResource("AudioStreamRandomizer_nyuq6")
+bite_stream = SubResource("AudioStreamRandomizer_38ga2")
+death_stream = SubResource("AudioStreamRandomizer_cy4ql")
 head_variant = 0
 body_variant = 0
 eye_variant = 0
-
-[node name="monster_2" parent="." instance=ExtResource("enemy")]
-position = Vector3(0, 0, 0)
 preview = true
+
+[node name="monster_2" parent="." unique_id=850531847 instance=ExtResource("enemy")]
+growl_stream = SubResource("AudioStreamRandomizer_vldur")
+bite_stream = SubResource("AudioStreamRandomizer_5hrts")
+death_stream = SubResource("AudioStreamRandomizer_daact")
 head_variant = 1
 body_variant = 1
 eye_variant = 1
-
-[node name="monster_3" parent="." instance=ExtResource("enemy")]
-position = Vector3(3.2, 0, 0)
 preview = true
+
+[node name="monster_3" parent="." unique_id=1250085347 instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, 0)
+growl_stream = SubResource("AudioStreamRandomizer_0n1a7")
+bite_stream = SubResource("AudioStreamRandomizer_ryv7k")
+death_stream = SubResource("AudioStreamRandomizer_tq6hb")
 head_variant = 2
 body_variant = 2
 eye_variant = 2
-
-[node name="monster_4" parent="." instance=ExtResource("enemy")]
-position = Vector3(-3.2, 0, 3.2)
 preview = true
+
+[node name="monster_4" parent="." unique_id=24796327 instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0, 3.2)
+growl_stream = SubResource("AudioStreamRandomizer_ng78q")
+bite_stream = SubResource("AudioStreamRandomizer_xmwa6")
+death_stream = SubResource("AudioStreamRandomizer_yf210")
 head_variant = 0
 body_variant = 1
 eye_variant = 3
-
-[node name="monster_5" parent="." instance=ExtResource("enemy")]
-position = Vector3(0, 0, 3.2)
 preview = true
+
+[node name="monster_5" parent="." unique_id=1886993661 instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2)
+growl_stream = SubResource("AudioStreamRandomizer_yqd16")
+bite_stream = SubResource("AudioStreamRandomizer_53n83")
+death_stream = SubResource("AudioStreamRandomizer_3ywy3")
 head_variant = 1
 body_variant = 2
 eye_variant = 4
-
-[node name="monster_6" parent="." instance=ExtResource("enemy")]
-position = Vector3(3.2, 0, 3.2)
 preview = true
+
+[node name="monster_6" parent="." unique_id=611656513 instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, 3.2)
+growl_stream = SubResource("AudioStreamRandomizer_83rt0")
+bite_stream = SubResource("AudioStreamRandomizer_0ltvu")
+death_stream = SubResource("AudioStreamRandomizer_vinyl")
 head_variant = 2
 body_variant = 0
 eye_variant = 0
+preview = true
 
-[node name="hud" type="CanvasLayer" parent="."]
+[node name="hud" type="CanvasLayer" parent="." unique_id=356976243]
 
-[node name="instructions" type="Label" parent="hud"]
+[node name="instructions" type="Label" parent="hud" unique_id=1654101539]
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 20.0
 offset_bottom = 56.0
 grow_horizontal = 2
-mouse_filter = 2
 theme_override_font_sizes/font_size = 24
 text = "Click a monster to preview its bite"
 horizontal_alignment = 1

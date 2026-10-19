@@ -1,11 +1,10 @@
-[gd_resource type="AudioStreamRandomizer" format=3]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://dqdofokmi7auy"]
 
-[ext_resource type="AudioStream" path="res://audio/enemy/bite_01.wav" id="1"]
-[ext_resource type="AudioStream" path="res://audio/enemy/bite_02.wav" id="2"]
+[ext_resource type="AudioStream" uid="uid://bhbmc7jy7xxgt" path="res://audio/enemy/bite_01.wav" id="1"]
+[ext_resource type="AudioStream" uid="uid://ngy3h1w8tg6q" path="res://audio/enemy/bite_02.wav" id="2"]
 
 [resource]
 resource_local_to_scene = true
-playback_mode = 0
 random_pitch = 1.04
 random_volume_offset_db = 1.0
 streams_count = 2

@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bksmljrtddjin" path="res://scripts/light_sensor.gd" id="1"]
 [ext_resource type="Shader" uid="uid://w4ap02fdcy8" path="res://shaders/light_sensor.gdshader" id="2"]
-
 [ext_resource type="Texture2D" path="res://resources/ground/light_profile.tres" id="light_profile"]
-
 [ext_resource type="Texture2D" path="res://resources/ground/world_light_profile.tres" id="world_light_profile"]
 
 [sub_resource type="ShaderMaterial" id="material"]
@@ -12,6 +10,8 @@ render_priority = 127
 shader = ExtResource("2")
 shader_parameter/ground_light_curve = ExtResource("light_profile")
 shader_parameter/world_light_curve = ExtResource("world_light_profile")
+shader_parameter/light_edge_noise_strength = 0.025
+shader_parameter/light_edge_noise_scale = 1.8
 
 [sub_resource type="Gradient" id="white"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -26,7 +26,6 @@ script = ExtResource("1")
 probe = NodePath("probe")
 camera = NodePath("viewport/camera")
 viewport = NodePath("viewport")
-threshold = 0.02
 
 [node name="probe" type="Sprite3D" parent="." unique_id=1706970169]
 transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0.025, 0)

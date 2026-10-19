@@ -2,33 +2,24 @@
 
 [ext_resource type="Script" uid="uid://r0lhe7hcf37b" path="res://scripts/enemy.gd" id="1"]
 [ext_resource type="Script" uid="uid://dp4r0732t61ar" path="res://scripts/camera_facing.gd" id="2"]
-[ext_resource type="Texture2D" path="res://sprites/monster_head_01.png" id="monster_head_01"]
-[ext_resource type="Texture2D" path="res://sprites/monster_head_02.png" id="monster_head_02"]
-[ext_resource type="Texture2D" path="res://sprites/monster_head_03.png" id="monster_head_03"]
-[ext_resource type="Texture2D" path="res://sprites/monster_body_01.png" id="monster_body_01"]
-[ext_resource type="Texture2D" path="res://sprites/monster_body_02.png" id="monster_body_02"]
-[ext_resource type="Texture2D" path="res://sprites/monster_body_03.png" id="monster_body_03"]
-[ext_resource type="Texture2D" path="res://sprites/eyes_01.png" id="eyes_01"]
-[ext_resource type="Texture2D" path="res://sprites/eyes_02.png" id="eyes_02"]
-[ext_resource type="Texture2D" path="res://sprites/eyes_03.png" id="eyes_03"]
-[ext_resource type="Texture2D" path="res://sprites/eyes_04.png" id="eyes_04"]
-[ext_resource type="Texture2D" path="res://sprites/eyes_05.png" id="eyes_05"]
-[ext_resource type="Texture2D" path="res://sprites/teeth_upper.png" id="teeth_upper"]
-[ext_resource type="Texture2D" path="res://sprites/teeth_lower.png" id="teeth_lower"]
-
 [ext_resource type="Animation" path="res://animations/enemy/bite.tres" id="bite"]
-
-[ext_resource type="AudioStream" path="res://audio/enemy/footsteps.tres" id="footsteps"]
-
-[ext_resource type="AudioStream" path="res://audio/enemy/growl.tres" id="growl"]
 [ext_resource type="AudioStream" path="res://audio/enemy/bite.tres" id="bite_audio"]
-
 [ext_resource type="AudioStream" path="res://audio/enemy/death.tres" id="death_audio"]
-
-[sub_resource type="AnimationLibrary" id="animations"]
-_data = {
-&"bite": ExtResource("bite")
-}
+[ext_resource type="Texture2D" uid="uid://bk7fvathwdwla" path="res://sprites/eyes_01.png" id="eyes_01"]
+[ext_resource type="Texture2D" uid="uid://cur46g6ijq1ux" path="res://sprites/eyes_02.png" id="eyes_02"]
+[ext_resource type="Texture2D" uid="uid://drdmanyg3467g" path="res://sprites/eyes_03.png" id="eyes_03"]
+[ext_resource type="Texture2D" uid="uid://cqqna456geip" path="res://sprites/eyes_04.png" id="eyes_04"]
+[ext_resource type="Texture2D" uid="uid://crewh1poea4m1" path="res://sprites/eyes_05.png" id="eyes_05"]
+[ext_resource type="AudioStream" path="res://audio/enemy/footsteps.tres" id="footsteps"]
+[ext_resource type="AudioStream" path="res://audio/enemy/growl.tres" id="growl"]
+[ext_resource type="Texture2D" uid="uid://b7dyjbmsthoqw" path="res://sprites/monster_body_01.png" id="monster_body_01"]
+[ext_resource type="Texture2D" uid="uid://7ym4duq6xj1j" path="res://sprites/monster_body_02.png" id="monster_body_02"]
+[ext_resource type="Texture2D" uid="uid://7idgcmg6gjbb" path="res://sprites/monster_body_03.png" id="monster_body_03"]
+[ext_resource type="Texture2D" uid="uid://o32rppby81gn" path="res://sprites/monster_head_01.png" id="monster_head_01"]
+[ext_resource type="Texture2D" uid="uid://dte7vimoollix" path="res://sprites/monster_head_02.png" id="monster_head_02"]
+[ext_resource type="Texture2D" uid="uid://cyw22b21h2hl5" path="res://sprites/monster_head_03.png" id="monster_head_03"]
+[ext_resource type="Texture2D" uid="uid://l3k3v51jk4en" path="res://sprites/teeth_lower.png" id="teeth_lower"]
+[ext_resource type="Texture2D" uid="uid://dmai72lsmadun" path="res://sprites/teeth_upper.png" id="teeth_upper"]
 
 [sub_resource type="BoxShape3D" id="hitbox"]
 size = Vector3(2.24, 2.56, 2.88)
@@ -37,6 +28,7 @@ size = Vector3(2.24, 2.56, 2.88)
 resource_local_to_scene = true
 transparency = 2
 alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 cull_mode = 2
 specular_mode = 2
 albedo_texture = ExtResource("monster_body_01")
@@ -48,6 +40,7 @@ emission_energy_multiplier = 0.0
 resource_local_to_scene = true
 transparency = 2
 alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 cull_mode = 2
 specular_mode = 2
 albedo_texture = ExtResource("monster_head_01")
@@ -55,27 +48,17 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.0
 
-[node name="enemy" type="CharacterBody3D" unique_id=67314845 node_paths=PackedStringArray("appearance", "head", "head_sprite", "body", "eyes", "mouth", "upper_teeth", "lower_teeth", "animation", "footstep_audio", "vocal_audio", "head_lift")]
+[sub_resource type="AnimationLibrary" id="animations"]
+_data = {
+&"bite": ExtResource("bite")
+}
+
+[node name="enemy" type="CharacterBody3D" unique_id=67314845 node_paths=PackedStringArray("appearance", "head", "head_lift", "head_sprite", "body", "eyes", "mouth", "upper_teeth", "lower_teeth", "vocal_audio", "footstep_audio", "animation")]
 collision_layer = 2
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1")
 appearance = NodePath("visuals/appearance")
-animation = NodePath("animation")
-footstep_audio = NodePath("footstep_audio")
-vocal_audio = NodePath("vocal_audio")
-growl_stream = ExtResource("growl")
-bite_stream = ExtResource("bite_audio")
-death_stream = ExtResource("death_audio")
-growl_min_time = 8.0
-growl_max_time = 18.0
-speed = 0.95
-engagement_distance = 16.0
-bite_range = 2.3
-bite_windup = 0.8
-lunge_distance = 2.0
-lunge_speed = 8.0
-bite_hit_radius = 1.1
 head = NodePath("visuals/appearance/head")
 head_lift = NodePath("visuals/appearance/head/lift")
 head_sprite = NodePath("visuals/appearance/head/lift/sprite")
@@ -84,20 +67,26 @@ eyes = NodePath("visuals/appearance/head/lift/eyes")
 mouth = NodePath("visuals/appearance/mouth")
 upper_teeth = NodePath("visuals/appearance/mouth/impact/upper/sprite")
 lower_teeth = NodePath("visuals/appearance/mouth/impact/lower/sprite")
+vocal_audio = NodePath("vocal_audio")
+growl_stream = ExtResource("growl")
+bite_stream = ExtResource("bite_audio")
+death_stream = ExtResource("death_audio")
+footstep_audio = NodePath("footstep_audio")
+animation = NodePath("animation")
 head_textures = Array[Texture2D]([ExtResource("monster_head_01"), ExtResource("monster_head_02"), ExtResource("monster_head_03")])
 body_textures = Array[Texture2D]([ExtResource("monster_body_01"), ExtResource("monster_body_02"), ExtResource("monster_body_03")])
 eye_textures = Array[Texture2D]([ExtResource("eyes_01"), ExtResource("eyes_02"), ExtResource("eyes_03"), ExtResource("eyes_04"), ExtResource("eyes_05")])
 
 [node name="hitbox" type="CollisionShape3D" parent="." unique_id=1070230378]
-position = Vector3(0, 1.12, -0.32)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12, -0.32)
 shape = SubResource("hitbox")
 
 [node name="visuals" type="Node3D" parent="." unique_id=34417323]
-position = Vector3(0, -0.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 script = ExtResource("2")
 
-[node name="appearance" type="Node3D" parent="visuals"]
-scale = Vector3(1.6, 1.6, 1.6)
+[node name="appearance" type="Node3D" parent="visuals" unique_id=1402254541]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0, 0)
 
 [node name="body" type="Sprite3D" parent="visuals/appearance" unique_id=703009130]
 material_override = SubResource("body_material")
@@ -107,63 +96,58 @@ alpha_cut = 1
 texture = ExtResource("monster_body_01")
 
 [node name="head" type="Node3D" parent="visuals/appearance" unique_id=1154797101]
-position = Vector3(0, 0.85, 0.005)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0.005)
 
-[node name="lift" type="Node3D" parent="visuals/appearance/head"]
+[node name="lift" type="Node3D" parent="visuals/appearance/head" unique_id=2052993236]
 
-[node name="sprite" type="Sprite3D" parent="visuals/appearance/head/lift"]
+[node name="sprite" type="Sprite3D" parent="visuals/appearance/head/lift" unique_id=1052758126]
 material_override = SubResource("head_material")
 pixel_size = 0.004
 shaded = true
 alpha_cut = 1
 texture = ExtResource("monster_head_01")
 
-[node name="eyes" type="Sprite3D" parent="visuals/appearance/head/lift"]
+[node name="eyes" type="Sprite3D" parent="visuals/appearance/head/lift" unique_id=591588256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.012)
+cast_shadow = 0
 pixel_size = 0.0035
-shaded = false
 alpha_cut = 1
 texture = ExtResource("eyes_01")
-position = Vector3(0, 0.3, 0.012)
+
+[node name="mouth" type="Node3D" parent="visuals/appearance" unique_id=1714578700]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0.025)
+
+[node name="impact" type="Node3D" parent="visuals/appearance/mouth" unique_id=1639661531]
+
+[node name="upper" type="Node3D" parent="visuals/appearance/mouth/impact" unique_id=1605543918]
+
+[node name="sprite" type="Sprite3D" parent="visuals/appearance/mouth/impact/upper" unique_id=773637902]
 cast_shadow = 0
-
-[node name="mouth" type="Node3D" parent="visuals/appearance"]
-position = Vector3(0, 0.9, 0.025)
-
-[node name="impact" type="Node3D" parent="visuals/appearance/mouth"]
-
-[node name="upper" type="Node3D" parent="visuals/appearance/mouth/impact"]
-
-[node name="sprite" type="Sprite3D" parent="visuals/appearance/mouth/impact/upper"]
 modulate = Color(1, 1, 1, 0)
 pixel_size = 0.001
-shaded = false
 texture = ExtResource("teeth_upper")
+
+[node name="lower" type="Node3D" parent="visuals/appearance/mouth/impact" unique_id=1458708536]
+
+[node name="sprite" type="Sprite3D" parent="visuals/appearance/mouth/impact/lower" unique_id=660533416]
 cast_shadow = 0
-
-[node name="lower" type="Node3D" parent="visuals/appearance/mouth/impact"]
-
-[node name="sprite" type="Sprite3D" parent="visuals/appearance/mouth/impact/lower"]
 modulate = Color(1, 1, 1, 0)
 pixel_size = 0.001
-shaded = false
 texture = ExtResource("teeth_lower")
-cast_shadow = 0
 
-[node name="animation" type="AnimationPlayer" parent="."]
+[node name="animation" type="AnimationPlayer" parent="." unique_id=539246449]
 callback_mode_process = 0
 libraries/ = SubResource("animations")
 
-[node name="footstep_audio" type="AudioStreamPlayer3D" parent="."]
+[node name="footstep_audio" type="AudioStreamPlayer3D" parent="." unique_id=216370705]
 stream = ExtResource("footsteps")
 volume_db = -6.0
-max_polyphony = 1
 max_distance = 30.0
 bus = &"World SFX Heavy Reverb"
 
-[node name="vocal_audio" type="AudioStreamPlayer3D" parent="."]
-position = Vector3(0, 1.28, 0)
+[node name="vocal_audio" type="AudioStreamPlayer3D" parent="." unique_id=1554878539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28, 0)
 volume_db = -8.0
-max_polyphony = 1
 max_distance = 30.0
 bus = &"World SFX"
 

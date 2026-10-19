@@ -1,8 +1,6 @@
-[gd_resource type="CurveTexture" format=3]
+[gd_resource type="CurveTexture" format=3 uid="uid://cxe3jaucjvyeo"]
 
-[ext_resource type="Curve" path="res://resources/ground/world_light_curve.tres" id="curve"]
+[ext_resource type="Curve" uid="uid://5behmripfygk" path="res://resources/ground/world_light_curve.tres" id="curve"]
 
 [resource]
-width = 256
-texture_mode = 0
 curve = ExtResource("curve")

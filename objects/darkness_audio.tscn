@@ -1,27 +1,26 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://niw08um2kh46"]
 
-[ext_resource type="Script" path="res://scripts/darkness_audio.gd" id="script"]
-[ext_resource type="AudioStream" path="res://audio/player/darkness_rumble.tres" id="rumble"]
-[ext_resource type="AudioStream" path="res://audio/enemy/growl.tres" id="growl"]
 [ext_resource type="AudioStream" path="res://audio/enemy/bite.tres" id="bite"]
+[ext_resource type="AudioStream" path="res://audio/enemy/growl.tres" id="growl"]
+[ext_resource type="AudioStream" path="res://audio/player/darkness_rumble.tres" id="rumble"]
+[ext_resource type="Script" uid="uid://be5cfs7exaadj" path="res://scripts/darkness_audio.gd" id="script"]
 
-[node name="darkness_audio" type="Node" node_paths=PackedStringArray("rumble", "growl", "bite")]
+[node name="darkness_audio" type="Node" unique_id=916236589 node_paths=PackedStringArray("rumble", "growl", "bite")]
 script = ExtResource("script")
 rumble = NodePath("rumble")
 growl = NodePath("growl")
 bite = NodePath("bite")
 
-[node name="rumble" type="AudioStreamPlayer" parent="."]
+[node name="rumble" type="AudioStreamPlayer" parent="." unique_id=557903817]
 stream = ExtResource("rumble")
-volume_db = 0.0
 bus = &"World SFX"
 
-[node name="growl" type="AudioStreamPlayer" parent="."]
+[node name="growl" type="AudioStreamPlayer" parent="." unique_id=172605270]
 stream = ExtResource("growl")
 volume_db = -17.0
 bus = &"World SFX"
 
-[node name="bite" type="AudioStreamPlayer" parent="."]
+[node name="bite" type="AudioStreamPlayer" parent="." unique_id=521524336]
 stream = ExtResource("bite")
 volume_db = -8.0
 bus = &"World SFX"

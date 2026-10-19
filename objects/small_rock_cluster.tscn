@@ -1,14 +1,30 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://4ra2fdld2frk"]
 
-[ext_resource type="Script" path="res://scripts/small_rock_cluster.gd" id="script"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_01.tscn" id="rock_01"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_02.tscn" id="rock_02"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_03.tscn" id="rock_03"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_04.tscn" id="rock_04"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_05.tscn" id="rock_05"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_06.tscn" id="rock_06"]
-[ext_resource type="PackedScene" path="res://objects/small_rock_07.tscn" id="rock_07"]
+[ext_resource type="PackedScene" uid="uid://b8lgdc61td4pn" path="res://objects/small_rock_01.tscn" id="rock_01"]
+[ext_resource type="PackedScene" uid="uid://dttg14r21k1r7" path="res://objects/small_rock_02.tscn" id="rock_02"]
+[ext_resource type="PackedScene" uid="uid://nll0qokvvylc" path="res://objects/small_rock_03.tscn" id="rock_03"]
+[ext_resource type="PackedScene" uid="uid://70km5nkt7itn" path="res://objects/small_rock_04.tscn" id="rock_04"]
+[ext_resource type="PackedScene" uid="uid://djaxh1nftck06" path="res://objects/small_rock_05.tscn" id="rock_05"]
+[ext_resource type="PackedScene" uid="uid://by3tq6buv41kb" path="res://objects/small_rock_06.tscn" id="rock_06"]
+[ext_resource type="PackedScene" uid="uid://dyeqe4xfv5w37" path="res://objects/small_rock_07.tscn" id="rock_07"]
+[ext_resource type="Script" uid="uid://vtqf5486bbl3" path="res://scripts/small_rock_cluster.gd" id="script"]
 
-[node name="small_rock_cluster" type="Node3D"]
+[node name="small_rock_cluster" type="Node3D" unique_id=265888818]
 script = ExtResource("script")
 rock_scenes = Array[PackedScene]([ExtResource("rock_01"), ExtResource("rock_02"), ExtResource("rock_03"), ExtResource("rock_04"), ExtResource("rock_05"), ExtResource("rock_06"), ExtResource("rock_07")])
+
+[node name="rock_01" type="StaticBody3D" parent="." unique_id=433123781 instance=ExtResource("rock_07")]
+transform = Transform3D(1.1997397, 0, 0, 0, 1.3517332, 0, 0, 0, 1.1997397, -0.70139796, 0, -0.28003755)
+metadata/small_rock_cluster_generated = true
+
+[node name="rock_02" type="StaticBody3D" parent="." unique_id=1280082663 instance=ExtResource("rock_07")]
+transform = Transform3D(1.4785404, 0, 0, 0, 1.5699953, 0, 0, 0, 1.4785404, -0.2559961, 0, 0.71696424)
+metadata/small_rock_cluster_generated = true
+
+[node name="rock_03" type="StaticBody3D" parent="." unique_id=1728641663 instance=ExtResource("rock_02")]
+transform = Transform3D(1.4734348, 0, 0, 0, 1.472741, 0, 0, 0, 1.4734348, 0.6066065, 0, 0.055541284)
+metadata/small_rock_cluster_generated = true
+
+[node name="rock_04" type="StaticBody3D" parent="." unique_id=198676513 instance=ExtResource("rock_05")]
+transform = Transform3D(1.1969452, 0, 0, 0, 1.1880214, 0, 0, 0, 1.1969452, -0.20288761, 0, -0.5025797)
+metadata/small_rock_cluster_generated = true

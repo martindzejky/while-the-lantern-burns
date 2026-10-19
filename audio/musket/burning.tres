@@ -1,10 +1,9 @@
-[gd_resource type="AudioStreamRandomizer" format=3]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://djtqxnmysxfji"]
 
-[ext_resource type="AudioStream" path="res://audio/musket/burning_loop.mp3" id="1"]
+[ext_resource type="AudioStream" uid="uid://clyxm6od2yhbk" path="res://audio/musket/burning_loop.mp3" id="1"]
 
 [resource]
 resource_local_to_scene = true
-playback_mode = 0
 random_pitch = 1.02
 random_volume_offset_db = 0.5
 streams_count = 1

@@ -6,16 +6,20 @@
 [ext_resource type="Shader" uid="uid://6hhe3yks1iro" path="res://shaders/sprite_lighting.gdshader" id="4"]
 [ext_resource type="PackedScene" uid="uid://fe24h0njihi4" path="res://effects/muzzle_flash.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://pbep40okecmw" path="res://effects/musket_smoke.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://objects/drop_shadow.tscn" id="shadow"]
-[ext_resource type="AudioStream" path="res://audio/musket/pickup.tres" id="pickup_audio"]
-[ext_resource type="AudioStream" path="res://audio/musket/ball.tres" id="ball_audio"]
-[ext_resource type="AudioStream" path="res://audio/musket/loaded.tres" id="loaded_audio"]
 [ext_resource type="AudioStream" path="res://audio/musket/aim.tres" id="aim_audio"]
-[ext_resource type="AudioStream" path="res://audio/musket/ignite.tres" id="ignite_audio"]
+[ext_resource type="AudioStream" path="res://audio/musket/ball.tres" id="ball_audio"]
 [ext_resource type="AudioStream" path="res://audio/musket/burning.tres" id="burning_audio"]
-[ext_resource type="AudioStream" path="res://audio/musket/shot.tres" id="shot_audio"]
 [ext_resource type="AudioStream" path="res://audio/musket/click.tres" id="click_audio"]
+[ext_resource type="AudioStream" path="res://audio/musket/ignite.tres" id="ignite_audio"]
+[ext_resource type="AudioStream" path="res://audio/musket/loaded.tres" id="loaded_audio"]
+[ext_resource type="AudioStream" path="res://audio/musket/pickup.tres" id="pickup_audio"]
 [ext_resource type="AudioStream" path="res://audio/musket/ramrod.tres" id="ramrod_audio"]
+[ext_resource type="PackedScene" uid="uid://djy410esc62bm" path="res://objects/drop_shadow.tscn" id="shadow"]
+[ext_resource type="AudioStream" path="res://audio/musket/shot.tres" id="shot_audio"]
+
+[sub_resource type="FastNoiseLite" id="spark_flicker_noise"]
+frequency = 22.0
+fractal_octaves = 2
 
 [sub_resource type="ShaderMaterial" id="material"]
 render_priority = 0
@@ -38,10 +42,6 @@ size = Vector2(0.1, 0.1)
 [sub_resource type="Gradient" id="spark_fade"]
 offsets = PackedFloat32Array(0, 0.35, 1)
 colors = PackedColorArray(1, 0.98, 0.8, 1, 1, 0.8, 0.25, 1, 1, 0.3, 0.03, 0)
-
-[sub_resource type="FastNoiseLite" id="spark_flicker_noise"]
-frequency = 22.0
-fractal_octaves = 2
 
 [node name="musket" type="Node3D" unique_id=1358336505 node_paths=PackedStringArray("rear_grip", "front_grip", "sprite", "visuals", "muzzle", "sparks", "spark_light", "pickup_audio", "ball_audio", "loaded_audio", "aim_audio", "ignite_audio", "burning_audio", "shot_audio", "click_audio", "ramrod_audio")]
 script = ExtResource("1")
@@ -95,14 +95,13 @@ initial_velocity_min = 0.3
 initial_velocity_max = 0.9
 color_ramp = SubResource("spark_fade")
 
-[node name="spark_light" type="OmniLight3D" parent="visuals/sprite"]
-position = Vector3(0.525, 0.12, 0.03)
+[node name="spark_light" type="OmniLight3D" parent="visuals/sprite" unique_id=1784243289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.525, 0.12, 0.03)
 visible = false
 light_color = Color(1, 0.76, 0.3, 1)
 light_energy = 0.35
 light_specular = 0.0
 omni_range = 0.8
-omni_attenuation = 1.0
 
 [node name="rear_grip" type="Marker3D" parent="visuals/sprite" unique_id=387435652]
 transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.6692753, -0.14233214, 0)
@@ -111,69 +110,68 @@ transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.669
 transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 1.3192751, -0.092332155, 0)
 
 [node name="shadow" parent="." unique_id=507534789 node_paths=PackedStringArray("anchor") instance=ExtResource("shadow")]
-transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
 pixel_size = 0.0033
 anchor = NodePath("..")
 
-[node name="pickup_audio" type="AudioStreamPlayer3D" parent="."]
-position = Vector3(0, 0.5, 0)
+[node name="pickup_audio" type="AudioStreamPlayer3D" parent="." unique_id=738849874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 stream = ExtResource("pickup_audio")
 volume_db = 16.0
 max_db = 16.0
 max_distance = 30.0
 bus = &"World SFX"
 
-[node name="ball_audio" type="AudioStreamPlayer" parent="."]
+[node name="ball_audio" type="AudioStreamPlayer" parent="." unique_id=1530849462]
 stream = ExtResource("ball_audio")
 volume_db = -8.0
 bus = &"UI SFX"
 
-[node name="loaded_audio" type="AudioStreamPlayer" parent="."]
+[node name="loaded_audio" type="AudioStreamPlayer" parent="." unique_id=1447076133]
 stream = ExtResource("loaded_audio")
 volume_db = -14.0
 bus = &"UI SFX"
 
-[node name="aim_audio" type="AudioStreamPlayer3D" parent="."]
-position = Vector3(0, 0.5, 0)
+[node name="aim_audio" type="AudioStreamPlayer3D" parent="." unique_id=1951118516]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 stream = ExtResource("aim_audio")
 volume_db = -18.0
 max_db = 0.0
 max_distance = 30.0
 bus = &"World SFX"
 
-[node name="ignite_audio" type="AudioStreamPlayer3D" parent="."]
-position = Vector3(0, 0.5, 0)
+[node name="ignite_audio" type="AudioStreamPlayer3D" parent="." unique_id=69800082]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 stream = ExtResource("ignite_audio")
 volume_db = -4.0
 max_db = 0.0
 max_distance = 30.0
 bus = &"World SFX"
 
-[node name="burning_audio" type="AudioStreamPlayer3D" parent="."]
-position = Vector3(0, 0.5, 0)
+[node name="burning_audio" type="AudioStreamPlayer3D" parent="." unique_id=1086162983]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 stream = ExtResource("burning_audio")
 volume_db = 10.0
 max_db = 10.0
 max_distance = 30.0
 bus = &"World SFX"
 
-[node name="shot_audio" type="AudioStreamPlayer3D" parent="."]
-position = Vector3(0, 0.5, 0)
+[node name="shot_audio" type="AudioStreamPlayer3D" parent="." unique_id=674861530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 stream = ExtResource("shot_audio")
 volume_db = -12.0
 max_db = 0.0
 max_distance = 45.0
 bus = &"World SFX Heavy Reverb"
 
-[node name="click_audio" type="AudioStreamPlayer3D" parent="."]
-position = Vector3(0, 0.5, 0)
+[node name="click_audio" type="AudioStreamPlayer3D" parent="." unique_id=930183240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 stream = ExtResource("click_audio")
 volume_db = -16.0
 max_db = 0.0
 max_distance = 30.0
 bus = &"World SFX"
 
-[node name="ramrod_audio" type="AudioStreamPlayer" parent="."]
+[node name="ramrod_audio" type="AudioStreamPlayer" parent="." unique_id=735927037]
 stream = ExtResource("ramrod_audio")
 volume_db = -80.0
 bus = &"UI SFX"

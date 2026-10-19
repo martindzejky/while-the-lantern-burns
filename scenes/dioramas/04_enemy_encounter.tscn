@@ -1,39 +1,49 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dkecoob06egfa"]
 
-[ext_resource type="PackedScene" path="res://objects/player.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://objects/lantern.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://objects/musket.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://ui/lantern_ui.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://ui/musket_ui.tscn" id="7"]
-[ext_resource type="Script" path="res://scripts/effects_warmup.gd" id="8"]
-[ext_resource type="PackedScene" path="res://ambience/controller.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://w6mjmcbcb6d" path="res://objects/player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://d330qifnxgchu" path="res://objects/lantern.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://by2n7sl0bbq3j" path="res://objects/musket.tscn" id="5"]
+[ext_resource type="AudioStream" uid="uid://b67k30emqe11s" path="res://audio/player/step_01.wav" id="5_a8df1"]
+[ext_resource type="PackedScene" uid="uid://by6jxo44b17at" path="res://ui/lantern_ui.tscn" id="6"]
+[ext_resource type="AudioStream" uid="uid://cwcylqhf0urp7" path="res://audio/player/step_02.wav" id="6_bw5ll"]
+[ext_resource type="PackedScene" uid="uid://odlmbst42wxg" path="res://ui/musket_ui.tscn" id="7"]
+[ext_resource type="AudioStream" uid="uid://6jnlk73os5yr" path="res://audio/player/step_03.wav" id="7_ysen8"]
+[ext_resource type="Script" uid="uid://de8uuvch50dlp" path="res://scripts/effects_warmup.gd" id="8"]
+[ext_resource type="AudioStream" uid="uid://cutkgxv2c161n" path="res://audio/player/step_04.wav" id="8_mayoo"]
+[ext_resource type="AudioStream" uid="uid://brasfbn4jeemx" path="res://audio/player/step_06.wav" id="9_7q2ti"]
+[ext_resource type="AudioStream" uid="uid://sjew2oaqluoc" path="res://audio/player/body_01.wav" id="10_6lo2u"]
+[ext_resource type="AudioStream" uid="uid://cwik1ebawpj2b" path="res://audio/player/body_02.wav" id="11_ymylm"]
+[ext_resource type="PackedScene" uid="uid://cjip80cip1fu2" path="res://ambience/controller.tscn" id="12"]
+[ext_resource type="AudioStream" uid="uid://pxpxdop6yiuw" path="res://audio/enemy/growl_01.wav" id="29_8ffk5"]
+[ext_resource type="AudioStream" uid="uid://r3j25a0vm43e" path="res://audio/enemy/growl_02.wav" id="30_nkrfs"]
+[ext_resource type="AudioStream" uid="uid://csnjyck16d06y" path="res://audio/enemy/growl_03.wav" id="31_fukx8"]
+[ext_resource type="AudioStream" uid="uid://doygxytmbxcer" path="res://audio/enemy/growl_04.wav" id="32_72lwj"]
+[ext_resource type="AudioStream" uid="uid://bkbjgtw04adkd" path="res://audio/enemy/growl_05.wav" id="33_1aotr"]
+[ext_resource type="AudioStream" uid="uid://25gbpetk41ed" path="res://audio/enemy/growl_06.wav" id="34_cho4f"]
+[ext_resource type="AudioStream" uid="uid://bhbmc7jy7xxgt" path="res://audio/enemy/bite_01.wav" id="35_necfm"]
+[ext_resource type="AudioStream" uid="uid://ngy3h1w8tg6q" path="res://audio/enemy/bite_02.wav" id="36_dqah8"]
+[ext_resource type="AudioStream" uid="uid://cps01lv4uvcli" path="res://audio/enemy/death_01.wav" id="37_kyuo8"]
+[ext_resource type="AudioStream" uid="uid://d0yyc7mxs5dqw" path="res://audio/enemy/death_02.wav" id="38_rjonr"]
+[ext_resource type="AudioStream" uid="uid://bm146vegk4pb6" path="res://audio/enemy/death_03.wav" id="39_ekqtv"]
+[ext_resource type="Texture2D" uid="uid://mtmam2bjvjgi" path="res://sprites/big_rock_04.png" id="background_4"]
+[ext_resource type="Texture2D" uid="uid://hq7pn5ufok4m" path="res://sprites/big_rock_05.png" id="background_5"]
+[ext_resource type="Texture2D" uid="uid://bxfjceu3sdhb1" path="res://sprites/big_rock_06.png" id="background_6"]
+[ext_resource type="PackedScene" uid="uid://dabxqu7mxnwcu" path="res://objects/background_rock.tscn" id="background_rock"]
+[ext_resource type="PackedScene" uid="uid://b0v247d6td2e1" path="res://objects/camera_controller.tscn" id="camera_controller"]
+[ext_resource type="PackedScene" uid="uid://bgvehpswq5e13" path="res://objects/camera_focus.tscn" id="camera_focus"]
 [ext_resource type="PackedScene" path="res://ui/death_feedback.tscn" id="death_ui"]
-
-[ext_resource type="PackedScene" path="res://objects/ground.tscn" id="ground"]
-
-[ext_resource type="PackedScene" path="res://ui/world_post_processing.tscn" id="world_post_processing"]
-
-[ext_resource type="PackedScene" path="res://objects/big_rock_01.tscn" id="rock_1"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_02.tscn" id="rock_2"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_03.tscn" id="rock_3"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_04.tscn" id="rock_4"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_05.tscn" id="rock_5"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_06.tscn" id="rock_6"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_07.tscn" id="rock_7"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_08.tscn" id="rock_8"]
-
-[ext_resource type="PackedScene" path="res://objects/world_light.tscn" id="world_light"]
-
-[ext_resource type="PackedScene" path="res://objects/background_rock.tscn" id="background_rock"]
-[ext_resource type="Texture2D" path="res://sprites/big_rock_04.png" id="background_4"]
-[ext_resource type="Texture2D" path="res://sprites/big_rock_05.png" id="background_5"]
-[ext_resource type="Texture2D" path="res://sprites/big_rock_06.png" id="background_6"]
-
-[ext_resource type="PackedScene" path="res://objects/stalagmite_cluster.tscn" id="stalagmites"]
-
-[ext_resource type="PackedScene" path="res://objects/enemy.tscn" id="enemy"]
-[ext_resource type="PackedScene" path="res://objects/camera_controller.tscn" id="camera_controller"]
-[ext_resource type="PackedScene" path="res://objects/camera_focus.tscn" id="camera_focus"]
+[ext_resource type="PackedScene" uid="uid://dnep4itj4mhsi" path="res://objects/enemy.tscn" id="enemy"]
+[ext_resource type="PackedScene" uid="uid://ct5elay5mk4lb" path="res://objects/ground.tscn" id="ground"]
+[ext_resource type="PackedScene" uid="uid://odumffg7yfr1" path="res://objects/big_rock_01.tscn" id="rock_1"]
+[ext_resource type="PackedScene" uid="uid://djk0sh2numjnd" path="res://objects/big_rock_02.tscn" id="rock_2"]
+[ext_resource type="PackedScene" uid="uid://bi4cxx4ajbs57" path="res://objects/big_rock_04.tscn" id="rock_4"]
+[ext_resource type="PackedScene" uid="uid://dyer8vsgv3sab" path="res://objects/big_rock_05.tscn" id="rock_5"]
+[ext_resource type="PackedScene" uid="uid://eusyopafqhvr" path="res://objects/big_rock_06.tscn" id="rock_6"]
+[ext_resource type="PackedScene" uid="uid://dswxislnonhiw" path="res://objects/big_rock_07.tscn" id="rock_7"]
+[ext_resource type="PackedScene" uid="uid://yrm4kbry3gfe" path="res://objects/big_rock_08.tscn" id="rock_8"]
+[ext_resource type="PackedScene" uid="uid://crebvy8a73kon" path="res://objects/stalagmite_cluster.tscn" id="stalagmites"]
+[ext_resource type="PackedScene" uid="uid://c2k5x6ubue31m" path="res://objects/world_light.tscn" id="world_light"]
+[ext_resource type="PackedScene" uid="uid://c3se2eoftldxs" path="res://ui/world_post_processing.tscn" id="world_post_processing"]
 
 [sub_resource type="Environment" id="environment"]
 background_mode = 1
@@ -43,69 +53,176 @@ ambient_light_color = Color(0.08, 0.16, 0.11, 1)
 ambient_light_energy = 0.07
 reflected_light_source = 2
 
-[node name="enemy_encounter" type="Node3D"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fn2d0"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 5
+stream_0/stream = ExtResource("5_a8df1")
+stream_1/stream = ExtResource("6_bw5ll")
+stream_2/stream = ExtResource("7_ysen8")
+stream_3/stream = ExtResource("8_mayoo")
+stream_4/stream = ExtResource("9_7q2ti")
 
-[node name="ambience" parent="." node_paths=PackedStringArray("target") instance=ExtResource("12")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hlfo2"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("10_6lo2u")
+stream_1/stream = ExtResource("11_ymylm")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_oo84n"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("29_8ffk5")
+stream_1/stream = ExtResource("30_nkrfs")
+stream_2/stream = ExtResource("31_fukx8")
+stream_3/stream = ExtResource("32_72lwj")
+stream_4/stream = ExtResource("33_1aotr")
+stream_5/stream = ExtResource("34_cho4f")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hu7jy"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("35_necfm")
+stream_1/stream = ExtResource("36_dqah8")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_soddd"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("37_kyuo8")
+stream_1/stream = ExtResource("38_rjonr")
+stream_2/stream = ExtResource("39_ekqtv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_52262"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("29_8ffk5")
+stream_1/stream = ExtResource("30_nkrfs")
+stream_2/stream = ExtResource("31_fukx8")
+stream_3/stream = ExtResource("32_72lwj")
+stream_4/stream = ExtResource("33_1aotr")
+stream_5/stream = ExtResource("34_cho4f")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pc0b8"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("35_necfm")
+stream_1/stream = ExtResource("36_dqah8")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_87672"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("37_kyuo8")
+stream_1/stream = ExtResource("38_rjonr")
+stream_2/stream = ExtResource("39_ekqtv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1mjig"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("29_8ffk5")
+stream_1/stream = ExtResource("30_nkrfs")
+stream_2/stream = ExtResource("31_fukx8")
+stream_3/stream = ExtResource("32_72lwj")
+stream_4/stream = ExtResource("33_1aotr")
+stream_5/stream = ExtResource("34_cho4f")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_01608"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("35_necfm")
+stream_1/stream = ExtResource("36_dqah8")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tidyi"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("37_kyuo8")
+stream_1/stream = ExtResource("38_rjonr")
+stream_2/stream = ExtResource("39_ekqtv")
+
+[node name="enemy_encounter" type="Node3D" unique_id=174458091]
+
+[node name="ambience" parent="." unique_id=131119999 node_paths=PackedStringArray("target") instance=ExtResource("12")]
 target = NodePath("../player")
 
-[node name="world_post_processing" parent="." instance=ExtResource("world_post_processing")]
+[node name="world_post_processing" parent="." unique_id=469017437 instance=ExtResource("world_post_processing")]
 
-[node name="environment" type="WorldEnvironment" parent="."]
+[node name="environment" type="WorldEnvironment" parent="." unique_id=141240345]
 environment = SubResource("environment")
 
-[node name="ground" parent="." instance=ExtResource("ground")]
+[node name="ground" parent="." unique_id=255391296 instance=ExtResource("ground")]
 polygon = PackedVector2Array(-3.7, -14.5, -4.3, -11, -3.4, -8, -2.8, -5.5, -4.5, -3, -7, -1, -8, 3, -7.5, 9, -5.5, 14, 0, 15.5, 5.5, 14, 8, 10, 8.5, 5, 7.5, 0, 4, -3.5, 2.7, -6, 3.2, -9, 3.8, -12, 2, -15)
 edge_seed = 604
 edge_roughness = 0.2
 
-[node name="player" parent="." node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("1")]
+[node name="player" parent="." unique_id=1220399072 node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.5)
 musket = NodePath("../musket")
 lantern = NodePath("../lantern")
 
-[node name="audio_listener" parent="player" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-
-[node name="shadow" parent="player" index="6" node_paths=PackedStringArray("light_source")]
-transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
+[node name="shadow" parent="player" index="6" unique_id=1776978813 node_paths=PackedStringArray("light_source")]
 light_source = NodePath("../../lantern")
 
-[node name="camera_controller" parent="." node_paths=PackedStringArray("target") instance=ExtResource("camera_controller")]
+[node name="footstep_audio" parent="player" index="7" unique_id=1882856814]
+stream = SubResource("AudioStreamRandomizer_fn2d0")
+
+[node name="body_audio" parent="player" index="8" unique_id=1333383196]
+stream = SubResource("AudioStreamRandomizer_hlfo2")
+
+[node name="camera_controller" parent="." unique_id=411270736 node_paths=PackedStringArray("target") instance=ExtResource("camera_controller")]
 target = NodePath("../player")
 follow_fov = 44.0
-bite_fov = 32.0
 
-[node name="passage_focus" parent="." instance=ExtResource("camera_focus")]
-position = Vector3(0, 0, 7.5)
+[node name="passage_focus" parent="." unique_id=1467391730 instance=ExtResource("camera_focus")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.5)
 outer_radius = 5.0
 inner_radius = 1.5
 
-[node name="lantern" parent="." instance=ExtResource("3")]
+[node name="lantern" parent="." unique_id=2086740893 instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0, 10.8)
 max_brightness = 1.1
 
-[node name="musket" parent="." instance=ExtResource("5")]
+[node name="musket" parent="." unique_id=1902162033 instance=ExtResource("5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 10.2)
 
-[node name="hud" type="CanvasLayer" parent="."]
+[node name="hud" type="CanvasLayer" parent="." unique_id=110173652]
 
-[node name="lantern" parent="hud" node_paths=PackedStringArray("lantern") instance=ExtResource("6")]
+[node name="lantern" parent="hud" unique_id=903897322 node_paths=PackedStringArray("lantern") instance=ExtResource("6")]
 lantern = NodePath("../../lantern")
 
-[node name="musket" parent="hud" node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("7")]
+[node name="musket" parent="hud" unique_id=322667973 node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("7")]
 musket = NodePath("../../musket")
 lantern = NodePath("../../lantern")
 
-[node name="death_ui" parent="." node_paths=PackedStringArray("player") instance=ExtResource("death_ui")]
+[node name="death_ui" parent="." unique_id=1869131388 node_paths=PackedStringArray("player") instance=ExtResource("death_ui")]
 player = NodePath("../player")
 
-[node name="loading" type="CanvasLayer" parent="." node_paths=PackedStringArray("musket", "player")]
+[node name="loading" type="CanvasLayer" parent="." unique_id=1357107763 node_paths=PackedStringArray("musket", "player")]
 layer = 100
 script = ExtResource("8")
 musket = NodePath("../musket")
 player = NodePath("../player")
 
-[node name="cover" type="ColorRect" parent="loading"]
+[node name="cover" type="ColorRect" parent="loading" unique_id=625206105]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -113,160 +230,143 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.002, 0.006, 0.004, 1)
 
+[node name="scenery" type="Node3D" parent="." unique_id=1054450100]
 
-[node name="scenery" type="Node3D" parent="."]
+[node name="entrance_left" parent="scenery" unique_id=838274698 instance=ExtResource("rock_7")]
+transform = Transform3D(1.6, 0, 0, 0, 1.5, 0, 0, 0, 1.6, -4.5, 0, 12.8)
 
-[node name="entrance_left" parent="scenery" instance=ExtResource("rock_7")]
-position = Vector3(-4.5, 0, 12.8)
-scale = Vector3(1.6, 1.5, 1.6)
+[node name="entrance_left_chip" parent="scenery" unique_id=832810721 instance=ExtResource("rock_1")]
+transform = Transform3D(0.8, 0, 0, 0, 0.7, 0, 0, 0, 0.8, -4.2, 0, 10)
 
-[node name="entrance_left_chip" parent="scenery" instance=ExtResource("rock_1")]
-position = Vector3(-4.2, 0, 10)
-scale = Vector3(0.8, 0.7, 0.8)
+[node name="entrance_right" parent="scenery" unique_id=60315870 instance=ExtResource("rock_2")]
+transform = Transform3D(1.8, 0, 0, 0, 1.5, 0, 0, 0, 1.8, 4, 0, 12.3)
 
-[node name="entrance_right" parent="scenery" instance=ExtResource("rock_2")]
-position = Vector3(4, 0, 12.3)
-scale = Vector3(1.8, 1.5, 1.8)
+[node name="entrance_right_spire" parent="scenery" unique_id=1571499043 instance=ExtResource("rock_4")]
+transform = Transform3D(0.9, 0, 0, 0, 1.8, 0, 0, 0, 0.9, 4.1, 0, 10.1)
 
-[node name="entrance_right_spire" parent="scenery" instance=ExtResource("rock_4")]
-position = Vector3(4.1, 0, 10.1)
-scale = Vector3(0.9, 1.8, 0.9)
+[node name="passage_left" parent="scenery" unique_id=1390375956 instance=ExtResource("rock_6")]
+transform = Transform3D(1.3, 0, 0, 0, 1.4, 0, 0, 0, 1.3, -3.8, 0, 6.4)
 
-[node name="passage_left" parent="scenery" instance=ExtResource("rock_6")]
-position = Vector3(-3.8, 0, 6.4)
-scale = Vector3(1.3, 1.4, 1.3)
+[node name="passage_right" parent="scenery" unique_id=1506577284 instance=ExtResource("rock_5")]
+transform = Transform3D(0.9, 0, 0, 0, 1.9, 0, 0, 0, 0.9, 3.4, 0, 6.9)
 
-[node name="passage_right" parent="scenery" instance=ExtResource("rock_5")]
-position = Vector3(3.4, 0, 6.9)
-scale = Vector3(0.9, 1.9, 0.9)
+[node name="chamber_left_near" parent="scenery" unique_id=1037671392 instance=ExtResource("rock_8")]
+transform = Transform3D(1.8, 0, 0, 0, 1.6, 0, 0, 0, 1.8, -7.9, 0, 1.6)
 
-[node name="chamber_left_near" parent="scenery" instance=ExtResource("rock_8")]
-position = Vector3(-7.9, 0, 1.6)
-scale = Vector3(1.8, 1.6, 1.8)
+[node name="chamber_left_chip" parent="scenery" unique_id=1633997793 instance=ExtResource("rock_1")]
+transform = Transform3D(0.9, 0, 0, 0, 0.8, 0, 0, 0, 0.9, -7.8, 0, -0.5)
 
-[node name="chamber_left_chip" parent="scenery" instance=ExtResource("rock_1")]
-position = Vector3(-7.8, 0, -0.5)
-scale = Vector3(0.9, 0.8, 0.9)
+[node name="chamber_left_wall" parent="scenery" unique_id=1796398426 instance=ExtResource("rock_6")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -9, 0, -5.6)
 
-[node name="chamber_left_wall" parent="scenery" instance=ExtResource("rock_6")]
-position = Vector3(-9, 0, -5.6)
-scale = Vector3(2, 2, 2)
+[node name="chamber_left_spire" parent="scenery" unique_id=1929225519 instance=ExtResource("rock_4")]
+transform = Transform3D(1.3, 0, 0, 0, 2.7, 0, 0, 0, 1.3, -8.1, 0, -9.6)
 
-[node name="chamber_left_spire" parent="scenery" instance=ExtResource("rock_4")]
-position = Vector3(-8.1, 0, -9.6)
-scale = Vector3(1.3, 2.7, 1.3)
+[node name="chamber_back_left" parent="scenery" unique_id=1589569057 instance=ExtResource("rock_2")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -5.7, 0, -15)
 
-[node name="chamber_back_left" parent="scenery" instance=ExtResource("rock_2")]
-position = Vector3(-5.7, 0, -15)
-scale = Vector3(2, 2, 2)
+[node name="chamber_back_middle" parent="scenery" unique_id=128125966 instance=ExtResource("rock_5")]
+transform = Transform3D(1.4, 0, 0, 0, 2.5, 0, 0, 0, 1.4, -1.8, 0, -16)
 
-[node name="chamber_back_middle" parent="scenery" instance=ExtResource("rock_5")]
-position = Vector3(-1.8, 0, -16)
-scale = Vector3(1.4, 2.5, 1.4)
+[node name="chamber_back_right" parent="scenery" unique_id=886506176 instance=ExtResource("rock_8")]
+transform = Transform3D(2, 0, 0, 0, 1.9, 0, 0, 0, 2, 4.4, 0, -15.3)
 
-[node name="chamber_back_right" parent="scenery" instance=ExtResource("rock_8")]
-position = Vector3(4.4, 0, -15.3)
-scale = Vector3(2, 1.9, 2)
+[node name="chamber_right_wall" parent="scenery" unique_id=255815433 instance=ExtResource("rock_7")]
+transform = Transform3D(1.7, 0, 0, 0, 2, 0, 0, 0, 1.7, 9, 0, -9.5)
 
-[node name="chamber_right_wall" parent="scenery" instance=ExtResource("rock_7")]
-position = Vector3(9, 0, -9.5)
-scale = Vector3(1.7, 2, 1.7)
+[node name="chamber_right_chip" parent="scenery" unique_id=1709257818 instance=ExtResource("rock_1")]
+transform = Transform3D(0.9, 0, 0, 0, 0.8, 0, 0, 0, 0.9, 9.2, 0, -6.5)
 
-[node name="chamber_right_chip" parent="scenery" instance=ExtResource("rock_1")]
-position = Vector3(9.2, 0, -6.5)
-scale = Vector3(0.9, 0.8, 0.9)
+[node name="chamber_right_near" parent="scenery" unique_id=1361978782 instance=ExtResource("rock_2")]
+transform = Transform3D(1.9, 0, 0, 0, 1.9, 0, 0, 0, 1.9, 8.4, 0, 0.4)
 
-[node name="chamber_right_near" parent="scenery" instance=ExtResource("rock_2")]
-position = Vector3(8.4, 0, 0.4)
-scale = Vector3(1.9, 1.9, 1.9)
+[node name="chamber_right_spire" parent="scenery" unique_id=881735844 instance=ExtResource("rock_4")]
+transform = Transform3D(1.1, 0, 0, 0, 2.2, 0, 0, 0, 1.1, 7.7, 0, 2.1)
 
-[node name="chamber_right_spire" parent="scenery" instance=ExtResource("rock_4")]
-position = Vector3(7.7, 0, 2.1)
-scale = Vector3(1.1, 2.2, 1.1)
+[node name="ceiling_light" type="Node3D" parent="." unique_id=1533571302]
 
-[node name="ceiling_light" type="Node3D" parent="."]
-
-[node name="preparation" parent="ceiling_light" instance=ExtResource("world_light")]
-position = Vector3(0, 4, 11.5)
-light_energy = 0.3
+[node name="preparation" parent="ceiling_light" unique_id=1363777682 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 11.5)
 omni_range = 9.0
 
-[node name="passage" parent="ceiling_light" instance=ExtResource("world_light")]
-position = Vector3(0, 3.8, 6.3)
+[node name="passage" parent="ceiling_light" unique_id=268338752 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8, 6.3)
 light_energy = 0.12
 omni_range = 6.0
 
-[node name="enemy_near" parent="." node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
-position = Vector3(-4, 0, -1.2)
+[node name="enemy_near" parent="." unique_id=1659567771 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1.2)
 target = NodePath("../player")
+growl_stream = SubResource("AudioStreamRandomizer_oo84n")
+bite_stream = SubResource("AudioStreamRandomizer_hu7jy")
+death_stream = SubResource("AudioStreamRandomizer_soddd")
 head_variant = 0
 body_variant = 1
 eye_variant = 0
 
-[node name="enemy_far_left" parent="." node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
-position = Vector3(-4, 0, -11)
+[node name="enemy_far_left" parent="." unique_id=2037867044 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -11)
 target = NodePath("../player")
+growl_stream = SubResource("AudioStreamRandomizer_52262")
+bite_stream = SubResource("AudioStreamRandomizer_pc0b8")
+death_stream = SubResource("AudioStreamRandomizer_87672")
 head_variant = 1
 body_variant = 0
 eye_variant = 2
 
-[node name="enemy_far_right" parent="." node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
-position = Vector3(4.3, 0, -10.5)
+[node name="enemy_far_right" parent="." unique_id=783629126 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 0, -10.5)
 target = NodePath("../player")
+growl_stream = SubResource("AudioStreamRandomizer_1mjig")
+bite_stream = SubResource("AudioStreamRandomizer_01608")
+death_stream = SubResource("AudioStreamRandomizer_tidyi")
 head_variant = 2
 body_variant = 2
 eye_variant = 4
 
-[node name="background_rocks" type="Node3D" parent="."]
+[node name="background_rocks" type="Node3D" parent="." unique_id=1967973172]
 
-[node name="left" parent="background_rocks" instance=ExtResource("background_rock")]
-position = Vector3(-14, -1, -7)
-scale = Vector3(5.5, 5, 1)
+[node name="left" parent="background_rocks" unique_id=2135147358 instance=ExtResource("background_rock")]
+transform = Transform3D(5.5, 0, 0, 0, 5, 0, 0, 0, 1, -14, -1, -7)
 
-[node name="right" parent="background_rocks" instance=ExtResource("background_rock")]
-position = Vector3(15, -1, -7)
-scale = Vector3(5, 5.5, 1)
-texture = ExtResource("background_6")
+[node name="right" parent="background_rocks" unique_id=600849956 instance=ExtResource("background_rock")]
+transform = Transform3D(5, 0, 0, 0, 5.5, 0, 0, 0, 1, 15, -1, -7)
 offset = Vector2(0, 234.5)
+texture = ExtResource("background_6")
 
-[node name="far_left" parent="background_rocks" instance=ExtResource("background_rock")]
-position = Vector3(-7, -1, -23)
-scale = Vector3(4.5, 7, 1)
-texture = ExtResource("background_5")
+[node name="far_left" parent="background_rocks" unique_id=2111083474 instance=ExtResource("background_rock")]
+transform = Transform3D(4.5, 0, 0, 0, 7, 0, 0, 0, 1, -7, -1, -23)
 offset = Vector2(0, 179)
+texture = ExtResource("background_5")
 
-[node name="far_right" parent="background_rocks" instance=ExtResource("background_rock")]
-position = Vector3(5, -1, -22)
-scale = Vector3(5, 6, 1)
-texture = ExtResource("background_4")
+[node name="far_right" parent="background_rocks" unique_id=1228006072 instance=ExtResource("background_rock")]
+transform = Transform3D(5, 0, 0, 0, 6, 0, 0, 0, 1, 5, -1, -22)
 offset = Vector2(0, 212)
+texture = ExtResource("background_4")
 
-[node name="stalagmites" parent="." instance=ExtResource("stalagmites")]
-position = Vector3(7.3, 0, -4.5)
+[node name="stalagmites" parent="." unique_id=101439937 instance=ExtResource("stalagmites")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3, 0, -4.5)
 seed_value = 104
 collisions_enabled = false
 
 [connection signal="died" from="player" to="hud" method="hide"]
 [connection signal="ramrod_drag_changed" from="player" to="hud/musket" method="_on_ramrod_drag_changed"]
+[connection signal="focus_entered" from="passage_focus" to="camera_controller" method="_on_focus_entered"]
+[connection signal="focus_exited" from="passage_focus" to="camera_controller" method="_on_focus_exited"]
 [connection signal="fired" from="musket" to="player" method="_on_musket_fired"]
 [connection signal="fuse_expired" from="musket" to="player" method="_on_musket_fuse_expired"]
 [connection signal="trigger_ready" from="musket" to="player" method="_on_musket_trigger_ready"]
 [connection signal="charge_requested" from="hud/lantern" to="player" method="_on_lantern_pressed"]
 [connection signal="ball_requested" from="hud/musket" to="player" method="_on_barrel_pressed"]
 [connection signal="ramrod_requested" from="hud/musket" to="player" method="_on_ramrod_gui_input"]
-[connection signal="focus_entered" from="passage_focus" to="camera_controller" method="_on_focus_entered"]
-[connection signal="focus_exited" from="passage_focus" to="camera_controller" method="_on_focus_exited"]
-[connection signal="bite_started" from="enemy_near" to="camera_controller" method="_on_bite_started"]
 [connection signal="bite_finished" from="enemy_near" to="camera_controller" method="_on_bite_finished"]
-[connection signal="bite_started" from="enemy_far_left" to="camera_controller" method="_on_bite_started"]
+[connection signal="bite_landed" from="enemy_near" to="camera_controller" method="_on_bite_landed"]
+[connection signal="bite_started" from="enemy_near" to="camera_controller" method="_on_bite_started"]
 [connection signal="bite_finished" from="enemy_far_left" to="camera_controller" method="_on_bite_finished"]
-[connection signal="bite_started" from="enemy_far_right" to="camera_controller" method="_on_bite_started"]
+[connection signal="bite_landed" from="enemy_far_left" to="camera_controller" method="_on_bite_landed"]
+[connection signal="bite_started" from="enemy_far_left" to="camera_controller" method="_on_bite_started"]
 [connection signal="bite_finished" from="enemy_far_right" to="camera_controller" method="_on_bite_finished"]
+[connection signal="bite_landed" from="enemy_far_right" to="camera_controller" method="_on_bite_landed"]
+[connection signal="bite_started" from="enemy_far_right" to="camera_controller" method="_on_bite_started"]
 
 [editable path="player"]
-
-[connection signal="bite_landed" from="enemy_near" to="camera_controller" method="_on_bite_landed"]
-
-[connection signal="bite_landed" from="enemy_far_left" to="camera_controller" method="_on_bite_landed"]
-
-[connection signal="bite_landed" from="enemy_far_right" to="camera_controller" method="_on_bite_landed"]

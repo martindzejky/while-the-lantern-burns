@@ -1,10 +1,10 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bkxqwr56si7ij"]
 
-[ext_resource type="Script" path="res://scripts/gameplay_prompts.gd" id="script"]
-[ext_resource type="FontFile" path="res://resources/menu/barlow_medium.ttf" id="font"]
-[ext_resource type="Theme" path="res://resources/menu/theme.tres" id="theme"]
+[ext_resource type="FontFile" uid="uid://edm7qhympbho" path="res://resources/menu/barlow_medium.ttf" id="font"]
+[ext_resource type="Script" uid="uid://cd1c1xmmqckru" path="res://scripts/gameplay_prompts.gd" id="script"]
+[ext_resource type="Theme" uid="uid://drxw11x7lxcwj" path="res://resources/menu/theme.tres" id="theme"]
 
-[node name="gameplay_prompts" type="Control" node_paths=PackedStringArray("movement", "instruction", "context")]
+[node name="gameplay_prompts" type="Control" unique_id=1511225715 node_paths=PackedStringArray("movement", "instruction", "context")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,17 +18,19 @@ movement = NodePath("movement")
 instruction = NodePath("instruction")
 context = NodePath("context")
 
-[node name="movement" type="Label3D" parent="."]
+[node name="movement" type="Label3D" parent="." unique_id=292514808]
+pixel_size = 0.007
 billboard = 1
 no_depth_test = true
-pixel_size = 0.007
+modulate = Color(1, 0.89, 0.66, 1)
+text = "WASD / ARROWS
+Move"
 font = ExtResource("font")
 font_size = 40
 outline_size = 8
-modulate = Color(1, 0.89, 0.66, 1)
-text = "WASD / ARROWS\nMove"
 
-[node name="instruction" type="Label" parent="."]
+[node name="instruction" type="Label" parent="." unique_id=1152472181]
+layout_mode = 0
 anchor_left = 0.14
 anchor_top = 0.48
 anchor_right = 0.44
@@ -36,21 +38,20 @@ anchor_bottom = 0.48
 offset_top = -40.0
 offset_bottom = 40.0
 grow_horizontal = 2
-mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0.035, 0.015, 1)
+theme_override_colors/font_outline_color = Color(0, 0.035, 0.015, 0.8)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 4
-theme_override_colors/font_outline_color = Color(0, 0.035, 0.015, 0.8)
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="context" type="Label3D" parent="."]
+[node name="context" type="Label3D" parent="." unique_id=509898162]
+pixel_size = 0.007
 billboard = 1
 no_depth_test = true
-pixel_size = 0.007
+modulate = Color(1, 0.89, 0.66, 1)
 font = ExtResource("font")
 font_size = 36
 outline_size = 8
-modulate = Color(1, 0.89, 0.66, 1)

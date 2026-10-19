@@ -1,14 +1,13 @@
-[gd_resource type="AudioStreamRandomizer" format=3]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://bmjrguf5cm508"]
 
-[ext_resource type="AudioStream" path="res://audio/player/step_01.wav" id="1"]
-[ext_resource type="AudioStream" path="res://audio/player/step_02.wav" id="2"]
-[ext_resource type="AudioStream" path="res://audio/player/step_03.wav" id="3"]
-[ext_resource type="AudioStream" path="res://audio/player/step_04.wav" id="4"]
-[ext_resource type="AudioStream" path="res://audio/player/step_06.wav" id="6"]
+[ext_resource type="AudioStream" uid="uid://b67k30emqe11s" path="res://audio/player/step_01.wav" id="1"]
+[ext_resource type="AudioStream" uid="uid://cwcylqhf0urp7" path="res://audio/player/step_02.wav" id="2"]
+[ext_resource type="AudioStream" uid="uid://6jnlk73os5yr" path="res://audio/player/step_03.wav" id="3"]
+[ext_resource type="AudioStream" uid="uid://cutkgxv2c161n" path="res://audio/player/step_04.wav" id="4"]
+[ext_resource type="AudioStream" uid="uid://brasfbn4jeemx" path="res://audio/player/step_06.wav" id="6"]
 
 [resource]
 resource_local_to_scene = true
-playback_mode = 0
 random_pitch = 1.04
 random_volume_offset_db = 1.0
 streams_count = 5

@@ -1,20 +1,19 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bgvehpswq5e13"]
 
-[ext_resource type="Script" path="res://scripts/camera_focus.gd" id="1"]
+[ext_resource type="Script" uid="uid://3s56mfen7eax" path="res://scripts/camera_focus.gd" id="1"]
 
 [sub_resource type="CylinderShape3D" id="shape"]
 resource_local_to_scene = true
 height = 6.0
 radius = 8.0
 
-[node name="camera_focus" type="Area3D" node_paths=PackedStringArray("shape")]
+[node name="camera_focus" type="Area3D" unique_id=1097471335 node_paths=PackedStringArray("shape")]
 collision_layer = 0
-collision_mask = 1
 monitorable = false
 script = ExtResource("1")
 shape = NodePath("shape")
 
-[node name="shape" type="CollisionShape3D" parent="."]
+[node name="shape" type="CollisionShape3D" parent="." unique_id=1179813374]
 shape = SubResource("shape")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,10 +1,9 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://c2k5x6ubue31m"]
 
-[node name="world_light" type="OmniLight3D"]
-position = Vector3(0, 4, 0)
+[node name="world_light" type="OmniLight3D" unique_id=1584517053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 light_color = Color(0.7, 0.83, 1, 1)
 light_energy = 0.3
-; custom ground shaders use the otherwise unused specular amount to select the world-light curve.
 light_specular = 1.0
 shadow_enabled = true
 shadow_blur = 0.0

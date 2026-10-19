@@ -1,14 +1,13 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dabxqu7mxnwcu"]
 
-[ext_resource type="Texture2D" path="res://sprites/big_rock_02.png" id="rock"]
+[ext_resource type="Texture2D" uid="uid://ctdf0x3e7x2cs" path="res://sprites/big_rock_02.png" id="rock"]
 
-[node name="background_rock" type="Sprite3D"]
+[node name="background_rock" type="Sprite3D" unique_id=221501031]
 layers = 4
 cast_shadow = 0
+offset = Vector2(0, 177.5)
 modulate = Color(0.08, 0.12, 0.09, 1)
 pixel_size = 0.004
-offset = Vector2(0, 177.5)
 billboard = 1
-shaded = false
 alpha_cut = 1
 texture = ExtResource("rock")

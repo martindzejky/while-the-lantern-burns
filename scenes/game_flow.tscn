@@ -1,13 +1,12 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://j7uebfnnisiy"]
 
-[ext_resource type="Script" path="res://scripts/game_flow.gd" id="script"]
-[ext_resource type="PackedScene" path="res://scenes/menu_preview.tscn" id="menu"]
-[ext_resource type="PackedScene" path="res://scenes/gameplay.tscn" id="game"]
-[ext_resource type="AudioStream" path="res://audio/ui/transition.tres" id="transition"]
+[ext_resource type="PackedScene" uid="uid://c6caq2n25ojcn" path="res://scenes/gameplay.tscn" id="game"]
+[ext_resource type="PackedScene" uid="uid://cf0djcrv4nkr8" path="res://scenes/menu_preview.tscn" id="menu"]
+[ext_resource type="PackedScene" uid="uid://dqxhuvvqtunai" path="res://ui/pause_menu.tscn" id="pause_menu"]
+[ext_resource type="Script" uid="uid://c0un7cuu7sb55" path="res://scripts/game_flow.gd" id="script"]
+[ext_resource type="AudioStream" uid="uid://i18062bm6aak" path="res://audio/ui/transition.tres" id="transition"]
 
-[ext_resource type="PackedScene" path="res://ui/pause_menu.tscn" id="pause_menu"]
-
-[node name="game_flow" type="Node" node_paths=PackedStringArray("screen_host", "fade", "transition_audio", "pause_menu")]
+[node name="game_flow" type="Node" unique_id=300425972 node_paths=PackedStringArray("screen_host", "fade", "transition_audio", "pause_menu")]
 process_mode = 3
 script = ExtResource("script")
 menu_scene = ExtResource("menu")
@@ -17,18 +16,18 @@ fade = NodePath("transition/fade")
 transition_audio = NodePath("transition_audio")
 pause_menu = NodePath("pause/menu")
 
-[node name="screens" type="Node" parent="."]
+[node name="screens" type="Node" parent="." unique_id=1930463375]
 process_mode = 1
 
-[node name="transition_audio" type="AudioStreamPlayer" parent="."]
+[node name="transition_audio" type="AudioStreamPlayer" parent="." unique_id=369495138]
 stream = ExtResource("transition")
 volume_db = 12.0412
 bus = &"UI SFX"
 
-[node name="transition" type="CanvasLayer" parent="."]
+[node name="transition" type="CanvasLayer" parent="." unique_id=113661862]
 layer = 110
 
-[node name="fade" type="ColorRect" parent="transition"]
+[node name="fade" type="ColorRect" parent="transition" unique_id=169829319]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,10 +35,10 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="pause" type="CanvasLayer" parent="."]
+[node name="pause" type="CanvasLayer" parent="." unique_id=776343940]
 layer = 105
 
-[node name="menu" parent="pause" instance=ExtResource("pause_menu")]
+[node name="menu" parent="pause" unique_id=1345961836 instance=ExtResource("pause_menu")]
 
 [connection signal="continue_requested" from="pause/menu" to="." method="_on_continue_requested"]
 [connection signal="menu_requested" from="pause/menu" to="." method="_on_menu_requested"]

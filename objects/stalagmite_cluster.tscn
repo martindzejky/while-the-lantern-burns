@@ -1,9 +1,9 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://crebvy8a73kon"]
 
-[ext_resource type="Script" path="res://scripts/stalagmite_cluster.gd" id="script"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_04.tscn" id="rock_04"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_05.tscn" id="rock_05"]
+[ext_resource type="PackedScene" uid="uid://bi4cxx4ajbs57" path="res://objects/big_rock_04.tscn" id="rock_04"]
+[ext_resource type="PackedScene" uid="uid://dyer8vsgv3sab" path="res://objects/big_rock_05.tscn" id="rock_05"]
+[ext_resource type="Script" uid="uid://d1304ib7kq252" path="res://scripts/stalagmite_cluster.gd" id="script"]
 
-[node name="stalagmite_cluster" type="Node3D"]
+[node name="stalagmite_cluster" type="Node3D" unique_id=965937053]
 script = ExtResource("script")
 rock_scenes = Array[PackedScene]([ExtResource("rock_04"), ExtResource("rock_05")])

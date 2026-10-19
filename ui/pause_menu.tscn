@@ -1,14 +1,14 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dqxhuvvqtunai"]
 
-[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="script"]
-[ext_resource type="Theme" path="res://resources/menu/theme.tres" id="theme"]
 [ext_resource type="PackedScene" path="res://ui/ui_audio.tscn" id="audio"]
+[ext_resource type="FontFile" uid="uid://edm7qhympbho" path="res://resources/menu/barlow_medium.ttf" id="medium"]
+[ext_resource type="Script" uid="uid://bwnnmvwmha6sb" path="res://scripts/pause_menu.gd" id="script"]
+[ext_resource type="Theme" uid="uid://drxw11x7lxcwj" path="res://resources/menu/theme.tres" id="theme"]
 
-[ext_resource type="FontFile" path="res://resources/menu/barlow_medium.ttf" id="medium"]
-
-[node name="pause_menu" type="Control" node_paths=PackedStringArray("continue_button", "audio")]
-visible = false
+[node name="pause_menu" type="Control" unique_id=1256409563 node_paths=PackedStringArray("continue_button", "audio")]
 process_mode = 3
+visible = false
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,8 +19,8 @@ script = ExtResource("script")
 continue_button = NodePath("column/buttons/continue")
 audio = NodePath("audio")
 
-[node name="background" type="ColorRect" parent="."]
-anchors_preset = 15
+[node name="background" type="ColorRect" parent="." unique_id=890799686]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -28,7 +28,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.003, 0.016, 0.01, 0.88)
 
-[node name="column" type="VBoxContainer" parent="."]
+[node name="column" type="VBoxContainer" parent="." unique_id=670405044]
 layout_mode = 0
 anchor_left = 0.085
 anchor_top = 0.23
@@ -38,44 +38,38 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 48
 
-[node name="title" type="Label" parent="column"]
+[node name="title" type="Label" parent="column" unique_id=206179563]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("medium")
 theme_override_font_sizes/font_size = 55
 text = "Paused"
 
-[node name="buttons" type="VBoxContainer" parent="column"]
+[node name="buttons" type="VBoxContainer" parent="column" unique_id=453997250]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 12
 
-[node name="continue" type="Button" parent="column/buttons"]
+[node name="continue" type="Button" parent="column/buttons" unique_id=414510784]
 custom_minimum_size = Vector2(240, 50)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "CONTINUE"
 alignment = 0
 
-[node name="main_menu" type="Button" parent="column/buttons"]
+[node name="main_menu" type="Button" parent="column/buttons" unique_id=50051930]
 custom_minimum_size = Vector2(240, 50)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "MAIN MENU"
 alignment = 0
 
-[node name="audio" parent="." instance=ExtResource("audio")]
-
-[connection signal="pressed" from="column/buttons/continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="column/buttons/main_menu" to="." method="_on_menu_pressed"]
-
-[connection signal="pressed" from="column/buttons/continue" to="audio" method="play_click"]
-
-[connection signal="mouse_entered" from="column/buttons/continue" to="audio" method="play_hover"]
+[node name="audio" parent="." unique_id=1946040955 instance=ExtResource("audio")]
 
 [connection signal="focus_entered" from="column/buttons/continue" to="audio" method="play_hover"]
-
-[connection signal="pressed" from="column/buttons/main_menu" to="audio" method="play_click"]
-
-[connection signal="mouse_entered" from="column/buttons/main_menu" to="audio" method="play_hover"]
-
+[connection signal="mouse_entered" from="column/buttons/continue" to="audio" method="play_hover"]
+[connection signal="pressed" from="column/buttons/continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="column/buttons/continue" to="audio" method="play_click"]
 [connection signal="focus_entered" from="column/buttons/main_menu" to="audio" method="play_hover"]
+[connection signal="mouse_entered" from="column/buttons/main_menu" to="audio" method="play_hover"]
+[connection signal="pressed" from="column/buttons/main_menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="column/buttons/main_menu" to="audio" method="play_click"]

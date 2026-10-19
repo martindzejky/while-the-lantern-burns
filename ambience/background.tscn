@@ -1,11 +1,11 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dv3xr7lqywdas"]
 
-[ext_resource type="AudioStream" path="res://ambience/cave_hum.mp3" id="hum"]
+[ext_resource type="AudioStream" uid="uid://b2mtxadwlky3a" path="res://ambience/cave_hum.mp3" id="hum"]
 
-[node name="cave_ambience" type="Node"]
+[node name="cave_ambience" type="Node" unique_id=261750205]
 process_mode = 3
 
-[node name="hum" type="AudioStreamPlayer" parent="."]
+[node name="hum" type="AudioStreamPlayer" parent="." unique_id=593733711]
 stream = ExtResource("hum")
 volume_db = -2.846
 autoplay = true

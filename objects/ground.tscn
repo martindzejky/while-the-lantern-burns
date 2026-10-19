@@ -1,11 +1,9 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://ct5elay5mk4lb"]
 
 [ext_resource type="Shader" uid="uid://bn1p42cqm4tj0" path="res://shaders/ground_lighting.gdshader" id="4"]
 [ext_resource type="Script" uid="uid://2wksfmfp1kib" path="res://scripts/ground.gd" id="11"]
 [ext_resource type="PackedScene" path="res://objects/ground_details.tscn" id="details"]
-
 [ext_resource type="Texture2D" path="res://resources/ground/light_profile.tres" id="light_profile"]
-
 [ext_resource type="Texture2D" path="res://resources/ground/world_light_profile.tres" id="world_light_profile"]
 
 [sub_resource type="Gradient" id="ground_color"]
@@ -20,11 +18,15 @@ height = 16
 [sub_resource type="ShaderMaterial" id="ground_material"]
 render_priority = 0
 shader = ExtResource("4")
-shader_parameter/ground_texture = SubResource("ground_texture")
 shader_parameter/ground_light_curve = ExtResource("light_profile")
 shader_parameter/world_light_curve = ExtResource("world_light_profile")
+shader_parameter/light_edge_noise_strength = 0.025
+shader_parameter/light_edge_noise_scale = 1.8
+shader_parameter/ground_texture = SubResource("ground_texture")
+shader_parameter/ground_grain_strength = 0.045
+shader_parameter/ground_grain_scale = 0.65
 
-[node name="ground" type="CSGPolygon3D" node_paths=PackedStringArray("details")]
+[node name="ground" type="CSGPolygon3D" unique_id=1022492301 node_paths=PackedStringArray("details")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 cast_shadow = 0
 polygon = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
@@ -33,4 +35,4 @@ material = SubResource("ground_material")
 script = ExtResource("11")
 details = NodePath("details")
 
-[node name="details" parent="." instance=ExtResource("details")]
+[node name="details" parent="." unique_id=503566835 instance=ExtResource("details")]

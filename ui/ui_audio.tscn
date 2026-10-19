@@ -1,20 +1,20 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bc8cqpt06nl08"]
 
-[ext_resource type="Script" path="res://scripts/ui_audio.gd" id="script"]
-[ext_resource type="AudioStream" path="res://audio/ui/hover.tres" id="hover"]
 [ext_resource type="AudioStream" path="res://audio/ui/click.tres" id="click"]
+[ext_resource type="AudioStream" path="res://audio/ui/hover.tres" id="hover"]
+[ext_resource type="Script" uid="uid://b8pc5frkw1yxi" path="res://scripts/ui_audio.gd" id="script"]
 
-[node name="ui_audio" type="Node" node_paths=PackedStringArray("hover_audio", "click_audio")]
+[node name="ui_audio" type="Node" unique_id=333982263 node_paths=PackedStringArray("hover_audio", "click_audio")]
 script = ExtResource("script")
 hover_audio = NodePath("hover")
 click_audio = NodePath("click")
 
-[node name="hover" type="AudioStreamPlayer" parent="."]
+[node name="hover" type="AudioStreamPlayer" parent="." unique_id=1153498466]
 stream = ExtResource("hover")
 volume_db = -6.0
 bus = &"UI SFX"
 
-[node name="click" type="AudioStreamPlayer" parent="."]
+[node name="click" type="AudioStreamPlayer" parent="." unique_id=790992806]
 stream = ExtResource("click")
 volume_db = -6.0
 bus = &"UI SFX"

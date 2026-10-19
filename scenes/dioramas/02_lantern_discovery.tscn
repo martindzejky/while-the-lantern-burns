@@ -1,35 +1,36 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cdld4ge7arrei"]
 
-[ext_resource type="PackedScene" path="res://objects/player.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://objects/lantern.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://objects/musket.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://ui/lantern_ui.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://ui/musket_ui.tscn" id="7"]
-[ext_resource type="Script" path="res://scripts/effects_warmup.gd" id="8"]
-[ext_resource type="PackedScene" path="res://ambience/controller.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://w6mjmcbcb6d" path="res://objects/player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://d330qifnxgchu" path="res://objects/lantern.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://by2n7sl0bbq3j" path="res://objects/musket.tscn" id="5"]
+[ext_resource type="AudioStream" uid="uid://b67k30emqe11s" path="res://audio/player/step_01.wav" id="5_4ql50"]
+[ext_resource type="PackedScene" uid="uid://by6jxo44b17at" path="res://ui/lantern_ui.tscn" id="6"]
+[ext_resource type="AudioStream" uid="uid://cwcylqhf0urp7" path="res://audio/player/step_02.wav" id="6_ca7kv"]
+[ext_resource type="PackedScene" uid="uid://odlmbst42wxg" path="res://ui/musket_ui.tscn" id="7"]
+[ext_resource type="AudioStream" uid="uid://6jnlk73os5yr" path="res://audio/player/step_03.wav" id="7_ud3rp"]
+[ext_resource type="Script" uid="uid://de8uuvch50dlp" path="res://scripts/effects_warmup.gd" id="8"]
+[ext_resource type="AudioStream" uid="uid://cutkgxv2c161n" path="res://audio/player/step_04.wav" id="8_6w7dw"]
+[ext_resource type="AudioStream" uid="uid://brasfbn4jeemx" path="res://audio/player/step_06.wav" id="9_44vmk"]
+[ext_resource type="AudioStream" uid="uid://sjew2oaqluoc" path="res://audio/player/body_01.wav" id="10_of3yb"]
+[ext_resource type="AudioStream" uid="uid://cwik1ebawpj2b" path="res://audio/player/body_02.wav" id="11_ulr81"]
+[ext_resource type="PackedScene" uid="uid://cjip80cip1fu2" path="res://ambience/controller.tscn" id="12"]
+[ext_resource type="Texture2D" uid="uid://mtmam2bjvjgi" path="res://sprites/big_rock_04.png" id="background_4"]
+[ext_resource type="Texture2D" uid="uid://hq7pn5ufok4m" path="res://sprites/big_rock_05.png" id="background_5"]
+[ext_resource type="Texture2D" uid="uid://bxfjceu3sdhb1" path="res://sprites/big_rock_06.png" id="background_6"]
+[ext_resource type="PackedScene" uid="uid://dabxqu7mxnwcu" path="res://objects/background_rock.tscn" id="background_rock"]
 [ext_resource type="PackedScene" path="res://ui/death_feedback.tscn" id="death_ui"]
-
-[ext_resource type="PackedScene" path="res://objects/ground.tscn" id="ground"]
-
-[ext_resource type="PackedScene" path="res://ui/world_post_processing.tscn" id="world_post_processing"]
-
-[ext_resource type="PackedScene" path="res://objects/big_rock_01.tscn" id="rock_01"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_02.tscn" id="rock_02"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_03.tscn" id="rock_03"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_04.tscn" id="rock_04"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_05.tscn" id="rock_05"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_06.tscn" id="rock_06"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_07.tscn" id="rock_07"]
-[ext_resource type="PackedScene" path="res://objects/big_rock_08.tscn" id="rock_08"]
-
-[ext_resource type="PackedScene" path="res://objects/world_light.tscn" id="world_light"]
-
-[ext_resource type="PackedScene" path="res://objects/background_rock.tscn" id="background_rock"]
-[ext_resource type="Texture2D" path="res://sprites/big_rock_04.png" id="background_4"]
-[ext_resource type="Texture2D" path="res://sprites/big_rock_05.png" id="background_5"]
-[ext_resource type="Texture2D" path="res://sprites/big_rock_06.png" id="background_6"]
-
-[ext_resource type="PackedScene" path="res://objects/stalagmite_cluster.tscn" id="stalagmites"]
+[ext_resource type="PackedScene" uid="uid://ct5elay5mk4lb" path="res://objects/ground.tscn" id="ground"]
+[ext_resource type="PackedScene" uid="uid://odumffg7yfr1" path="res://objects/big_rock_01.tscn" id="rock_01"]
+[ext_resource type="PackedScene" uid="uid://djk0sh2numjnd" path="res://objects/big_rock_02.tscn" id="rock_02"]
+[ext_resource type="PackedScene" uid="uid://bd1pkpe5kcxf6" path="res://objects/big_rock_03.tscn" id="rock_03"]
+[ext_resource type="PackedScene" uid="uid://bi4cxx4ajbs57" path="res://objects/big_rock_04.tscn" id="rock_04"]
+[ext_resource type="PackedScene" uid="uid://dyer8vsgv3sab" path="res://objects/big_rock_05.tscn" id="rock_05"]
+[ext_resource type="PackedScene" uid="uid://eusyopafqhvr" path="res://objects/big_rock_06.tscn" id="rock_06"]
+[ext_resource type="PackedScene" uid="uid://dswxislnonhiw" path="res://objects/big_rock_07.tscn" id="rock_07"]
+[ext_resource type="PackedScene" uid="uid://yrm4kbry3gfe" path="res://objects/big_rock_08.tscn" id="rock_08"]
+[ext_resource type="PackedScene" uid="uid://crebvy8a73kon" path="res://objects/stalagmite_cluster.tscn" id="stalagmites"]
+[ext_resource type="PackedScene" uid="uid://c2k5x6ubue31m" path="res://objects/world_light.tscn" id="world_light"]
+[ext_resource type="PackedScene" uid="uid://c3se2eoftldxs" path="res://ui/world_post_processing.tscn" id="world_post_processing"]
 
 [sub_resource type="Environment" id="environment"]
 background_mode = 1
@@ -39,139 +40,139 @@ ambient_light_color = Color(0.08, 0.16, 0.11, 1)
 ambient_light_energy = 0.05
 reflected_light_source = 2
 
-[node name="lantern_discovery" type="Node3D"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qwcp6"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 5
+stream_0/stream = ExtResource("5_4ql50")
+stream_1/stream = ExtResource("6_ca7kv")
+stream_2/stream = ExtResource("7_ud3rp")
+stream_3/stream = ExtResource("8_6w7dw")
+stream_4/stream = ExtResource("9_44vmk")
 
-[node name="ambience" parent="." node_paths=PackedStringArray("target") instance=ExtResource("12")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pnqig"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("10_of3yb")
+stream_1/stream = ExtResource("11_ulr81")
+
+[node name="lantern_discovery" type="Node3D" unique_id=340782863]
+
+[node name="ambience" parent="." unique_id=990303865 node_paths=PackedStringArray("target") instance=ExtResource("12")]
 target = NodePath("../player")
 
-[node name="world_post_processing" parent="." instance=ExtResource("world_post_processing")]
+[node name="world_post_processing" parent="." unique_id=626582376 instance=ExtResource("world_post_processing")]
 
-[node name="environment" type="WorldEnvironment" parent="."]
+[node name="environment" type="WorldEnvironment" parent="." unique_id=1137665195]
 environment = SubResource("environment")
 
-[node name="ground" parent="." instance=ExtResource("ground")]
-polygon = PackedVector2Array(-5, -7, -6, -5, -5.5, -2, -4, -1, -3.8, 1, -2.4, 3, -0.5, 4, 0, 6, 2, 7.5, 4, 7.2, 5, 10.5, 7.5, 11.5, 9, 10, 8.5, 8, 7, 6.5, 6.5, 4, 5, 2.5, 2.5, 2, 1.5, -0, -0.5, -1.5, -0.5, -3, 0.5, -5, -1, -7)
+[node name="ground" parent="." unique_id=2125897336 instance=ExtResource("ground")]
+polygon = PackedVector2Array(-5, -7, -6, -5, -5.5, -2, -4, -1, -3.8, 1, -2.4, 3, -0.5, 4, 0, 6, 2, 7.5, 4, 7.2, 5, 10.5, 7.5, 11.5, 9, 10, 8.5, 8, 7, 6.5, 6.5, 4, 5, 2.5, 2.5, 2, 1.5, 0, -0.5, -1.5, -0.5, -3, 0.5, -5, -1, -7)
 
-[node name="player" parent="." node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("1")]
+[node name="player" parent="." unique_id=2110356739 node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 4.5)
 musket = NodePath("../musket")
 lantern = NodePath("../lantern")
 
-[node name="audio_listener" parent="player" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-
-[node name="shadow" parent="player" index="6" node_paths=PackedStringArray("light_source")]
-transform = Transform3D(1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0)
+[node name="shadow" parent="player" index="6" unique_id=1776978813 node_paths=PackedStringArray("light_source")]
 light_source = NodePath("../../lantern")
 
-[node name="camera" type="Camera3D" parent="player"]
+[node name="footstep_audio" parent="player" index="7" unique_id=1882856814]
+stream = SubResource("AudioStreamRandomizer_qwcp6")
+
+[node name="body_audio" parent="player" index="8" unique_id=1333383196]
+stream = SubResource("AudioStreamRandomizer_pnqig")
+
+[node name="camera" type="Camera3D" parent="player" unique_id=625398333]
 transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 10, 12)
 cull_mask = 5
 current = true
 fov = 40.0
 
-[node name="lantern" parent="." instance=ExtResource("3")]
+[node name="lantern" parent="." unique_id=641855284 instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4, 0, -4.8)
 max_brightness = 0.9
 
-[node name="musket" parent="." instance=ExtResource("5")]
+[node name="musket" parent="." unique_id=1616159295 instance=ExtResource("5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1000, 0, 1000)
 
-[node name="lights" type="Node3D" parent="."]
+[node name="lights" type="Node3D" parent="." unique_id=163034690]
 
-[node name="ceiling_opening" parent="lights" instance=ExtResource("world_light")]
-position = Vector3(-3, 4, 4)
+[node name="ceiling_opening" parent="lights" unique_id=336293421 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 4, 4)
 light_color = Color(0.65, 0.79, 1, 1)
-light_energy = 0.3
-shadow_enabled = true
-omni_range = 10
-omni_attenuation = 0.0
 
-[node name="last_blue_pool" parent="lights" instance=ExtResource("world_light")]
-position = Vector3(-0.8, 3.8, -1.2)
-light_color = Color(0.7, 0.83, 1, 1)
+[node name="last_blue_pool" parent="lights" unique_id=2137712840 instance=ExtResource("world_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.8, -1.2)
 light_energy = 0.2
-shadow_enabled = true
-omni_range = 9
-omni_attenuation = 0.0
+omni_range = 9.0
 
-[node name="rocks" type="Node3D" parent="."]
+[node name="rocks" type="Node3D" parent="." unique_id=424307376]
 
-[node name="entrance_left" parent="rocks" instance=ExtResource("rock_08")]
-position = Vector3(-6, 0, 5)
-scale = Vector3(1.5, 1.5, 1.5)
+[node name="entrance_left" parent="rocks" unique_id=2095638287 instance=ExtResource("rock_08")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6, 0, 5)
 
-[node name="entrance_right" parent="rocks" instance=ExtResource("rock_06")]
-position = Vector3(0.2, 0, 5.9)
-scale = Vector3(1.45, 1.45, 1.45)
+[node name="entrance_right" parent="rocks" unique_id=1501858821 instance=ExtResource("rock_06")]
+transform = Transform3D(1.45, 0, 0, 0, 1.45, 0, 0, 0, 1.45, 0.2, 0, 5.9)
 
-[node name="entrance_chips" parent="rocks" instance=ExtResource("rock_01")]
-position = Vector3(-5, 0, 6.5)
-scale = Vector3(0.8, 0.8, 0.8)
+[node name="entrance_chips" parent="rocks" unique_id=1954757492 instance=ExtResource("rock_01")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -5, 0, 6.5)
 
-[node name="left_wall_low" parent="rocks" instance=ExtResource("rock_03")]
-position = Vector3(-5.6, 0, 1.8)
-scale = Vector3(1.4, 1.4, 1.4)
+[node name="left_wall_low" parent="rocks" unique_id=679555863 instance=ExtResource("rock_03")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -5.6, 0, 1.8)
 
-[node name="left_wall_high" parent="rocks" instance=ExtResource("rock_04")]
-position = Vector3(-4.8, 0, -1)
-scale = Vector3(1.8, 1.8, 1.8)
+[node name="left_wall_high" parent="rocks" unique_id=161856617 instance=ExtResource("rock_04")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -4.8, 0, -1)
 
-[node name="bend_pillar" parent="rocks" instance=ExtResource("rock_04")]
-position = Vector3(0.4, 0, 0.1)
-scale = Vector3(2, 2, 2)
+[node name="bend_pillar" parent="rocks" unique_id=46821497 instance=ExtResource("rock_04")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.4, 0, 0.1)
 
-[node name="bend_foot" parent="rocks" instance=ExtResource("rock_01")]
-position = Vector3(-0.4, 0, 0.5)
-scale = Vector3(0.9, 0.9, 0.9)
+[node name="bend_foot" parent="rocks" unique_id=114854214 instance=ExtResource("rock_01")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -0.4, 0, 0.5)
 
-[node name="niche_back" parent="rocks" instance=ExtResource("rock_02")]
-position = Vector3(1.7, 0, -7.3)
-scale = Vector3(1.7, 1.7, 1.7)
+[node name="niche_back" parent="rocks" unique_id=1087354936 instance=ExtResource("rock_02")]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 1.7, 0, -7.3)
 
-[node name="niche_back_spire" parent="rocks" instance=ExtResource("rock_05")]
-position = Vector3(3.7, 0, -7.8)
-scale = Vector3(2.8, 2.8, 2.8)
+[node name="niche_back_spire" parent="rocks" unique_id=813578085 instance=ExtResource("rock_05")]
+transform = Transform3D(2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 3.7, 0, -7.8)
 
-[node name="niche_right" parent="rocks" instance=ExtResource("rock_07")]
-position = Vector3(6.4, 0, -4.7)
-scale = Vector3(1.5, 1.5, 1.5)
+[node name="niche_right" parent="rocks" unique_id=1713879283 instance=ExtResource("rock_07")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 6.4, 0, -4.7)
 
-[node name="niche_right_chip" parent="rocks" instance=ExtResource("rock_01")]
-position = Vector3(5.7, 0, -3.4)
-scale = Vector3(0.85, 0.85, 0.85)
+[node name="niche_right_chip" parent="rocks" unique_id=83408937 instance=ExtResource("rock_01")]
+transform = Transform3D(0.85, 0, 0, 0, 0.85, 0, 0, 0, 0.85, 5.7, 0, -3.4)
 
-[node name="inner_curve" parent="rocks" instance=ExtResource("rock_06")]
-position = Vector3(-1.6, 0, -4.6)
-scale = Vector3(1.3, 1.3, 1.3)
+[node name="inner_curve" parent="rocks" unique_id=1463625180 instance=ExtResource("rock_06")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -1.6, 0, -4.6)
 
-[node name="exit_left" parent="rocks" instance=ExtResource("rock_05")]
-position = Vector3(4.4, 0, -9.8)
-scale = Vector3(2.1, 2.1, 2.1)
+[node name="exit_left" parent="rocks" unique_id=1776574924 instance=ExtResource("rock_05")]
+transform = Transform3D(2.1, 0, 0, 0, 2.1, 0, 0, 0, 2.1, 4.4, 0, -9.8)
 
-[node name="exit_right" parent="rocks" instance=ExtResource("rock_08")]
-position = Vector3(9.1, 0, -9.1)
-scale = Vector3(1.3, 1.3, 1.3)
+[node name="exit_right" parent="rocks" unique_id=1578323008 instance=ExtResource("rock_08")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 9.1, 0, -9.1)
 
-[node name="hud" type="CanvasLayer" parent="."]
+[node name="hud" type="CanvasLayer" parent="." unique_id=1030045626]
 
-[node name="lantern" parent="hud" node_paths=PackedStringArray("lantern") instance=ExtResource("6")]
+[node name="lantern" parent="hud" unique_id=170746910 node_paths=PackedStringArray("lantern") instance=ExtResource("6")]
 lantern = NodePath("../../lantern")
 
-[node name="musket" parent="hud" node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("7")]
+[node name="musket" parent="hud" unique_id=198832135 node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("7")]
 musket = NodePath("../../musket")
 lantern = NodePath("../../lantern")
 
-[node name="death_ui" parent="." node_paths=PackedStringArray("player") instance=ExtResource("death_ui")]
+[node name="death_ui" parent="." unique_id=571337969 node_paths=PackedStringArray("player") instance=ExtResource("death_ui")]
 player = NodePath("../player")
 
-[node name="loading" type="CanvasLayer" parent="." node_paths=PackedStringArray("musket", "player")]
+[node name="loading" type="CanvasLayer" parent="." unique_id=1966055974 node_paths=PackedStringArray("musket", "player")]
 layer = 100
 script = ExtResource("8")
 musket = NodePath("../musket")
 player = NodePath("../player")
 
-[node name="cover" type="ColorRect" parent="loading"]
+[node name="cover" type="ColorRect" parent="loading" unique_id=554999140]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -179,33 +180,29 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.002, 0.006, 0.004, 1)
 
-[node name="background_rocks" type="Node3D" parent="."]
+[node name="background_rocks" type="Node3D" parent="." unique_id=1439551524]
 
-[node name="distant_rock_1" parent="background_rocks" instance=ExtResource("background_rock")]
-position = Vector3(-12, -0.8, -2)
-scale = Vector3(4.8, 4.8, 1)
+[node name="distant_rock_1" parent="background_rocks" unique_id=1912684148 instance=ExtResource("background_rock")]
+transform = Transform3D(4.8, 0, 0, 0, 4.8, 0, 0, 0, 1, -12, -0.8, -2)
 offset = Vector2(0, 234.5)
 texture = ExtResource("background_6")
 
-[node name="distant_rock_2" parent="background_rocks" instance=ExtResource("background_rock")]
-position = Vector3(14, -0.8, -8)
-scale = Vector3(4.8, 4.3, 1)
+[node name="distant_rock_2" parent="background_rocks" unique_id=920579613 instance=ExtResource("background_rock")]
+transform = Transform3D(4.8, 0, 0, 0, 4.3, 0, 0, 0, 1, 14, -0.8, -8)
 
-[node name="distant_rock_3" parent="background_rocks" instance=ExtResource("background_rock")]
-position = Vector3(-1, -0.8, -16)
-scale = Vector3(3.6, 5.5, 1)
+[node name="distant_rock_3" parent="background_rocks" unique_id=1929012860 instance=ExtResource("background_rock")]
+transform = Transform3D(3.6, 0, 0, 0, 5.5, 0, 0, 0, 1, -1, -0.8, -16)
 offset = Vector2(0, 212)
 texture = ExtResource("background_4")
 
-[node name="distant_rock_4" parent="background_rocks" instance=ExtResource("background_rock")]
-position = Vector3(9, -0.8, -18)
-scale = Vector3(4, 6, 1)
+[node name="distant_rock_4" parent="background_rocks" unique_id=1938762659 instance=ExtResource("background_rock")]
+transform = Transform3D(4, 0, 0, 0, 6, 0, 0, 0, 1, 9, -0.8, -18)
 offset = Vector2(0, 179)
-texture = ExtResource("background_5")
 modulate = Color(0.06, 0.09, 0.07, 1)
+texture = ExtResource("background_5")
 
-[node name="stalagmites" parent="." instance=ExtResource("stalagmites")]
-position = Vector3(5.8, 0, -6.0)
+[node name="stalagmites" parent="." unique_id=1396885505 instance=ExtResource("stalagmites")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8, 0, -6)
 seed_value = 102
 collisions_enabled = false
 
