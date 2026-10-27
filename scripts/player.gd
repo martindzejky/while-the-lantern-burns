@@ -303,6 +303,16 @@ func _aiming_requested() -> bool:
   )
 
 
+func is_aiming() -> bool:
+  return _aiming_requested()
+
+
+func get_aim_target() -> Vector3:
+  if musket.is_trigger_pending:
+    return _locked_aim_target
+  return _get_aim_target(get_viewport().get_mouse_position())
+
+
 func _update_aim_line(target: Vector3) -> void:
   var direction := global_position.direction_to(target)
   if direction.is_zero_approx():

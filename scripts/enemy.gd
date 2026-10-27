@@ -145,6 +145,10 @@ func _physics_process(delta: float) -> void:
     move_and_slide()
 
 
+func is_chasing() -> bool:
+  return _engaged and not _dead and not preview and not target.is_dead
+
+
 func take_shot() -> void:
   if _dead:
     return
