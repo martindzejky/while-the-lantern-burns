@@ -188,9 +188,10 @@ stream = SubResource("AudioStreamRandomizer_fn2d0")
 [node name="body_audio" parent="player" index="8" unique_id=1333383196]
 stream = SubResource("AudioStreamRandomizer_hlfo2")
 
-[node name="camera_controller" parent="." unique_id=411270736 node_paths=PackedStringArray("target") instance=ExtResource("camera_controller")]
+[node name="camera_controller" parent="." unique_id=411270736 node_paths=PackedStringArray("target", "enemies") instance=ExtResource("camera_controller")]
 target = NodePath("../player")
 follow_fov = 44.0
+enemies = [NodePath("../enemy_near"), NodePath("../enemy_far_left"), NodePath("../enemy_far_right")]
 
 [node name="passage_focus" parent="." unique_id=1467391730 instance=ExtResource("camera_focus")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.5)

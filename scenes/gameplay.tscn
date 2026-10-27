@@ -385,8 +385,9 @@ stream = SubResource("AudioStreamRandomizer_lx1vx")
 [node name="body_audio" parent="player" index="8" unique_id=1333383196]
 stream = SubResource("AudioStreamRandomizer_kf8tg")
 
-[node name="camera_controller" parent="." unique_id=839260601 node_paths=PackedStringArray("target") instance=ExtResource("camera_controller")]
+[node name="camera_controller" parent="." unique_id=839260601 node_paths=PackedStringArray("target", "enemies") instance=ExtResource("camera_controller")]
 target = NodePath("../player")
+enemies = [NodePath("../enemy_first"), NodePath("../enemy_pair_left"), NodePath("../enemy_pair_right"), NodePath("../enemy_final_left"), NodePath("../enemy_final_right"), NodePath("../enemy_final_back_left"), NodePath("../enemy_final_back_right")]
 
 [node name="lantern" parent="." unique_id=1329808312 instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.824055, 0, -21.228134)
@@ -6867,5 +6868,8 @@ color = Color(0, 0, 0, 1)
 [connection signal="ramrod_requested" from="hud/musket" to="player" method="_on_ramrod_gui_input"]
 [connection signal="menu_requested" from="death_ui" to="." method="_on_menu_requested"]
 [connection signal="retry_requested" from="death_ui" to="." method="_on_retry_requested"]
+
+[connection signal="carried_changed" from="lantern" to="camera_focuses/lantern_discovery" method="_on_lantern_carried_changed"]
+[connection signal="equipped" from="musket" to="camera_focuses/musket_refuge" method="queue_free"]
 
 [editable path="player"]

@@ -23,6 +23,11 @@ func get_weight(world_position: Vector3) -> float:
   return 1.0 - smoothstep(clampf(inner_radius, 0.0, outer_radius - 0.01), outer_radius, distance)
 
 
+func _on_lantern_carried_changed(carried: bool) -> void:
+  if carried:
+    queue_free()
+
+
 func _update_shape() -> void:
   if not is_node_ready():
     return

@@ -3,8 +3,13 @@ extends Node3D
 
 @export var target: Player
 @export var camera: Camera3D
+@export var enemies: Array[Enemy] = []
 @export_range(1.0, 120.0, 0.5) var follow_fov: float = 43.0
 @export_range(0.1, 20.0, 0.1) var follow_response: float = 6.0
+@export_group('Framing')
+@export_range(0.0, 1.0, 0.05) var aim_focus_weight: float = 0.5
+@export_range(0.0, 1.0, 0.05) var chase_focus_weight: float = 0.35
+@export_range(0.0, 0.45, 0.01) var player_screen_margin: float = 0.25
 @export_group('Bite emphasis')
 @export var bite_zoom_enabled: bool = true
 @export_range(1.0, 120.0, 0.5) var bite_fov: float = 32.0
@@ -30,21 +35,26 @@ func _process(delta: float) -> void:
     camera.fov = lerpf(camera.fov, bite_fov, 1.0 - exp(-bite_response * delta))
     global_position = global_position.lerp(_death_focus, 1.0 - exp(-follow_response * delta))
     return
-  var desired_position: Vector3 = target.global_position
+  var chase_position: Vector3 = _get_chase_position()
+  var desired_position: Vector3 = chase_position
   var strongest_weight: float = 0.0
   for index: int in range(_focus_points.size() - 1, -1, -1):
     var focus: CameraFocus = _focus_points[index]
-    if not is_instance_valid(focus):
+    if not is_instance_valid(focus) or focus.is_queued_for_deletion():
       _focus_points.remove_at(index)
       continue
     var weight: float = focus.get_weight(target.global_position)
     if weight > strongest_weight:
       strongest_weight = weight
-      desired_position = target.global_position.lerp(focus.global_position, weight)
+      desired_position = chase_position.lerp(focus.global_position, weight)
 
+  var aiming: bool = target.is_aiming()
+  if aiming:
+    desired_position = target.global_position.lerp(target.get_aim_target(), aim_focus_weight)
+    desired_position = _constrain_player_frame(desired_position, 1.0 / 3.0)
   var biting_enemy: Enemy = _get_nearest_biting_enemy()
   var blend: float = 1.0 - exp(-follow_response * delta)
-  if bite_zoom_enabled and biting_enemy != null:
+  if bite_zoom_enabled and biting_enemy != null and not aiming:
     if _zoom_enemy != biting_enemy:
       _zoom_enemy = biting_enemy
       _bite_start_fov = camera.fov
@@ -61,6 +71,37 @@ func _process(delta: float) -> void:
     camera.fov = lerpf(camera.fov, follow_fov, blend)
 
   global_position = global_position.lerp(desired_position, blend)
+  global_position = _constrain_player_frame(global_position, player_screen_margin)
+
+
+func _get_chase_position() -> Vector3:
+  var position_sum: Vector3 = target.global_position
+  var total_weight: float = 1.0
+  for enemy: Enemy in enemies:
+    if (
+      is_instance_valid(enemy) and not enemy.is_queued_for_deletion()
+      and enemy.target == target and enemy.is_chasing()
+    ):
+      position_sum += enemy.global_position * chase_focus_weight
+      total_weight += chase_focus_weight
+  return position_sum / total_weight
+
+
+func _constrain_player_frame(position: Vector3, margin: float) -> Vector3:
+  var displacement: Vector3 = position - global_position
+  var screen_size: Vector2 = camera.get_viewport().get_visible_rect().size
+  var screen_position: Vector2 = camera.unproject_position(target.global_position - displacement)
+  var safe_position: Vector2 = screen_position.clamp(screen_size * margin, screen_size * (1.0 - margin))
+  if screen_position.is_equal_approx(safe_position):
+    return position
+  # translate on the ground plane so the player projects onto the nearest safe screen edge.
+  var origin: Vector3 = camera.project_ray_origin(safe_position) + displacement
+  var point: Variant = Plane(Vector3.UP, target.global_position.y).intersects_ray(
+    origin, camera.project_ray_normal(safe_position)
+  )
+  if point == null:
+    return target.global_position
+  return position + target.global_position - Vector3(point)
 
 
 func _get_nearest_biting_enemy() -> Enemy:
