@@ -80,14 +80,34 @@ func _run() -> void:
   world.add_child(focus)
   controller._on_focus_entered(focus, player)
   controller._process(1.0)
-  _expect(controller.position.x > 1.0, 'reveal can frame beyond level follow bounds')
-  _expect(controller.position.z < -1.0, 'reveal retains its depth near a level boundary')
+  _expect(controller.position.x <= 1.0, 'level bounds limit reveal framing horizontally')
+  _expect(controller.position.z >= -1.0, 'level bounds limit reveal framing vertically')
   var screen_size: Vector2 = root.get_visible_rect().size
   var screen_position: Vector2 = controller.camera.unproject_position(player.global_position)
   _expect(Rect2(screen_size * 0.24, screen_size * 0.52).has_point(screen_position), 'boundary reveal keeps player safely framed')
   controller._on_focus_exited(focus, player)
   controller._process(2.0)
   _expect(controller.position.length() < 0.01, 'camera returns to bounded player follow after reveal')
+  for scene: PackedScene in [
+    preload('res://scenes/levels/discovery.tscn'),
+    preload('res://scenes/levels/deep_cave.tscn'),
+    preload('res://scenes/levels/escape.tscn'),
+  ]:
+    var level := scene.instantiate() as CaveLevel
+    player.position = level.entry.position
+    controller.set_level(level.camera_bounds, [])
+    _expect(_within_bounds(controller, level.camera_bounds), '%s camera starts within bounds' % level.name)
+    for offset: Vector3 in [Vector3.LEFT * 10.0, Vector3.FORWARD * 10.0, Vector3.BACK * 10.0]:
+      player.position = level.entry.position + offset
+      controller._process(1.0)
+      _expect(_within_bounds(controller, level.camera_bounds), '%s bounds override player framing: %s' % [level.name, offset])
+    enemy.position = player.position
+    player.is_dead = true
+    controller._on_bite_landed(enemy)
+    controller._process(1.0)
+    _expect(_within_bounds(controller, level.camera_bounds), '%s death closeup stays within bounds' % level.name)
+    player.is_dead = false
+    level.free()
   world.queue_free()
   camera.queue_free()
   await process_frame
@@ -97,6 +117,10 @@ func _run() -> void:
   await create_timer(0.1).timeout
   print('Camera facing tests: %d checks, %d failures' % [_checks, _failures])
   quit(1 if _failures > 0 else 0)
+
+
+func _within_bounds(controller: CameraController, bounds: Rect2) -> bool:
+  return bounds.grow(0.001).has_point(Vector2(controller.position.x, controller.position.z))
 
 
 func _expect(condition: bool, message: String) -> void:
