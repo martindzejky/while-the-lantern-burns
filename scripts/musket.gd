@@ -16,7 +16,8 @@ enum ReloadState { EMPTY, BALL_INSERTED, LOADED }
 @export var rear_grip: Marker3D
 @export var front_grip: Marker3D
 @export var sprite: Sprite3D
-@export var visuals: CameraFacing
+@export var visuals: Node3D
+@export var facing: CameraFacing
 @export var muzzle: Marker3D
 @export var sparks: CPUParticles3D
 @export var spark_light: OmniLight3D
@@ -167,7 +168,7 @@ func set_ramrod_dragging(dragging: bool) -> void:
 
 func equip() -> void:
   is_owned = true
-  visuals.set_process(false)
+  facing.enabled = false
   visuals.transform = Transform3D.IDENTITY
   sprite.rotation.z = 1.0
   pickup_audio.play()
@@ -179,7 +180,7 @@ func drop() -> void:
   set_aiming(false)
   sprite.rotation.z = 0.0
   visuals.transform = _ground_visuals_transform
-  visuals.set_process(true)
+  facing.enabled = true
   set_ramrod_dragging(false)
   pickup_audio.play()
   unequipped.emit()

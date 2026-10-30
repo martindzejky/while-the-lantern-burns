@@ -8,7 +8,8 @@ signal lever_changed(openness: float)
 
 @export var grip: Marker3D
 @export var light: OmniLight3D
-@export var visuals: CameraFacing
+@export var visuals: Node3D
+@export var facing: CameraFacing
 @export var swing: Node3D
 @export var pickup_audio: AudioStreamPlayer3D
 @export var drop_audio: AudioStreamPlayer3D
@@ -121,7 +122,7 @@ func set_carried(carried: bool) -> void:
   _previous_velocity = 0.0
   _swing_velocity = 0.0
   swing.rotation.z = 0.0
-  visuals.set_process(not carried)
+  facing.enabled = not carried
   if carried:
     visuals.transform = Transform3D.IDENTITY
     pickup_audio.play()

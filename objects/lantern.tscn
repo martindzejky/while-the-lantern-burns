@@ -15,11 +15,12 @@
 frequency = 2.0
 fractal_octaves = 2
 
-[node name="lantern" type="Node3D" unique_id=709075666 node_paths=PackedStringArray("grip", "light", "visuals", "swing", "pickup_audio", "drop_audio", "lever_audio", "carry_audio")]
+[node name="lantern" type="Node3D" unique_id=709075666 node_paths=PackedStringArray("facing", "grip", "light", "visuals", "swing", "pickup_audio", "drop_audio", "lever_audio", "carry_audio")]
 script = ExtResource("1")
 grip = NodePath("visuals/grip")
 light = NodePath("visuals/swing/light")
 visuals = NodePath("visuals")
+facing = NodePath("camera_facing")
 swing = NodePath("visuals/swing")
 pickup_audio = NodePath("pickup_audio")
 drop_audio = NodePath("drop_audio")
@@ -33,7 +34,11 @@ flicker_noise = SubResource("flicker_noise")
 flicker_amount = 0.03
 
 [node name="visuals" type="Node3D" parent="." unique_id=241417503]
+
+[node name="camera_facing" type="Node" parent="." node_paths=PackedStringArray("target")]
+process_mode = 3
 script = ExtResource("2")
+target = NodePath("../visuals")
 
 [node name="swing" type="Node3D" parent="visuals" unique_id=930632651]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77, 0)

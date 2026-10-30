@@ -22,10 +22,11 @@ jobs:
           mkdir -p dist/web
           godot --headless --export-release Web dist/web/index.html
 
-      - name: Check checkpoints and levels
+      - name: Run game checks
         run: |
           godot --headless --script res://tests/checkpoints.gd
           godot --headless --script res://tests/levels.gd
+          godot --headless --script res://tests/camera_facing.gd
 
       - uses: actions/upload-artifact@v7
         with:

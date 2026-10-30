@@ -32,11 +32,12 @@ Discovered equipment follows you between caves. Lantern charge, reload progress 
 
 Web saves use the browser's storage for the current site. Native saves use Godot's `user://` directory.
 
-To check checkpoint serialization and invalid-save recovery:
+To check checkpoints, level geometry and camera facing:
 
 ```sh
 godot --headless --script res://tests/checkpoints.gd
 godot --headless --script res://tests/levels.gd
+godot --headless --script res://tests/camera_facing.gd
 ```
 
 ## Theme

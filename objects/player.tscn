@@ -47,7 +47,11 @@ pixel_size = 1.0
 texture = SubResource("aim_texture")
 
 [node name="visuals" type="Node3D" parent="." unique_id=1961632350]
+
+[node name="camera_facing" type="Node" parent="." node_paths=PackedStringArray("target")]
+process_mode = 3
 script = ExtResource("2")
+target = NodePath("../visuals")
 
 [node name="character_rig" parent="visuals" unique_id=61604420 instance=ExtResource("3")]
 
