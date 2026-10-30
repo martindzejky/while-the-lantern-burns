@@ -309,4 +309,3 @@ ground = NodePath("../../ground")
 seed_value = 903
 count_range = Vector2i(4, 7)
 radius = 1.3
-
