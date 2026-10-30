@@ -18,6 +18,7 @@ size = Vector2(2, 2)
 [sub_resource type="ShaderMaterial" id="color_material"]
 resource_local_to_scene = true
 shader = ExtResource("2")
+shader_parameter/fxaa_enabled = true
 shader_parameter/brightness = 1.11
 shader_parameter/contrast = 1.03
 shader_parameter/saturation = 1.04

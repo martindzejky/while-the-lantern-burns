@@ -4,6 +4,12 @@ extends Node3D
 @export var distance_blur: MeshInstance3D
 @export var overlay: ColorRect
 
+@export_group('Antialiasing')
+@export var fxaa_enabled: bool = true:
+  set(value):
+    fxaa_enabled = value
+    _update_effects()
+
 @export_group('Color')
 @export_range(0.0, 2.0, 0.01) var brightness: float = 1.0:
   set(value):
@@ -63,6 +69,7 @@ func _update_effects() -> void:
   if not is_node_ready():
     return
   var color_material := overlay.material as ShaderMaterial
+  color_material.set_shader_parameter('fxaa_enabled', fxaa_enabled)
   color_material.set_shader_parameter('brightness', brightness)
   color_material.set_shader_parameter('contrast', contrast)
   color_material.set_shader_parameter('saturation', saturation)
