@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody3D
 
+signal movement_started
+signal interaction_range_changed
 signal died
 signal light_changed(lit: bool)
 signal darkness_progress_changed(progress: float)
@@ -28,6 +30,9 @@ var darkness_progress: float = 0.0
 var is_lit: bool:
   get:
     return light_sensor.is_lit
+var _was_moving: bool = false
+var _lantern_in_reach: bool = false
+var _musket_in_reach: bool = false
 var _darkness_timer: Timer = Timer.new()
 var _item_parent: Node
 var _shot_requested: bool = false
@@ -85,8 +90,8 @@ func _unhandled_input(event: InputEvent) -> void:
     _interact()
   elif event.is_action_pressed('ignite_musket'):
     if (
-      not lantern.is_carried and _within_reach(lantern)
-      and lantern.energy >= lantern.max_energy * 0.2
+      not lantern.is_carried and can_reach(lantern)
+      and lantern.can_light_fuse()
       and musket.reload_state == Musket.ReloadState.LOADED
     ):
       _set_dragging_ramrod(false)
@@ -243,17 +248,17 @@ func _interact() -> void:
   _set_dragging_ramrod(false)
   if lantern.is_carried:
     _drop_lantern()
-  elif not musket.is_owned and _within_reach(musket):
+  elif not musket.is_owned and can_reach(musket):
     _attach(musket, rig.get_back_slot())
     musket.equip()
-  elif not musket.is_lit and _within_reach(lantern):
+  elif not musket.is_lit and can_reach(lantern):
     lantern.set_carried(true)
     _attach(lantern, rig.get_right_hand_slot())
     _align_grip(lantern, lantern.grip, rig.get_right_hand_slot())
   _update_equipment()
 
 
-func _within_reach(item: Node3D) -> bool:
+func can_reach(item: Node3D) -> bool:
   return global_position.distance_squared_to(item.global_position) <= pickup_radius * pickup_radius
 
 
@@ -347,7 +352,18 @@ func _physics_process(_delta: float) -> void:
     var direction := Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
     var movement_speed := speed * aim_speed_multiplier if aiming else speed
     velocity = Vector3(direction.x, 0.0, direction.y) * movement_speed
+    var previous_position := global_position
     move_and_slide()
+    var moving := not global_position.is_equal_approx(previous_position)
+    if moving and not _was_moving:
+      movement_started.emit()
+    _was_moving = moving
+    var lantern_in_reach := can_reach(lantern)
+    var musket_in_reach := can_reach(musket)
+    if lantern_in_reach != _lantern_in_reach or musket_in_reach != _musket_in_reach:
+      _lantern_in_reach = lantern_in_reach
+      _musket_in_reach = musket_in_reach
+      interaction_range_changed.emit()
     if not _aiming_requested():
       rig.set_facing(Vector2(velocity.x, velocity.z))
     rig.set_moving(not velocity.is_zero_approx())

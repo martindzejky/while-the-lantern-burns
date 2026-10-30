@@ -11,6 +11,8 @@ signal start_requested
 @export var settings_button: Button
 @export var controls: ControlsScreen
 @export var controls_button: Button
+@export var how_to_play: HowToPlay
+@export var how_to_play_button: Button
 
 
 func _ready() -> void:
@@ -55,3 +57,15 @@ func _on_controls_closed() -> void:
   title.show()
   buttons.show()
   controls_button.grab_focus()
+
+
+func _on_how_to_play_pressed() -> void:
+  buttons.hide()
+  title.hide()
+  how_to_play.open()
+
+
+func _on_how_to_play_closed() -> void:
+  title.show()
+  buttons.show()
+  how_to_play_button.grab_focus()

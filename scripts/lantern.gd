@@ -1,6 +1,8 @@
 class_name Lantern
 extends Node3D
 
+signal charged(stroke: float)
+signal ignition_ready_changed
 signal carried_changed(carried: bool)
 signal lever_changed(openness: float)
 
@@ -57,7 +59,10 @@ func _process(delta: float) -> void:
   _update_swing(delta)
   _update_carry_audio()
   _flicker_time += delta
+  var was_ready := can_light_fuse()
   energy = maxf(energy - energy_drain * delta, 0.0)
+  if was_ready != can_light_fuse():
+    ignition_ready_changed.emit()
   if lever_openness < 1.0:
     lever_openness = move_toward(lever_openness, 1.0, delta / lever_return_time)
     lever_changed.emit(lever_openness)
@@ -125,10 +130,18 @@ func set_carried(carried: bool) -> void:
 
 
 func charge() -> void:
+  var was_ready := can_light_fuse()
   var stroke := lever_openness * lever_openness
   energy = minf(energy + energy_per_press * stroke, max_energy)
+  if was_ready != can_light_fuse():
+    ignition_ready_changed.emit()
+  charged.emit(stroke)
   lever_openness = 0.0
   lever_audio.volume_db = _lever_volume_db + linear_to_db(maxf(stroke, 0.0001))
   lever_audio.play()
   lever_changed.emit(lever_openness)
   _update_light()
+
+
+func can_light_fuse() -> bool:
+  return energy >= max_energy * 0.2

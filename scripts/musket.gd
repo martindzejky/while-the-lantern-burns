@@ -8,6 +8,7 @@ signal fired(hit: Dictionary)
 signal reload_changed
 signal lit_changed(lit: bool)
 signal fuse_expired
+signal trigger_pulled
 signal trigger_ready
 
 enum ReloadState { EMPTY, BALL_INSERTED, LOADED }
@@ -210,6 +211,7 @@ func pull_trigger() -> bool:
   if reload_state != ReloadState.LOADED or not is_lit:
     return false
   is_trigger_pending = true
+  trigger_pulled.emit()
   _trigger_timer.start(trigger_delay)
   return true
 
