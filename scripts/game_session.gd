@@ -4,36 +4,78 @@ extends Node3D
 signal pause_requested
 signal retry_requested
 signal menu_requested
+signal level_completed
+signal escaped
 signal prepared
 
 @export var player: Player
+@export var lantern: Lantern
 @export var musket: Musket
+@export var prompts: GameplayPrompts
+@export var camera_controller: CameraController
+@export var level_host: Node3D
+@export var level_scenes: Array[PackedScene]
 @export var hud: CanvasLayer
 @export var loading: CanvasLayer
 @export var victory: VictoryScreen
 @export var start_inactive: bool = false
 
-var _active: bool = false
+var initial_checkpoint: Dictionary = {}
+var level_id: int = 0
 var is_prepared: bool = false
+var _active: bool = false
+var _level: CaveLevel
 
 
 func _ready() -> void:
   set_active(false)
+  _prepare.call_deferred()
+
+
+func _prepare() -> void:
+  level_id = int(initial_checkpoint.get('level_id', 0))
+  _level = level_scenes[level_id].instantiate() as CaveLevel
+  for enemy: Enemy in _level.enemies:
+    enemy.target = player
+    enemy.bite_started.connect(camera_controller._on_bite_started)
+    enemy.bite_finished.connect(camera_controller._on_bite_finished)
+    enemy.bite_landed.connect(camera_controller._on_bite_landed)
+  for focus: CameraFocus in _level.focuses:
+    focus.focus_entered.connect(camera_controller._on_focus_entered)
+    focus.focus_exited.connect(camera_controller._on_focus_exited)
+  _level.exit.body_entered.connect(_on_exit_body_entered)
+  level_host.add_child(_level)
+
+  var player_state: Dictionary = initial_checkpoint.get('player', player.get_checkpoint())
+  var lantern_position: Vector3 = _level.lantern_spawn.global_position
+  if player_state['lantern']['discovered']:
+    lantern_position = _level.entry.global_position + Vector3(1.0, 0.0, 0.0)
+  player.restore_checkpoint(
+    player_state, _level.entry.global_position, lantern_position, _level.musket_spawn.global_position
+  )
+  camera_controller.set_level(_level.camera_bounds, _level.enemies)
+
   var stored_transform: Transform3D = musket.global_transform
   musket.global_position = player.global_position
   await musket.warm_up_effects()
   musket.global_transform = stored_transform
+  musket.restore_checkpoint(player_state['musket'])
+  if initial_checkpoint.has('prompts'):
+    prompts.restore_checkpoint(initial_checkpoint['prompts'])
   loading.queue_free()
   is_prepared = true
   set_active(not start_inactive)
   prepared.emit()
 
 
+func get_checkpoint() -> Dictionary:
+  return {'level_id': level_id, 'player': player.get_checkpoint(), 'prompts': prompts.get_checkpoint()}
+
+
 func set_active(active: bool) -> void:
   _active = active
   player.set_darkness_enabled(active)
-  player.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
-  hud.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
+  process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
 
 
 func _on_player_died() -> void:
@@ -52,14 +94,17 @@ func _on_exit_body_entered(body: Node3D) -> void:
   if body != player or not _active or player.is_dead:
     return
   _active = false
-  _finish_escape.call_deferred()
+  _finish_level.call_deferred()
 
 
-func _finish_escape() -> void:
+func _finish_level() -> void:
   set_active(false)
-  hud.hide()
-  process_mode = Node.PROCESS_MODE_DISABLED
-  victory.open()
+  if level_id < level_scenes.size() - 1:
+    level_completed.emit()
+  else:
+    hud.hide()
+    victory.open()
+    escaped.emit()
 
 
 func _unhandled_input(event: InputEvent) -> void:

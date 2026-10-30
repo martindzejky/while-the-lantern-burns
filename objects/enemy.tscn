@@ -83,7 +83,11 @@ shape = SubResource("hitbox")
 
 [node name="visuals" type="Node3D" parent="." unique_id=34417323]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="camera_facing" type="Node" parent="." node_paths=PackedStringArray("target")]
+process_mode = 3
 script = ExtResource("2")
+target = NodePath("../visuals")
 
 [node name="appearance" type="Node3D" parent="visuals" unique_id=1402254541]
 transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0, 0)

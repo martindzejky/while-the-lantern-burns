@@ -8,7 +8,8 @@ signal lever_changed(openness: float)
 
 @export var grip: Marker3D
 @export var light: OmniLight3D
-@export var visuals: CameraFacing
+@export var visuals: Node3D
+@export var facing: CameraFacing
 @export var swing: Node3D
 @export var pickup_audio: AudioStreamPlayer3D
 @export var drop_audio: AudioStreamPlayer3D
@@ -39,6 +40,7 @@ signal lever_changed(openness: float)
 
 var energy: float = 0.0
 var is_carried: bool = false
+var was_discovered: bool = false
 var lever_openness: float = 1.0
 
 var _flicker_time: float = 0.0
@@ -115,11 +117,12 @@ func _update_light() -> void:
 
 func set_carried(carried: bool) -> void:
   is_carried = carried
+  was_discovered = was_discovered or carried
   _swing_started = false
   _previous_velocity = 0.0
   _swing_velocity = 0.0
   swing.rotation.z = 0.0
-  visuals.set_process(not carried)
+  facing.enabled = not carried
   if carried:
     visuals.transform = Transform3D.IDENTITY
     pickup_audio.play()
@@ -145,3 +148,21 @@ func charge() -> void:
 
 func can_light_fuse() -> bool:
   return energy >= max_energy * 0.2
+
+
+func get_checkpoint() -> Dictionary:
+  return {
+    'energy': energy,
+    'carried': is_carried,
+    'discovered': was_discovered,
+  }
+
+
+func restore_checkpoint(data: Dictionary) -> void:
+  energy = float(data['energy'])
+  set_carried(data['carried'])
+  was_discovered = data['discovered']
+  pickup_audio.stop()
+  drop_audio.stop()
+  ignition_ready_changed.emit()
+  _update_light()

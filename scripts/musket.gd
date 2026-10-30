@@ -16,7 +16,8 @@ enum ReloadState { EMPTY, BALL_INSERTED, LOADED }
 @export var rear_grip: Marker3D
 @export var front_grip: Marker3D
 @export var sprite: Sprite3D
-@export var visuals: CameraFacing
+@export var visuals: Node3D
+@export var facing: CameraFacing
 @export var muzzle: Marker3D
 @export var sparks: CPUParticles3D
 @export var spark_light: OmniLight3D
@@ -167,7 +168,7 @@ func set_ramrod_dragging(dragging: bool) -> void:
 
 func equip() -> void:
   is_owned = true
-  visuals.set_process(false)
+  facing.enabled = false
   visuals.transform = Transform3D.IDENTITY
   sprite.rotation.z = 1.0
   pickup_audio.play()
@@ -179,7 +180,7 @@ func drop() -> void:
   set_aiming(false)
   sprite.rotation.z = 0.0
   visuals.transform = _ground_visuals_transform
-  visuals.set_process(true)
+  facing.enabled = true
   set_ramrod_dragging(false)
   pickup_audio.play()
   unequipped.emit()
@@ -275,3 +276,38 @@ func _discharge(end: Vector3, hit: Dictionary) -> void:
   lit_changed.emit(false)
   print('Musket fired: ', hit.get('collider', 'miss'))
   fired.emit(hit)
+
+
+func get_checkpoint() -> Dictionary:
+  return {
+    'owned': is_owned,
+    'reload_state': reload_state,
+    'ramrod_insertion': ramrod_insertion,
+    'fuse_remaining': _fuse_timer.time_left if is_lit else 0.0,
+  }
+
+
+func restore_checkpoint(data: Dictionary) -> void:
+  _trigger_timer.stop()
+  is_trigger_pending = false
+  _fuse_timer.stop()
+  if data['owned']:
+    equip()
+  else:
+    drop()
+  pickup_audio.stop()
+  reload_state = int(data['reload_state']) as ReloadState
+  ramrod_insertion = float(data['ramrod_insertion'])
+  var remaining := float(data['fuse_remaining'])
+  is_lit = remaining > 0.0
+  sparks.emitting = is_lit
+  spark_light.visible = is_lit
+  if is_lit:
+    spark_light.light_energy = spark_light_max_energy
+    sparks.restart()
+    _fuse_timer.start(remaining)
+    burning_audio.play()
+  else:
+    burning_audio.stop()
+  reload_changed.emit()
+  lit_changed.emit(is_lit)
