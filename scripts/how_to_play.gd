@@ -7,6 +7,23 @@ signal closed
 @export var audio: UIAudio
 
 
+func _ready() -> void:
+  get_parent().resized.connect(_update_content_widths)
+  scroll.resized.connect(_update_content_widths)
+  _update_content_widths()
+
+
+func _update_content_widths() -> void:
+  var parent: Control = get_parent()
+  var panel_width := parent.size.x * (anchor_right - anchor_left) + offset_right - offset_left
+  var padding := get_theme_stylebox('panel').get_minimum_size().x
+  var available_width := maxf(0.0, panel_width - padding - scroll.get_v_scroll_bar().size.x)
+  for child: Control in scroll.get_child(0).get_children():
+    var max_width := 720.0 if child is TextureRect else 600.0
+    child.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+    child.custom_minimum_size.x = minf(available_width, max_width)
+
+
 func open() -> void:
   scroll.scroll_vertical = 0
   show()
