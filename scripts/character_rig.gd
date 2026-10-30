@@ -21,6 +21,12 @@ enum EquipmentPose { IDLE, LANTERN, MUSKET_READY, MUSKET_AIM }
 @export var pose_blend_duration: float = 0.18
 @export var musket_angle: float = 1.0
 
+var is_recoiling: bool:
+  get:
+    return (
+      animation_tree.get('parameters/recoil/active')
+      or animation_tree.get('parameters/recoil/request') == AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+    )
 var _equipment_pose: EquipmentPose = EquipmentPose.IDLE
 var _moving: bool = false
 var _movement_blend: float = 0.0
@@ -43,7 +49,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-  if _dead:
+  if _dead or is_recoiling:
     return
   var step := delta / pose_blend_duration
   _movement_blend = move_toward(_movement_blend, 1.0 if _moving else 0.0, step)
@@ -141,6 +147,18 @@ func set_frozen(frozen: bool) -> void:
   animation_tree.process_mode = Node.PROCESS_MODE_DISABLED if frozen else Node.PROCESS_MODE_INHERIT
 
 
+func play_recoil(aiming: bool) -> void:
+  if _dead:
+    return
+  set_frozen(false)
+  _moving = false
+  _movement_blend = 0.0
+  animation_tree.set('parameters/locomotion/blend_amount', 0.0)
+  animation_tree.set('parameters/recoil_pose/transition_request', 'aimed' if aiming else 'upwards')
+  animation_tree.set('parameters/recoil/request', AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+  animation_tree.advance(0.0)
+
+
 func show_death() -> void:
   if _dead:
     return
@@ -171,6 +189,7 @@ func show_death() -> void:
           current = musket_angle
     death.track_set_key_value(track, 0, current)
   animation.get_animation_library('').add_animation('death', death)
+  animation_tree.set('parameters/recoil/request', AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
   animation_tree.set('parameters/life/transition_request', 'dead')
 
 

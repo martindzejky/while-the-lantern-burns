@@ -18,6 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://b8g0sr2836jtp" path="res://sprites/character_head_back.png" id="head_back"]
 [ext_resource type="Texture2D" uid="uid://sjslryl8e2cy" path="res://sprites/character_torso_back.png" id="torso_back"]
 
+[ext_resource type="Animation" path="res://animations/character/recoil_aimed.tres" id="recoil_aimed"]
+[ext_resource type="Animation" path="res://animations/character/recoil_upwards.tres" id="recoil_upwards"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ajux4"]
 resource_local_to_scene = true
 render_priority = 0
@@ -61,6 +64,8 @@ _data = {
 &"death": ExtResource("11_t27r0"),
 &"hold_musket": ExtResource("12_r1ivy"),
 &"idle": ExtResource("13_xf1mv"),
+&"recoil_aimed": ExtResource("recoil_aimed"),
+&"recoil_upwards": ExtResource("recoil_upwards"),
 &"run": ExtResource("14_8vffn")
 }
 
@@ -136,6 +141,25 @@ animation = &"run"
 filter_enabled = true
 filters = [".:musket_angle", "flip/skeleton:arm_left", "flip/skeleton:arm_right", "flip/skeleton:hand_left", "flip/skeleton:hand_right", "flip/skeleton:head"]
 
+[sub_resource type="AnimationNodeAnimation" id="recoil_aimed"]
+animation = &"recoil_aimed"
+
+[sub_resource type="AnimationNodeAnimation" id="recoil_upwards"]
+animation = &"recoil_upwards"
+
+[sub_resource type="AnimationNodeTransition" id="recoil_pose"]
+input_0/name = "aimed"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "upwards"
+input_1/auto_advance = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="recoil"]
+mix_mode = 1
+fadein_time = 0.0
+fadeout_time = 0.0
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b23ua"]
 nodes/idle/node = SubResource("AnimationNodeAnimation_sgsuk")
 nodes/idle/position = Vector2(-900, 0)
@@ -167,7 +191,15 @@ nodes/death/node = SubResource("AnimationNodeAnimation_w6wwh")
 nodes/death/position = Vector2(-80, 440)
 nodes/life/node = SubResource("AnimationNodeTransition_cvf3f")
 nodes/life/position = Vector2(450, 180)
-node_connections = [&"output", 0, &"life", &"locomotion", 0, &"idle", &"locomotion", 1, &"run", &"equipment", 0, &"pose_neutral", &"equipment", 1, &"pose_lantern", &"equipment", 2, &"pose_musket", &"equipment", 3, &"pose_aiming", &"upper_body", 0, &"locomotion", &"upper_body", 1, &"equipment", &"breathing", 0, &"upper_body", &"breathing", 1, &"breathe", &"aim", 0, &"breathing", &"aim", 1, &"aim_offset", &"life", 0, &"aim", &"life", 1, &"death"]
+nodes/recoil_aimed/node = SubResource("recoil_aimed")
+nodes/recoil_aimed/position = Vector2(180, -400)
+nodes/recoil_upwards/node = SubResource("recoil_upwards")
+nodes/recoil_upwards/position = Vector2(180, -240)
+nodes/recoil_pose/node = SubResource("recoil_pose")
+nodes/recoil_pose/position = Vector2(450, -280)
+nodes/recoil/node = SubResource("recoil")
+nodes/recoil/position = Vector2(700, 0)
+node_connections = [&"output", 0, &"life", &"locomotion", 0, &"idle", &"locomotion", 1, &"run", &"equipment", 0, &"pose_neutral", &"equipment", 1, &"pose_lantern", &"equipment", 2, &"pose_musket", &"equipment", 3, &"pose_aiming", &"upper_body", 0, &"locomotion", &"upper_body", 1, &"equipment", &"breathing", 0, &"upper_body", &"breathing", 1, &"breathe", &"aim", 0, &"breathing", &"aim", 1, &"aim_offset", &"recoil_pose", 0, &"recoil_aimed", &"recoil_pose", 1, &"recoil_upwards", &"recoil", 0, &"aim", &"recoil", 1, &"recoil_pose", &"life", 0, &"recoil", &"life", 1, &"death"]
 
 [node name="character_rig" type="Node3D" unique_id=166766975 node_paths=PackedStringArray("animation", "animation_tree", "skeleton", "flip", "head", "torso", "left_hand_slot", "right_hand_slot", "back_slot")]
 script = ExtResource("1_5w654")

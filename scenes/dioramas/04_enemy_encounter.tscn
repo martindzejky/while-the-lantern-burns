@@ -358,6 +358,7 @@ collisions_enabled = false
 [connection signal="fuse_expired" from="musket" to="player" method="_on_musket_fuse_expired"]
 [connection signal="trigger_ready" from="musket" to="player" method="_on_musket_trigger_ready"]
 [connection signal="charge_requested" from="hud/lantern" to="player" method="_on_lantern_pressed"]
+[connection signal="handling_changed" from="hud/musket" to="player" method="_on_musket_ui_handling_changed"]
 [connection signal="ball_requested" from="hud/musket" to="player" method="_on_barrel_pressed"]
 [connection signal="ramrod_requested" from="hud/musket" to="player" method="_on_ramrod_gui_input"]
 [connection signal="bite_finished" from="enemy_near" to="camera_controller" method="_on_bite_finished"]

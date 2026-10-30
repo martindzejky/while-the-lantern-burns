@@ -1,0 +1,40 @@
+[gd_resource type="Animation" format=3]
+
+[resource]
+resource_name = "recoil_aimed"
+length = 0.7
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("flip/skeleton:torso")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.055, 1, 0, 0, 0.079914694, 0.996801706, 0.16, 1, 0, 0, 0.0599640065, 0.99820054, 0.38, 1, 0, 0, -0.0124996745, 0.999921876, 0.7, 1, 0, 0, 0, 1)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("flip/skeleton:head")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.055, 1, 0, 0, -0.044984814, 0.998987671, 0.16, 1, 0, 0, -0.0199986667, 0.999800007, 0.38, 1, 0, 0, 0.00999983333, 0.99995, 0.7, 1, 0, 0, 0, 1)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("flip/skeleton:shoulder_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.055, 1, 0, 0, 0.109778301, 0.993956098, 0.16, 1, 0, 0, 0.0699428473, 0.997551, 0.38, 1, 0, 0, -0.0124996745, 0.999921876, 0.7, 1, 0, 0, 0, 1)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("flip/skeleton:shoulder_right")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.055, 1, 0, 0, 0.109778301, 0.993956098, 0.16, 1, 0, 0, 0.0699428473, 0.997551, 0.38, 1, 0, 0, -0.0124996745, 0.999921876, 0.7, 1, 0, 0, 0, 1)
+tracks/4/type = "position_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("flip/skeleton:torso")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0.4, 0, 0.055, 1, -0.055, 0.375, 0, 0.16, 1, -0.035, 0.385, 0, 0.38, 1, 0.008, 0.405, 0, 0.7, 1, 0, 0.4, 0)

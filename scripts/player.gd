@@ -38,6 +38,7 @@ var _item_parent: Node
 var _shot_requested: bool = false
 var _fuse_shot_requested: bool = false
 var _dragging_ramrod: bool = false
+var _handling_musket: bool = false
 var _locked_aim_target: Vector3
 var _darkness_allowed: bool = true
 var _darkness_enabled: bool = false
@@ -63,7 +64,7 @@ func _notification(what: int) -> void:
 
 
 func _input(event: InputEvent) -> void:
-  if musket.is_trigger_pending:
+  if musket.is_trigger_pending or rig.is_recoiling:
     get_viewport().set_input_as_handled()
     return
   if not _dragging_ramrod:
@@ -83,7 +84,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-  if event.is_echo():
+  if rig.is_recoiling or event.is_echo():
     return
 
   if event.is_action_pressed('interact'):
@@ -144,7 +145,7 @@ func _set_darkness_progress(progress: float) -> void:
 
 
 func _on_lantern_pressed() -> void:
-  if not is_dead and lantern.is_carried:
+  if not is_dead and not rig.is_recoiling and lantern.is_carried:
     lantern.charge()
 
 
@@ -164,7 +165,9 @@ func _on_musket_trigger_ready() -> void:
 
 func _on_musket_fired(hit: Dictionary) -> void:
   if not is_dead:
-    rig.set_frozen(false)
+    velocity = Vector3.ZERO
+    _set_dragging_ramrod(false)
+    rig.play_recoil(musket.is_aiming)
   var enemy := hit.get('collider') as Enemy
   if enemy:
     enemy.take_shot()
@@ -225,13 +228,20 @@ func _get_drop_position() -> Vector3:
 
 
 func _on_barrel_pressed() -> void:
-  if not is_dead and not lantern.is_carried:
+  if not is_dead and not rig.is_recoiling and not lantern.is_carried:
     musket.insert_ball()
 
 
 func _on_ramrod_gui_input(event: InputEvent) -> void:
-  if not is_dead and event.is_action_pressed('fire_musket') and not lantern.is_carried:
+  if (
+    not is_dead and not rig.is_recoiling and not lantern.is_carried
+    and event.is_action_pressed('fire_musket')
+  ):
     _set_dragging_ramrod(musket.can_use_ramrod())
+
+
+func _on_musket_ui_handling_changed(handling: bool) -> void:
+  _handling_musket = handling
 
 
 func _set_dragging_ramrod(dragging: bool) -> void:
@@ -274,6 +284,9 @@ func _align_grip(item: Node3D, grip: Marker3D, slot: Marker3D) -> void:
 func _update_equipment() -> void:
   if musket.is_trigger_pending:
     return
+  if rig.is_recoiling:
+    _position_musket(true)
+    return
   var aiming := _aiming_requested()
   musket.set_aiming(aiming)
   var pose := CharacterRig.EquipmentPose.IDLE
@@ -281,7 +294,7 @@ func _update_equipment() -> void:
     pose = CharacterRig.EquipmentPose.LANTERN
   elif aiming:
     pose = CharacterRig.EquipmentPose.MUSKET_AIM
-  elif musket.is_lit:
+  elif musket.is_lit or (musket.is_owned and _handling_musket):
     pose = CharacterRig.EquipmentPose.MUSKET_READY
   rig.set_equipment_pose(pose)
   if aiming:
@@ -290,14 +303,17 @@ func _update_equipment() -> void:
     rig.set_facing(Vector2(target.x - global_position.x, target.z - global_position.z))
     var camera := get_viewport().get_camera_3d()
     rig.set_aim_direction(mouse - camera.unproject_position(rig.get_aim_origin()))
+  _position_musket(not lantern.is_carried and (aiming or musket.is_lit or _handling_musket))
+
+
+func _position_musket(in_hands: bool) -> void:
   if not musket.is_owned:
     return
-  var in_hands := aiming or musket.is_lit
   var slot := rig.get_left_hand_slot() if in_hands else rig.get_back_slot()
   if musket.get_parent() != slot:
     _attach(musket, slot)
+  musket.set_held_angle(rig.get_musket_angle() if in_hands else 1.0)
   if in_hands:
-    musket.set_held_angle(rig.get_musket_angle())
     _align_grip(musket, musket.rear_grip, slot)
 
 
@@ -309,11 +325,11 @@ func _aiming_requested() -> bool:
 
 
 func is_aiming() -> bool:
-  return _aiming_requested()
+  return musket.is_aiming if rig.is_recoiling else _aiming_requested()
 
 
 func get_aim_target() -> Vector3:
-  if musket.is_trigger_pending:
+  if musket.is_trigger_pending or rig.is_recoiling:
     return _locked_aim_target
   return _get_aim_target(get_viewport().get_mouse_position())
 
@@ -345,7 +361,7 @@ func _get_aim_target(mouse: Vector2) -> Vector3:
 func _physics_process(_delta: float) -> void:
   if not _darkness_timer.is_stopped():
     _set_darkness_progress(clampf(1.0 - _darkness_timer.time_left / darkness_grace, 0.0, 1.0))
-  if musket.is_trigger_pending:
+  if musket.is_trigger_pending or rig.is_recoiling:
     velocity = Vector3.ZERO
   else:
     var aiming := _aiming_requested()
@@ -371,11 +387,12 @@ func _physics_process(_delta: float) -> void:
   aim_line.visible = musket.is_aiming
   var target := global_position
   if musket.is_aiming:
-    target = _locked_aim_target if musket.is_trigger_pending else _get_aim_target(get_viewport().get_mouse_position())
+    target = get_aim_target()
     _update_aim_line(target)
   if _shot_requested or _fuse_shot_requested:
     _shot_requested = false
     if musket.is_aiming:
+      _locked_aim_target = target
       musket.fire(global_position, target, get_rid())
     if _fuse_shot_requested and musket.is_lit:
       musket.fire_upwards()
@@ -384,7 +401,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_rig_stepped() -> void:
-  if not is_dead and not velocity.is_zero_approx() and not musket.is_trigger_pending:
+  if not is_dead and not velocity.is_zero_approx() and not musket.is_trigger_pending and not rig.is_recoiling:
     footstep_audio.play()
 
 
