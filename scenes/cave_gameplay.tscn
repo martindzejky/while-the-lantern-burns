@@ -189,6 +189,7 @@ color = Color(0, 0, 0, 1)
 [connection signal="unequipped" from="musket" to="equipment_hud/gameplay_prompts" method="_refresh"]
 [connection signal="menu_requested" from="victory_screen" to="." method="_on_menu_requested"]
 [connection signal="charge_requested" from="equipment_hud/lantern" to="player" method="_on_lantern_pressed"]
+[connection signal="handling_changed" from="equipment_hud/musket" to="player" method="_on_musket_ui_handling_changed"]
 [connection signal="ball_requested" from="equipment_hud/musket" to="player" method="_on_barrel_pressed"]
 [connection signal="ramrod_requested" from="equipment_hud/musket" to="player" method="_on_ramrod_gui_input"]
 [connection signal="menu_requested" from="death_screen" to="." method="_on_menu_requested"]

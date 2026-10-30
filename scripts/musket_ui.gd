@@ -1,5 +1,6 @@
 extends Control
 
+signal handling_changed(handling: bool)
 signal ball_requested
 signal ramrod_requested(event: InputEvent)
 
@@ -22,6 +23,7 @@ signal ramrod_requested(event: InputEvent)
 @export var ball_duration: float = 0.4
 
 var _hovered: bool = false
+var _handling: bool = false
 var _dragging: bool = false
 var _busy: bool = false
 var _last_state: Musket.ReloadState
@@ -74,6 +76,9 @@ func _process(_delta: float) -> void:
 
 func _move_hover() -> void:
   var raised := _can_interact() and (_hovered or _dragging)
+  if _handling != raised:
+    _handling = raised
+    handling_changed.emit(raised)
   if _hover_tween:
     _hover_tween.kill()
   _hover_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
