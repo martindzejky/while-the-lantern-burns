@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://j7uebfnnisiy"]
+
+[ext_resource type="PackedScene" uid="uid://c6caq2n25ojcn" path="res://scenes/cave_gameplay.tscn" id="game"]
+[ext_resource type="PackedScene" uid="uid://cf0djcrv4nkr8" path="res://scenes/main_menu.tscn" id="menu"]
+[ext_resource type="PackedScene" uid="uid://dqxhuvvqtunai" path="res://ui/pause_menu.tscn" id="pause_menu"]
+[ext_resource type="Script" uid="uid://c0un7cuu7sb55" path="res://scripts/application_controller.gd" id="script"]
+[ext_resource type="AudioStream" uid="uid://i18062bm6aak" path="res://audio/ui/transition.tres" id="screen_transition"]
+
+[ext_resource type="Script" path="res://scripts/checkpoint_storage.gd" id="checkpoint_storage"]
+
+[node name="application_controller" type="Node" unique_id=300425972 node_paths=PackedStringArray("active_screen_container", "fade", "transition_audio", "pause_menu", "checkpoint_storage", "save_notice")]
+process_mode = 3
+script = ExtResource("script")
+menu_scene = ExtResource("menu")
+cave_gameplay_scene = ExtResource("game")
+active_screen_container = NodePath("active_screen")
+fade = NodePath("screen_transition/fade")
+transition_audio = NodePath("transition_audio")
+pause_menu = NodePath("pause_overlay/pause_menu")
+checkpoint_storage = NodePath("checkpoint_storage")
+save_notice = NodePath("screen_transition/save_notice")
+
+[node name="active_screen" type="Node" parent="." unique_id=1930463375]
+process_mode = 1
+
+[node name="transition_audio" type="AudioStreamPlayer" parent="." unique_id=369495138]
+stream = ExtResource("screen_transition")
+volume_db = 12.0412
+bus = &"UI SFX"
+
+[node name="screen_transition" type="CanvasLayer" parent="." unique_id=113661862]
+layer = 110
+
+[node name="fade" type="ColorRect" parent="screen_transition" unique_id=169829319]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="pause_overlay" type="CanvasLayer" parent="." unique_id=776343940]
+layer = 105
+
+[node name="pause_menu" parent="pause_overlay" unique_id=1345961836 instance=ExtResource("pause_menu")]
+
+
+[node name="checkpoint_storage" type="Node" parent="."]
+script = ExtResource("checkpoint_storage")
+
+[node name="save_notice" type="Label" parent="screen_transition"]
+visible = false
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 900.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(1, 0.8, 0.4, 1)
+text = "Progress could not be saved. Retry still works until you close the game."
+
+[connection signal="continue_requested" from="pause_overlay/pause_menu" to="." method="_on_continue_requested"]
+[connection signal="menu_requested" from="pause_overlay/pause_menu" to="." method="_on_menu_requested"]

@@ -14,9 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://cjip80cip1fu2" path="res://ambience/controller.tscn" id="12"]
 [ext_resource type="AudioStream" uid="uid://cwik1ebawpj2b" path="res://audio/player/body_02.wav" id="12_s1tv7"]
 [ext_resource type="PackedScene" uid="uid://b0v247d6td2e1" path="res://objects/camera_controller.tscn" id="camera_controller"]
-[ext_resource type="PackedScene" uid="uid://br7ucbibir75o" path="res://ui/death_feedback.tscn" id="death_ui"]
+[ext_resource type="PackedScene" uid="uid://br7ucbibir75o" path="res://ui/death_feedback.tscn" id="death_screen"]
 [ext_resource type="PackedScene" path="res://ui/gameplay_prompts.tscn" id="gameplay_prompts"]
-[ext_resource type="Script" uid="uid://dy72qt3fyp76c" path="res://scripts/game_session.gd" id="session"]
+[ext_resource type="Script" uid="uid://dy72qt3fyp76c" path="res://scripts/cave_gameplay.gd" id="session"]
 [ext_resource type="PackedScene" uid="uid://dnvi0br5xmw6g" path="res://ui/victory_screen.tscn" id="victory_screen"]
 [ext_resource type="PackedScene" uid="uid://c3se2eoftldxs" path="res://ui/world_post_processing.tscn" id="world_post_processing"]
 [ext_resource type="PackedScene" path="res://scenes/levels/discovery.tscn" id="level_01"]
@@ -82,18 +82,18 @@ fractal_octaves = 2
 frequency = 22.0
 fractal_octaves = 2
 
-[node name="gameplay" type="Node3D" unique_id=61242527 node_paths=PackedStringArray("player", "musket", "hud", "loading", "victory", "level_host", "camera_controller", "lantern", "prompts")]
+[node name="cave_gameplay" type="Node3D" unique_id=61242527 node_paths=PackedStringArray("player", "musket", "equipment_hud", "loading_overlay", "victory_screen", "cave_container", "camera_controller", "lantern", "prompts")]
 script = ExtResource("session")
 player = NodePath("player")
 musket = NodePath("musket")
-hud = NodePath("hud")
-loading = NodePath("loading")
-victory = NodePath("victory")
+equipment_hud = NodePath("equipment_hud")
+loading_overlay = NodePath("loading_overlay")
+victory_screen = NodePath("victory_screen")
 
-level_host = NodePath("level_host")
+cave_container = NodePath("cave_container")
 camera_controller = NodePath("camera_controller")
 lantern = NodePath("lantern")
-prompts = NodePath("hud/gameplay_prompts")
+prompts = NodePath("equipment_hud/gameplay_prompts")
 level_scenes = Array[PackedScene]([ExtResource("level_01"), ExtResource("level_02"), ExtResource("level_03")])
 
 [node name="ambience" parent="." unique_id=1254964729 node_paths=PackedStringArray("target") instance=ExtResource("12")]
@@ -137,29 +137,29 @@ flicker_noise = SubResource("flicker_noise")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 0)
 spark_flicker_noise = SubResource("spark_flicker_noise")
 
-[node name="victory" parent="." unique_id=482090997 instance=ExtResource("victory_screen")]
+[node name="victory_screen" parent="." unique_id=482090997 instance=ExtResource("victory_screen")]
 
-[node name="hud" type="CanvasLayer" parent="." unique_id=997754346]
+[node name="equipment_hud" type="CanvasLayer" parent="." unique_id=997754346]
 
-[node name="lantern" parent="hud" unique_id=2037850372 node_paths=PackedStringArray("lantern") instance=ExtResource("6")]
+[node name="lantern" parent="equipment_hud" unique_id=2037850372 node_paths=PackedStringArray("lantern") instance=ExtResource("6")]
 lantern = NodePath("../../lantern")
 
-[node name="musket" parent="hud" unique_id=273416607 node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("7")]
+[node name="musket" parent="equipment_hud" unique_id=273416607 node_paths=PackedStringArray("musket", "lantern") instance=ExtResource("7")]
 musket = NodePath("../../musket")
 lantern = NodePath("../../lantern")
 
-[node name="gameplay_prompts" parent="hud" unique_id=1478039485 node_paths=PackedStringArray("player", "lantern", "musket") instance=ExtResource("gameplay_prompts")]
+[node name="gameplay_prompts" parent="equipment_hud" unique_id=1478039485 node_paths=PackedStringArray("player", "lantern", "musket") instance=ExtResource("gameplay_prompts")]
 player = NodePath("../../player")
 lantern = NodePath("../../lantern")
 musket = NodePath("../../musket")
 
-[node name="death_ui" parent="." unique_id=415196139 node_paths=PackedStringArray("player") instance=ExtResource("death_ui")]
+[node name="death_screen" parent="." unique_id=415196139 node_paths=PackedStringArray("player") instance=ExtResource("death_screen")]
 player = NodePath("../player")
 
-[node name="loading" type="CanvasLayer" parent="." unique_id=1405385157]
+[node name="loading_overlay" type="CanvasLayer" parent="." unique_id=1405385157]
 layer = 100
 
-[node name="cover" type="ColorRect" parent="loading" unique_id=209373961]
+[node name="cover" type="ColorRect" parent="loading_overlay" unique_id=209373961]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -167,31 +167,31 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="level_host" type="Node3D" parent="."]
+[node name="cave_container" type="Node3D" parent="."]
 
 [connection signal="died" from="player" to="." method="_on_player_died"]
-[connection signal="died" from="player" to="hud" method="hide"]
-[connection signal="interaction_range_changed" from="player" to="hud/gameplay_prompts" method="_refresh"]
-[connection signal="movement_started" from="player" to="hud/gameplay_prompts" method="_on_movement_started"]
-[connection signal="ramrod_drag_changed" from="player" to="hud/musket" method="_on_ramrod_drag_changed"]
-[connection signal="carried_changed" from="lantern" to="hud/gameplay_prompts" method="_on_carried_changed"]
-[connection signal="charged" from="lantern" to="hud/gameplay_prompts" method="_on_lantern_charged"]
-[connection signal="ignition_ready_changed" from="lantern" to="hud/gameplay_prompts" method="_refresh"]
-[connection signal="aiming_changed" from="musket" to="hud/gameplay_prompts" method="_on_aiming_changed"]
-[connection signal="equipped" from="musket" to="hud/gameplay_prompts" method="_on_equipped"]
+[connection signal="died" from="player" to="equipment_hud" method="hide"]
+[connection signal="interaction_range_changed" from="player" to="equipment_hud/gameplay_prompts" method="_refresh"]
+[connection signal="movement_started" from="player" to="equipment_hud/gameplay_prompts" method="_on_movement_started"]
+[connection signal="ramrod_drag_changed" from="player" to="equipment_hud/musket" method="_on_ramrod_drag_changed"]
+[connection signal="carried_changed" from="lantern" to="equipment_hud/gameplay_prompts" method="_on_carried_changed"]
+[connection signal="charged" from="lantern" to="equipment_hud/gameplay_prompts" method="_on_lantern_charged"]
+[connection signal="ignition_ready_changed" from="lantern" to="equipment_hud/gameplay_prompts" method="_refresh"]
+[connection signal="aiming_changed" from="musket" to="equipment_hud/gameplay_prompts" method="_on_aiming_changed"]
+[connection signal="equipped" from="musket" to="equipment_hud/gameplay_prompts" method="_on_equipped"]
 [connection signal="fired" from="musket" to="player" method="_on_musket_fired"]
-[connection signal="fired" from="musket" to="hud/gameplay_prompts" method="_on_musket_fired"]
+[connection signal="fired" from="musket" to="equipment_hud/gameplay_prompts" method="_on_musket_fired"]
 [connection signal="fuse_expired" from="musket" to="player" method="_on_musket_fuse_expired"]
-[connection signal="lit_changed" from="musket" to="hud/gameplay_prompts" method="_on_lit_changed"]
-[connection signal="reload_changed" from="musket" to="hud/gameplay_prompts" method="_on_reload_changed"]
-[connection signal="trigger_pulled" from="musket" to="hud/gameplay_prompts" method="_refresh"]
+[connection signal="lit_changed" from="musket" to="equipment_hud/gameplay_prompts" method="_on_lit_changed"]
+[connection signal="reload_changed" from="musket" to="equipment_hud/gameplay_prompts" method="_on_reload_changed"]
+[connection signal="trigger_pulled" from="musket" to="equipment_hud/gameplay_prompts" method="_refresh"]
 [connection signal="trigger_ready" from="musket" to="player" method="_on_musket_trigger_ready"]
-[connection signal="unequipped" from="musket" to="hud/gameplay_prompts" method="_refresh"]
-[connection signal="menu_requested" from="victory" to="." method="_on_menu_requested"]
-[connection signal="charge_requested" from="hud/lantern" to="player" method="_on_lantern_pressed"]
-[connection signal="ball_requested" from="hud/musket" to="player" method="_on_barrel_pressed"]
-[connection signal="ramrod_requested" from="hud/musket" to="player" method="_on_ramrod_gui_input"]
-[connection signal="menu_requested" from="death_ui" to="." method="_on_menu_requested"]
-[connection signal="retry_requested" from="death_ui" to="." method="_on_retry_requested"]
+[connection signal="unequipped" from="musket" to="equipment_hud/gameplay_prompts" method="_refresh"]
+[connection signal="menu_requested" from="victory_screen" to="." method="_on_menu_requested"]
+[connection signal="charge_requested" from="equipment_hud/lantern" to="player" method="_on_lantern_pressed"]
+[connection signal="ball_requested" from="equipment_hud/musket" to="player" method="_on_barrel_pressed"]
+[connection signal="ramrod_requested" from="equipment_hud/musket" to="player" method="_on_ramrod_gui_input"]
+[connection signal="menu_requested" from="death_screen" to="." method="_on_menu_requested"]
+[connection signal="retry_requested" from="death_screen" to="." method="_on_retry_requested"]
 
 [editable path="player"]

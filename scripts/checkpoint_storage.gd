@@ -1,4 +1,4 @@
-class_name GameProgress
+class_name CheckpointStorage
 extends Node
 
 const SAVE_PATH: String = 'user://progress.json'

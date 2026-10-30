@@ -1,12 +1,12 @@
 extends Node
 
 @export var menu_scene: PackedScene
-@export var game_scene: PackedScene
-@export var screen_host: Node
+@export var cave_gameplay_scene: PackedScene
+@export var active_screen_container: Node
 @export var fade: ColorRect
 @export var transition_audio: AudioStreamPlayer
 @export var pause_menu: PauseMenu
-@export var progress: GameProgress
+@export var checkpoint_storage: CheckpointStorage
 @export var save_notice: Label
 @export var fade_out_duration: float = 1.2
 @export var fade_in_duration: float = 1.6
@@ -17,7 +17,7 @@ var _checkpoint: Dictionary = {}
 
 
 func _ready() -> void:
-  _checkpoint = progress.load_checkpoint()
+  _checkpoint = checkpoint_storage.load_checkpoint()
   _open_menu()
   await _fade_to(0.0, fade_in_duration)
   _screen.process_mode = Node.PROCESS_MODE_INHERIT
@@ -30,67 +30,67 @@ func _open_menu() -> void:
   menu.continue_requested.connect(_on_load_requested)
   menu.process_mode = Node.PROCESS_MODE_DISABLED
   _screen = menu
-  screen_host.add_child(menu)
+  active_screen_container.add_child(menu)
   menu.set_continue_available(not _checkpoint.is_empty())
 
 
 func _clear_screen() -> void:
-  screen_host.remove_child(_screen)
+  active_screen_container.remove_child(_screen)
   _screen.queue_free()
 
 
 func _on_new_game_requested() -> void:
   if not _busy:
-    _start_game({})
+    _start_cave_gameplay({})
 
 
 func _on_load_requested() -> void:
   if not _busy and not _checkpoint.is_empty():
-    _start_game(_checkpoint)
+    _start_cave_gameplay(_checkpoint)
 
 
 func _on_retry_requested() -> void:
   if not _busy:
-    _start_game(_checkpoint)
+    _start_cave_gameplay(_checkpoint)
 
 
-func _start_game(checkpoint: Dictionary) -> void:
+func _start_cave_gameplay(checkpoint: Dictionary) -> void:
   _busy = true
   _screen.process_mode = Node.PROCESS_MODE_DISABLED
   transition_audio.play()
   await _fade_to(1.0, fade_out_duration)
   _clear_screen()
-  var game: GameSession = game_scene.instantiate() as GameSession
-  game.start_inactive = true
-  game.initial_checkpoint = checkpoint.duplicate(true)
-  game.pause_requested.connect(_on_pause_requested)
-  game.retry_requested.connect(_on_retry_requested)
-  game.menu_requested.connect(_on_menu_requested)
-  game.level_completed.connect(_on_level_completed)
-  game.escaped.connect(_on_escaped)
-  _screen = game
-  screen_host.add_child(game)
-  if not game.is_prepared:
-    await game.prepared
-  _checkpoint = game.get_checkpoint()
-  _show_save_result(progress.save_checkpoint(_checkpoint))
+  var cave_gameplay: CaveGameplay = cave_gameplay_scene.instantiate() as CaveGameplay
+  cave_gameplay.start_inactive = true
+  cave_gameplay.initial_checkpoint = checkpoint.duplicate(true)
+  cave_gameplay.pause_requested.connect(_on_pause_requested)
+  cave_gameplay.retry_requested.connect(_on_retry_requested)
+  cave_gameplay.menu_requested.connect(_on_menu_requested)
+  cave_gameplay.level_completed.connect(_on_level_completed)
+  cave_gameplay.escaped.connect(_on_escaped)
+  _screen = cave_gameplay
+  active_screen_container.add_child(cave_gameplay)
+  if not cave_gameplay.is_prepared:
+    await cave_gameplay.prepared
+  _checkpoint = cave_gameplay.get_checkpoint()
+  _show_save_result(checkpoint_storage.save_checkpoint(_checkpoint))
   await _fade_to(0.0, fade_in_duration)
-  game.set_active(true)
+  cave_gameplay.set_active(true)
   _busy = false
 
 
 func _on_level_completed() -> void:
   if _busy:
     return
-  var game: GameSession = _screen as GameSession
-  var next_checkpoint: Dictionary = game.get_checkpoint()
-  next_checkpoint['level_id'] = game.level_id + 1
-  _start_game(next_checkpoint)
+  var cave_gameplay: CaveGameplay = _screen as CaveGameplay
+  var next_checkpoint: Dictionary = cave_gameplay.get_checkpoint()
+  next_checkpoint['level_id'] = cave_gameplay.level_id + 1
+  _start_cave_gameplay(next_checkpoint)
 
 
 func _on_escaped() -> void:
   _checkpoint = {}
-  _show_save_result(progress.clear_checkpoint())
+  _show_save_result(checkpoint_storage.clear_checkpoint())
 
 
 func _show_save_result(saved: bool) -> void:

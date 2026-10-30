@@ -1,4 +1,4 @@
-class_name GameSession
+class_name CaveGameplay
 extends Node3D
 
 signal pause_requested
@@ -13,11 +13,11 @@ signal prepared
 @export var musket: Musket
 @export var prompts: GameplayPrompts
 @export var camera_controller: CameraController
-@export var level_host: Node3D
+@export var cave_container: Node3D
 @export var level_scenes: Array[PackedScene]
-@export var hud: CanvasLayer
-@export var loading: CanvasLayer
-@export var victory: VictoryScreen
+@export var equipment_hud: CanvasLayer
+@export var loading_overlay: CanvasLayer
+@export var victory_screen: VictoryScreen
 @export var start_inactive: bool = false
 
 var initial_checkpoint: Dictionary = {}
@@ -44,7 +44,7 @@ func _prepare() -> void:
     focus.focus_entered.connect(camera_controller._on_focus_entered)
     focus.focus_exited.connect(camera_controller._on_focus_exited)
   _level.exit.body_entered.connect(_on_exit_body_entered)
-  level_host.add_child(_level)
+  cave_container.add_child(_level)
 
   var player_state: Dictionary = initial_checkpoint.get('player', player.get_checkpoint())
   if _level.lantern_focus != null:
@@ -72,7 +72,7 @@ func _prepare() -> void:
   musket.restore_checkpoint(player_state['musket'])
   if initial_checkpoint.has('prompts'):
     prompts.restore_checkpoint(initial_checkpoint['prompts'])
-  loading.queue_free()
+  loading_overlay.queue_free()
   is_prepared = true
   set_active(not start_inactive)
   prepared.emit()
@@ -112,8 +112,8 @@ func _finish_level() -> void:
   if level_id < level_scenes.size() - 1:
     level_completed.emit()
   else:
-    hud.hide()
-    victory.open()
+    equipment_hud.hide()
+    victory_screen.open()
     escaped.emit()
 
 

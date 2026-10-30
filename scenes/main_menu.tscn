@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bd1pkpe5kcxf6" path="res://objects/big_rock_03.tscn" id="rock_3"]
 [ext_resource type="PackedScene" uid="uid://dyer8vsgv3sab" path="res://objects/big_rock_05.tscn" id="rock_5"]
 [ext_resource type="PackedScene" uid="uid://eusyopafqhvr" path="res://objects/big_rock_06.tscn" id="rock_6"]
-[ext_resource type="Script" uid="uid://c11fkg6c3sbix" path="res://scripts/menu_preview.gd" id="script"]
+[ext_resource type="Script" uid="uid://c11fkg6c3sbix" path="res://scripts/main_menu.gd" id="script"]
 [ext_resource type="PackedScene" uid="uid://djt7f3eenk6wm" path="res://ui/audio_settings.tscn" id="settings"]
 [ext_resource type="PackedScene" uid="uid://70km5nkt7itn" path="res://objects/small_rock_04.tscn" id="small_4"]
 [ext_resource type="Theme" uid="uid://drxw11x7lxcwj" path="res://resources/menu/theme.tres" id="theme"]
@@ -26,7 +26,7 @@ ambient_light_color = Color(0.09, 0.18, 0.13, 1)
 ambient_light_energy = 0.11
 reflected_light_source = 2
 
-[node name="menu_preview" type="Node3D" unique_id=462274930 node_paths=PackedStringArray("start_button", "continue_button", "quit_button", "title", "buttons", "settings", "settings_button", "controls", "controls_button", "how_to_play", "how_to_play_button")]
+[node name="main_menu" type="Node3D" unique_id=462274930 node_paths=PackedStringArray("start_button", "continue_button", "quit_button", "title", "buttons", "settings", "settings_button", "controls", "controls_button", "how_to_play", "how_to_play_button")]
 script = ExtResource("script")
 start_button = NodePath("ui/layout/column/buttons/start")
 continue_button = NodePath("ui/layout/column/buttons/continue")

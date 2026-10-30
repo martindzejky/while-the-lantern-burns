@@ -9,7 +9,7 @@ func _initialize() -> void:
 
 
 func _run() -> void:
-  var progress := GameProgress.new()
+  var progress := CheckpointStorage.new()
   progress.save_path = 'user://checkpoint-test-%d.json' % OS.get_process_id()
   var checkpoint := _checkpoint()
   _expect(progress.is_valid_checkpoint(checkpoint), 'valid checkpoint')
@@ -60,7 +60,7 @@ func _run() -> void:
   invalid = checkpoint.duplicate(true)
   invalid['player']['musket']['reload_state'] = 1
   _expect(not progress.is_valid_checkpoint(invalid), 'burning musket must be loaded')
-  for flag: String in GameProgress.PROMPT_FLAGS:
+  for flag: String in CheckpointStorage.PROMPT_FLAGS:
     invalid = checkpoint.duplicate(true)
     invalid['prompts'][flag] = 1
     _expect(not progress.is_valid_checkpoint(invalid), 'reject nonboolean prompt ' + flag)
@@ -94,10 +94,10 @@ func _run() -> void:
 
 func _checkpoint() -> Dictionary:
   var prompts: Dictionary = {'charge_count': 2}
-  for flag: String in GameProgress.PROMPT_FLAGS:
+  for flag: String in CheckpointStorage.PROMPT_FLAGS:
     prompts[flag] = true
   return {
-    'version': GameProgress.SAVE_VERSION,
+    'version': CheckpointStorage.SAVE_VERSION,
     'level_id': 1,
     'player': {
       'lantern': {'energy': 42.5, 'carried': false, 'discovered': true},
