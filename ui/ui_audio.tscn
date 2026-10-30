@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bc8cqpt06nl08"]
 
-[ext_resource type="AudioStream" path="res://audio/ui/click.tres" id="click"]
-[ext_resource type="AudioStream" path="res://audio/ui/hover.tres" id="hover"]
+[ext_resource type="AudioStream" uid="uid://csrbcg5xmwjl7" path="res://audio/ui/click.tres" id="click"]
+[ext_resource type="AudioStream" uid="uid://d2ouo1sd5h3c0" path="res://audio/ui/hover.tres" id="hover"]
 [ext_resource type="Script" uid="uid://b8pc5frkw1yxi" path="res://scripts/ui_audio.gd" id="script"]
 
 [node name="ui_audio" type="Node" unique_id=333982263 node_paths=PackedStringArray("hover_audio", "click_audio")]

@@ -1,202 +1,216 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://c5s5n2pwqvprc"]
 
-[ext_resource type="Script" path="res://scripts/how_to_play.gd" id="script"]
-[ext_resource type="Script" path="res://scripts/key_label.gd" id="key_label"]
-[ext_resource type="PackedScene" path="res://ui/ui_audio.tscn" id="audio"]
-[ext_resource type="Texture2D" path="res://resources/how_to_play/pickup.webp" id="pickup"]
-[ext_resource type="Texture2D" path="res://resources/how_to_play/lantern.webp" id="lantern"]
-[ext_resource type="Texture2D" path="res://resources/how_to_play/ball.webp" id="ball"]
-[ext_resource type="Texture2D" path="res://resources/how_to_play/ramrod.webp" id="ramrod"]
-[ext_resource type="Texture2D" path="res://resources/how_to_play/fuse.webp" id="fuse"]
-[ext_resource type="Texture2D" path="res://resources/how_to_play/aim.webp" id="aim"]
+[ext_resource type="Texture2D" uid="uid://v8hi32tow5qv" path="res://resources/how_to_play/aim.webp" id="aim"]
+[ext_resource type="PackedScene" uid="uid://bc8cqpt06nl08" path="res://ui/ui_audio.tscn" id="audio"]
+[ext_resource type="Texture2D" uid="uid://bc7kdnd50qnjn" path="res://resources/how_to_play/ball.webp" id="ball"]
+[ext_resource type="Texture2D" uid="uid://bwk7hxqnepdc2" path="res://resources/how_to_play/fuse.webp" id="fuse"]
+[ext_resource type="Script" uid="uid://vv8rr870wpeh" path="res://scripts/key_label.gd" id="key_label"]
+[ext_resource type="Texture2D" uid="uid://cfh1cgfjd7jku" path="res://resources/how_to_play/lantern.webp" id="lantern"]
+[ext_resource type="Texture2D" uid="uid://di0oufsm0s1bi" path="res://resources/how_to_play/pickup.webp" id="pickup"]
+[ext_resource type="Texture2D" uid="uid://chg3kmov11f1d" path="res://resources/how_to_play/ramrod.webp" id="ramrod"]
+[ext_resource type="Script" uid="uid://di80pp7cb147l" path="res://scripts/how_to_play.gd" id="script"]
 
 [sub_resource type="StyleBoxFlat" id="background"]
-bg_color = Color(0.008, 0.026, 0.019, 0.96)
 content_margin_left = 24.0
-content_margin_right = 24.0
 content_margin_top = 20.0
+content_margin_right = 24.0
 content_margin_bottom = 12.0
+bg_color = Color(0.008, 0.026, 0.019, 0.96)
 
-[node name="how_to_play" type="PanelContainer" node_paths=PackedStringArray("scroll", "audio")]
+[node name="how_to_play" type="PanelContainer" unique_id=286570982 node_paths=PackedStringArray("scroll", "audio")]
 theme_override_styles/panel = SubResource("background")
 script = ExtResource("script")
 scroll = NodePath("column/scroll")
 audio = NodePath("audio")
 
-[node name="audio" parent="." instance=ExtResource("audio")]
+[node name="audio" parent="." unique_id=34183269 instance=ExtResource("audio")]
 
-[node name="column" type="VBoxContainer" parent="."]
+[node name="column" type="VBoxContainer" parent="." unique_id=821632504]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="heading" type="Label" parent="column"]
+[node name="heading" type="Label" parent="column" unique_id=645972286]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "HOW TO PLAY"
 
-[node name="scroll" type="ScrollContainer" parent="column"]
+[node name="scroll" type="ScrollContainer" parent="column" unique_id=1062501140]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 2
-horizontal_scroll_mode = 0
 follow_focus = true
+horizontal_scroll_mode = 0
 
-[node name="content" type="VBoxContainer" parent="column/scroll"]
+[node name="content" type="VBoxContainer" parent="column/scroll" unique_id=1481490051]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 18
 
-[node name="basics_heading" type="Label" parent="column/scroll/content"]
+[node name="basics_heading" type="Label" parent="column/scroll/content" unique_id=1809933798]
 layout_mode = 2
 theme_override_font_sizes/font_size = 27
 text = "Getting around"
 
-[node name="basics_text" type="RichTextLabel" parent="column/scroll/content"]
+[node name="basics_text" type="RichTextLabel" parent="column/scroll/content" unique_id=622181284]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/line_separation = 4
 theme_override_font_sizes/normal_font_size = 21
 theme_override_font_sizes/bold_font_size = 21
-theme_override_constants/line_separation = 4
-script = ExtResource("key_label")
-text = "Move with [key]WASD[/key] or the [key]Arrow keys[/key]. The camera follows you automatically.\n\nStand beside an item and press [key]E[/key] or [key]Enter[/key] to pick it up. Press the same key to put the lantern down.\n\nHold [key]Right mouse[/key] to aim the musket and move the mouse towards your target. Press [key]Escape[/key] to pause."
+text = "Move with [key]WASD[/key] or the [key]Arrow keys[/key]. The camera follows you automatically.
+
+Stand beside an item and press [key]E[/key] or [key]Enter[/key] to pick it up. Press the same key to put the lantern down.
+
+Hold [key]Right mouse[/key] to aim the musket and move the mouse towards your target. Press [key]Escape[/key] to pause."
 fit_content = true
 scroll_active = false
+script = ExtResource("key_label")
 
-[node name="basics_image" type="TextureRect" parent="column/scroll/content"]
+[node name="basics_image" type="TextureRect" parent="column/scroll/content" unique_id=83619224]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 texture = ExtResource("pickup")
 expand_mode = 5
 stretch_mode = 5
-mouse_filter = 2
 
-[node name="lantern_heading" type="Label" parent="column/scroll/content"]
+[node name="lantern_heading" type="Label" parent="column/scroll/content" unique_id=967887722]
 layout_mode = 2
 theme_override_font_sizes/font_size = 27
 text = "Keep the lantern charged"
 
-[node name="lantern_text" type="RichTextLabel" parent="column/scroll/content"]
+[node name="lantern_text" type="RichTextLabel" parent="column/scroll/content" unique_id=385185830]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/line_separation = 4
 theme_override_font_sizes/normal_font_size = 21
 theme_override_font_sizes/bold_font_size = 21
-theme_override_constants/line_separation = 4
-script = ExtResource("key_label")
-text = "Pick up the lantern, then move your mouse over its picture in the bottom-right corner. It lifts up so you can reach the handle.\n\n[key]Left click[/key] the handle to pump it. Let the handle spring back between clicks for a full stroke. The light fades as the charge runs out, so give it a few pumps as you go."
+text = "Pick up the lantern, then move your mouse over its picture in the bottom-right corner. It lifts up so you can reach the handle.
+
+[key]Left click[/key] the handle to pump it. Let the handle spring back between clicks for a full stroke. The light fades as the charge runs out, so give it a few pumps as you go."
 fit_content = true
 scroll_active = false
+script = ExtResource("key_label")
 
-[node name="lantern_image" type="TextureRect" parent="column/scroll/content"]
+[node name="lantern_image" type="TextureRect" parent="column/scroll/content" unique_id=442752930]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 texture = ExtResource("lantern")
 expand_mode = 5
 stretch_mode = 5
-mouse_filter = 2
 
-[node name="ball_heading" type="Label" parent="column/scroll/content"]
+[node name="ball_heading" type="Label" parent="column/scroll/content" unique_id=1286698220]
 layout_mode = 2
 theme_override_font_sizes/font_size = 27
 text = "Load the musket"
 
-[node name="ball_text" type="RichTextLabel" parent="column/scroll/content"]
+[node name="ball_text" type="RichTextLabel" parent="column/scroll/content" unique_id=1848484583]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/line_separation = 4
 theme_override_font_sizes/normal_font_size = 21
 theme_override_font_sizes/bold_font_size = 21
-theme_override_constants/line_separation = 4
-script = ExtResource("key_label")
-text = "Put the lantern down first. Stand beside the musket and press [key]E[/key] or [key]Enter[/key] to pick it up. You can carry the lantern again afterwards, but put it down whenever you want to use the musket.\n\nMove your mouse over the musket in the bottom-left corner. [key]Left click[/key] the barrel opening at the top to insert a ball."
+text = "Put the lantern down first. Stand beside the musket and press [key]E[/key] or [key]Enter[/key] to pick it up. You can carry the lantern again afterwards, but put it down whenever you want to use the musket.
+
+Move your mouse over the musket in the bottom-left corner. [key]Left click[/key] the barrel opening at the top to insert a ball."
 fit_content = true
 scroll_active = false
+script = ExtResource("key_label")
 
-[node name="ball_image" type="TextureRect" parent="column/scroll/content"]
+[node name="ball_image" type="TextureRect" parent="column/scroll/content" unique_id=1782029598]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 texture = ExtResource("ball")
 expand_mode = 5
 stretch_mode = 5
-mouse_filter = 2
 
-[node name="ramrod_heading" type="Label" parent="column/scroll/content"]
+[node name="ramrod_heading" type="Label" parent="column/scroll/content" unique_id=662513141]
 layout_mode = 2
 theme_override_font_sizes/font_size = 27
 text = "Push the ball down"
 
-[node name="ramrod_text" type="RichTextLabel" parent="column/scroll/content"]
+[node name="ramrod_text" type="RichTextLabel" parent="column/scroll/content" unique_id=318942016]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/line_separation = 4
 theme_override_font_sizes/normal_font_size = 21
 theme_override_font_sizes/bold_font_size = 21
-theme_override_constants/line_separation = 4
-script = ExtResource("key_label")
-text = "The ramrod moves out beside the gun. Hold [key]Left mouse[/key] on the ramrod and drag down to push it into the barrel.\n\nPush all the way to the bottom. The gun gives a little kick and plays a sound when it is loaded. Then release the mouse button. If you let go too soon, grab the ramrod and try again."
+text = "The ramrod moves out beside the gun. Hold [key]Left mouse[/key] on the ramrod and drag down to push it into the barrel.
+
+Push all the way to the bottom. The gun gives a little kick and plays a sound when it is loaded. Then release the mouse button. If you let go too soon, grab the ramrod and try again."
 fit_content = true
 scroll_active = false
+script = ExtResource("key_label")
 
-[node name="ramrod_image" type="TextureRect" parent="column/scroll/content"]
+[node name="ramrod_image" type="TextureRect" parent="column/scroll/content" unique_id=454946514]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 texture = ExtResource("ramrod")
 expand_mode = 5
 stretch_mode = 5
-mouse_filter = 2
 
-[node name="fuse_heading" type="Label" parent="column/scroll/content"]
+[node name="fuse_heading" type="Label" parent="column/scroll/content" unique_id=919554182]
 layout_mode = 2
 theme_override_font_sizes/font_size = 27
 text = "Light the fuse"
 
-[node name="fuse_text" type="RichTextLabel" parent="column/scroll/content"]
+[node name="fuse_text" type="RichTextLabel" parent="column/scroll/content" unique_id=792677139]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/line_separation = 4
 theme_override_font_sizes/normal_font_size = 21
 theme_override_font_sizes/bold_font_size = 21
-theme_override_constants/line_separation = 4
-script = ExtResource("key_label")
-text = "Put your charged lantern on the ground. Stand beside it with the loaded musket, then press [key]R[/key], [key]Shift[/key] or [key]Space[/key] to light the fuse.\n\nIf nothing happens, push the ball all the way down, check the lantern has enough charge and move closer to it. Look for sparks on the musket and listen for the burning fuse."
+text = "Put your charged lantern on the ground. Stand beside it with the loaded musket, then press [key]R[/key], [key]Shift[/key] or [key]Space[/key] to light the fuse.
+
+If nothing happens, push the ball all the way down, check the lantern has enough charge and move closer to it. Look for sparks on the musket and listen for the burning fuse."
 fit_content = true
 scroll_active = false
+script = ExtResource("key_label")
 
-[node name="fuse_image" type="TextureRect" parent="column/scroll/content"]
+[node name="fuse_image" type="TextureRect" parent="column/scroll/content" unique_id=2049285906]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 texture = ExtResource("fuse")
 expand_mode = 5
 stretch_mode = 5
-mouse_filter = 2
 
-[node name="aim_heading" type="Label" parent="column/scroll/content"]
+[node name="aim_heading" type="Label" parent="column/scroll/content" unique_id=915749676]
 layout_mode = 2
 theme_override_font_sizes/font_size = 27
 text = "Aim and fire"
 
-[node name="aim_text" type="RichTextLabel" parent="column/scroll/content"]
+[node name="aim_text" type="RichTextLabel" parent="column/scroll/content" unique_id=1985994865]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/line_separation = 4
 theme_override_font_sizes/normal_font_size = 21
 theme_override_font_sizes/bold_font_size = 21
-theme_override_constants/line_separation = 4
-script = ExtResource("key_label")
-text = "The musket needs a lit fuse before it can shoot. Hold [key]Right mouse[/key] and move the mouse towards your target. The faint line shows where you are aiming.\n\nWhile aiming, [key]Left click[/key] to fire. There is a short delay between pulling the trigger and the shot. Load another ball and light the fuse again for your next shot."
+text = "The musket needs a lit fuse before it can shoot. Hold [key]Right mouse[/key] and move the mouse towards your target. The faint line shows where you are aiming.
+
+While aiming, [key]Left click[/key] to fire. There is a short delay between pulling the trigger and the shot. Load another ball and light the fuse again for your next shot."
 fit_content = true
 scroll_active = false
+script = ExtResource("key_label")
 
-[node name="aim_image" type="TextureRect" parent="column/scroll/content"]
+[node name="aim_image" type="TextureRect" parent="column/scroll/content" unique_id=825161527]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 texture = ExtResource("aim")
 expand_mode = 5
 stretch_mode = 5
-mouse_filter = 2
 
-[node name="back" type="Button" parent="column"]
+[node name="back" type="Button" parent="column" unique_id=1290880408]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -204,8 +218,8 @@ mouse_default_cursor_shape = 2
 text = "BACK"
 alignment = 0
 
+[connection signal="gui_input" from="column/scroll" to="." method="_on_scroll_gui_input"]
+[connection signal="focus_entered" from="column/back" to="audio" method="play_hover"]
+[connection signal="mouse_entered" from="column/back" to="audio" method="play_hover"]
 [connection signal="pressed" from="column/back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="column/back" to="audio" method="play_click"]
-[connection signal="mouse_entered" from="column/back" to="audio" method="play_hover"]
-[connection signal="focus_entered" from="column/back" to="audio" method="play_hover"]
-[connection signal="gui_input" from="column/scroll" to="." method="_on_scroll_gui_input"]

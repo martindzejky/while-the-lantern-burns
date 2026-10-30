@@ -1,19 +1,19 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bwxb5h4a68gsn"]
 
-[ext_resource type="Script" path="res://scripts/hint_label.gd" id="hint"]
-[ext_resource type="Theme" path="res://resources/menu/theme.tres" id="theme"]
+[ext_resource type="Script" uid="uid://dmgsi274a4dun" path="res://scripts/hint_label.gd" id="hint"]
+[ext_resource type="Theme" uid="uid://drxw11x7lxcwj" path="res://resources/menu/theme.tres" id="theme"]
 
 [sub_resource type="ViewportTexture" id="texture"]
 viewport_path = NodePath("viewport")
 
-[node name="world_hint" type="Node3D"]
+[node name="world_hint" type="Node3D" unique_id=823470464]
 
-[node name="viewport" type="SubViewport" parent="."]
+[node name="viewport" type="SubViewport" parent="." unique_id=1223632827]
 transparent_bg = true
 size = Vector2i(768, 180)
 render_target_update_mode = 1
 
-[node name="text" type="RichTextLabel" parent="viewport" node_paths=PackedStringArray("render_viewport")]
+[node name="text" type="RichTextLabel" parent="viewport" unique_id=327563977 node_paths=PackedStringArray("render_viewport")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,8 +31,7 @@ vertical_alignment = 1
 script = ExtResource("hint")
 render_viewport = NodePath("..")
 
-[node name="sprite" type="Sprite3D" parent="."]
+[node name="sprite" type="Sprite3D" parent="." unique_id=1554231881]
 cast_shadow = 0
-pixel_size = 0.01
 billboard = 1
 texture = SubResource("texture")

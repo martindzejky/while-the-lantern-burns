@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://dp4r0732t61ar" path="res://scripts/camera_facing.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cjb60o8i680x1" path="res://objects/character_rig.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://c616kmmr8did" path="res://objects/light_sensor.tscn" id="4"]
-[ext_resource type="AudioStream" path="res://audio/player/body.tres" id="body_audio"]
+[ext_resource type="AudioStream" uid="uid://80mb55urpoin" path="res://audio/player/body.tres" id="body_audio"]
 [ext_resource type="PackedScene" uid="uid://niw08um2kh46" path="res://objects/darkness_audio.tscn" id="darkness_audio"]
-[ext_resource type="AudioStream" path="res://audio/player/footsteps.tres" id="footsteps"]
+[ext_resource type="AudioStream" uid="uid://bmjrguf5cm508" path="res://audio/player/footsteps.tres" id="footsteps"]
 [ext_resource type="PackedScene" uid="uid://djy410esc62bm" path="res://objects/drop_shadow.tscn" id="shadow"]
 
 [sub_resource type="CapsuleShape3D" id="shape"]

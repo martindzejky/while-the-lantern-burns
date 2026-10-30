@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bksmljrtddjin" path="res://scripts/light_sensor.gd" id="1"]
 [ext_resource type="Shader" uid="uid://w4ap02fdcy8" path="res://shaders/light_sensor.gdshader" id="2"]
-[ext_resource type="Texture2D" path="res://resources/ground/light_profile.tres" id="light_profile"]
-[ext_resource type="Texture2D" path="res://resources/ground/world_light_profile.tres" id="world_light_profile"]
+[ext_resource type="Texture2D" uid="uid://5m8yle351an7" path="res://resources/ground/light_profile.tres" id="light_profile"]
+[ext_resource type="Texture2D" uid="uid://cxe3jaucjvyeo" path="res://resources/ground/world_light_profile.tres" id="world_light_profile"]
 
 [sub_resource type="ShaderMaterial" id="material"]
 render_priority = 127

@@ -31,7 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://dabxqu7mxnwcu" path="res://objects/background_rock.tscn" id="background_rock"]
 [ext_resource type="PackedScene" uid="uid://b0v247d6td2e1" path="res://objects/camera_controller.tscn" id="camera_controller"]
 [ext_resource type="PackedScene" uid="uid://bgvehpswq5e13" path="res://objects/camera_focus.tscn" id="camera_focus"]
-[ext_resource type="PackedScene" path="res://ui/death_feedback.tscn" id="death_ui"]
+[ext_resource type="PackedScene" uid="uid://br7ucbibir75o" path="res://ui/death_feedback.tscn" id="death_ui"]
 [ext_resource type="PackedScene" uid="uid://dnep4itj4mhsi" path="res://objects/enemy.tscn" id="enemy"]
 [ext_resource type="PackedScene" uid="uid://ct5elay5mk4lb" path="res://objects/ground.tscn" id="ground"]
 [ext_resource type="PackedScene" uid="uid://odumffg7yfr1" path="res://objects/big_rock_01.tscn" id="rock_1"]
@@ -53,7 +53,7 @@ ambient_light_color = Color(0.08, 0.16, 0.11, 1)
 ambient_light_energy = 0.07
 reflected_light_source = 2
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fn2d0"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_a8df1"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -64,7 +64,7 @@ stream_2/stream = ExtResource("7_ysen8")
 stream_3/stream = ExtResource("8_mayoo")
 stream_4/stream = ExtResource("9_7q2ti")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hlfo2"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bw5ll"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -72,7 +72,7 @@ streams_count = 2
 stream_0/stream = ExtResource("10_6lo2u")
 stream_1/stream = ExtResource("11_ymylm")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_oo84n"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ysen8"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -84,7 +84,7 @@ stream_3/stream = ExtResource("32_72lwj")
 stream_4/stream = ExtResource("33_1aotr")
 stream_5/stream = ExtResource("34_cho4f")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hu7jy"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mayoo"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -92,7 +92,7 @@ streams_count = 2
 stream_0/stream = ExtResource("35_necfm")
 stream_1/stream = ExtResource("36_dqah8")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_soddd"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7q2ti"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -101,7 +101,7 @@ stream_0/stream = ExtResource("37_kyuo8")
 stream_1/stream = ExtResource("38_rjonr")
 stream_2/stream = ExtResource("39_ekqtv")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_52262"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6lo2u"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -113,7 +113,7 @@ stream_3/stream = ExtResource("32_72lwj")
 stream_4/stream = ExtResource("33_1aotr")
 stream_5/stream = ExtResource("34_cho4f")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pc0b8"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ymylm"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -121,7 +121,7 @@ streams_count = 2
 stream_0/stream = ExtResource("35_necfm")
 stream_1/stream = ExtResource("36_dqah8")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_87672"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8ffk5"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -130,7 +130,7 @@ stream_0/stream = ExtResource("37_kyuo8")
 stream_1/stream = ExtResource("38_rjonr")
 stream_2/stream = ExtResource("39_ekqtv")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1mjig"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nkrfs"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -142,7 +142,7 @@ stream_3/stream = ExtResource("32_72lwj")
 stream_4/stream = ExtResource("33_1aotr")
 stream_5/stream = ExtResource("34_cho4f")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_01608"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fukx8"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -150,7 +150,7 @@ streams_count = 2
 stream_0/stream = ExtResource("35_necfm")
 stream_1/stream = ExtResource("36_dqah8")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tidyi"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_72lwj"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -183,15 +183,15 @@ lantern = NodePath("../lantern")
 light_source = NodePath("../../lantern")
 
 [node name="footstep_audio" parent="player" index="7" unique_id=1882856814]
-stream = SubResource("AudioStreamRandomizer_fn2d0")
+stream = SubResource("AudioStreamRandomizer_a8df1")
 
 [node name="body_audio" parent="player" index="8" unique_id=1333383196]
-stream = SubResource("AudioStreamRandomizer_hlfo2")
+stream = SubResource("AudioStreamRandomizer_bw5ll")
 
 [node name="camera_controller" parent="." unique_id=411270736 node_paths=PackedStringArray("target", "enemies") instance=ExtResource("camera_controller")]
 target = NodePath("../player")
-follow_fov = 44.0
 enemies = [NodePath("../enemy_near"), NodePath("../enemy_far_left"), NodePath("../enemy_far_right")]
+follow_fov = 44.0
 
 [node name="passage_focus" parent="." unique_id=1467391730 instance=ExtResource("camera_focus")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.5)
@@ -298,9 +298,9 @@ omni_range = 6.0
 [node name="enemy_near" parent="." unique_id=1659567771 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1.2)
 target = NodePath("../player")
-growl_stream = SubResource("AudioStreamRandomizer_oo84n")
-bite_stream = SubResource("AudioStreamRandomizer_hu7jy")
-death_stream = SubResource("AudioStreamRandomizer_soddd")
+growl_stream = SubResource("AudioStreamRandomizer_ysen8")
+bite_stream = SubResource("AudioStreamRandomizer_mayoo")
+death_stream = SubResource("AudioStreamRandomizer_7q2ti")
 head_variant = 0
 body_variant = 1
 eye_variant = 0
@@ -308,9 +308,9 @@ eye_variant = 0
 [node name="enemy_far_left" parent="." unique_id=2037867044 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -11)
 target = NodePath("../player")
-growl_stream = SubResource("AudioStreamRandomizer_52262")
-bite_stream = SubResource("AudioStreamRandomizer_pc0b8")
-death_stream = SubResource("AudioStreamRandomizer_87672")
+growl_stream = SubResource("AudioStreamRandomizer_6lo2u")
+bite_stream = SubResource("AudioStreamRandomizer_ymylm")
+death_stream = SubResource("AudioStreamRandomizer_8ffk5")
 head_variant = 1
 body_variant = 0
 eye_variant = 2
@@ -318,9 +318,9 @@ eye_variant = 2
 [node name="enemy_far_right" parent="." unique_id=783629126 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 0, -10.5)
 target = NodePath("../player")
-growl_stream = SubResource("AudioStreamRandomizer_1mjig")
-bite_stream = SubResource("AudioStreamRandomizer_01608")
-death_stream = SubResource("AudioStreamRandomizer_tidyi")
+growl_stream = SubResource("AudioStreamRandomizer_nkrfs")
+bite_stream = SubResource("AudioStreamRandomizer_fukx8")
+death_stream = SubResource("AudioStreamRandomizer_72lwj")
 head_variant = 2
 body_variant = 2
 eye_variant = 4

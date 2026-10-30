@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dvtwgqx6anrpe" path="res://scripts/death_feedback.gd" id="1"]
 [ext_resource type="Shader" uid="uid://cw0neltwqf45g" path="res://shaders/death_feedback.gdshader" id="2"]
-[ext_resource type="PackedScene" path="res://ui/ui_audio.tscn" id="audio"]
+[ext_resource type="PackedScene" uid="uid://bc8cqpt06nl08" path="res://ui/ui_audio.tscn" id="audio"]
 [ext_resource type="FontFile" uid="uid://edm7qhympbho" path="res://resources/menu/barlow_medium.ttf" id="medium"]
 [ext_resource type="Theme" uid="uid://drxw11x7lxcwj" path="res://resources/menu/theme.tres" id="theme"]
 

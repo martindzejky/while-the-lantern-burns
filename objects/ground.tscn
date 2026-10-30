@@ -2,9 +2,9 @@
 
 [ext_resource type="Shader" uid="uid://bn1p42cqm4tj0" path="res://shaders/ground_lighting.gdshader" id="4"]
 [ext_resource type="Script" uid="uid://2wksfmfp1kib" path="res://scripts/ground.gd" id="11"]
-[ext_resource type="PackedScene" path="res://objects/ground_details.tscn" id="details"]
-[ext_resource type="Texture2D" path="res://resources/ground/light_profile.tres" id="light_profile"]
-[ext_resource type="Texture2D" path="res://resources/ground/world_light_profile.tres" id="world_light_profile"]
+[ext_resource type="PackedScene" uid="uid://dlg408i3gtgkm" path="res://objects/ground_details.tscn" id="details"]
+[ext_resource type="Texture2D" uid="uid://5m8yle351an7" path="res://resources/ground/light_profile.tres" id="light_profile"]
+[ext_resource type="Texture2D" uid="uid://cxe3jaucjvyeo" path="res://resources/ground/world_light_profile.tres" id="world_light_profile"]
 
 [sub_resource type="Gradient" id="ground_color"]
 offsets = PackedFloat32Array(0)

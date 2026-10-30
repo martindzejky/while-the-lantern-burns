@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c1vepqd50nrqc"]
 
-[ext_resource type="PackedScene" path="res://objects/random_big_rock.tscn" id="rock"]
+[ext_resource type="PackedScene" uid="uid://j8olerx61rht" path="res://objects/random_big_rock.tscn" id="rock"]
 [ext_resource type="Script" uid="uid://jodaxlgnua61" path="res://scripts/ground_rock_scatter.gd" id="script"]
 
 [node name="ground_rock_scatter" type="Node3D" unique_id=2046555064]

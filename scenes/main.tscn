@@ -25,7 +25,7 @@
 [ext_resource type="AudioStream" uid="uid://cps01lv4uvcli" path="res://audio/enemy/death_01.wav" id="23_cjqg0"]
 [ext_resource type="AudioStream" uid="uid://d0yyc7mxs5dqw" path="res://audio/enemy/death_02.wav" id="24_vchkt"]
 [ext_resource type="AudioStream" uid="uid://bm146vegk4pb6" path="res://audio/enemy/death_03.wav" id="25_txyw0"]
-[ext_resource type="PackedScene" path="res://ui/death_feedback.tscn" id="death_ui"]
+[ext_resource type="PackedScene" uid="uid://br7ucbibir75o" path="res://ui/death_feedback.tscn" id="death_ui"]
 [ext_resource type="PackedScene" uid="uid://dnep4itj4mhsi" path="res://objects/enemy.tscn" id="enemy"]
 [ext_resource type="PackedScene" uid="uid://ct5elay5mk4lb" path="res://objects/ground.tscn" id="ground"]
 [ext_resource type="PackedScene" uid="uid://c3se2eoftldxs" path="res://ui/world_post_processing.tscn" id="world_post_processing"]
@@ -38,7 +38,7 @@ ambient_light_color = Color(0.08, 0.16, 0.11, 1)
 ambient_light_energy = 0.05
 reflected_light_source = 2
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vc5cj"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yq6so"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -49,7 +49,7 @@ stream_2/stream = ExtResource("7_tel4y")
 stream_3/stream = ExtResource("8_qkpxi")
 stream_4/stream = ExtResource("9_5q0nq")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nvyfr"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fv21b"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -57,7 +57,7 @@ streams_count = 2
 stream_0/stream = ExtResource("10_dgi5k")
 stream_1/stream = ExtResource("11_j8jky")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ty1g6"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tel4y"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -69,7 +69,7 @@ stream_3/stream = ExtResource("18_c6pm6")
 stream_4/stream = ExtResource("19_5he1u")
 stream_5/stream = ExtResource("20_5poiv")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_j2jfr"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qkpxi"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -77,7 +77,7 @@ streams_count = 2
 stream_0/stream = ExtResource("21_2cjbq")
 stream_1/stream = ExtResource("22_chjal")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bjg73"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5q0nq"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
@@ -108,10 +108,10 @@ lantern = NodePath("../lantern")
 light_source = NodePath("../../lantern")
 
 [node name="footstep_audio" parent="player" index="7" unique_id=1882856814]
-stream = SubResource("AudioStreamRandomizer_vc5cj")
+stream = SubResource("AudioStreamRandomizer_yq6so")
 
 [node name="body_audio" parent="player" index="8" unique_id=1333383196]
-stream = SubResource("AudioStreamRandomizer_nvyfr")
+stream = SubResource("AudioStreamRandomizer_fv21b")
 
 [node name="camera" type="Camera3D" parent="player" unique_id=1545861327]
 transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 10, 12)
@@ -128,9 +128,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
 [node name="enemy" parent="." unique_id=1153954632 node_paths=PackedStringArray("target") instance=ExtResource("enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 0, -4)
 target = NodePath("../player")
-growl_stream = SubResource("AudioStreamRandomizer_ty1g6")
-bite_stream = SubResource("AudioStreamRandomizer_j2jfr")
-death_stream = SubResource("AudioStreamRandomizer_bjg73")
+growl_stream = SubResource("AudioStreamRandomizer_tel4y")
+bite_stream = SubResource("AudioStreamRandomizer_qkpxi")
+death_stream = SubResource("AudioStreamRandomizer_5q0nq")
 
 [node name="hud" type="CanvasLayer" parent="." unique_id=997754346]
 

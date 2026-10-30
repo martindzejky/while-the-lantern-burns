@@ -1,11 +1,11 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bu4wydmyatiwj"]
 
-[ext_resource type="Script" path="res://scripts/gameplay_prompts.gd" id="script"]
-[ext_resource type="Script" path="res://scripts/hint_label.gd" id="hint"]
+[ext_resource type="Script" uid="uid://dmgsi274a4dun" path="res://scripts/hint_label.gd" id="hint"]
+[ext_resource type="Script" uid="uid://cd1c1xmmqckru" path="res://scripts/gameplay_prompts.gd" id="script"]
+[ext_resource type="Theme" uid="uid://drxw11x7lxcwj" path="res://resources/menu/theme.tres" id="theme"]
 [ext_resource type="PackedScene" path="res://ui/world_hint.tscn" id="world_hint"]
-[ext_resource type="Theme" path="res://resources/menu/theme.tres" id="theme"]
 
-[node name="gameplay_prompts" type="Control" node_paths=PackedStringArray("movement", "movement_text", "instruction", "context", "context_text")]
+[node name="gameplay_prompts" type="Control" unique_id=955870785 node_paths=PackedStringArray("movement", "movement_text", "instruction", "context", "context_text")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,20 +21,21 @@ instruction = NodePath("instruction")
 context = NodePath("context")
 context_text = NodePath("context/viewport/text")
 
-[node name="movement" parent="." instance=ExtResource("world_hint")]
+[node name="movement" parent="." unique_id=1424552284 instance=ExtResource("world_hint")]
 
-[node name="instruction" type="RichTextLabel" parent="."]
+[node name="instruction" type="RichTextLabel" parent="." unique_id=258043171]
+layout_mode = 0
 anchor_left = 0.14
 anchor_top = 0.43
 anchor_right = 0.44
 anchor_bottom = 0.68
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.94, 0.91, 0.83, 1)
+theme_override_colors/font_outline_color = Color(0, 0.035, 0.015, 0.8)
 theme_override_colors/font_shadow_color = Color(0, 0.035, 0.015, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 4
-theme_override_colors/font_outline_color = Color(0, 0.035, 0.015, 0.8)
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 24
 bbcode_enabled = true
@@ -42,8 +43,7 @@ scroll_active = false
 horizontal_alignment = 1
 script = ExtResource("hint")
 
-[node name="context" parent="." instance=ExtResource("world_hint")]
+[node name="context" parent="." unique_id=1845115119 instance=ExtResource("world_hint")]
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-
 [connection signal="message_shown" from="instruction" to="." method="_on_instruction_shown"]

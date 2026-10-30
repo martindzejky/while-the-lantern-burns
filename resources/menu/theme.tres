@@ -2,13 +2,13 @@
 
 [ext_resource type="FontFile" uid="uid://btyhd1mo7xa10" path="res://resources/menu/barlow_regular.ttf" id="font"]
 
-[sub_resource type="FontVariation" id="bold"]
-base_font = ExtResource("font")
-variation_embolden = 0.6
-
 [sub_resource type="StyleBoxEmpty" id="empty"]
 content_margin_top = 6.0
 content_margin_bottom = 6.0
+
+[sub_resource type="FontVariation" id="bold"]
+base_font = ExtResource("font")
+variation_embolden = 0.6
 
 [resource]
 default_font = ExtResource("font")
@@ -23,6 +23,5 @@ Button/styles/hover = SubResource("empty")
 Button/styles/normal = SubResource("empty")
 Button/styles/pressed = SubResource("empty")
 Label/colors/font_color = Color(0.94, 0.91, 0.83, 1)
-
-RichTextLabel/fonts/bold_font = SubResource("bold")
 RichTextLabel/colors/default_color = Color(0.94, 0.91, 0.83, 1)
+RichTextLabel/fonts/bold_font = SubResource("bold")

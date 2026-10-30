@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://djt7f3eenk6wm"]
 
-[ext_resource type="PackedScene" path="res://ui/ui_audio.tscn" id="audio"]
+[ext_resource type="PackedScene" uid="uid://bc8cqpt06nl08" path="res://ui/ui_audio.tscn" id="audio"]
 [ext_resource type="Script" uid="uid://b3u7277vrgk8g" path="res://scripts/audio_settings.gd" id="script"]
 
 [node name="audio_settings" type="VBoxContainer" unique_id=720016635 node_paths=PackedStringArray("sliders", "back_button", "audio")]

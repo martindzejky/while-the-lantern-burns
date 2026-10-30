@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cx1sdai0kmoq4" path="res://sprites/crack_08.png" id="crack_08"]
 [ext_resource type="Texture2D" uid="uid://c201xe2rf1yli" path="res://sprites/crack_09.png" id="crack_09"]
 [ext_resource type="Texture2D" uid="uid://cdsm0wctg2gmo" path="res://sprites/crack_10.png" id="crack_10"]
-[ext_resource type="Texture2D" path="res://resources/ground/light_profile.tres" id="light_profile"]
+[ext_resource type="Texture2D" uid="uid://5m8yle351an7" path="res://resources/ground/light_profile.tres" id="light_profile"]
 [ext_resource type="Texture2D" uid="uid://de7i6d7ukcrv4" path="res://sprites/small_rock_01_normal.png" id="normal_01"]
 [ext_resource type="Texture2D" uid="uid://caa2fswbrqf8a" path="res://sprites/small_rock_02_normal.png" id="normal_02"]
 [ext_resource type="Texture2D" uid="uid://csobroyncy1qo" path="res://sprites/small_rock_03_normal.png" id="normal_03"]
@@ -28,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://ihonfis1di4t" path="res://sprites/small_rock_06.png" id="small_rock_06"]
 [ext_resource type="Texture2D" uid="uid://lqrqmsg4brhk" path="res://sprites/small_rock_07.png" id="small_rock_07"]
 [ext_resource type="Shader" uid="uid://bhovwctme3phi" path="res://shaders/ground_pebbles.gdshader" id="stone_shader"]
-[ext_resource type="Texture2D" path="res://resources/ground/world_light_profile.tres" id="world_light_profile"]
+[ext_resource type="Texture2D" uid="uid://cxe3jaucjvyeo" path="res://resources/ground/world_light_profile.tres" id="world_light_profile"]
 
 [sub_resource type="ShaderMaterial" id="material"]
 render_priority = 0
