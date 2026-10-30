@@ -28,6 +28,21 @@ func _run() -> void:
       landmarks.append(enemy)
     for landmark: Node3D in landmarks:
       _expect(_on_floor(floor, landmark.position), '%s/%s is on the floor' % [level.name, landmark.name])
+    if level.name == 'discovery':
+      _expect(level.focuses.size() == 2, 'discovery has both item reveals')
+      _expect(level.focuses.has(level.lantern_focus), 'lantern reveal is registered')
+      _expect(level.focuses.has(level.musket_focus), 'musket reveal is registered')
+      _expect(level.lantern_focus.position.is_equal_approx(level.lantern_spawn.position), 'lantern reveal follows spawn')
+      _expect(level.musket_focus.position.is_equal_approx(level.musket_spawn.position), 'musket reveal follows spawn')
+      _expect(level.lantern_focus.position.distance_to(level.entry.position) > level.lantern_focus.outer_radius, 'entrance does not trigger lantern reveal')
+      _expect(level.camera_bounds.grow(0.01).has_point(Vector2(level.entry.position.x, level.entry.position.z)), 'camera can center on entrance')
+      for point: Vector3 in [Vector3(-27, 0, -10), Vector3(7, 0, -10), Vector3(7, 0, 0)]:
+        _expect(_on_floor(floor, point), 'discovery bends are walkable: %s' % point)
+      _expect(not _on_floor(floor, Vector3(-18, 0, 6)), 'entrance requires walking up before right')
+      _expect(not _on_floor(floor, Vector3(14, 0, -8)), 'musket route requires the narrow descent')
+    if level.name == 'deep_cave':
+      _expect(level.focuses.size() == 1, 'deep cave has its first encounter reveal')
+      _expect(level.focuses[0].position.is_equal_approx(level.enemies[0].position), 'first encounter reveal follows enemy spawn')
     if level.name == 'escape':
       _expect(not _on_floor(floor, Vector3(-3, 0, -15)), 'escape U bend has an open central gap')
     level.free()

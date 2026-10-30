@@ -8,4 +8,6 @@ extends Node3D
 @export var camera_bounds: Rect2
 @export var enemies: Array[Enemy] = []
 @export var focuses: Array[CameraFocus] = []
+@export var lantern_focus: CameraFocus
+@export var musket_focus: CameraFocus
 @export var exit: Area3D

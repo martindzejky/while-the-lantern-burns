@@ -35,9 +35,9 @@ func _process(delta: float) -> void:
   if _death_closeup:
     camera.fov = lerpf(camera.fov, bite_fov, 1.0 - exp(-bite_response * delta))
     global_position = global_position.lerp(_death_focus, 1.0 - exp(-follow_response * delta))
-    global_position = _constrain_to_level(global_position)
     return
-  var chase_position: Vector3 = _get_chase_position()
+  # bounds limit ordinary follow; reveals and combat can frame beyond them.
+  var chase_position: Vector3 = _constrain_to_level(_get_chase_position())
   var desired_position: Vector3 = chase_position
   var strongest_weight: float = 0.0
   for index: int in range(_focus_points.size() - 1, -1, -1):
@@ -73,7 +73,7 @@ func _process(delta: float) -> void:
     camera.fov = lerpf(camera.fov, follow_fov, blend)
 
   global_position = global_position.lerp(desired_position, blend)
-  global_position = _constrain_to_level(_constrain_player_frame(global_position, player_screen_margin))
+  global_position = _constrain_player_frame(global_position, player_screen_margin)
 
 
 func _get_chase_position() -> Vector3:

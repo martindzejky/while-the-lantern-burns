@@ -47,6 +47,16 @@ func _prepare() -> void:
   level_host.add_child(_level)
 
   var player_state: Dictionary = initial_checkpoint.get('player', player.get_checkpoint())
+  if _level.lantern_focus != null:
+    if player_state['lantern']['discovered']:
+      _level.lantern_focus.queue_free()
+    else:
+      lantern.carried_changed.connect(_level.lantern_focus._on_lantern_carried_changed)
+  if _level.musket_focus != null:
+    if player_state['musket']['owned']:
+      _level.musket_focus.queue_free()
+    else:
+      musket.equipped.connect(_level.musket_focus.queue_free)
   var lantern_position: Vector3 = _level.lantern_spawn.global_position
   if player_state['lantern']['discovered']:
     lantern_position = _level.entry.global_position + Vector3(1.0, 0.0, 0.0)

@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" path="res://objects/random_big_rock.tscn" id="rock"]
 [ext_resource type="PackedScene" path="res://objects/small_rock_cluster.tscn" id="small"]
 [ext_resource type="PackedScene" path="res://objects/enemy.tscn" id="enemy"]
+[ext_resource type="PackedScene" path="res://objects/camera_focus.tscn" id="focus"]
 
 [sub_resource type="BoxShape3D" id="exit_shape"]
 size = Vector3(6, 4, 3)
 
-[node name="deep_cave" type="Node3D" node_paths=PackedStringArray("entry", "lantern_spawn", "musket_spawn", "enemies", "exit")]
+[node name="deep_cave" type="Node3D" node_paths=PackedStringArray("entry", "lantern_spawn", "musket_spawn", "enemies", "exit", "focuses")]
 script = ExtResource("script")
 entry = NodePath("entry")
 lantern_spawn = NodePath("lantern_spawn")
@@ -18,6 +19,7 @@ musket_spawn = NodePath("musket_spawn")
 camera_bounds = Rect2(-16, -10, 28, 31)
 enemies = [NodePath("enemy_1"), NodePath("enemy_2"), NodePath("enemy_3")]
 exit = NodePath("exit")
+focuses = [NodePath("first_encounter")]
 
 [node name="ground" parent="." instance=ExtResource("ground")]
 polygon = PackedVector2Array(-29, 13, -22, 17, -15, 15, -11, 10, -5, 10, 1, 15, 10, 14, 15, 9, 15, 3, 11, -3, 9, -9, 13, -14, 13, -21, 9, -26, 8, -31, 0, -31, -1, -26, -7, -23, -11, -17, -9, -11, -5, -6, -6, -1, -12, 2, -17, 4, -23, 3, -29, 7)
@@ -340,3 +342,8 @@ ground = NodePath("../../ground")
 seed_value = 914
 count_range = Vector2i(4, 7)
 radius = 1.3
+
+[node name="first_encounter" parent="." instance=ExtResource("focus")]
+position = Vector3(-5, 0, -6)
+outer_radius = 10.0
+inner_radius = 2.5

@@ -69,6 +69,25 @@ func _run() -> void:
   await process_frame
   _expect(visuals.basis.is_equal_approx(Basis.IDENTITY), 'held items preserve their attachment transform')
   paused = false
+
+  var controller := preload('res://objects/camera_controller.tscn').instantiate() as CameraController
+  controller.target = player
+  world.add_child(controller)
+  controller.set_level(Rect2(-1, -1, 2, 2), [])
+  var focus := preload('res://objects/camera_focus.tscn').instantiate() as CameraFocus
+  focus.position = Vector3(5, 0, -4)
+  focus.inner_radius = 7.0
+  world.add_child(focus)
+  controller._on_focus_entered(focus, player)
+  controller._process(1.0)
+  _expect(controller.position.x > 1.0, 'reveal can frame beyond level follow bounds')
+  _expect(controller.position.z < -1.0, 'reveal retains its depth near a level boundary')
+  var screen_size: Vector2 = root.get_visible_rect().size
+  var screen_position: Vector2 = controller.camera.unproject_position(player.global_position)
+  _expect(Rect2(screen_size * 0.24, screen_size * 0.52).has_point(screen_position), 'boundary reveal keeps player safely framed')
+  controller._on_focus_exited(focus, player)
+  controller._process(2.0)
+  _expect(controller.position.length() < 0.01, 'camera returns to bounded player follow after reveal')
   world.queue_free()
   camera.queue_free()
   await process_frame
