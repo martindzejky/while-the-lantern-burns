@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://ui/ui_audio.tscn" id="audio"]
 [ext_resource type="Script" uid="uid://c4xp20cdd5hq6" path="res://scripts/controls_screen.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/key_label.gd" id="key_label"]
 
 [node name="controls_screen" type="VBoxContainer" unique_id=1907252139 node_paths=PackedStringArray("back_button", "audio")]
 custom_minimum_size = Vector2(440, 0)
@@ -17,19 +18,23 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "CONTROLS"
 
-[node name="instructions" type="Label" parent="." unique_id=1556453070]
+[node name="instructions" type="RichTextLabel" parent="." unique_id=1556453070]
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/line_spacing = 6
-theme_override_font_sizes/font_size = 18
-text = "WASD / Arrow keys: Move
-E / Enter: Pick up or put down
-R / Shift / Space: Light the fuse
-Left click: Use item or fire
-Left click + drag: Move the ramrod
-Hold right mouse: Aim
-Escape: Pause"
+theme_override_constants/line_separation = 6
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+script = ExtResource("key_label")
+fit_content = true
+scroll_active = false
+text = "[key]WASD[/key] / [key]Arrow keys[/key]: Move
+[key]E[/key] / [key]Enter[/key]: Pick up or put down
+[key]R[/key] / [key]Shift[/key] / [key]Space[/key]: Light the fuse
+[key]Left click[/key]: Use item or fire
+[key]Left click[/key] + drag: Move the ramrod
+Hold [key]right mouse[/key]: Aim
+[key]Escape[/key]: Pause"
 autowrap_mode = 2
 
 [node name="back" type="Button" parent="." unique_id=1159518041]
