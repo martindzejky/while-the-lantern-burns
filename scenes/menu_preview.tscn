@@ -26,9 +26,10 @@ ambient_light_color = Color(0.09, 0.18, 0.13, 1)
 ambient_light_energy = 0.11
 reflected_light_source = 2
 
-[node name="menu_preview" type="Node3D" unique_id=462274930 node_paths=PackedStringArray("start_button", "quit_button", "title", "buttons", "settings", "settings_button", "controls", "controls_button", "how_to_play", "how_to_play_button")]
+[node name="menu_preview" type="Node3D" unique_id=462274930 node_paths=PackedStringArray("start_button", "continue_button", "quit_button", "title", "buttons", "settings", "settings_button", "controls", "controls_button", "how_to_play", "how_to_play_button")]
 script = ExtResource("script")
 start_button = NodePath("ui/layout/column/buttons/start")
+continue_button = NodePath("ui/layout/column/buttons/continue")
 quit_button = NodePath("ui/layout/column/buttons/quit")
 title = NodePath("ui/layout/column/title")
 buttons = NodePath("ui/layout/column/buttons")
@@ -126,6 +127,14 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 12
 
+[node name="continue" type="Button" parent="ui/layout/column/buttons"]
+visible = false
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "CONTINUE"
+alignment = 0
+
 [node name="start" type="Button" parent="ui/layout/column/buttons" unique_id=1073433845]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
@@ -202,3 +211,8 @@ anchor_bottom = 0.94
 [connection signal="closed" from="ui/layout/column/settings" to="." method="_on_settings_closed"]
 [connection signal="closed" from="ui/layout/column/controls" to="." method="_on_controls_closed"]
 [connection signal="closed" from="ui/layout/how_to_play" to="." method="_on_how_to_play_closed"]
+
+[connection signal="pressed" from="ui/layout/column/buttons/continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="ui/layout/column/buttons/continue" to="ui_audio" method="play_click"]
+[connection signal="focus_entered" from="ui/layout/column/buttons/continue" to="ui_audio" method="play_hover"]
+[connection signal="mouse_entered" from="ui/layout/column/buttons/continue" to="ui_audio" method="play_hover"]

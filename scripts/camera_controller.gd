@@ -22,6 +22,7 @@ var _zoom_enemy: Enemy
 var _bite_start_fov: float
 var _death_closeup: bool = false
 var _death_focus: Vector3
+var _level_bounds: Rect2
 
 
 func _ready() -> void:
@@ -34,6 +35,7 @@ func _process(delta: float) -> void:
   if _death_closeup:
     camera.fov = lerpf(camera.fov, bite_fov, 1.0 - exp(-bite_response * delta))
     global_position = global_position.lerp(_death_focus, 1.0 - exp(-follow_response * delta))
+    global_position = _constrain_to_level(global_position)
     return
   var chase_position: Vector3 = _get_chase_position()
   var desired_position: Vector3 = chase_position
@@ -71,7 +73,7 @@ func _process(delta: float) -> void:
     camera.fov = lerpf(camera.fov, follow_fov, blend)
 
   global_position = global_position.lerp(desired_position, blend)
-  global_position = _constrain_player_frame(global_position, player_screen_margin)
+  global_position = _constrain_to_level(_constrain_player_frame(global_position, player_screen_margin))
 
 
 func _get_chase_position() -> Vector3:
@@ -145,3 +147,25 @@ func _on_bite_landed(enemy: Enemy) -> void:
   _death_focus = target.global_position.lerp(mouth_position, bite_focus_weight)
   _death_focus.y = mouth_position.y
   _death_closeup = true
+
+
+func set_level(bounds: Rect2, level_enemies: Array[Enemy]) -> void:
+  _level_bounds = bounds
+  enemies = level_enemies
+  _focus_points.clear()
+  _biting_enemies.clear()
+  _zoom_enemy = null
+  _death_closeup = false
+  camera.fov = follow_fov
+  global_position = _constrain_to_level(target.global_position)
+
+
+func _constrain_to_level(position: Vector3) -> Vector3:
+  if not _level_bounds.has_area():
+    return position
+  position.x = clampf(position.x, _level_bounds.position.x, _level_bounds.end.x)
+  position.z = clampf(position.z, _level_bounds.position.y, _level_bounds.end.y)
+  # narrow windows may need a little more travel to keep the player on screen.
+  var screen_size: Vector2 = get_viewport().get_visible_rect().size
+  var margin: float = minf(player_screen_margin, 0.14 * screen_size.y / screen_size.x)
+  return _constrain_player_frame(position, margin)

@@ -2,8 +2,10 @@ class_name MainMenu
 extends Node3D
 
 signal start_requested
+signal continue_requested
 
 @export var start_button: Button
+@export var continue_button: Button
 @export var quit_button: Button
 @export var title: Label
 @export var buttons: VBoxContainer
@@ -69,3 +71,14 @@ func _on_how_to_play_closed() -> void:
   title.show()
   buttons.show()
   how_to_play_button.grab_focus()
+
+
+func set_continue_available(available: bool) -> void:
+  continue_button.visible = available
+  start_button.text = 'NEW GAME' if available else 'START'
+  if available:
+    continue_button.grab_focus()
+
+
+func _on_continue_pressed() -> void:
+  continue_requested.emit()

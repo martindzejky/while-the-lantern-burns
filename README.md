@@ -24,6 +24,21 @@ A game for the Ludum Dare #60 compo. Explore dark caverns, keep your lantern cha
   </tr>
 </table>
 
+## Progress
+
+The journey has three caves. Entering a cave saves a checkpoint; Retry restores that cave's entrance, equipment and tutorial progress, with its monsters reset. Continue resumes the checkpoint after closing the game. New Game replaces it, and escaping clears it.
+
+Discovered equipment follows you between caves. Lantern charge, reload progress and remaining fuse time carry over; transitions pause them. A pending trigger pull is cancelled when crossing, leaving the loaded shot available.
+
+Web saves use the browser's storage for the current site. Native saves use Godot's `user://` directory.
+
+To check checkpoint serialization and invalid-save recovery:
+
+```sh
+godot --headless --script res://tests/checkpoints.gd
+godot --headless --script res://tests/levels.gd
+```
+
 ## Theme
 
 > "Old tech"

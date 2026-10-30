@@ -1,0 +1,312 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/cave_level.gd" id="script"]
+[ext_resource type="PackedScene" path="res://objects/ground.tscn" id="ground"]
+[ext_resource type="PackedScene" path="res://objects/world_light.tscn" id="light"]
+[ext_resource type="PackedScene" path="res://objects/random_big_rock.tscn" id="rock"]
+[ext_resource type="PackedScene" path="res://objects/small_rock_cluster.tscn" id="small"]
+[ext_resource type="PackedScene" path="res://objects/enemy.tscn" id="enemy"]
+
+[sub_resource type="BoxShape3D" id="exit_shape"]
+size = Vector3(3, 4, 5)
+
+[node name="discovery" type="Node3D" node_paths=PackedStringArray("entry", "lantern_spawn", "musket_spawn", "enemies", "exit")]
+script = ExtResource("script")
+entry = NodePath("entry")
+lantern_spawn = NodePath("lantern_spawn")
+musket_spawn = NodePath("musket_spawn")
+camera_bounds = Rect2(-19, -1, 38, 2)
+enemies = []
+exit = NodePath("exit")
+
+[node name="ground" parent="." instance=ExtResource("ground")]
+polygon = PackedVector2Array(-32, 5, -29, 9, -21, 10, -16, 7, -9, 8, -4, 5, 2, 4, 7, 8, 16, 10, 23, 8, 26, 4, 32, 3, 32, -3, 26, -4, 22, -8, 14, -9, 8, -7, 3, -3, -3, -4, -8, -7, -16, -8, -23, -10, -29, -7, -32, -4)
+edge_seed = 100
+
+[node name="entry" type="Marker3D" parent="."]
+position = Vector3(-27, 0, 0)
+
+[node name="lantern_spawn" type="Marker3D" parent="."]
+position = Vector3(-11, 0, -3)
+
+[node name="musket_spawn" type="Marker3D" parent="."]
+position = Vector3(17, 0, 0)
+
+[node name="light_1" parent="." instance=ExtResource("light")]
+position = Vector3(-27, 4, 0)
+light_color = Color(0.6, 0.76, 1, 1)
+light_energy = 0.3
+omni_range = 9.0
+
+[node name="light_2" parent="." instance=ExtResource("light")]
+position = Vector3(-16, 4, -3)
+light_color = Color(0.6, 0.76, 1, 1)
+light_energy = 0.3
+omni_range = 8.0
+
+[node name="light_3" parent="." instance=ExtResource("light")]
+position = Vector3(18, 4, 0)
+light_color = Color(1, 0.71, 0.4, 1)
+light_energy = 0.3
+omni_range = 9.0
+
+[node name="light_4" parent="." instance=ExtResource("light")]
+position = Vector3(29, 4, 0)
+light_color = Color(1, 0.71, 0.4, 1)
+light_energy = 0.3
+omni_range = 6.0
+
+[node name="exit" type="Area3D" parent="."]
+position = Vector3(29, 1, 0)
+collision_layer = 0
+collision_mask = 1
+
+[node name="shape" type="CollisionShape3D" parent="exit"]
+shape = SubResource("exit_shape")
+
+[node name="scenery" type="Node3D" parent="."]
+
+[node name="outcrop_1_1" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-29, 0, -7)
+seed_value = 600
+scale_range = Vector2(2.1, 2.1)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_1_2" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-30.1, 0, -6.55)
+seed_value = 601
+scale_range = Vector2(1.45, 1.45)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_1_3" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-28.1, 0, -7.4)
+seed_value = 602
+scale_range = Vector2(1.3, 1.3)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_2_1" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-23, 0, -9)
+seed_value = 603
+scale_range = Vector2(2.1, 2.1)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_2_2" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-24.1, 0, -8.55)
+seed_value = 604
+scale_range = Vector2(1.45, 1.45)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_2_3" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-22.1, 0, -9.4)
+seed_value = 605
+scale_range = Vector2(1.3, 1.3)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_3_1" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-16, 0, -7)
+seed_value = 606
+scale_range = Vector2(2.1, 2.1)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_3_2" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-17.1, 0, -6.55)
+seed_value = 607
+scale_range = Vector2(1.45, 1.45)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_3_3" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-15.1, 0, -7.4)
+seed_value = 608
+scale_range = Vector2(1.3, 1.3)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_4_1" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-7, 0, -7)
+seed_value = 609
+scale_range = Vector2(2.1, 2.1)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_4_2" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-8.1, 0, -6.55)
+seed_value = 610
+scale_range = Vector2(1.45, 1.45)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_4_3" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-6.1, 0, -7.4)
+seed_value = 611
+scale_range = Vector2(1.3, 1.3)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_5_1" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(7, 0, -7)
+seed_value = 612
+scale_range = Vector2(2.1, 2.1)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_5_2" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(5.9, 0, -6.55)
+seed_value = 613
+scale_range = Vector2(1.45, 1.45)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_5_3" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(7.9, 0, -7.4)
+seed_value = 614
+scale_range = Vector2(1.3, 1.3)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_6_1" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(15, 0, -9)
+seed_value = 615
+scale_range = Vector2(2.1, 2.1)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_6_2" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(13.9, 0, -8.55)
+seed_value = 616
+scale_range = Vector2(1.45, 1.45)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_6_3" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(15.9, 0, -9.4)
+seed_value = 617
+scale_range = Vector2(1.3, 1.3)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_7_1" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(23, 0, -7)
+seed_value = 618
+scale_range = Vector2(2.1, 2.1)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_7_2" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(21.9, 0, -6.55)
+seed_value = 619
+scale_range = Vector2(1.45, 1.45)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_7_3" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(23.9, 0, -7.4)
+seed_value = 620
+scale_range = Vector2(1.3, 1.3)
+height_range = Vector2(0.8, 1.3)
+
+[node name="outcrop_8_1" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-27, 0, 8)
+seed_value = 621
+scale_range = Vector2(2.1, 2.1)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_8_2" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-28.1, 0, 8.45)
+seed_value = 622
+scale_range = Vector2(1.45, 1.45)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_8_3" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-26.1, 0, 7.6)
+seed_value = 623
+scale_range = Vector2(1.3, 1.3)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_9_1" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-20, 0, 9)
+seed_value = 624
+scale_range = Vector2(2.1, 2.1)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_9_2" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-21.1, 0, 9.45)
+seed_value = 625
+scale_range = Vector2(1.45, 1.45)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_9_3" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-19.1, 0, 8.6)
+seed_value = 626
+scale_range = Vector2(1.3, 1.3)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_10_1" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-10, 0, 7)
+seed_value = 627
+scale_range = Vector2(2.1, 2.1)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_10_2" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-11.1, 0, 7.45)
+seed_value = 628
+scale_range = Vector2(1.45, 1.45)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_10_3" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(-9.1, 0, 6.6)
+seed_value = 629
+scale_range = Vector2(1.3, 1.3)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_11_1" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(11, 0, 8)
+seed_value = 630
+scale_range = Vector2(2.1, 2.1)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_11_2" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(9.9, 0, 8.45)
+seed_value = 631
+scale_range = Vector2(1.45, 1.45)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_11_3" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(11.9, 0, 7.6)
+seed_value = 632
+scale_range = Vector2(1.3, 1.3)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_12_1" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(21, 0, 7)
+seed_value = 633
+scale_range = Vector2(2.1, 2.1)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_12_2" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(19.9, 0, 7.45)
+seed_value = 634
+scale_range = Vector2(1.45, 1.45)
+height_range = Vector2(0.3, 0.5)
+
+[node name="outcrop_12_3" parent="scenery" instance=ExtResource("rock")]
+position = Vector3(21.9, 0, 6.6)
+seed_value = 635
+scale_range = Vector2(1.3, 1.3)
+height_range = Vector2(0.3, 0.5)
+
+[node name="pebbles_1" parent="scenery" node_paths=PackedStringArray("ground") instance=ExtResource("small")]
+position = Vector3(-23, 0, -5)
+ground = NodePath("../../ground")
+seed_value = 900
+count_range = Vector2i(4, 7)
+radius = 1.3
+
+[node name="pebbles_2" parent="scenery" node_paths=PackedStringArray("ground") instance=ExtResource("small")]
+position = Vector3(-8, 0, 5)
+ground = NodePath("../../ground")
+seed_value = 901
+count_range = Vector2i(4, 7)
+radius = 1.3
+
+[node name="pebbles_3" parent="scenery" node_paths=PackedStringArray("ground") instance=ExtResource("small")]
+position = Vector3(12, 0, -6)
+ground = NodePath("../../ground")
+seed_value = 902
+count_range = Vector2i(4, 7)
+radius = 1.3
+
+[node name="pebbles_4" parent="scenery" node_paths=PackedStringArray("ground") instance=ExtResource("small")]
+position = Vector3(23, 0, 4)
+ground = NodePath("../../ground")
+seed_value = 903
+count_range = Vector2i(4, 7)
+radius = 1.3
+

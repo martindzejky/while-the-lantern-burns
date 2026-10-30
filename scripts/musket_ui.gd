@@ -118,6 +118,10 @@ func _on_reload_changed() -> void:
   var state_changed := state != _last_state
   if state == Musket.ReloadState.BALL_INSERTED and _last_state == Musket.ReloadState.EMPTY:
     _load_ball()
+  elif state == Musket.ReloadState.LOADED:
+    ball_motion.show()
+    ball_motion.position = Vector2.ZERO
+    ball_motion.modulate.a = 1.0
   elif state == Musket.ReloadState.EMPTY:
     ball_motion.hide()
   if musket.ramrod_insertion == 1.0 and _last_insertion < 1.0:

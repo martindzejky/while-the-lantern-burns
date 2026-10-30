@@ -386,3 +386,32 @@ func _physics_process(_delta: float) -> void:
 func _on_rig_stepped() -> void:
   if not is_dead and not velocity.is_zero_approx() and not musket.is_trigger_pending:
     footstep_audio.play()
+
+
+func get_checkpoint() -> Dictionary:
+  return {
+    'lantern': lantern.get_checkpoint(),
+    'musket': musket.get_checkpoint(),
+  }
+
+
+func restore_checkpoint(
+  data: Dictionary, entry: Vector3, lantern_position: Vector3, musket_position: Vector3
+) -> void:
+  global_position = entry
+  velocity = Vector3.ZERO
+  lantern.restore_checkpoint(data['lantern'])
+  musket.restore_checkpoint(data['musket'])
+  if lantern.is_carried:
+    _attach(lantern, rig.get_right_hand_slot())
+    _align_grip(lantern, lantern.grip, rig.get_right_hand_slot())
+  else:
+    lantern.reparent(_item_parent)
+    lantern.global_transform = Transform3D(Basis.IDENTITY, lantern_position)
+  if musket.is_owned:
+    _attach(musket, rig.get_back_slot())
+  else:
+    musket.reparent(_item_parent)
+    musket.global_transform = Transform3D(Basis.IDENTITY, musket_position)
+  _update_equipment()
+  interaction_range_changed.emit()

@@ -1,3 +1,4 @@
+class_name GameplayPrompts
 extends Control
 
 @export var player: Player
@@ -164,3 +165,36 @@ func _get_instruction() -> String:
 func _on_instruction_shown() -> void:
   instruction.anchor_left = 0.56 if lantern.is_carried else 0.14
   instruction.anchor_right = 0.86 if lantern.is_carried else 0.44
+
+
+func get_checkpoint() -> Dictionary:
+  return {
+    'has_moved': _has_moved,
+    'has_picked_lantern': _has_picked_lantern,
+    'has_picked_musket': _has_picked_musket,
+    'has_dropped_lantern': _has_dropped_lantern,
+    'has_inserted_ball': _has_inserted_ball,
+    'has_loaded': _has_loaded,
+    'has_lit': _has_lit,
+    'has_aimed': _has_aimed,
+    'has_fired': _has_fired,
+    'charge_count': mini(_charge_count, 3),
+  }
+
+
+func restore_checkpoint(data: Dictionary) -> void:
+  movement_text.reset_hint()
+  context_text.reset_hint()
+  instruction.reset_hint()
+  movement.global_position = player.global_position + Vector3(0, 2.4, 0)
+  _has_moved = data['has_moved']
+  _has_picked_lantern = data['has_picked_lantern']
+  _has_picked_musket = data['has_picked_musket']
+  _has_dropped_lantern = data['has_dropped_lantern']
+  _has_inserted_ball = data['has_inserted_ball']
+  _has_loaded = data['has_loaded']
+  _has_lit = data['has_lit']
+  _has_aimed = data['has_aimed']
+  _has_fired = data['has_fired']
+  _charge_count = int(data['charge_count'])
+  _refresh()

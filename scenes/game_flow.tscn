@@ -6,7 +6,9 @@
 [ext_resource type="Script" uid="uid://c0un7cuu7sb55" path="res://scripts/game_flow.gd" id="script"]
 [ext_resource type="AudioStream" uid="uid://i18062bm6aak" path="res://audio/ui/transition.tres" id="transition"]
 
-[node name="game_flow" type="Node" unique_id=300425972 node_paths=PackedStringArray("screen_host", "fade", "transition_audio", "pause_menu")]
+[ext_resource type="Script" path="res://scripts/game_progress.gd" id="progress"]
+
+[node name="game_flow" type="Node" unique_id=300425972 node_paths=PackedStringArray("screen_host", "fade", "transition_audio", "pause_menu", "progress", "save_notice")]
 process_mode = 3
 script = ExtResource("script")
 menu_scene = ExtResource("menu")
@@ -15,6 +17,8 @@ screen_host = NodePath("screens")
 fade = NodePath("transition/fade")
 transition_audio = NodePath("transition_audio")
 pause_menu = NodePath("pause/menu")
+progress = NodePath("progress")
+save_notice = NodePath("transition/save_notice")
 
 [node name="screens" type="Node" parent="." unique_id=1930463375]
 process_mode = 1
@@ -39,6 +43,19 @@ color = Color(0, 0, 0, 1)
 layer = 105
 
 [node name="menu" parent="pause" unique_id=1345961836 instance=ExtResource("pause_menu")]
+
+
+[node name="progress" type="Node" parent="."]
+script = ExtResource("progress")
+
+[node name="save_notice" type="Label" parent="transition"]
+visible = false
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 900.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(1, 0.8, 0.4, 1)
+text = "Progress could not be saved. Retry still works until you close the game."
 
 [connection signal="continue_requested" from="pause/menu" to="." method="_on_continue_requested"]
 [connection signal="menu_requested" from="pause/menu" to="." method="_on_menu_requested"]
