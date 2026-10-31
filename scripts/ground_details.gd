@@ -58,8 +58,8 @@ func _scatter(textures: Array[Texture2D], count: int, widths: Vector2, polygon: 
     mesh.size = size
     var is_stone: bool = not normal_textures.is_empty()
     if is_stone:
-      # bury a little of the rounded bottom to keep contact with the ground.
-      mesh.center_offset.y = size.y * 0.35
+      # anchor the billboard at its bottom so the whole pebble clears the ground.
+      mesh.center_offset.y = size.y * 0.5
     var material := (stone_material if is_stone else patch_material).duplicate() as ShaderMaterial
     material.set_shader_parameter('detail_texture', texture)
     if is_stone:

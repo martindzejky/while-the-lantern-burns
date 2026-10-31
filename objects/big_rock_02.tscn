@@ -28,8 +28,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 shape = SubResource("shape")
 
 [node name="sprite" type="Sprite3D" parent="." unique_id=2090428502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.442)
+material_override = SubResource("material")
+cast_shadow = 0
+offset = Vector2(0, 177.5)
+pixel_size = 0.004
+billboard = 1
+alpha_cut = 1
+texture = ExtResource("albedo")
+
+[node name="shadow" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.44727564, 0)
 material_override = SubResource("material")
+cast_shadow = 3
 offset = Vector2(0, 177.5)
 pixel_size = 0.004
 billboard = 1
