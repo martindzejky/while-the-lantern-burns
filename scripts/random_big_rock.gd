@@ -43,4 +43,10 @@ func get_footprint_radius() -> float:
       if collision != null and collision.shape is CylinderShape3D:
         var cylinder := collision.shape as CylinderShape3D
         return cylinder.radius * rock.scale.x
+      if collision != null and collision.shape is ConvexPolygonShape3D:
+        var convex := collision.shape as ConvexPolygonShape3D
+        var radius: float = 0.0
+        for point: Vector3 in convex.points:
+          radius = maxf(radius, Vector2(point.x, point.z).length())
+        return radius * rock.scale.x
   return 0.5
