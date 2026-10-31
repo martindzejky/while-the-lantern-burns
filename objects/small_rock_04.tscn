@@ -25,6 +25,7 @@ billboard_keep_scale = true
 [node name="shape" type="CollisionShape3D" parent="." unique_id=1341059796]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 shape = SubResource("shape")
+disabled = true
 
 [node name="sprite" type="Sprite3D" parent="." unique_id=2125183179]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05437500)
