@@ -50,12 +50,10 @@ step = 0.01
 value = 1.0
 
 [node name="music_label" type="Label" parent="." unique_id=984249776]
-visible = false
 layout_mode = 2
 text = "Music"
 
 [node name="music" type="HSlider" parent="." unique_id=2107669313]
-visible = false
 custom_minimum_size = Vector2(300, 24)
 layout_mode = 2
 mouse_default_cursor_shape = 2

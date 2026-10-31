@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dqxhuvvqtunai" path="res://ui/pause_menu.tscn" id="pause_menu"]
 [ext_resource type="AudioStream" uid="uid://i18062bm6aak" path="res://audio/ui/transition.tres" id="screen_transition"]
 [ext_resource type="Script" uid="uid://c0un7cuu7sb55" path="res://scripts/application_controller.gd" id="script"]
+[ext_resource type="AudioStream" path="res://audio/music/menu_theme.ogg" id="menu_music"]
 
-[node name="application_controller" type="Node" unique_id=300425972 node_paths=PackedStringArray("active_screen_container", "fade", "transition_audio", "pause_menu", "checkpoint_storage", "save_notice")]
+[node name="application_controller" type="Node" unique_id=300425972 node_paths=PackedStringArray("active_screen_container", "fade", "transition_audio", "menu_music", "pause_menu", "checkpoint_storage", "save_notice")]
 process_mode = 3
 script = ExtResource("script")
 menu_scene = ExtResource("menu")
@@ -15,6 +16,7 @@ cave_gameplay_scene = ExtResource("game")
 active_screen_container = NodePath("active_screen")
 fade = NodePath("screen_transition/fade")
 transition_audio = NodePath("transition_audio")
+menu_music = NodePath("menu_music")
 pause_menu = NodePath("pause_overlay/pause_menu")
 checkpoint_storage = NodePath("checkpoint_storage")
 save_notice = NodePath("screen_transition/save_notice")
@@ -26,6 +28,11 @@ process_mode = 1
 stream = ExtResource("screen_transition")
 volume_db = 12.0412
 bus = &"UI SFX"
+
+[node name="menu_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("menu_music")
+volume_db = -4.0
+bus = &"Music"
 
 [node name="screen_transition" type="CanvasLayer" parent="." unique_id=113661862]
 layer = 110
