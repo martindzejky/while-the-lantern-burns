@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 signal bite_started(enemy: Enemy)
 signal bite_finished(enemy: Enemy)
+signal bite_windup_finished(enemy: Enemy)
 signal bite_landed(enemy: Enemy)
 
 @export var target: Player
@@ -31,14 +32,14 @@ signal bite_landed(enemy: Enemy)
 @export var eye_variant: int = -1
 @export var preview: bool = false
 @export_range(0.0, 0.25) var size_variation: float = 0.1
-@export var speed: float = 0.95
+@export var speed: float = 1.14
 @export var engagement_distance: float = 16.0
 @export_group('Bite')
 @export var bite_range: float = 2.3
-@export_range(0.1, 3.0, 0.05) var bite_windup: float = 0.8
-@export_range(0.1, 5.0, 0.1) var lunge_distance: float = 2.0
-@export_range(0.1, 20.0, 0.1) var lunge_speed: float = 8.0
-@export_range(0.1, 2.0, 0.05) var bite_hit_radius: float = 1.1
+@export_range(0.1, 3.0, 0.05) var bite_windup: float = 0.8 / 1.2
+@export_range(0.1, 5.0, 0.1) var lunge_distance: float = 2.4
+@export_range(0.1, 20.0, 0.1) var lunge_speed: float = 10.0
+@export_range(0.1, 2.0, 0.05) var bite_hit_radius: float = 1.25
 @export_group('Appearance')
 @export var head_bob_height: float = 0.025
 @export_range(1.0, 10.0, 0.5) var head_bob_period: float = 3.0
@@ -227,6 +228,7 @@ func _begin_lunge() -> void:
     animation.play('bite', -1.0, 1.0)
     return
   _lunging = true
+  bite_windup_finished.emit(self)
   _lunge_remaining = lunge_distance
   animation.pause()
   animation.seek(_lunge_start_time, true, true)

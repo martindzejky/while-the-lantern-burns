@@ -32,12 +32,13 @@ Discovered equipment follows you between caves. Lantern charge, reload progress 
 
 Web saves use the browser's storage for the current site. Native saves use Godot's `user://` directory.
 
-To check checkpoints, level geometry and camera facing:
+To check checkpoints, level geometry, camera facing and monster threats:
 
 ```sh
 godot --headless --script res://tests/checkpoints.gd
 godot --headless --script res://tests/levels.gd
 godot --headless --script res://tests/camera_facing.gd
+godot --headless --script res://tests/monster_threat.gd
 ```
 
 ## Theme

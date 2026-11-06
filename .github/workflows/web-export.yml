@@ -27,6 +27,7 @@ jobs:
           godot --headless --script res://tests/checkpoints.gd
           godot --headless --script res://tests/levels.gd
           godot --headless --script res://tests/camera_facing.gd
+          godot --headless --script res://tests/monster_threat.gd
 
       - uses: actions/upload-artifact@v7
         with:
