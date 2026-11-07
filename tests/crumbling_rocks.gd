@@ -33,7 +33,7 @@ func _run() -> void:
     world.add_child(rock)
     world.add_child(neighbor)
     var shared_material := neighbor.sprite.material_override
-    var original_texture: Texture2D = (shared_material as StandardMaterial3D).albedo_texture
+    var original_texture: Texture2D = rock.sprite.texture
     await physics_frame
     await physics_frame
     musket.is_aiming = true
@@ -42,9 +42,9 @@ func _run() -> void:
     var hit := musket.fire(player.position, rock.position, player.get_rid())
     _expect(hit.get('collider') == rock, 'variant %d is hit by musket ray' % index)
     _expect(rock.collision_layer == 0 and rock.collision_mask == 0, 'hit removes blocking collision immediately')
-    var flash := rock.sprite.material_override as StandardMaterial3D
+    var flash := rock.sprite.material_override as ShaderMaterial
     _expect(flash != shared_material and neighbor.sprite.material_override == shared_material, 'flash does not alter another rock')
-    _expect(flash.emission == Color.WHITE and flash.albedo_texture == original_texture, 'white flash preserves the rock silhouette')
+    _expect(flash.shader == rock.flash_shader and flash.get_shader_parameter('rock_texture') == original_texture, 'white flash shader preserves the rock silhouette')
     rock.take_shot()
     await create_timer(0.25).timeout
     await process_frame

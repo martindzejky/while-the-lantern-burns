@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cyy8dxi1wfqbs" path="res://sprites/big_rock_07.png" id="albedo"]
 [ext_resource type="Texture2D" uid="uid://1s2okjh5e3r1" path="res://sprites/big_rock_07_normal.png" id="normal"]
 
+[ext_resource type="Shader" path="res://shaders/rock_hit_flash.gdshader" id="flash"]
 [ext_resource type="Script" path="res://scripts/crumbling_rock.gd" id="crumbling"]
 [ext_resource type="PackedScene" path="res://effects/rock_crumble.tscn" id="crumble"]
 
@@ -26,6 +27,7 @@ billboard_keep_scale = true
 [node name="big_rock_07" type="StaticBody3D" node_paths=PackedStringArray("sprite") unique_id=1948812339]
 script = ExtResource("crumbling")
 sprite = NodePath("sprite")
+flash_shader = ExtResource("flash")
 crumble_scene = ExtResource("crumble")
 
 [node name="shape" type="CollisionShape3D" parent="." unique_id=1350649793]
