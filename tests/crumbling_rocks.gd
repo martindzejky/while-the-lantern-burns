@@ -68,6 +68,34 @@ func _run() -> void:
     _expect(not rock is CrumblingRock and (rock.get_node('shape') as CollisionShape3D).disabled, 'decorative small rock %d stays unchanged' % index)
     rock.free()
 
+  var cluster := Node3D.new()
+  cluster.position = Vector3(17.0, 0.2, -23.0)
+  cluster.rotation.y = 0.6
+  cluster.scale = Vector3(0.8, 1.2, 1.5)
+  world.add_child(cluster)
+  var rock := preload('res://objects/big_rock_01.tscn').instantiate() as CrumblingRock
+  rock.position = Vector3(2.0, 0.1, -3.0)
+  rock.rotation.y = -0.4
+  rock.scale = Vector3(1.4, 0.6, 0.9)
+  cluster.add_child(rock)
+  var rock_transform := rock.global_transform
+  rock.take_shot()
+  await create_timer(0.25).timeout
+  await process_frame
+  _expect(not is_instance_valid(rock), 'transformed rock disappears after crumbling')
+  var dust: CPUParticles3D
+  for child: Node in cluster.get_children():
+    if child is CPUParticles3D:
+      dust = child as CPUParticles3D
+  _expect(dust != null, 'dust survives removal of its rock')
+  if dust != null:
+    _expect(dust.global_position.is_equal_approx(rock_transform.origin), 'dust spawns at rock world position under transformed parent')
+    _expect(dust.global_basis.is_equal_approx(rock_transform.basis), 'dust preserves rock world rotation and scale')
+    var crumble_audio := dust.get_node('audio') as AudioStreamPlayer3D
+    _expect(crumble_audio.global_position.is_equal_approx(rock_transform.origin), 'crumble sound originates at the rock')
+  cluster.queue_free()
+  await process_frame
+
   var effect := preload('res://effects/rock_crumble.tscn').instantiate() as CPUParticles3D
   world.add_child(effect)
   var audio := effect.get_node('audio') as AudioStreamPlayer3D
