@@ -88,6 +88,7 @@ func _run() -> void:
   print('Checkpoint tests: %d checks, %d failures' % [_checks, _failures])
   for audio: Node in root.find_children('*', 'AudioStreamPlayer', true, false):
     (audio as AudioStreamPlayer).stop()
+    (audio as AudioStreamPlayer).stream = null
   await create_timer(0.1).timeout
   quit(1 if _failures > 0 else 0)
 

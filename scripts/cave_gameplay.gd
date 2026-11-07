@@ -75,8 +75,7 @@ func _prepare() -> void:
   await musket.warm_up_effects()
   musket.global_transform = stored_transform
   musket.restore_checkpoint(player_state['musket'])
-  if initial_checkpoint.has('prompts'):
-    prompts.restore_checkpoint(initial_checkpoint['prompts'])
+  prompts.restore_checkpoint(initial_checkpoint.get('prompts', prompts.get_checkpoint()))
   loading_overlay.queue_free()
   is_prepared = true
   set_active(not start_inactive)
