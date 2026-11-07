@@ -32,7 +32,8 @@ vec3 fxaa(vec2 uv, vec2 pixel_size, vec3 center) {
   );
   float reduction = max((northwest + northeast + southwest + southeast) * 0.03125, 0.0078125);
   direction /= min(abs(direction.x), abs(direction.y)) + reduction;
-  direction = clamp(direction, vec2(-8.0), vec2(8.0)) * pixel_size;
+  // limit outer tap offsets to one pixel per axis to preserve small animated sprite details.
+  direction = clamp(direction, vec2(-2.0), vec2(2.0)) * pixel_size;
 
   vec3 inner = 0.5 * (
     texture(screen_texture, uv - direction / 6.0).rgb +
