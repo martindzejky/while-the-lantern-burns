@@ -172,6 +172,9 @@ func _on_musket_fired(hit: Dictionary) -> void:
   var enemy := hit.get('collider') as Enemy
   if enemy:
     enemy.take_shot()
+  var rock := hit.get('collider') as CrumblingRock
+  if rock:
+    rock.take_shot()
 
 
 func take_bite() -> void:
