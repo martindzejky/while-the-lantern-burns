@@ -25,6 +25,7 @@ var level_id: int = 0
 var is_prepared: bool = false
 var _active: bool = false
 var _level: CaveLevel
+var _winding_up_enemies: Array[Enemy] = []
 
 
 func _ready() -> void:
@@ -37,6 +38,10 @@ func _prepare() -> void:
   _level = level_scenes[level_id].instantiate() as CaveLevel
   for enemy: Enemy in _level.enemies:
     enemy.target = player
+    enemy.bite_started.connect(_on_bite_started)
+    enemy.bite_windup_finished.connect(_on_bite_finished)
+    enemy.bite_finished.connect(_on_bite_finished)
+    enemy.tree_exiting.connect(_on_bite_finished.bind(enemy))
     enemy.bite_started.connect(camera_controller._on_bite_started)
     enemy.bite_finished.connect(camera_controller._on_bite_finished)
     enemy.bite_landed.connect(camera_controller._on_bite_landed)
@@ -84,12 +89,33 @@ func get_checkpoint() -> Dictionary:
 
 func set_active(active: bool) -> void:
   _active = active
+  if not active:
+    _clear_bite_threats()
   player.set_darkness_enabled(active)
   process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
 
 
+func _on_bite_started(enemy: Enemy) -> void:
+  if not _active or player.is_dead or enemy.preview:
+    return
+  if not _winding_up_enemies.has(enemy):
+    _winding_up_enemies.append(enemy)
+  player.set_bite_threatened(true)
+
+
+func _on_bite_finished(enemy: Enemy) -> void:
+  _winding_up_enemies.erase(enemy)
+  player.set_bite_threatened(not _winding_up_enemies.is_empty())
+
+
+func _clear_bite_threats() -> void:
+  _winding_up_enemies.clear()
+  player.set_bite_threatened(false)
+
+
 func _on_player_died() -> void:
   _active = false
+  _clear_bite_threats()
 
 
 func _on_retry_requested() -> void:

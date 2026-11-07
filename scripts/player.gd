@@ -20,7 +20,7 @@ signal ramrod_drag_changed(dragging: bool)
 @export var audio_listener: AudioListener3D
 @export var aim_height: float = 0.7
 @export var pickup_radius: float = 1.5
-@export var speed: float = 4.0
+@export var speed: float = 3.2
 @export_range(0.0, 1.0, 0.05) var aim_speed_multiplier: float = 0.5
 @export var ramrod_drag_distance: float = 150.0
 @export var darkness_grace: float = 2.0
@@ -30,6 +30,7 @@ var darkness_progress: float = 0.0
 var is_lit: bool:
   get:
     return light_sensor.is_lit
+var _bite_threatened: bool = false
 var _was_moving: bool = false
 var _lantern_in_reach: bool = false
 var _musket_in_reach: bool = false
@@ -358,6 +359,15 @@ func _get_aim_target(mouse: Vector2) -> Vector3:
   return global_position + (target - global_position).limit_length(musket.shot_range)
 
 
+func set_bite_threatened(threatened: bool) -> void:
+  _bite_threatened = threatened
+
+
+func get_movement_speed(aiming: bool) -> float:
+  var movement_speed := speed * aim_speed_multiplier if aiming else speed
+  return movement_speed * 0.7 if _bite_threatened else movement_speed
+
+
 func _physics_process(_delta: float) -> void:
   if not _darkness_timer.is_stopped():
     _set_darkness_progress(clampf(1.0 - _darkness_timer.time_left / darkness_grace, 0.0, 1.0))
@@ -366,7 +376,7 @@ func _physics_process(_delta: float) -> void:
   else:
     var aiming := _aiming_requested()
     var direction := Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
-    var movement_speed := speed * aim_speed_multiplier if aiming else speed
+    var movement_speed := get_movement_speed(aiming)
     velocity = Vector3(direction.x, 0.0, direction.y) * movement_speed
     var previous_position := global_position
     move_and_slide()
