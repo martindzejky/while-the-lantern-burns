@@ -3,6 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://ctdf0x3e7x2cs" path="res://sprites/big_rock_02.png" id="albedo"]
 [ext_resource type="Texture2D" uid="uid://ddj6e81xs0r3i" path="res://sprites/big_rock_02_normal.png" id="normal"]
 
+[ext_resource type="Shader" path="res://shaders/rock_hit_flash.gdshader" id="flash"]
+[ext_resource type="Script" path="res://scripts/crumbling_rock.gd" id="crumbling"]
+[ext_resource type="PackedScene" path="res://effects/rock_crumble.tscn" id="crumble"]
+
 [sub_resource type="ConvexPolygonShape3D" id="shape"]
 points = PackedVector3Array(0.884, -10, 0, 0.85387843, -10, 0.11439802, 0.76556646, -10, 0.221, 0.62508239, -10, 0.3125412, 0.442, -10, 0.38278323, 0.22879604, -10, 0.42693922, 0, -10, 0.442, -0.22879604, -10, 0.42693922, -0.442, -10, 0.38278323, -0.62508239, -10, 0.3125412, -0.76556646, -10, 0.221, -0.85387843, -10, 0.11439802, -0.884, -10, 0, -0.85387843, -10, -0.11439802, -0.76556646, -10, -0.221, -0.62508239, -10, -0.3125412, -0.442, -10, -0.38278323, -0.22879604, -10, -0.42693922, 0, -10, -0.442, 0.22879604, -10, -0.42693922, 0.442, -10, -0.38278323, 0.62508239, -10, -0.3125412, 0.76556646, -10, -0.221, 0.85387843, -10, -0.11439802, 0.884, 10, 0, 0.85387843, 10, 0.11439802, 0.76556646, 10, 0.221, 0.62508239, 10, 0.3125412, 0.442, 10, 0.38278323, 0.22879604, 10, 0.42693922, 0, 10, 0.442, -0.22879604, 10, 0.42693922, -0.442, 10, 0.38278323, -0.62508239, 10, 0.3125412, -0.76556646, 10, 0.221, -0.85387843, 10, 0.11439802, -0.884, 10, 0, -0.85387843, 10, -0.11439802, -0.76556646, 10, -0.221, -0.62508239, 10, -0.3125412, -0.442, 10, -0.38278323, -0.22879604, 10, -0.42693922, 0, 10, -0.442, 0.22879604, 10, -0.42693922, 0.442, 10, -0.38278323, 0.62508239, 10, -0.3125412, 0.76556646, 10, -0.221, 0.85387843, 10, -0.11439802)
 
@@ -20,7 +24,11 @@ normal_texture = ExtResource("normal")
 billboard_mode = 1
 billboard_keep_scale = true
 
-[node name="big_rock_02" type="StaticBody3D" unique_id=1665101125]
+[node name="big_rock_02" type="StaticBody3D" node_paths=PackedStringArray("sprite") unique_id=1665101125]
+script = ExtResource("crumbling")
+sprite = NodePath("sprite")
+flash_shader = ExtResource("flash")
+crumble_scene = ExtResource("crumble")
 
 [node name="shape" type="CollisionShape3D" parent="." unique_id=1476761696]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
