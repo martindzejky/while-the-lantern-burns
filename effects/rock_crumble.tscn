@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://clrfuu8bhioq1" path="res://sprites/smoke.svg" id="1"]
 
-[ext_resource type="AudioStream" path="res://audio/rock_crumble_01.wav" id="crumble_1"]
-[ext_resource type="AudioStream" path="res://audio/rock_crumble_02.wav" id="crumble_2"]
-[ext_resource type="AudioStream" path="res://audio/rock_crumble_03.wav" id="crumble_3"]
+[ext_resource type="AudioStream" path="res://audio/rock_crumble/rock_crumble_01.wav" id="crumble_1"]
+[ext_resource type="AudioStream" path="res://audio/rock_crumble/rock_crumble_02.wav" id="crumble_2"]
+[ext_resource type="AudioStream" path="res://audio/rock_crumble/rock_crumble_03.wav" id="crumble_3"]
 
 [sub_resource type="StandardMaterial3D" id="material"]
 transparency = 1

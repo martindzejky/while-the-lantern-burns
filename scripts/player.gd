@@ -169,12 +169,11 @@ func _on_musket_fired(hit: Dictionary) -> void:
     velocity = Vector3.ZERO
     _set_dragging_ramrod(false)
     rig.play_recoil(musket.is_aiming)
-  var enemy := hit.get('collider') as Enemy
-  if enemy:
-    enemy.take_shot()
-  var rock := hit.get('collider') as CrumblingRock
-  if rock:
-    rock.take_shot()
+  var collider: Object = hit.get('collider')
+  if collider is Enemy:
+    (collider as Enemy).take_shot()
+  elif collider is CrumblingRock:
+    (collider as CrumblingRock).take_shot()
 
 
 func take_bite() -> void:

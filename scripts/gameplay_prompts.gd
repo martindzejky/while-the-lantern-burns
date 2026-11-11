@@ -183,10 +183,6 @@ func get_checkpoint() -> Dictionary:
 
 
 func restore_checkpoint(data: Dictionary) -> void:
-  movement_text.reset_hint()
-  context_text.reset_hint()
-  instruction.reset_hint()
-  movement.global_position = player.global_position + Vector3(0, 2.4, 0)
   _has_moved = data['has_moved']
   _has_picked_lantern = data['has_picked_lantern']
   _has_picked_musket = data['has_picked_musket']
@@ -197,4 +193,12 @@ func restore_checkpoint(data: Dictionary) -> void:
   _has_aimed = data['has_aimed']
   _has_fired = data['has_fired']
   _charge_count = int(data['charge_count'])
+  refresh_at_spawn()
+
+
+func refresh_at_spawn() -> void:
+  movement_text.reset_hint()
+  context_text.reset_hint()
+  instruction.reset_hint()
+  movement.global_position = player.global_position + Vector3(0, 2.4, 0)
   _refresh()

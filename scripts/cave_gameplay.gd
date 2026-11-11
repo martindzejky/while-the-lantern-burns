@@ -38,10 +38,10 @@ func _prepare() -> void:
   _level = level_scenes[level_id].instantiate() as CaveLevel
   for enemy: Enemy in _level.enemies:
     enemy.target = player
-    enemy.bite_started.connect(_on_bite_started)
-    enemy.bite_windup_finished.connect(_on_bite_finished)
-    enemy.bite_finished.connect(_on_bite_finished)
-    enemy.tree_exiting.connect(_on_bite_finished.bind(enemy))
+    enemy.bite_started.connect(_add_bite_threat)
+    enemy.bite_windup_finished.connect(_remove_bite_threat)
+    enemy.bite_finished.connect(_remove_bite_threat)
+    enemy.tree_exiting.connect(_remove_bite_threat.bind(enemy))
     enemy.bite_started.connect(camera_controller._on_bite_started)
     enemy.bite_finished.connect(camera_controller._on_bite_finished)
     enemy.bite_landed.connect(camera_controller._on_bite_landed)
@@ -75,7 +75,10 @@ func _prepare() -> void:
   await musket.warm_up_effects()
   musket.global_transform = stored_transform
   musket.restore_checkpoint(player_state['musket'])
-  prompts.restore_checkpoint(initial_checkpoint.get('prompts', prompts.get_checkpoint()))
+  if initial_checkpoint.has('prompts'):
+    prompts.restore_checkpoint(initial_checkpoint['prompts'])
+  else:
+    prompts.refresh_at_spawn()
   loading_overlay.queue_free()
   is_prepared = true
   set_active(not start_inactive)
@@ -94,7 +97,7 @@ func set_active(active: bool) -> void:
   process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
 
 
-func _on_bite_started(enemy: Enemy) -> void:
+func _add_bite_threat(enemy: Enemy) -> void:
   if not _active or player.is_dead or enemy.preview:
     return
   if not _winding_up_enemies.has(enemy):
@@ -102,7 +105,7 @@ func _on_bite_started(enemy: Enemy) -> void:
   player.set_bite_threatened(true)
 
 
-func _on_bite_finished(enemy: Enemy) -> void:
+func _remove_bite_threat(enemy: Enemy) -> void:
   _winding_up_enemies.erase(enemy)
   player.set_bite_threatened(not _winding_up_enemies.is_empty())
 

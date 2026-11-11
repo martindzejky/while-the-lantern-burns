@@ -6,15 +6,16 @@ extends StaticBody3D
 @export var crumble_scene: PackedScene
 @export var hit_flash_duration: float = 0.08
 
-var _crumbled: bool = false
+var _hit: bool = false
 
 
 func take_shot() -> void:
-  if _crumbled:
+  if _hit:
     return
-  _crumbled = true
+  _hit = true
   collision_layer = 0
   collision_mask = 0
+
   var flash := ShaderMaterial.new()
   flash.shader = flash_shader
   flash.set_shader_parameter('rock_texture', sprite.texture)
@@ -25,8 +26,8 @@ func take_shot() -> void:
 
 
 func _crumble() -> void:
-  var dust := crumble_scene.instantiate() as CPUParticles3D
-  dust.transform = transform
-  get_parent().add_child(dust)
+  var effect := crumble_scene.instantiate() as Node3D
+  effect.transform = transform
+  get_parent().add_child(effect)
   sprite.hide()
   queue_free()

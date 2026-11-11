@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://the7w3gj21fw"
-path="res://.godot/imported/rock_fall_01.wav-6c93e721f68a7c5a4d36d7307308802c.sample"
+path="res://.godot/imported/rock_fall_01.wav-668b123a8f65b084759efc33f847e428.sample"
 
 [deps]
 
-source_file="res://ambience/rock_fall_01.wav"
-dest_files=["res://.godot/imported/rock_fall_01.wav-6c93e721f68a7c5a4d36d7307308802c.sample"]
+source_file="res://audio/ambience/rock_fall_01.wav"
+dest_files=["res://.godot/imported/rock_fall_01.wav-668b123a8f65b084759efc33f847e428.sample"]
 
 [params]
 

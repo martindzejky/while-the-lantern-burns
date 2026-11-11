@@ -17,15 +17,16 @@ extends Node
 var _screen: Node
 var _busy: bool = true
 var _checkpoint: Dictionary = {}
-var _music_volume: float
+var _menu_music_volume: float
 var _music_fade: Tween
-var _music_active: bool = false
+var _wants_menu_music: bool = false
 var _music_reverb: AudioEffectReverb
 
 
 func _ready() -> void:
-  _music_reverb = AudioServer.get_bus_effect(AudioServer.get_bus_index(menu_music.bus), 0) as AudioEffectReverb
-  _music_volume = menu_music.volume_linear
+  var music_bus := AudioServer.get_bus_index(menu_music.bus)
+  _music_reverb = AudioServer.get_bus_effect(music_bus, 0) as AudioEffectReverb
+  _menu_music_volume = menu_music.volume_linear
   _checkpoint = checkpoint_storage.load_checkpoint()
   _open_menu()
   await _fade_to(0.0, fade_in_duration)
@@ -105,28 +106,6 @@ func _on_escaped() -> void:
   _show_save_result(checkpoint_storage.clear_checkpoint())
 
 
-func _set_menu_music(active: bool, delay: float = 0.0) -> void:
-  if _music_active == active:
-    return
-  _music_active = active
-  if _music_fade:
-    _music_fade.kill()
-  if not active and not menu_music.playing:
-    return
-  _music_fade = create_tween()
-  if active and not menu_music.playing:
-    menu_music.volume_linear = 0.0
-    _music_fade.tween_interval(delay)
-    _music_fade.tween_callback(menu_music.play)
-  var target: float = _music_volume if active else 0.0
-  var duration: float = fade_in_duration if active else music_fade_out_duration
-  _music_fade.tween_property(menu_music, 'volume_linear', target, duration)
-  _music_fade.parallel().tween_property(_music_reverb, 'wet', 0.0 if active else 0.85, duration)
-  _music_fade.parallel().tween_property(_music_reverb, 'dry', 1.0 if active else 0.15, duration)
-  if not active:
-    _music_fade.tween_callback(menu_music.stop)
-
-
 func _show_save_result(saved: bool) -> void:
   save_notice.visible = not saved
 
@@ -157,6 +136,31 @@ func _on_pause_requested() -> void:
 func _on_continue_requested() -> void:
   pause_menu.hide()
   get_tree().paused = false
+
+
+func _set_menu_music(should_play: bool, start_delay: float = 0.0) -> void:
+  if _wants_menu_music == should_play:
+    return
+  _wants_menu_music = should_play
+  if _music_fade:
+    _music_fade.kill()
+  if not should_play and not menu_music.playing:
+    return
+
+  _music_fade = create_tween()
+  if should_play and not menu_music.playing:
+    menu_music.volume_linear = 0.0
+    _music_fade.tween_interval(start_delay)
+    _music_fade.tween_callback(menu_music.play)
+
+  var volume := _menu_music_volume if should_play else 0.0
+  var duration := fade_in_duration if should_play else music_fade_out_duration
+  _music_fade.tween_property(menu_music, 'volume_linear', volume, duration)
+  # Let the reverb swell as the music recedes into the cave.
+  _music_fade.parallel().tween_property(_music_reverb, 'wet', 0.0 if should_play else 0.85, duration)
+  _music_fade.parallel().tween_property(_music_reverb, 'dry', 1.0 if should_play else 0.15, duration)
+  if not should_play:
+    _music_fade.tween_callback(menu_music.stop)
 
 
 func _fade_to(alpha: float, duration: float) -> void:

@@ -27,10 +27,10 @@ func _run() -> void:
     var enemy := preload('res://objects/enemy.tscn').instantiate() as Enemy
     enemy.target = player
     enemy.position = Vector3(index * 10.0, 0.0, 0.0)
-    enemy.bite_started.connect(gameplay._on_bite_started)
-    enemy.bite_windup_finished.connect(gameplay._on_bite_finished)
-    enemy.bite_finished.connect(gameplay._on_bite_finished)
-    enemy.tree_exiting.connect(gameplay._on_bite_finished.bind(enemy))
+    enemy.bite_started.connect(gameplay._add_bite_threat)
+    enemy.bite_windup_finished.connect(gameplay._remove_bite_threat)
+    enemy.bite_finished.connect(gameplay._remove_bite_threat)
+    enemy.tree_exiting.connect(gameplay._remove_bite_threat.bind(enemy))
     world.add_child(enemy)
     enemies.append(enemy)
   var enemy := enemies[0]

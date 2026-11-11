@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://g05me0ub5tbm"
-path="res://.godot/imported/bat_flutter_03.wav-a9bf1758ca25840a3748a9750b389e21.sample"
+path="res://.godot/imported/bat_flutter_03.wav-5fa4c2b39dda3c8b6fc47085630fa352.sample"
 
 [deps]
 
-source_file="res://ambience/bat_flutter_03.wav"
-dest_files=["res://.godot/imported/bat_flutter_03.wav-a9bf1758ca25840a3748a9750b389e21.sample"]
+source_file="res://audio/ambience/bat_flutter_03.wav"
+dest_files=["res://.godot/imported/bat_flutter_03.wav-5fa4c2b39dda3c8b6fc47085630fa352.sample"]
 
 [params]
 
