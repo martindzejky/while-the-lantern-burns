@@ -1382,4 +1382,12 @@ script = ExtResource("15_grkr3")
 rock_scenes = Array[PackedScene]([ExtResource("16_v7idv"), ExtResource("17_uvmh6"), ExtResource("18_fcxiy"), ExtResource("19_wcwv1"), ExtResource("20_rlfjy"), ExtResource("21_g7usf"), ExtResource("22_lq664"), ExtResource("23_n20jr")])
 seed_value = 3255583044
 
+[node name="detection" parent="enemy_2" index="0"]
+radius = 6.72
+
+[node name="detection" parent="enemy_3" index="0"]
+radius = 6.72
+
 [editable path="ground"]
+[editable path="enemy_2"]
+[editable path="enemy_3"]

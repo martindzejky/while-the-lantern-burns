@@ -83,28 +83,24 @@ position = Vector3(31.4, 0, -5.4)
 head_variant = 0
 body_variant = 1
 eye_variant = 2
-engagement_distance = 10.5
 
 [node name="enemy_8" parent="." groups=["enemy_alert_escape_final_room"] instance=ExtResource("enemy")]
 position = Vector3(32.8, 0, -3.5)
 head_variant = 1
 body_variant = 2
 eye_variant = 3
-engagement_distance = 10.5
 
 [node name="enemy_9" parent="." groups=["enemy_alert_escape_final_room"] instance=ExtResource("enemy")]
 position = Vector3(35.1, 0, -3)
 head_variant = 2
 body_variant = 0
 eye_variant = 0
-engagement_distance = 10.5
 
 [node name="enemy_10" parent="." groups=["enemy_alert_escape_final_room"] instance=ExtResource("enemy")]
 position = Vector3(36, 0, -5.8)
 head_variant = 0
 body_variant = 1
 eye_variant = 1
-engagement_distance = 10.5
 
 [node name="exit" type="Area3D" parent="."]
 position = Vector3(38.9, 1, -38.8)
@@ -118,4 +114,20 @@ shape = SubResource("exit_shape")
 [node name="details" parent="ground" index="0"]
 stone_density = 0.0
 
+[node name="detection" parent="enemy_7" index="0"]
+radius = 7.35
+
+[node name="detection" parent="enemy_8" index="0"]
+radius = 7.35
+
+[node name="detection" parent="enemy_9" index="0"]
+radius = 7.35
+
+[node name="detection" parent="enemy_10" index="0"]
+radius = 7.35
+
 [editable path="ground"]
+[editable path="enemy_7"]
+[editable path="enemy_8"]
+[editable path="enemy_9"]
+[editable path="enemy_10"]

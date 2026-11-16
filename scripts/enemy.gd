@@ -9,6 +9,7 @@ signal bite_landed(enemy: Enemy)
 const ROCK_CRUMBLE: PackedScene = preload('res://effects/rock_crumble.tscn')
 
 @export var target: Player
+@export var detection: EnemyDetection
 @export var appearance: Node3D
 @export var head: Node3D
 @export var head_lift: Node3D
@@ -35,7 +36,6 @@ const ROCK_CRUMBLE: PackedScene = preload('res://effects/rock_crumble.tscn')
 @export var preview: bool = false
 @export_range(0.0, 0.25) var size_variation: float = 0.1
 @export var speed: float = 1.14
-@export var engagement_distance: float = 16.0
 @export_group('Bite')
 @export var bite_range: float = 2.3
 @export_range(0.1, 3.0, 0.05) var bite_windup: float = 0.8 / 1.2
@@ -138,7 +138,7 @@ func _physics_process(delta: float) -> void:
     _previous_target_position = target.global_position
     return
   if not _engaged:
-    if global_position.distance_squared_to(target.global_position) > engagement_distance * engagement_distance:
+    if not detection.detects(target.global_position):
       return
     alert()
     for group: StringName in get_groups():
