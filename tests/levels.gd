@@ -36,15 +36,16 @@ func _run() -> void:
       _expect(level.musket_focus.position.is_equal_approx(level.musket_spawn.position), 'musket reveal follows spawn')
       _expect(level.lantern_focus.position.distance_to(level.entry.position) > level.lantern_focus.outer_radius, 'entrance does not trigger lantern reveal')
       _expect(level.camera_bounds.grow(0.01).has_point(Vector2(level.entry.position.x, level.entry.position.z)), 'camera can center on entrance')
-      for point: Vector3 in [Vector3(-27, 0, -10), Vector3(7, 0, -10), Vector3(7, 0, 0)]:
+      for point: Vector3 in [Vector3(-27, 0, -10), Vector3(7, 0, -10), Vector3(8, 0, 1), Vector3(4, 0, 7), Vector3(31, 0, 9)]:
         _expect(_on_floor(floor, point), 'discovery bends are walkable: %s' % point)
       _expect(not _on_floor(floor, Vector3(-18, 0, 6)), 'entrance requires walking up before right')
       _expect(not _on_floor(floor, Vector3(14, 0, -8)), 'musket route requires the narrow descent')
+      _expect(not _on_floor(floor, Vector3(31, 0, 0)), 'exit route bends around a gap')
     if level.name == 'deep_cave':
       _expect(level.focuses.size() == 1, 'deep cave has its first encounter reveal')
       _expect(level.focuses[0].position.is_equal_approx(level.enemies[0].position), 'first encounter reveal follows enemy spawn')
     if level.name == 'escape':
-      _expect(not _on_floor(floor, Vector3(-3, 0, -15)), 'escape U bend has an open central gap')
+      _expect(not _on_floor(floor, Vector3(23, 0, -10)), 'escape upper passage bends around a gap')
     level.free()
   for audio: Node in root.find_children('*', 'AudioStreamPlayer', true, false):
     (audio as AudioStreamPlayer).stop()
