@@ -1,88 +1,564 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://c6e02jb6rrs3t"]
 
-[ext_resource type="Script" path="res://scripts/cave_level.gd" id="script"]
-[ext_resource type="PackedScene" path="res://objects/ground.tscn" id="ground"]
-[ext_resource type="PackedScene" path="res://objects/world_light.tscn" id="light"]
-[ext_resource type="PackedScene" path="res://objects/enemy.tscn" id="enemy"]
-[ext_resource type="PackedScene" path="res://objects/camera_focus.tscn" id="focus"]
+[ext_resource type="PackedScene" uid="uid://j8olerx61rht" path="res://objects/random_big_rock.tscn" id="5_vxwfh"]
+[ext_resource type="Script" uid="uid://c6gh6v1sawggb" path="res://scripts/random_big_rock.gd" id="6_a20jf"]
+[ext_resource type="PackedScene" uid="uid://odumffg7yfr1" path="res://objects/big_rock_01.tscn" id="7_1op6o"]
+[ext_resource type="PackedScene" uid="uid://djk0sh2numjnd" path="res://objects/big_rock_02.tscn" id="8_nuv26"]
+[ext_resource type="PackedScene" uid="uid://bd1pkpe5kcxf6" path="res://objects/big_rock_03.tscn" id="9_mt41a"]
+[ext_resource type="PackedScene" uid="uid://bi4cxx4ajbs57" path="res://objects/big_rock_04.tscn" id="10_qn1l5"]
+[ext_resource type="PackedScene" uid="uid://dyer8vsgv3sab" path="res://objects/big_rock_05.tscn" id="11_ut1qm"]
+[ext_resource type="PackedScene" uid="uid://eusyopafqhvr" path="res://objects/big_rock_06.tscn" id="12_8ou70"]
+[ext_resource type="PackedScene" uid="uid://dswxislnonhiw" path="res://objects/big_rock_07.tscn" id="13_j4cq2"]
+[ext_resource type="PackedScene" uid="uid://yrm4kbry3gfe" path="res://objects/big_rock_08.tscn" id="14_2orfv"]
+[ext_resource type="PackedScene" uid="uid://bgvehpswq5e13" path="res://objects/camera_focus.tscn" id="focus"]
+[ext_resource type="PackedScene" uid="uid://ct5elay5mk4lb" path="res://objects/ground.tscn" id="ground"]
+[ext_resource type="PackedScene" uid="uid://c2k5x6ubue31m" path="res://objects/world_light.tscn" id="light"]
+[ext_resource type="Script" uid="uid://bp2dwudh415ft" path="res://scripts/cave_level.gd" id="script"]
 
 [sub_resource type="BoxShape3D" id="exit_shape"]
 size = Vector3(3, 4, 5)
 
-[node name="discovery" type="Node3D" node_paths=PackedStringArray("entry", "lantern_spawn", "musket_spawn", "enemies", "exit", "focuses", "lantern_focus", "musket_focus")]
+[node name="discovery" type="Node3D" unique_id=472307809 node_paths=PackedStringArray("entry", "lantern_spawn", "musket_spawn", "focuses", "lantern_focus", "musket_focus", "exit")]
 script = ExtResource("script")
 entry = NodePath("entry")
 lantern_spawn = NodePath("lantern_spawn")
 musket_spawn = NodePath("musket_spawn")
 camera_bounds = Rect2(-27, -10, 66, 19)
-enemies = []
-exit = NodePath("exit")
 focuses = [NodePath("lantern_discovery"), NodePath("musket_refuge")]
 lantern_focus = NodePath("lantern_discovery")
 musket_focus = NodePath("musket_refuge")
+exit = NodePath("exit")
 
-[node name="ground" parent="." instance=ExtResource("ground")]
+[node name="ground" parent="." unique_id=2002962253 instance=ExtResource("ground")]
 polygon = PackedVector2Array(-32, -8, -29, -11, -24, -10, -22, -6, -24, -2, -24, 6, -20, 7, -16, 5, -9, 6, -4, 7, 4, 7, 2.5, 3, 2.5, 1, 6.5, 0, 6.5, -1.8, 2, -4.2, 1.8, -7, 4, -9.5, 10, -10, 14, -5, 20, -6, 24, -4, 26, -4.5, 26.5, -9, 29, -11, 34, -10.5, 36, -8, 36, -3, 41, -3, 41, 3, 36, 3, 33, 0, 32.5, -6.5, 29.5, -7, 29, -3, 27, 0, 24, 1, 21, 4, 16, 4.5, 12, 1, 10, -4, 8, -6, 5, -6, 9.5, -3, 9.5, 2.5, 6, 4, 7, 7, 9, 8, 9, 12, 8, 13, 2, 15, -5, 14, -12, 15, -20, 14, -27, 15, -31, 12, -32, 6)
 edge_seed = 100
 
-[node name="entry" type="Marker3D" parent="."]
-position = Vector3(-27, 0, 6)
+[node name="details" parent="ground" index="0" unique_id=503566835]
+stone_density = 0.0
 
-[node name="lantern_spawn" type="Marker3D" parent="."]
-position = Vector3(-11, 0, -10)
+[node name="entry" type="Marker3D" parent="." unique_id=590350768]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, 6)
 
-[node name="musket_spawn" type="Marker3D" parent="."]
-position = Vector3(17, 0, 0)
+[node name="lantern_spawn" type="Marker3D" parent="." unique_id=277355175]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -10)
 
-[node name="light_1" parent="." instance=ExtResource("light")]
-position = Vector3(-27, 4, 6)
+[node name="musket_spawn" type="Marker3D" parent="." unique_id=1035721713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 0)
+
+[node name="light_1" parent="." unique_id=1016874304 instance=ExtResource("light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 4, 6)
 light_color = Color(0.6, 0.76, 1, 1)
-light_energy = 0.3
 omni_range = 9.0
 
-[node name="light_2" parent="." instance=ExtResource("light")]
-position = Vector3(-18, 4, -10)
+[node name="light_2" parent="." unique_id=1790282381 instance=ExtResource("light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 4, -10)
 light_color = Color(0.6, 0.76, 1, 1)
-light_energy = 0.3
-omni_range = 10.0
 
-[node name="light_3" parent="." instance=ExtResource("light")]
-position = Vector3(18, 4, 0)
+[node name="light_3" parent="." unique_id=2128657621 instance=ExtResource("light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, 0)
 light_color = Color(1, 0.71, 0.4, 1)
-light_energy = 0.3
 omni_range = 9.0
 
-[node name="light_4" parent="." instance=ExtResource("light")]
-position = Vector3(39, 4, 0)
+[node name="light_4" parent="." unique_id=1655215368 instance=ExtResource("light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 4, 0)
 light_color = Color(1, 0.71, 0.4, 1)
-light_energy = 0.3
 omni_range = 6.0
 
-[node name="light_5" parent="." instance=ExtResource("light")]
-position = Vector3(-27, 4, -5)
+[node name="light_5" parent="." unique_id=1187996697 instance=ExtResource("light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 4, -5)
 light_color = Color(0.6, 0.76, 1, 1)
-light_energy = 0.3
 omni_range = 8.0
 
-[node name="exit" type="Area3D" parent="."]
-position = Vector3(39, 1, 0)
+[node name="exit" type="Area3D" parent="." unique_id=749149040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 1, 0)
 collision_layer = 0
-collision_mask = 1
 
-[node name="shape" type="CollisionShape3D" parent="exit"]
+[node name="shape" type="CollisionShape3D" parent="exit" unique_id=988302323]
 shape = SubResource("exit_shape")
 
-[node name="lantern_discovery" parent="." instance=ExtResource("focus")]
-position = Vector3(-11, 0, -10)
+[node name="lantern_discovery" parent="." unique_id=1975354876 instance=ExtResource("focus")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -10)
 outer_radius = 9.0
 inner_radius = 2.0
 
-[node name="musket_refuge" parent="." instance=ExtResource("focus")]
-position = Vector3(17, 0, 0)
+[node name="musket_refuge" parent="." unique_id=437207996 instance=ExtResource("focus")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 0)
 outer_radius = 8.5
-inner_radius = 3.0
 
-[node name="details" parent="ground" index="0"]
-stone_density = 0.0
+[node name="rocks" type="Node3D" parent="." unique_id=929476774]
+
+[node name="random_big_rock" type="Node3D" parent="rocks" unique_id=294755677 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.038292, 0, 6.681039)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1902817151
+
+[node name="random_big_rock2" type="Node3D" parent="rocks" unique_id=891504067 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.213577, 0, 5.689975)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 541992870
+
+[node name="random_big_rock3" type="Node3D" parent="rocks" unique_id=589760246 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.485231, 0, 5.3015065)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1693329184
+
+[node name="random_big_rock4" type="Node3D" parent="rocks" unique_id=897235292 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(2.345, 0, 0, 0, 2.345, 0, 0, 0, 2.345, -30.615349, 0, 9.240482)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3417282635
+
+[node name="random_big_rock5" type="Node3D" parent="rocks" unique_id=2074626356 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.840023, 0, 11.249403)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3273567160
+
+[node name="random_big_rock6" type="Node3D" parent="rocks" unique_id=179338378 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.882278, 0, 10.92237)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2534293273
+
+[node name="random_big_rock7" type="Node3D" parent="rocks" unique_id=236695995 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.009052, 0, 8.749931)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 900397603
+
+[node name="random_big_rock8" type="Node3D" parent="rocks" unique_id=642605096 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1.965, 0, 0, 0, 1.965, 0, 0, 0, 1.965, -23.81958, 0, 9.738403)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2263081008
+
+[node name="random_big_rock9" type="Node3D" parent="rocks" unique_id=2044857642 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.223663, 0, 8.728638)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1133948250
+
+[node name="random_big_rock10" type="Node3D" parent="rocks" unique_id=2110098272 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.857239, 0, 7.891968)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1843755129
+
+[node name="random_big_rock11" type="Node3D" parent="rocks" unique_id=1572185486 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1.69, 0, 0, 0, 1.69, 0, 0, 0, 1.69, -33.90216, 0, 3.0459137)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2090092664
+
+[node name="random_big_rock12" type="Node3D" parent="rocks" unique_id=358338361 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.97542, 4.7683716e-07, 2.0207753)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 573179698
+
+[node name="random_big_rock13" type="Node3D" parent="rocks" unique_id=458253298 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.41849, -9.536743e-07, 1.4276726)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3440712265
+
+[node name="random_big_rock14" type="Node3D" parent="rocks" unique_id=498131835 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.468124, 0, 0.7294829)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 651207993
+
+[node name="random_big_rock15" type="Node3D" parent="rocks" unique_id=44385709 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.748375, 4.7683716e-07, -6.168383)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2527275061
+
+[node name="random_big_rock16" type="Node3D" parent="rocks" unique_id=648003729 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.369488, 0, -6.9194407)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 165801236
+
+[node name="random_big_rock17" type="Node3D" parent="rocks" unique_id=1861961262 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.366955, 0, -5.5521955)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2238324297
+
+[node name="random_big_rock18" type="Node3D" parent="rocks" unique_id=280790945 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1.61, 0, 0, 0, 1.61, 0, 0, 0, 1.61, -22.697578, 0, -2.6317842)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2197744788
+
+[node name="random_big_rock19" type="Node3D" parent="rocks" unique_id=1556193730 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.638126, 0, -11.283943)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 884676905
+
+[node name="random_big_rock20" type="Node3D" parent="rocks" unique_id=831863265 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.74026, 0, -13.097574)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2802866719
+
+[node name="random_big_rock21" type="Node3D" parent="rocks" unique_id=1066257237 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.381845, 0, -13.4698515)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3471495473
+
+[node name="random_big_rock22" type="Node3D" parent="rocks" unique_id=747741110 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.694979, 0, -11.986132)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1427413201
+
+[node name="random_big_rock23" type="Node3D" parent="rocks" unique_id=1665642148 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.773647, 0, -14.145223)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2365817635
+
+[node name="random_big_rock24" type="Node3D" parent="rocks" unique_id=1771427105 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(2.74, 0, 0, 0, 2.74, 0, 0, 0, 2.74, -32.964497, -1.1588826, -6.279731)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1177193789
+
+[node name="random_big_rock25" type="Node3D" parent="rocks" unique_id=582275396 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.986172, 4.7683716e-07, -5.296858)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2713946729
+
+[node name="random_big_rock26" type="Node3D" parent="rocks" unique_id=277217311 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.894485, 9.536743e-07, -11.687192)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2794241938
+
+[node name="random_big_rock27" type="Node3D" parent="rocks" unique_id=1303789858 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.763174, 0, -13.121826)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2632514531
+
+[node name="random_big_rock28" type="Node3D" parent="rocks" unique_id=1474824142 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(2.12, 0, 0, 0, 2.12, 0, 0, 0, 2.12, -11.641962, -0.8351202, -13.785184)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2074641919
+
+[node name="random_big_rock29" type="Node3D" parent="rocks" unique_id=380247183 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.348766, -9.536743e-07, -4.9727745)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 219662454
+
+[node name="random_big_rock30" type="Node3D" parent="rocks" unique_id=1403209111 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.911756, -9.536743e-07, -5.8490424)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3361994461
+
+[node name="random_big_rock31" type="Node3D" parent="rocks" unique_id=695125035 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.050465, 0, -5.7929554)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1627447083
+
+[node name="random_big_rock32" type="Node3D" parent="rocks" unique_id=2135768890 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.746193, 0, -6.4769483)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3036144055
+
+[node name="random_big_rock33" type="Node3D" parent="rocks" unique_id=2040980295 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5312943, 0, -13.671432)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3750208597
+
+[node name="random_big_rock34" type="Node3D" parent="rocks" unique_id=900818591 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(2.475, 0, 0, 0, 2.475, 0, 0, 0, 2.475, 7.003475, -1.1164742, -14.213223)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2367648527
+
+[node name="random_big_rock35" type="Node3D" parent="rocks" unique_id=1219693094 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.595232, -9.536743e-07, -11.262836)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 4113923948
+
+[node name="random_big_rock36" type="Node3D" parent="rocks" unique_id=2098395375 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7394896, 1.9073486e-06, -6.7675743)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1871170187
+
+[node name="random_big_rock37" type="Node3D" parent="rocks" unique_id=1933227063 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2751048, 9.536743e-07, -7.0156326)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3123340898
+
+[node name="random_big_rock38" type="Node3D" parent="rocks" unique_id=1721502276 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2036989, 1.9073486e-06, -8.446834)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2067247598
+
+[node name="random_big_rock39" type="Node3D" parent="rocks" unique_id=2042222633 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5680904, 0, -4.0949106)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2345893731
+
+[node name="random_big_rock40" type="Node3D" parent="rocks" unique_id=1385283448 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4019966, -9.536743e-07, -5.099189)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 4007102272
+
+[node name="random_big_rock41" type="Node3D" parent="rocks" unique_id=776869691 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0566144, 0, -2.1357775)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3593572110
+
+[node name="random_big_rock42" type="Node3D" parent="rocks" unique_id=89642455 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7027104, 0, -1.020195)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 260626467
+
+[node name="random_big_rock43" type="Node3D" parent="rocks" unique_id=1386575013 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.106142, 0, -2.53117)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 353342835
+
+[node name="random_big_rock44" type="Node3D" parent="rocks" unique_id=2056173472 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8676615, 0, 0.103364944)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 833756734
+
+[node name="random_big_rock45" type="Node3D" parent="rocks" unique_id=1128130767 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.761674, 0, -0.024095535)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 347649361
+
+[node name="random_big_rock46" type="Node3D" parent="rocks" unique_id=1813799510 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.679364, -0.57433796, -0.8805733)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3038232386
+
+[node name="random_big_rock47" type="Node3D" parent="rocks" unique_id=536198475 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.786797, -9.536743e-07, 2.8750715)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1459137205
+
+[node name="random_big_rock48" type="Node3D" parent="rocks" unique_id=1067278232 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.241854, 9.536743e-07, 1.3507404)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1890119444
+
+[node name="random_big_rock49" type="Node3D" parent="rocks" unique_id=228451569 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.620017, 9.536743e-07, -1.4225292)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1893479198
+
+[node name="random_big_rock50" type="Node3D" parent="rocks" unique_id=1711714957 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.133835, 1.9073486e-06, 4.025901)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 901314172
+
+[node name="random_big_rock51" type="Node3D" parent="rocks" unique_id=1996101292 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.343122, 0, 1.8875732)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1714589371
+
+[node name="random_big_rock52" type="Node3D" parent="rocks" unique_id=364223577 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1.405, 0, 0, 0, 1.405, 0, 0, 0, 1.405, 7.3252172, -0.5688782, 6.212906)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3212870186
+
+[node name="random_big_rock53" type="Node3D" parent="rocks" unique_id=840356679 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.891648, 0, 10.283656)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3783805225
+
+[node name="random_big_rock54" type="Node3D" parent="rocks" unique_id=1304788299 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(2.08, 0, 0, 0, 2.08, 0, 0, 0, 2.08, 7.5767655, -0.39669037, 11.209564)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2821387721
+
+[node name="random_big_rock55" type="Node3D" parent="rocks" unique_id=930456099 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6636405, 0, 7.6881027)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1478512337
+
+[node name="random_big_rock56" type="Node3D" parent="rocks" unique_id=486404521 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.814981, 0, 8.320313)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1110861829
+
+[node name="random_big_rock57" type="Node3D" parent="rocks" unique_id=1555233299 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.939644, 0, 6.3075705)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2430512091
+
+[node name="random_big_rock58" type="Node3D" parent="rocks" unique_id=973863316 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.908791, 0, 7.1871033)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1217708812
+
+[node name="random_big_rock59" type="Node3D" parent="rocks" unique_id=896584738 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.221972, 0, -2.1291885)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3519730647
+
+[node name="random_big_rock60" type="Node3D" parent="rocks" unique_id=435948651 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.314882, -1.9073486e-06, -2.7447548)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1571734988
+
+[node name="random_big_rock61" type="Node3D" parent="rocks" unique_id=413575964 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.222744, 0, -1.5283871)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 558059453
+
+[node name="random_big_rock62" type="Node3D" parent="rocks" unique_id=1199650651 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.899124, 9.536743e-07, -4.003562)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 411993823
+
+[node name="random_big_rock63" type="Node3D" parent="rocks" unique_id=1749508043 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.018301, 9.536743e-07, 5.1097255)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2573235744
+
+[node name="random_big_rock64" type="Node3D" parent="rocks" unique_id=1322653616 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1.785, 0, 0, 0, 1.785, 0, 0, 0, 1.785, 19.566925, -0.2857046, 6.0656633)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3617645120
+
+[node name="random_big_rock65" type="Node3D" parent="rocks" unique_id=80814415 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.356947, 9.536743e-07, 5.4560585)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1661932127
+
+[node name="random_big_rock66" type="Node3D" parent="rocks" unique_id=2112783674 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.052395, 0, 2.9942331)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2360876950
+
+[node name="random_big_rock67" type="Node3D" parent="rocks" unique_id=257048617 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.937168, -9.536743e-07, 4.8236284)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 329126343
+
+[node name="random_big_rock68" type="Node3D" parent="rocks" unique_id=1791224980 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.381943, 9.536743e-07, 0.7381754)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 198069741
+
+[node name="random_big_rock69" type="Node3D" parent="rocks" unique_id=644789516 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1.115, 0, 0, 0, 1.115, 0, 0, 0, 1.115, 32.945576, -9.536743e-07, 2.2509785)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1218980386
+
+[node name="random_big_rock70" type="Node3D" parent="rocks" unique_id=520527582 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.55694, 9.536743e-07, -1.0071936)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2177621981
+
+[node name="random_big_rock71" type="Node3D" parent="rocks" unique_id=1127987091 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.149025, -9.536743e-07, 6.553218)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1094541167
+
+[node name="random_big_rock72" type="Node3D" parent="rocks" unique_id=1373460384 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 30.977596, -0.9629202, 6.66416)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3658303288
+
+[node name="random_big_rock73" type="Node3D" parent="rocks" unique_id=1698380881 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.565546, 9.536743e-07, 8.839113)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1348750398
+
+[node name="random_big_rock74" type="Node3D" parent="rocks" unique_id=309171045 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.936619, 9.536743e-07, 11.005397)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1529516595
+
+[node name="random_big_rock75" type="Node3D" parent="rocks" unique_id=418703038 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.451078, 0, 10.299282)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 3251255120
+
+[node name="random_big_rock76" type="Node3D" parent="rocks" unique_id=443701785 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.798733, 0, 8.517911)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2526952934
+
+[node name="random_big_rock77" type="Node3D" parent="rocks" unique_id=850520028 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.78183, 9.536743e-07, 9.236789)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 4202981861
+
+[node name="random_big_rock78" type="Node3D" parent="rocks" unique_id=878413882 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(2.625, 0, 0, 0, 2.625, 0, 0, 0, 2.625, 33.398693, -0.36130238, 12.518306)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 2665018496
+
+[node name="random_big_rock79" type="Node3D" parent="rocks" unique_id=1316186454 instance=ExtResource("5_vxwfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.67015, -9.536743e-07, 4.1708975)
+script = ExtResource("6_a20jf")
+rock_scenes = Array[PackedScene]([ExtResource("7_1op6o"), ExtResource("8_nuv26"), ExtResource("9_mt41a"), ExtResource("10_qn1l5"), ExtResource("11_ut1qm"), ExtResource("12_8ou70"), ExtResource("13_j4cq2"), ExtResource("14_2orfv")])
+seed_value = 1092321136
 
 [editable path="ground"]
