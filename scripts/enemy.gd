@@ -141,9 +141,7 @@ func _physics_process(delta: float) -> void:
     if not detection.detects(target.global_position):
       return
     alert()
-    for group: StringName in get_groups():
-      if group.begins_with('enemy_alert_'):
-        get_tree().call_group(group, &'alert')
+    _alert_group_members()
   if _within_bite_range():
     bite()
   else:
@@ -162,10 +160,17 @@ func is_chasing() -> bool:
   return _engaged and not _dead and not preview and not target.is_dead
 
 
+func _alert_group_members() -> void:
+  for group: StringName in get_groups():
+    if group.begins_with('enemy_alert_'):
+      get_tree().call_group(group, &'alert')
+
+
 func take_shot() -> void:
   if _dead:
     _crumble_corpse()
     return
+  _alert_group_members()
   _dead = true
   _finish_bite()
   velocity = Vector3.ZERO
