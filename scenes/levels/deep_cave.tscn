@@ -8,13 +8,14 @@
 [ext_resource type="AudioStream" uid="uid://25gbpetk41ed" path="res://audio/enemy/growl_06.wav" id="10_jidwt"]
 [ext_resource type="AudioStream" uid="uid://bhbmc7jy7xxgt" path="res://audio/enemy/bite_01.wav" id="11_y68gf"]
 [ext_resource type="AudioStream" uid="uid://ngy3h1w8tg6q" path="res://audio/enemy/bite_02.wav" id="12_rxl51"]
+[ext_resource type="Texture2D" uid="uid://b7dyjbmsthoqw" path="res://sprites/monster_body_01.png" id="13_n6gv5"]
+[ext_resource type="Texture2D" uid="uid://o32rppby81gn" path="res://sprites/monster_head_01.png" id="14_044ee"]
 [ext_resource type="PackedScene" uid="uid://j8olerx61rht" path="res://objects/random_big_rock.tscn" id="14_57wvg"]
 [ext_resource type="Script" uid="uid://c6gh6v1sawggb" path="res://scripts/random_big_rock.gd" id="15_grkr3"]
-[ext_resource type="Script" uid="uid://lvb21vxji46k" path="res://scripts/crumbling_rock.gd" id="16_gvuos"]
+[ext_resource type="AudioStream" uid="uid://ck1vl6njbjb73" path="res://audio/enemy/step_01.wav" id="15_jidwt"]
 [ext_resource type="PackedScene" uid="uid://odumffg7yfr1" path="res://objects/big_rock_01.tscn" id="16_v7idv"]
-[ext_resource type="Shader" uid="uid://drpa1pvlwb3t6" path="res://shaders/rock_hit_flash.gdshader" id="17_n6gv5"]
+[ext_resource type="AudioStream" uid="uid://ct3cdy2y6p5ow" path="res://audio/enemy/step_02.wav" id="16_y68gf"]
 [ext_resource type="PackedScene" uid="uid://djk0sh2numjnd" path="res://objects/big_rock_02.tscn" id="17_uvmh6"]
-[ext_resource type="PackedScene" path="res://effects/rock_crumble.tscn" id="18_044ee"]
 [ext_resource type="PackedScene" uid="uid://bd1pkpe5kcxf6" path="res://objects/big_rock_03.tscn" id="18_fcxiy"]
 [ext_resource type="PackedScene" uid="uid://bi4cxx4ajbs57" path="res://objects/big_rock_04.tscn" id="19_wcwv1"]
 [ext_resource type="PackedScene" uid="uid://dyer8vsgv3sab" path="res://objects/big_rock_05.tscn" id="20_rlfjy"]
@@ -26,6 +27,26 @@
 [ext_resource type="PackedScene" uid="uid://ct5elay5mk4lb" path="res://objects/ground.tscn" id="ground"]
 [ext_resource type="PackedScene" uid="uid://c2k5x6ubue31m" path="res://objects/world_light.tscn" id="light"]
 [ext_resource type="Script" uid="uid://bp2dwudh415ft" path="res://scripts/cave_level.gd" id="script"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_n6gv5"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 6
+stream_0/stream = ExtResource("5_pbamd")
+stream_1/stream = ExtResource("6_te8lg")
+stream_2/stream = ExtResource("7_gvuos")
+stream_3/stream = ExtResource("8_n6gv5")
+stream_4/stream = ExtResource("9_044ee")
+stream_5/stream = ExtResource("10_jidwt")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_044ee"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("11_y68gf")
+stream_1/stream = ExtResource("12_rxl51")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jidwt"]
 resource_local_to_scene = true
@@ -47,30 +68,42 @@ streams_count = 2
 stream_0/stream = ExtResource("11_y68gf")
 stream_1/stream = ExtResource("12_rxl51")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rxl51"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxl51"]
 resource_local_to_scene = true
-random_pitch = 1.04
-random_volume_offset_db = 1.0
-streams_count = 6
-stream_0/stream = ExtResource("5_pbamd")
-stream_1/stream = ExtResource("6_te8lg")
-stream_2/stream = ExtResource("7_gvuos")
-stream_3/stream = ExtResource("8_n6gv5")
-stream_4/stream = ExtResource("9_044ee")
-stream_5/stream = ExtResource("10_jidwt")
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+specular_mode = 2
+albedo_texture = ExtResource("13_n6gv5")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_57wvg"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_57wvg"]
 resource_local_to_scene = true
-random_pitch = 1.04
-random_volume_offset_db = 1.0
-streams_count = 2
-stream_0/stream = ExtResource("11_y68gf")
-stream_1/stream = ExtResource("12_rxl51")
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+specular_mode = 2
+albedo_texture = ExtResource("14_044ee")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_grkr3"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("15_jidwt")
+stream_1/stream = ExtResource("16_y68gf")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v7idv"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
 streams_count = 6
 stream_0/stream = ExtResource("5_pbamd")
 stream_1/stream = ExtResource("6_te8lg")
@@ -79,13 +112,45 @@ stream_3/stream = ExtResource("8_n6gv5")
 stream_4/stream = ExtResource("9_044ee")
 stream_5/stream = ExtResource("10_jidwt")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v7idv"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uvmh6"]
 resource_local_to_scene = true
 random_pitch = 1.04
 random_volume_offset_db = 1.0
 streams_count = 2
 stream_0/stream = ExtResource("11_y68gf")
 stream_1/stream = ExtResource("12_rxl51")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fcxiy"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+specular_mode = 2
+albedo_texture = ExtResource("13_n6gv5")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wcwv1"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+specular_mode = 2
+albedo_texture = ExtResource("14_044ee")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rlfjy"]
+resource_local_to_scene = true
+random_pitch = 1.04
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("15_jidwt")
+stream_1/stream = ExtResource("16_y68gf")
 
 [sub_resource type="BoxShape3D" id="exit_shape"]
 size = Vector3(8.5, 4, 3)
@@ -127,28 +192,52 @@ light_color = Color(1, 0.71, 0.4, 1)
 omni_range = 7.0
 
 [node name="enemy_1" parent="." unique_id=1558141712 instance=ExtResource("enemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -11)
-growl_stream = SubResource("AudioStreamRandomizer_jidwt")
-bite_stream = SubResource("AudioStreamRandomizer_y68gf")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9512234, -9.536743e-07, -13.107662)
+growl_stream = SubResource("AudioStreamRandomizer_n6gv5")
+bite_stream = SubResource("AudioStreamRandomizer_044ee")
 head_variant = 0
 body_variant = 1
 eye_variant = 0
 
 [node name="enemy_2" parent="." unique_id=1193796112 groups=["enemy_alert_deep_cave_lower_room"] instance=ExtResource("enemy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9472919, 0, 18.638456)
-growl_stream = SubResource("AudioStreamRandomizer_rxl51")
-bite_stream = SubResource("AudioStreamRandomizer_57wvg")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3152452, 0, 17.592676)
+growl_stream = SubResource("AudioStreamRandomizer_jidwt")
+bite_stream = SubResource("AudioStreamRandomizer_y68gf")
 head_variant = 1
 body_variant = 2
 eye_variant = 1
 
+[node name="detection" parent="enemy_2" index="0"]
+radius = 6.72
+
+[node name="body" parent="enemy_2/visuals/appearance" parent_id_path=PackedInt32Array(1193796112, 1402254541) index="0" unique_id=703009130]
+material_override = SubResource("StandardMaterial3D_rxl51")
+
+[node name="sprite" parent="enemy_2/visuals/appearance/head/lift" parent_id_path=PackedInt32Array(1193796112, 2052993236) index="0" unique_id=1052758126]
+material_override = SubResource("StandardMaterial3D_57wvg")
+
+[node name="footstep_audio" parent="enemy_2" index="5" unique_id=216370705]
+stream = SubResource("AudioStreamRandomizer_grkr3")
+
 [node name="enemy_3" parent="." unique_id=1600873856 groups=["enemy_alert_deep_cave_lower_room"] instance=ExtResource("enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.389123, 0, 19.893036)
-growl_stream = SubResource("AudioStreamRandomizer_grkr3")
-bite_stream = SubResource("AudioStreamRandomizer_v7idv")
+growl_stream = SubResource("AudioStreamRandomizer_v7idv")
+bite_stream = SubResource("AudioStreamRandomizer_uvmh6")
 head_variant = 2
 body_variant = 0
 eye_variant = 2
+
+[node name="detection" parent="enemy_3" index="0"]
+radius = 6.72
+
+[node name="body" parent="enemy_3/visuals/appearance" parent_id_path=PackedInt32Array(1600873856, 1402254541) index="0" unique_id=703009130]
+material_override = SubResource("StandardMaterial3D_fcxiy")
+
+[node name="sprite" parent="enemy_3/visuals/appearance/head/lift" parent_id_path=PackedInt32Array(1600873856, 2052993236) index="0" unique_id=1052758126]
+material_override = SubResource("StandardMaterial3D_wcwv1")
+
+[node name="footstep_audio" parent="enemy_3" index="5" unique_id=216370705]
+stream = SubResource("AudioStreamRandomizer_rlfjy")
 
 [node name="exit" type="Area3D" parent="." unique_id=663921876]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1, 35)
@@ -168,1225 +257,829 @@ inner_radius = 2.5
 transform = Transform3D(1.485, 0, 0, 0, 1.485, 0, 0, 0, 1.485, -27.770351, 0, -11.384088)
 seed_value = 2281161573
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock" unique_id=1948812339 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock" unique_id=1948812339 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.033663, 0, 0, 0, 0.9509177, 0, 0, 0, 1.033663, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock2" parent="rocks" unique_id=497948303 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.765738, 0, -11.529663)
 seed_value = 1077285676
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock2" unique_id=1665101125 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock2" unique_id=1665101125 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(0.9816442, 0, 0, 0, 0.8885946, 0, 0, 0, 0.9816442, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock3" parent="rocks" unique_id=1347697976 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.239359, 0, -9.541761)
 seed_value = 2002632089
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock3" unique_id=20366013 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock3" unique_id=20366013 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(1.2988957, 0, 0, 0, 1.4558177, 0, 0, 0, 1.2988957, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock4" parent="rocks" unique_id=384014732 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.965385, 0, -11.222641)
 seed_value = 3122103285
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock4" unique_id=301203950 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock4" unique_id=301203950 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(0.87032354, 0, 0, 0, 0.9261401, 0, 0, 0, 0.87032354, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock5" parent="rocks" unique_id=564602456 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.013971, 4.7683716e-07, -10.709715)
 seed_value = 3889002764
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock5" unique_id=29976254 node_paths=PackedStringArray("sprite") instance=ExtResource("16_v7idv")]
+[node name="rock" parent="rocks/random_big_rock5" unique_id=29976254 instance=ExtResource("16_v7idv")]
 transform = Transform3D(1.4890497, 0, 0, 0, 1.7437977, 0, 0, 0, 1.4890497, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock6" parent="rocks" unique_id=1357503802 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.129082, 4.7683716e-07, -12.610159)
 seed_value = 3242531165
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock6" unique_id=565154425 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock6" unique_id=565154425 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(0.85034674, 0, 0, 0, 0.90910256, 0, 0, 0, 0.85034674, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock7" parent="rocks" unique_id=998664736 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.593542, 0, -9.101861)
 seed_value = 4149179423
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock7" unique_id=665766790 node_paths=PackedStringArray("sprite") instance=ExtResource("19_wcwv1")]
+[node name="rock" parent="rocks/random_big_rock7" unique_id=665766790 instance=ExtResource("19_wcwv1")]
 transform = Transform3D(1.4492736, 0, 0, 0, 1.5657523, 0, 0, 0, 1.4492736, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock8" parent="rocks" unique_id=551125777 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.857279, 4.7683716e-07, -8.868399)
 seed_value = 442377547
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock8" unique_id=2045859687 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock8" unique_id=2045859687 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(0.99771875, 0, 0, 0, 1.0297551, 0, 0, 0, 0.99771875, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock9" parent="rocks" unique_id=1883694385 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1.455, 0, 0, 0, 1.455, 0, 0, 0, 1.455, -21.257593, -9.536743e-07, -5.03076)
 seed_value = 2162088772
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock9" unique_id=566234909 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock9" unique_id=566234909 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.27766, 0, 0, 0, 1.3803461, 0, 0, 0, 1.27766, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock10" parent="rocks" unique_id=1461815633 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1.205, 0, 0, 0, 1.205, 0, 0, 0, 1.205, -23.146088, 0, -5.3160586)
 seed_value = 312227088
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock10" unique_id=2028269485 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock10" unique_id=2028269485 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(1.1658937, 0, 0, 0, 1.3016226, 0, 0, 0, 1.1658937, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock11" parent="rocks" unique_id=512132314 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.42368, 0, -5.196215)
 seed_value = 2021201594
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock11" unique_id=1314278218 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock11" unique_id=1314278218 instance=ExtResource("22_lq664")]
 transform = Transform3D(0.8963799, 0, 0, 0, 1.0472741, 0, 0, 0, 0.8963799, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock12" parent="rocks" unique_id=163001958 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.061552, 0, -5.4875474)
 seed_value = 3304706192
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock12" unique_id=321141871 node_paths=PackedStringArray("sprite") instance=ExtResource("21_g7usf")]
+[node name="rock" parent="rocks/random_big_rock12" unique_id=321141871 instance=ExtResource("21_g7usf")]
 transform = Transform3D(1.123359, 0, 0, 0, 1.0995479, 0, 0, 0, 1.123359, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock13" parent="rocks" unique_id=263567429 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.392208, -4.7683716e-07, -4.23055)
 seed_value = 229295206
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock13" unique_id=617169427 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock13" unique_id=617169427 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.3593982, 0, 0, 0, 1.2685734, 0, 0, 0, 1.3593982, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock14" parent="rocks" unique_id=53241565 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.377216, 4.7683716e-07, -3.7480564)
 seed_value = 2872958056
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock14" unique_id=917575738 node_paths=PackedStringArray("sprite") instance=ExtResource("16_v7idv")]
+[node name="rock" parent="rocks/random_big_rock14" unique_id=917575738 instance=ExtResource("16_v7idv")]
 transform = Transform3D(0.9862864, 0, 0, 0, 1.0182189, 0, 0, 0, 0.9862864, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock15" parent="rocks" unique_id=718348977 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.333002, 0, -2.5172744)
 seed_value = 2976483707
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock15" unique_id=66469493 node_paths=PackedStringArray("sprite") instance=ExtResource("19_wcwv1")]
+[node name="rock" parent="rocks/random_big_rock15" unique_id=66469493 instance=ExtResource("19_wcwv1")]
 transform = Transform3D(1.2686812, 0, 0, 0, 1.1686972, 0, 0, 0, 1.2686812, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock16" parent="rocks" unique_id=306843161 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.935936, -4.7683716e-07, -1.7862105)
 seed_value = 1191917548
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock16" unique_id=1773679331 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock16" unique_id=1773679331 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.0628854, 0, 0, 0, 0.99387205, 0, 0, 0, 1.0628854, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock17" parent="rocks" unique_id=162021435 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1.175, 0, 0, 0, 1.175, 0, 0, 0, 1.175, -14.363433, -0.3910365, -0.011476271)
 seed_value = 2210102052
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock17" unique_id=975787150 node_paths=PackedStringArray("sprite") instance=ExtResource("23_n20jr")]
+[node name="rock" parent="rocks/random_big_rock17" unique_id=975787150 instance=ExtResource("23_n20jr")]
 transform = Transform3D(1.2927966, 0, 0, 0, 1.2106892, 0, 0, 0, 1.2927966, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock18" parent="rocks" unique_id=1862441461 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.798128, -4.7683716e-07, 0.8112564)
 seed_value = 3874393627
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock18" unique_id=887622922 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock18" unique_id=887622922 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(0.8033525, 0, 0, 0, 0.9323543, 0, 0, 0, 0.8033525, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock19" parent="rocks" unique_id=79015870 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.422802, 4.7683716e-07, 0.11068082)
 seed_value = 1573560485
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock19" unique_id=285508178 node_paths=PackedStringArray("sprite") instance=ExtResource("19_wcwv1")]
+[node name="rock" parent="rocks/random_big_rock19" unique_id=285508178 instance=ExtResource("19_wcwv1")]
 transform = Transform3D(1.4519535, 0, 0, 0, 1.5905097, 0, 0, 0, 1.4519535, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock20" parent="rocks" unique_id=1289676533 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.14094, -4.7683716e-07, 0.47916746)
 seed_value = 2274253478
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock20" unique_id=757603448 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock20" unique_id=757603448 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.215172, 0, 0, 0, 1.1422269, 0, 0, 0, 1.215172, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock21" parent="rocks" unique_id=1313565426 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1.815, 0, 0, 0, 1.815, 0, 0, 0, 1.815, -14.047769, -0.27382517, 3.2102344)
 seed_value = 3228913828
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock21" unique_id=1687222596 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock21" unique_id=1687222596 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(1.119692, 0, 0, 0, 1.0214334, 0, 0, 0, 1.119692, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock22" parent="rocks" unique_id=1715341509 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.552037, -4.7683716e-07, 1.7990484)
 seed_value = 2544419538
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock22" unique_id=70781387 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock22" unique_id=70781387 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.0871427, 0, 0, 0, 1.195687, 0, 0, 0, 1.0871427, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock23" parent="rocks" unique_id=597916146 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.130453, -4.7683716e-07, 0.79879904)
 seed_value = 548944552
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock23" unique_id=329453057 node_paths=PackedStringArray("sprite") instance=ExtResource("21_g7usf")]
+[node name="rock" parent="rocks/random_big_rock23" unique_id=329453057 instance=ExtResource("21_g7usf")]
 transform = Transform3D(0.8700175, 0, 0, 0, 0.98707765, 0, 0, 0, 0.8700175, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock24" parent="rocks" unique_id=1926412090 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.728314, 0, -1.9600387)
 seed_value = 2002040138
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock24" unique_id=1647010893 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock24" unique_id=1647010893 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(0.8906107, 0, 0, 0, 0.9125791, 0, 0, 0, 0.8906107, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock25" parent="rocks" unique_id=194391411 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.609443, 0, -2.3397608)
 seed_value = 2941982514
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock25" unique_id=409947067 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock25" unique_id=409947067 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.0241009, 0, 0, 0, 0.92734694, 0, 0, 0, 1.0241009, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock26" parent="rocks" unique_id=1974103543 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.092893, -4.7683716e-07, -2.7303562)
 seed_value = 3745601762
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock26" unique_id=732592601 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock26" unique_id=732592601 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.1687403, 0, 0, 0, 1.2516892, 0, 0, 0, 1.1687403, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock27" parent="rocks" unique_id=1589500406 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3204184, -4.7683716e-07, -0.6764388)
 seed_value = 2785237298
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock27" unique_id=1963373760 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock27" unique_id=1963373760 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.3633945, 0, 0, 0, 1.3344094, 0, 0, 0, 1.3633945, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock28" parent="rocks" unique_id=460640495 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8252926, 0, -2.2560215)
 seed_value = 1724648435
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock28" unique_id=1662202643 node_paths=PackedStringArray("sprite") instance=ExtResource("16_v7idv")]
+[node name="rock" parent="rocks/random_big_rock28" unique_id=1662202643 instance=ExtResource("16_v7idv")]
 transform = Transform3D(1.1604407, 0, 0, 0, 1.0662899, 0, 0, 0, 1.1604407, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock29" parent="rocks" unique_id=1444157178 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9092784, -4.7683716e-07, -1.310842)
 seed_value = 239015619
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock29" unique_id=283599922 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock29" unique_id=283599922 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(0.8251909, 0, 0, 0, 0.83802027, 0, 0, 0, 0.8251909, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock30" parent="rocks" unique_id=973002342 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.672807, 0, -4.8741)
 seed_value = 1030822207
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock30" unique_id=1044579313 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock30" unique_id=1044579313 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(1.256725, 0, 0, 0, 1.3381689, 0, 0, 0, 1.256725, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock31" parent="rocks" unique_id=445989992 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.092778, -4.7683716e-07, -7.814771)
 seed_value = 2576789271
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock31" unique_id=1475612041 node_paths=PackedStringArray("sprite") instance=ExtResource("23_n20jr")]
+[node name="rock" parent="rocks/random_big_rock31" unique_id=1475612041 instance=ExtResource("23_n20jr")]
 transform = Transform3D(0.96719545, 0, 0, 0, 1.0288534, 0, 0, 0, 0.96719545, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock32" parent="rocks" unique_id=1303887042 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1.695, 0, 0, 0, 1.695, 0, 0, 0, 1.695, 0.36184168, -4.7683716e-07, -2.1400075)
 seed_value = 293095798
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock32" unique_id=468005107 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock32" unique_id=468005107 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(1.1517353, 0, 0, 0, 1.0952268, 0, 0, 0, 1.1517353, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock33" parent="rocks" unique_id=2145426225 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3585908, 4.7683716e-07, -3.5270529)
 seed_value = 152896601
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock33" unique_id=1013154021 node_paths=PackedStringArray("sprite") instance=ExtResource("16_v7idv")]
+[node name="rock" parent="rocks/random_big_rock33" unique_id=1013154021 instance=ExtResource("16_v7idv")]
 transform = Transform3D(0.9939814, 0, 0, 0, 0.9033118, 0, 0, 0, 0.9939814, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock34" parent="rocks" unique_id=219171563 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8927953, 4.7683716e-07, -2.7253256)
 seed_value = 4058199284
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock34" unique_id=2021861743 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock34" unique_id=2021861743 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.0097528, 0, 0, 0, 0.9507751, 0, 0, 0, 1.0097528, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock35" parent="rocks" unique_id=796539060 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6782036, -4.7683716e-07, -1.9740052)
 seed_value = 1269714386
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock35" unique_id=833978374 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock35" unique_id=833978374 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.0905571, 0, 0, 0, 1.0882008, 0, 0, 0, 1.0905571, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock36" parent="rocks" unique_id=1414465575 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4379437, 0, -0.71116924)
 seed_value = 3645804997
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock36" unique_id=1544954593 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock36" unique_id=1544954593 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.1886983, 0, 0, 0, 1.3430437, 0, 0, 0, 1.1886983, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock37" parent="rocks" unique_id=1079330759 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.843247, 0, 1.0001369)
 seed_value = 220094351
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock37" unique_id=1893855491 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock37" unique_id=1893855491 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.1634446, 0, 0, 0, 1.0758243, 0, 0, 0, 1.1634446, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock38" parent="rocks" unique_id=359967871 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7983823, 0, 1.7820063)
 seed_value = 2968451833
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock38" unique_id=2060387731 node_paths=PackedStringArray("sprite") instance=ExtResource("21_g7usf")]
+[node name="rock" parent="rocks/random_big_rock38" unique_id=2060387731 instance=ExtResource("21_g7usf")]
 transform = Transform3D(0.8618562, 0, 0, 0, 0.94319636, 0, 0, 0, 0.8618562, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock39" parent="rocks" unique_id=1557320507 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.037447, 0, -2.0345345)
 seed_value = 2211987836
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock39" unique_id=733715669 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock39" unique_id=733715669 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(1.3740754, 0, 0, 0, 1.6312203, 0, 0, 0, 1.3740754, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock40" parent="rocks" unique_id=113246759 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.117364, 0, -6.8940387)
 seed_value = 3502881316
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock40" unique_id=844622114 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock40" unique_id=844622114 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(0.92639387, 0, 0, 0, 0.9267888, 0, 0, 0, 0.92639387, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock41" parent="rocks" unique_id=1271433864 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.96254, 0, -8.418691)
 seed_value = 433167275
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock41" unique_id=588621802 node_paths=PackedStringArray("sprite") instance=ExtResource("23_n20jr")]
+[node name="rock" parent="rocks/random_big_rock41" unique_id=588621802 instance=ExtResource("23_n20jr")]
 transform = Transform3D(1.3674123, 0, 0, 0, 1.5151808, 0, 0, 0, 1.3674123, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock42" parent="rocks" unique_id=432144972 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.27226, -4.7683716e-07, -7.6005816)
 seed_value = 1042250762
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock42" unique_id=791745490 node_paths=PackedStringArray("sprite") instance=ExtResource("19_wcwv1")]
+[node name="rock" parent="rocks/random_big_rock42" unique_id=791745490 instance=ExtResource("19_wcwv1")]
 transform = Transform3D(0.98249817, 0, 0, 0, 1.0282042, 0, 0, 0, 0.98249817, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock43" parent="rocks" unique_id=1462021381 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.609712, 0, -7.4166455)
 seed_value = 2231514506
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock43" unique_id=292418589 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock43" unique_id=292418589 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(0.8015447, 0, 0, 0, 0.957418, 0, 0, 0, 0.8015447, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock44" parent="rocks" unique_id=2104552943 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.106215, 4.7683716e-07, -12.624421)
 seed_value = 1518247187
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock44" unique_id=1821464695 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock44" unique_id=1821464695 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(1.0626531, 0, 0, 0, 1.0401646, 0, 0, 0, 1.0626531, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock45" parent="rocks" unique_id=1111732443 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.45886, 4.7683716e-07, -11.642525)
 seed_value = 3510991533
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock45" unique_id=1881461891 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock45" unique_id=1881461891 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.196007, 0, 0, 0, 1.3716582, 0, 0, 0, 1.196007, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock46" parent="rocks" unique_id=1157080894 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.319691, 0, -13.334257)
 seed_value = 779016387
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock46" unique_id=1117623645 node_paths=PackedStringArray("sprite") instance=ExtResource("19_wcwv1")]
+[node name="rock" parent="rocks/random_big_rock46" unique_id=1117623645 instance=ExtResource("19_wcwv1")]
 transform = Transform3D(1.2419242, 0, 0, 0, 1.3781465, 0, 0, 0, 1.2419242, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock47" parent="rocks" unique_id=1317194717 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.234309, 9.536743e-07, -14.253056)
 seed_value = 3795059221
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock47" unique_id=81304676 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock47" unique_id=81304676 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.2368363, 0, 0, 0, 1.3040792, 0, 0, 0, 1.2368363, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock48" parent="rocks" unique_id=270455603 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.558174, -1.4305115e-06, -15.785388)
 seed_value = 2513931252
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock48" unique_id=2121440651 node_paths=PackedStringArray("sprite") instance=ExtResource("19_wcwv1")]
+[node name="rock" parent="rocks/random_big_rock48" unique_id=2121440651 instance=ExtResource("19_wcwv1")]
 transform = Transform3D(1.4077892, 0, 0, 0, 1.3872361, 0, 0, 0, 1.4077892, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock49" parent="rocks" unique_id=1098998866 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.036665, -4.7683716e-07, -16.320745)
 seed_value = 2827937993
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock49" unique_id=1966730028 node_paths=PackedStringArray("sprite") instance=ExtResource("23_n20jr")]
+[node name="rock" parent="rocks/random_big_rock49" unique_id=1966730028 instance=ExtResource("23_n20jr")]
 transform = Transform3D(1.4690562, 0, 0, 0, 1.3583809, 0, 0, 0, 1.4690562, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock50" parent="rocks" unique_id=1319674598 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7659311, -4.7683716e-07, -15.29631)
 seed_value = 3365078066
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock50" unique_id=1709161784 node_paths=PackedStringArray("sprite") instance=ExtResource("21_g7usf")]
+[node name="rock" parent="rocks/random_big_rock50" unique_id=1709161784 instance=ExtResource("21_g7usf")]
 transform = Transform3D(1.0766947, 0, 0, 0, 1.2310987, 0, 0, 0, 1.0766947, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock51" parent="rocks" unique_id=641261681 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9449909, 0, -12.802501)
 seed_value = 3765747870
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock51" unique_id=2036358989 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock51" unique_id=2036358989 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(1.1805757, 0, 0, 0, 1.2650017, 0, 0, 0, 1.1805757, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock52" parent="rocks" unique_id=1115589911 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00027923286, -4.7683716e-07, -11.954664)
 seed_value = 2755694930
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock52" unique_id=1333324533 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock52" unique_id=1333324533 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(0.8247071, 0, 0, 0, 0.8571449, 0, 0, 0, 0.8247071, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock53" parent="rocks" unique_id=88499701 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48354578, 0, -14.295945)
 seed_value = 470709828
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock53" unique_id=828111981 node_paths=PackedStringArray("sprite") instance=ExtResource("19_wcwv1")]
+[node name="rock" parent="rocks/random_big_rock53" unique_id=828111981 instance=ExtResource("19_wcwv1")]
 transform = Transform3D(0.9513713, 0, 0, 0, 0.9183984, 0, 0, 0, 0.9513713, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock54" parent="rocks" unique_id=252637438 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.133444, 0, -13.843288)
 seed_value = 800523644
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock54" unique_id=1061373732 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock54" unique_id=1061373732 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.259248, 0, 0, 0, 1.3153318, 0, 0, 0, 1.259248, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock55" parent="rocks" unique_id=1726498697 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.136189, 0, -13.275099)
 seed_value = 962065173
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock55" unique_id=1638057111 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock55" unique_id=1638057111 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.4949739, 0, 0, 0, 1.4456419, 0, 0, 0, 1.4949739, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock56" parent="rocks" unique_id=1617387126 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.050621, 0, -10.590181)
 seed_value = 3031953341
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock56" unique_id=980460524 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock56" unique_id=980460524 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.0719675, 0, 0, 0, 0.97186935, 0, 0, 0, 1.0719675, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock57" parent="rocks" unique_id=1953114307 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2096605, 0, -9.957068)
 seed_value = 924702126
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock57" unique_id=1274739859 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock57" unique_id=1274739859 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(0.8289327, 0, 0, 0, 0.8830416, 0, 0, 0, 0.8289327, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock58" parent="rocks" unique_id=776225997 instance=ExtResource("14_57wvg")]
 transform = Transform3D(2.825, 0, 0, 0, 2.825, 0, 0, 0, 2.825, -6.2077084, -2.1409779, -8.624018)
 seed_value = 1451472057
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock58" unique_id=676828136 node_paths=PackedStringArray("sprite") instance=ExtResource("19_wcwv1")]
+[node name="rock" parent="rocks/random_big_rock58" unique_id=676828136 instance=ExtResource("19_wcwv1")]
 transform = Transform3D(1.1470318, 0, 0, 0, 1.0573391, 0, 0, 0, 1.1470318, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock59" parent="rocks" unique_id=1590124991 instance=ExtResource("14_57wvg")]
 transform = Transform3D(3.715, 0, 0, 0, 3.715, 0, 0, 0, 3.715, 1.2274201, -1.0284276, -17.659914)
 seed_value = 2566800847
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock59" unique_id=290385421 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock59" unique_id=290385421 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(0.96779925, 0, 0, 0, 1.0037742, 0, 0, 0, 0.96779925, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock60" parent="rocks" unique_id=1301064060 instance=ExtResource("14_57wvg")]
 transform = Transform3D(2.69, 0, 0, 0, 2.69, 0, 0, 0, 2.69, 5.8147645, -0.8914013, 4.6068406)
 seed_value = 673779862
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock60" unique_id=754410803 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock60" unique_id=754410803 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(1.0145453, 0, 0, 0, 0.9217614, 0, 0, 0, 1.0145453, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock61" parent="rocks" unique_id=1344812731 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7189336, 0, 5.8872223)
 seed_value = 301884751
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock61" unique_id=1954355877 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock61" unique_id=1954355877 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(1.2700392, 0, 0, 0, 1.3648958, 0, 0, 0, 1.2700392, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock62" parent="rocks" unique_id=867199000 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.684851, 0, 2.7412372)
 seed_value = 4184914174
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock62" unique_id=1100836354 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock62" unique_id=1100836354 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(1.0071666, 0, 0, 0, 1.1615326, 0, 0, 0, 1.0071666, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock63" parent="rocks" unique_id=1780036849 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.559542, 0, 3.4917073)
 seed_value = 1666224376
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock63" unique_id=380501487 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock63" unique_id=380501487 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.2875657, 0, 0, 0, 1.3152186, 0, 0, 0, 1.2875657, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock64" parent="rocks" unique_id=620931843 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1.725, 0, 0, 0, 1.725, 0, 0, 0, 1.725, 11.835012, 1.9073486e-06, 7.4239535)
 seed_value = 2672620328
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock64" unique_id=1640439540 node_paths=PackedStringArray("sprite") instance=ExtResource("23_n20jr")]
+[node name="rock" parent="rocks/random_big_rock64" unique_id=1640439540 instance=ExtResource("23_n20jr")]
 transform = Transform3D(1.0914894, 0, 0, 0, 1.2487899, 0, 0, 0, 1.0914894, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock65" parent="rocks" unique_id=1707237465 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.016385, 0, 8.23866)
 seed_value = 1787421547
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock65" unique_id=1946253345 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock65" unique_id=1946253345 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.0079639, 0, 0, 0, 1.2049705, 0, 0, 0, 1.0079639, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock66" parent="rocks" unique_id=1874793352 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1.68, 0, 0, 0, 1.68, 0, 0, 0, 1.68, 7.5941434, -1.3188454, 9.937407)
 seed_value = 3640510151
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock66" unique_id=1761820581 node_paths=PackedStringArray("sprite") instance=ExtResource("21_g7usf")]
+[node name="rock" parent="rocks/random_big_rock66" unique_id=1761820581 instance=ExtResource("21_g7usf")]
 transform = Transform3D(1.3960814, 0, 0, 0, 1.6735529, 0, 0, 0, 1.3960814, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock67" parent="rocks" unique_id=1608203372 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3002334, 0, 4.4552298)
 seed_value = 635240047
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock67" unique_id=118583256 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock67" unique_id=118583256 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(1.0323545, 0, 0, 0, 1.0508442, 0, 0, 0, 1.0323545, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock68" parent="rocks" unique_id=2016714606 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97383416, -9.536743e-07, 4.2268896)
 seed_value = 3863661897
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock68" unique_id=2002624538 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock68" unique_id=2002624538 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(1.232373, 0, 0, 0, 1.4081471, 0, 0, 0, 1.232373, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock69" parent="rocks" unique_id=908327308 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1395669, 0, 11.784988)
 seed_value = 3206754885
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock69" unique_id=864958082 node_paths=PackedStringArray("sprite") instance=ExtResource("21_g7usf")]
+[node name="rock" parent="rocks/random_big_rock69" unique_id=864958082 instance=ExtResource("21_g7usf")]
 transform = Transform3D(1.4317287, 0, 0, 0, 1.6935656, 0, 0, 0, 1.4317287, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock70" parent="rocks" unique_id=899579108 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.530416, 9.536743e-07, 9.3494625)
 seed_value = 3480090593
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock70" unique_id=2138879193 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock70" unique_id=2138879193 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(0.8901813, 0, 0, 0, 0.98326814, 0, 0, 0, 0.8901813, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock71" parent="rocks" unique_id=1058881019 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6968122, 0, 10.8439865)
 seed_value = 1790164132
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock71" unique_id=1302244320 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock71" unique_id=1302244320 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(1.2809488, 0, 0, 0, 1.3121697, 0, 0, 0, 1.2809488, -0.55999595, 0, -0.14081667)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock72" parent="rocks" unique_id=562748986 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99457955, 0, 6.9068327)
 seed_value = 1201151321
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock72" unique_id=1581706775 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock72" unique_id=1581706775 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(0.83850265, 0, 0, 0, 0.9568282, 0, 0, 0, 0.83850265, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock73" parent="rocks" unique_id=852156134 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5489464, 0, 11.695919)
 seed_value = 2480484292
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock73" unique_id=1605690380 node_paths=PackedStringArray("sprite") instance=ExtResource("21_g7usf")]
+[node name="rock" parent="rocks/random_big_rock73" unique_id=1605690380 instance=ExtResource("21_g7usf")]
 transform = Transform3D(1.0416753, 0, 0, 0, 1.0192517, 0, 0, 0, 1.0416753, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock74" parent="rocks" unique_id=931012078 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.446577, 0, 13.8685)
 seed_value = 1479102182
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock74" unique_id=241176383 node_paths=PackedStringArray("sprite") instance=ExtResource("16_v7idv")]
+[node name="rock" parent="rocks/random_big_rock74" unique_id=241176383 instance=ExtResource("16_v7idv")]
 transform = Transform3D(1.4933693, 0, 0, 0, 1.6822879, 0, 0, 0, 1.4933693, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock75" parent="rocks" unique_id=1916810589 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.995771, 0, 15.041364)
 seed_value = 2890376610
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock75" unique_id=1610009249 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock75" unique_id=1610009249 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.2899914, 0, 0, 0, 1.4811741, 0, 0, 0, 1.2899914, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock76" parent="rocks" unique_id=349161238 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3301706, 0, 15.609035)
 seed_value = 1598760222
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock76" unique_id=123050885 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock76" unique_id=123050885 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.154844, 0, 0, 0, 1.0609466, 0, 0, 0, 1.154844, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock77" parent="rocks" unique_id=582738292 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.678578, 0, 15.523489)
 seed_value = 3852947303
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock77" unique_id=1620490056 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock77" unique_id=1620490056 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(0.9225108, 0, 0, 0, 0.9533094, 0, 0, 0, 0.9225108, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock78" parent="rocks" unique_id=381425260 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.881293, 0, 16.775707)
 seed_value = 373475448
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock78" unique_id=1472163960 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock78" unique_id=1472163960 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.0619432, 0, 0, 0, 1.0825245, 0, 0, 0, 1.0619432, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock79" parent="rocks" unique_id=1142252757 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4936018, 0, 19.729576)
 seed_value = 698366501
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock79" unique_id=1032220689 node_paths=PackedStringArray("sprite") instance=ExtResource("16_v7idv")]
+[node name="rock" parent="rocks/random_big_rock79" unique_id=1032220689 instance=ExtResource("16_v7idv")]
 transform = Transform3D(1.2800896, 0, 0, 0, 1.4982308, 0, 0, 0, 1.2800896, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock80" parent="rocks" unique_id=227170778 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6556444, 0, 20.188446)
 seed_value = 2053430007
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock80" unique_id=1064526297 node_paths=PackedStringArray("sprite") instance=ExtResource("16_v7idv")]
+[node name="rock" parent="rocks/random_big_rock80" unique_id=1064526297 instance=ExtResource("16_v7idv")]
 transform = Transform3D(1.3217361, 0, 0, 0, 1.3119506, 0, 0, 0, 1.3217361, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock81" parent="rocks" unique_id=58635502 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2086921, 0, 19.865932)
 seed_value = 278700745
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock81" unique_id=487331638 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock81" unique_id=487331638 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(0.98031944, 0, 0, 0, 1.028927, 0, 0, 0, 0.98031944, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock82" parent="rocks" unique_id=1154659442 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16580343, 0, 21.192635)
 seed_value = 1046080317
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock82" unique_id=740783437 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock82" unique_id=740783437 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.0198395, 0, 0, 0, 1.0414344, 0, 0, 0, 1.0198395, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock83" parent="rocks" unique_id=1680103047 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.451753, 0, 22.779692)
 seed_value = 389653311
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock83" unique_id=1735528567 node_paths=PackedStringArray("sprite") instance=ExtResource("21_g7usf")]
+[node name="rock" parent="rocks/random_big_rock83" unique_id=1735528567 instance=ExtResource("21_g7usf")]
 transform = Transform3D(1.4838688, 0, 0, 0, 1.3985902, 0, 0, 0, 1.4838688, -1.282954, 9.536742e-07, -0.23617743)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock84" parent="rocks" unique_id=50633262 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1.81, 0, 0, 0, 1.81, 0, 0, 0, 1.81, 5.601469, -1.1553888, 23.890717)
 seed_value = 2300135095
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock84" unique_id=479821139 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock84" unique_id=479821139 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(1.4478436, 0, 0, 0, 1.6700636, 0, 0, 0, 1.4478436, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock85" parent="rocks" unique_id=1725612619 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1.6314013, 0, 0, 0, 1.6314013, 0, 0, 0, 1.6314013, 7.7223043, -0.65256053, 25.775295)
 seed_value = 2907763678
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock85" unique_id=513553518 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock85" unique_id=513553518 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.14194, 0, 0, 0, 1.0660725, 0, 0, 0, 1.14194, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock86" parent="rocks" unique_id=512660068 instance=ExtResource("14_57wvg")]
 transform = Transform3D(2.748, 0, 0, 0, 2.748, 0, 0, 0, 2.748, 10.352562, -0.671155, 20.424603)
 seed_value = 1006860415
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock86" unique_id=647967962 node_paths=PackedStringArray("sprite") instance=ExtResource("16_v7idv")]
+[node name="rock" parent="rocks/random_big_rock86" unique_id=647967962 instance=ExtResource("16_v7idv")]
 transform = Transform3D(1.1984705, 0, 0, 0, 1.0944226, 0, 0, 0, 1.1984705, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock87" parent="rocks" unique_id=1043366444 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.357602, 0, 20.259237)
 seed_value = 3832546291
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock87" unique_id=1305318290 node_paths=PackedStringArray("sprite") instance=ExtResource("20_rlfjy")]
+[node name="rock" parent="rocks/random_big_rock87" unique_id=1305318290 instance=ExtResource("20_rlfjy")]
 transform = Transform3D(1.0833589, 0, 0, 0, 1.251421, 0, 0, 0, 1.0833589, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock88" parent="rocks" unique_id=1572773554 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.134032, 0, 18.994741)
 seed_value = 3529097877
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock88" unique_id=93144415 node_paths=PackedStringArray("sprite") instance=ExtResource("22_lq664")]
+[node name="rock" parent="rocks/random_big_rock88" unique_id=93144415 instance=ExtResource("22_lq664")]
 transform = Transform3D(1.3632491, 0, 0, 0, 1.5744642, 0, 0, 0, 1.3632491, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock89" parent="rocks" unique_id=1006285273 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.376164, 0, 14.223129)
 seed_value = 3743166428
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock89" unique_id=1070337545 node_paths=PackedStringArray("sprite") instance=ExtResource("16_v7idv")]
+[node name="rock" parent="rocks/random_big_rock89" unique_id=1070337545 instance=ExtResource("16_v7idv")]
 transform = Transform3D(1.3449925, 0, 0, 0, 1.4962945, 0, 0, 0, 1.3449925, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock90" parent="rocks" unique_id=611619266 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.188652, 0, 18.588608)
 seed_value = 165048783
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock90" unique_id=1264226656 node_paths=PackedStringArray("sprite") instance=ExtResource("19_wcwv1")]
+[node name="rock" parent="rocks/random_big_rock90" unique_id=1264226656 instance=ExtResource("19_wcwv1")]
 transform = Transform3D(0.9161534, 0, 0, 0, 1.0244313, 0, 0, 0, 0.9161534, 0.12547016, 0, 0.5550499)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock91" parent="rocks" unique_id=431522443 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4078736, 0, 25.792759)
 seed_value = 950179244
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock91" unique_id=303708119 node_paths=PackedStringArray("sprite") instance=ExtResource("16_v7idv")]
+[node name="rock" parent="rocks/random_big_rock91" unique_id=303708119 instance=ExtResource("16_v7idv")]
 transform = Transform3D(1.0100223, 0, 0, 0, 0.97416824, 0, 0, 0, 1.0100223, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock92" parent="rocks" unique_id=1700704892 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.388226, 0, 26.008793)
 seed_value = 3826353302
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock92" unique_id=1807696423 node_paths=PackedStringArray("sprite") instance=ExtResource("16_v7idv")]
+[node name="rock" parent="rocks/random_big_rock92" unique_id=1807696423 instance=ExtResource("16_v7idv")]
 transform = Transform3D(1.3402638, 0, 0, 0, 1.4031497, 0, 0, 0, 1.3402638, 0.15115929, 0, -0.24608232)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock93" parent="rocks" unique_id=45503569 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8571601, 0, 26.133951)
 seed_value = 687424092
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock93" unique_id=1024075583 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock93" unique_id=1024075583 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(1.0633289, 0, 0, 0, 1.1030872, 0, 0, 0, 1.0633289, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock94" parent="rocks" unique_id=1598886386 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1.721105, 0, 0, 0, 1.721105, 0, 0, 0, 1.721105, 8.292686, -0.688442, 29.413347)
 seed_value = 4149197549
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock94" unique_id=461647571 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
-transform = Transform3D(1.363297, 0, 0, 0, 1.3829746, 0, 0, 0, 1.363297, -0.3060936, 0, 0.41948694)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
+[node name="rock" parent="rocks/random_big_rock94" unique_id=461647571 instance=ExtResource("18_fcxiy")]
+transform = Transform3D(1.363297, 0, 0, 0, 1.3829746, 0, 0, 0, 1.363297, -0.49471012, 0, 0.34361988)
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock95" parent="rocks" unique_id=1579135974 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6468813, 0, 27.314224)
 seed_value = 2261106372
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock95" unique_id=930000219 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock95" unique_id=930000219 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(1.2938504, 0, 0, 0, 1.4363098, 0, 0, 0, 1.2938504, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock96" parent="rocks" unique_id=2110087576 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.90449, 0, 31.154133)
 seed_value = 816772689
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock96" unique_id=628918184 node_paths=PackedStringArray("sprite") instance=ExtResource("21_g7usf")]
+[node name="rock" parent="rocks/random_big_rock96" unique_id=628918184 instance=ExtResource("21_g7usf")]
 transform = Transform3D(1.3480923, 0, 0, 0, 1.6075292, 0, 0, 0, 1.3480923, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock97" parent="rocks" unique_id=1675987586 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.849918, 0, 27.246035)
 seed_value = 878216580
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock97" unique_id=960860880 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
-transform = Transform3D(1.1979297, 0, 0, 0, 1.1225147, 0, 0, 0, 1.1979297, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
+[node name="rock" parent="rocks/random_big_rock97" unique_id=960860880 instance=ExtResource("18_fcxiy")]
+transform = Transform3D(1.1979297, 0, 0, 0, 1.1225147, 0, 0, 0, 1.1979297, 0.15675831, 0, -0.37212563)
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock98" parent="rocks" unique_id=69654546 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.245008, 0, 28.024708)
 seed_value = 1316371496
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock98" unique_id=2121477315 node_paths=PackedStringArray("sprite") instance=ExtResource("16_v7idv")]
+[node name="rock" parent="rocks/random_big_rock98" unique_id=2121477315 instance=ExtResource("16_v7idv")]
 transform = Transform3D(1.1679735, 0, 0, 0, 1.160274, 0, 0, 0, 1.1679735, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock99" parent="rocks" unique_id=309360760 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1.8415973, 0, 0, 0, 1.8415973, 0, 0, 0, 1.8415973, 9.881441, -0.73663896, 31.337992)
 seed_value = 2623095331
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock99" unique_id=868319011 node_paths=PackedStringArray("sprite") instance=ExtResource("17_uvmh6")]
+[node name="rock" parent="rocks/random_big_rock99" unique_id=868319011 instance=ExtResource("17_uvmh6")]
 transform = Transform3D(0.86559254, 0, 0, 0, 0.8580745, 0, 0, 0, 0.86559254, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock100" parent="rocks" unique_id=749759527 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.903783, 0, 34.02859)
 seed_value = 1643233655
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock100" unique_id=676043930 node_paths=PackedStringArray("sprite") instance=ExtResource("21_g7usf")]
+[node name="rock" parent="rocks/random_big_rock100" unique_id=676043930 instance=ExtResource("21_g7usf")]
 transform = Transform3D(1.3731596, 0, 0, 0, 1.5511107, 0, 0, 0, 1.3731596, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
 [node name="random_big_rock101" parent="rocks" unique_id=1404074337 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.738205, 0, 32.67599)
 seed_value = 3767371065
 
-[node name="rock" type="StaticBody3D" parent="rocks/random_big_rock101" unique_id=283618476 node_paths=PackedStringArray("sprite") instance=ExtResource("18_fcxiy")]
+[node name="rock" parent="rocks/random_big_rock101" unique_id=283618476 instance=ExtResource("18_fcxiy")]
 transform = Transform3D(0.828101, 0, 0, 0, 0.8092123, 0, 0, 0, 0.828101, 0, 0, 0)
-script = ExtResource("16_gvuos")
-sprite = NodePath("sprite")
-flash_shader = ExtResource("17_n6gv5")
-crumble_scene = ExtResource("18_044ee")
 metadata/random_big_rock_generated = true
 
-[node name="random_big_rock102" type="Node3D" parent="rocks" unique_id=1911075240 instance=ExtResource("14_57wvg")]
+[node name="random_big_rock102" parent="rocks" unique_id=1911075240 instance=ExtResource("14_57wvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.679888, 0, 28.109318)
-script = ExtResource("15_grkr3")
-rock_scenes = Array[PackedScene]([ExtResource("16_v7idv"), ExtResource("17_uvmh6"), ExtResource("18_fcxiy"), ExtResource("19_wcwv1"), ExtResource("20_rlfjy"), ExtResource("21_g7usf"), ExtResource("22_lq664"), ExtResource("23_n20jr")])
 seed_value = 3255583044
 
-[node name="detection" parent="enemy_2" index="0"]
-radius = 6.72
+[node name="rock" parent="rocks/random_big_rock102" unique_id=658999340 instance=ExtResource("17_uvmh6")]
+transform = Transform3D(0.86113846, 0, 0, 0, 0.99543625, 0, 0, 0, 0.86113846, 0, 0, 0)
+metadata/random_big_rock_generated = true
 
-[node name="detection" parent="enemy_3" index="0"]
-radius = 6.72
+[node name="random_big_rock103" type="Node3D" parent="rocks" unique_id=831520233 instance=ExtResource("14_57wvg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.689766, 0, 36.591484)
+script = ExtResource("15_grkr3")
+rock_scenes = Array[PackedScene]([ExtResource("16_v7idv"), ExtResource("17_uvmh6"), ExtResource("18_fcxiy"), ExtResource("19_wcwv1"), ExtResource("20_rlfjy"), ExtResource("21_g7usf"), ExtResource("22_lq664"), ExtResource("23_n20jr")])
+seed_value = 2032032625
+
+[node name="random_big_rock104" type="Node3D" parent="rocks" unique_id=439511631 instance=ExtResource("14_57wvg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.806942, 0, 36.992607)
+script = ExtResource("15_grkr3")
+rock_scenes = Array[PackedScene]([ExtResource("16_v7idv"), ExtResource("17_uvmh6"), ExtResource("18_fcxiy"), ExtResource("19_wcwv1"), ExtResource("20_rlfjy"), ExtResource("21_g7usf"), ExtResource("22_lq664"), ExtResource("23_n20jr")])
+seed_value = 2872812881
 
 [editable path="ground"]
 [editable path="enemy_2"]
