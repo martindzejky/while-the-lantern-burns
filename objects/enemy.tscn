@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dp4r0732t61ar" path="res://scripts/camera_facing.gd" id="2"]
 [ext_resource type="Animation" uid="uid://cbv4lpq2nqrjk" path="res://animations/enemy/bite.tres" id="bite"]
 [ext_resource type="AudioStream" uid="uid://dqdofokmi7auy" path="res://audio/enemy/bite.tres" id="bite_audio"]
-[ext_resource type="AudioStream" uid="uid://bf8sxfao2lt7x" path="res://audio/enemy/death.tres" id="death_audio"]
+[ext_resource type="AudioStream" path="res://audio/rock_crumble/rock_crumble.tres" id="death_audio"]
 [ext_resource type="Texture2D" uid="uid://bk7fvathwdwla" path="res://sprites/eyes_01.png" id="eyes_01"]
 [ext_resource type="Texture2D" uid="uid://cur46g6ijq1ux" path="res://sprites/eyes_02.png" id="eyes_02"]
 [ext_resource type="Texture2D" uid="uid://drdmanyg3467g" path="res://sprites/eyes_03.png" id="eyes_03"]

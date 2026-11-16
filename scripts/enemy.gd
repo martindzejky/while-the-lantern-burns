@@ -168,6 +168,7 @@ func take_shot() -> void:
   vocal_audio.stream = death_stream
   vocal_audio.bus = &'World SFX Heavy Reverb'
   vocal_audio.volume_db += 3.0
+  vocal_audio.max_db = -12.0
   vocal_audio.play()
   var tween := create_tween().set_parallel(true).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
   for sprite: Sprite3D in [body, head_sprite]:

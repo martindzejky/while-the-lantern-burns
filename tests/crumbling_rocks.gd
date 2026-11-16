@@ -102,9 +102,15 @@ func _run() -> void:
   var sounds := audio.stream as AudioStreamRandomizer
   _expect(audio.playing and audio.bus == &'World SFX Heavy Reverb', 'crumble sound starts on world SFX bus')
   _expect(sounds.streams_count == 3, 'three crumble variants are configured')
+  var longest_duration := 0.0
   for index: int in range(sounds.streams_count):
-    _expect(is_equal_approx(sounds.get_stream(index).get_length(), 2.0), 'sound variant lasts exactly two seconds')
-  await create_timer(3.2).timeout
+    var duration := sounds.get_stream(index).get_length()
+    _expect(duration > effect.lifetime, 'sound variant outlasts the dust')
+    longest_duration = maxf(longest_duration, duration)
+  var tail_check_time := effect.lifetime + 0.25
+  await create_timer(tail_check_time).timeout
+  _expect(is_instance_valid(audio) and audio.playing, 'crumble audio keeps playing after the dust ends')
+  await create_timer(longest_duration - tail_check_time + 0.3).timeout
   _expect(not is_instance_valid(effect), 'dust and audio clean themselves up')
   world.queue_free()
   await process_frame
