@@ -3,23 +3,30 @@ extends EditorPlugin
 
 const RANDOM_ROCK: PackedScene = preload('res://objects/random_big_rock.tscn')
 
-var _place_button: Button
+var _placement_controls: HBoxContainer
 
 
 func _enter_tree() -> void:
-  _place_button = Button.new()
-  _place_button.text = 'Place Random Rock'
-  _place_button.tooltip_text = 'Place a rock on the cave floor at the center of the 3D view.'
-  _place_button.pressed.connect(_place_rock)
-  add_control_to_container(CONTAINER_SPATIAL_EDITOR_MENU, _place_button)
+  _placement_controls = HBoxContainer.new()
+  _add_button('Place Random Rock', false)
+  _add_button('Place Huge Rock', true)
+  add_control_to_container(CONTAINER_SPATIAL_EDITOR_MENU, _placement_controls)
 
 
 func _exit_tree() -> void:
-  remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, _place_button)
-  _place_button.queue_free()
+  remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, _placement_controls)
+  _placement_controls.queue_free()
 
 
-func _place_rock() -> void:
+func _add_button(label: String, huge: bool) -> void:
+  var button := Button.new()
+  button.text = label
+  button.tooltip_text = 'Place a rock at the center of the 3D view.'
+  button.pressed.connect(_place_rock.bind(huge))
+  _placement_controls.add_child(button)
+
+
+func _place_rock(huge: bool) -> void:
   var level := EditorInterface.get_edited_scene_root() as Node3D
   var ground := level.get_node_or_null('ground') as CSGPolygon3D if level != null else null
   if ground == null:
@@ -35,10 +42,10 @@ func _place_rock() -> void:
     EditorInterface.get_editor_toaster().push_toast('Tilt the 3D view toward the cave floor.')
     return
   var floor_position: Vector3 = hit
-  _add_rock(level, floor_position)
+  _add_rock(level, floor_position, huge)
 
 
-func _add_rock(level: Node3D, floor_position: Vector3) -> void:
+func _add_rock(level: Node3D, floor_position: Vector3, huge: bool) -> void:
   var rocks := level.get_node_or_null('rocks') as Node3D
   var create_container: bool = rocks == null
   if create_container:
@@ -47,10 +54,14 @@ func _add_rock(level: Node3D, floor_position: Vector3) -> void:
 
   var rock := RANDOM_ROCK.instantiate() as RandomBigRock
   rock.seed_value = randi()
+  if huge:
+    var size: float = randf_range(1.4, 2.0)
+    rock.scale = Vector3.ONE * size
+    floor_position.y -= size * 0.4
   rock.position = level.to_local(floor_position) if create_container else rocks.to_local(floor_position)
 
   var history: EditorUndoRedoManager = get_undo_redo()
-  history.create_action('Place Random Rock', UndoRedo.MERGE_DISABLE, level)
+  history.create_action('Place Huge Rock' if huge else 'Place Random Rock', UndoRedo.MERGE_DISABLE, level)
   if create_container:
     history.add_do_method(level, &'add_child', rocks, true)
     history.add_do_property(rocks, &'owner', level)
