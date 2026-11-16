@@ -100,7 +100,9 @@ func _run() -> void:
   world.add_child(effect)
   var audio := effect.get_node('audio') as AudioStreamPlayer3D
   var sounds := audio.stream as AudioStreamRandomizer
-  _expect(audio.playing and audio.bus == &'World SFX Heavy Reverb', 'crumble sound starts on world SFX bus')
+  _expect(not audio.playing, 'rock impact leaves a gap after the musket blast')
+  await (effect.get_node('impact_delay') as Timer).timeout
+  _expect(audio.playing and audio.bus == &'World SFX', 'crumble sound starts on world SFX bus')
   _expect(sounds.streams_count == 3, 'three crumble variants are configured')
   var longest_duration := 0.0
   for index: int in range(sounds.streams_count):
