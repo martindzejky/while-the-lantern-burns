@@ -6,6 +6,8 @@ signal bite_finished(enemy: Enemy)
 signal bite_windup_finished(enemy: Enemy)
 signal bite_landed(enemy: Enemy)
 
+const ROCK_CRUMBLE: PackedScene = preload('res://effects/rock_crumble.tscn')
+
 @export var target: Player
 @export var appearance: Node3D
 @export var head: Node3D
@@ -47,6 +49,7 @@ signal bite_landed(enemy: Enemy)
 @export var head_collapse_distance: float = 0.45
 
 var _dead: bool = false
+var _crumbling: bool = false
 var _engaged: bool = false
 var _growl_timer: RandomTimer
 var _biting: bool = false
@@ -152,6 +155,7 @@ func is_chasing() -> bool:
 
 func take_shot() -> void:
   if _dead:
+    _crumble_corpse()
     return
   _dead = true
   _finish_bite()
@@ -170,12 +174,33 @@ func take_shot() -> void:
   vocal_audio.volume_db += 3.0
   vocal_audio.max_db = -12.0
   vocal_audio.play()
+  var tween := _flash_hit(hit_flash_duration)
+  tween.tween_property(head, 'position:y', _head_base_y - head_collapse_distance, 0.25)
+
+
+func _crumble_corpse() -> void:
+  if _crumbling:
+    return
+  _crumbling = true
+  collision_layer = 0
+  collision_mask = 0
+  _flash_hit(0.08).chain().tween_callback(_spawn_crumble)
+
+
+func _spawn_crumble() -> void:
+  var effect := ROCK_CRUMBLE.instantiate() as Node3D
+  effect.transform = transform
+  get_parent().add_child(effect)
+  queue_free()
+
+
+func _flash_hit(duration: float) -> Tween:
   var tween := create_tween().set_parallel(true).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
   for sprite: Sprite3D in [body, head_sprite]:
     var material := sprite.material_override as StandardMaterial3D
     material.emission_energy_multiplier = 1.0
-    tween.tween_property(material, 'emission_energy_multiplier', 0.0, hit_flash_duration)
-  tween.tween_property(head, 'position:y', _head_base_y - head_collapse_distance, 0.25)
+    tween.tween_property(material, 'emission_energy_multiplier', 0.0, duration)
+  return tween
 
 
 func _within_bite_range() -> bool:

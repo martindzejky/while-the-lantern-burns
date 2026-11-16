@@ -114,6 +114,7 @@ func _run() -> void:
   _expect(is_instance_valid(audio) and audio.playing, 'crumble audio keeps playing after the dust ends')
   await create_timer(longest_duration - tail_check_time + 0.3).timeout
   _expect(not is_instance_valid(effect), 'dust and audio clean themselves up')
+  await _check_enemy_corpse(world, player, musket)
   world.queue_free()
   await process_frame
   for audio_player: Node in root.find_children('*', 'AudioStreamPlayer', true, false):
@@ -122,6 +123,36 @@ func _run() -> void:
   await create_timer(0.1).timeout
   print('Crumbling rocks: %d checks, %d failures' % [_checks, _failures])
   quit(1 if _failures else 0)
+
+
+func _check_enemy_corpse(world: Node3D, player: Player, musket: Musket) -> void:
+  var enemy := preload('res://objects/enemy.tscn').instantiate() as Enemy
+  enemy.target = player
+  world.add_child(enemy)
+  enemy.set_physics_process(false)
+  await physics_frame
+  await physics_frame
+
+  for shot: int in range(1, 3):
+    musket.is_aiming = true
+    musket.reload_state = Musket.ReloadState.LOADED
+    musket.is_lit = true
+    var hit := musket.fire(player.position, Vector3.ZERO, player.get_rid())
+    _expect(hit.get('collider') == enemy, 'musket shot %d hits the enemy' % shot)
+    if shot == 1:
+      _expect(enemy.vocal_audio.playing, 'lethal hit starts the corpse sound')
+      await create_timer(0.35).timeout
+      _expect(not world.has_node('rock_crumble'), 'lethal hit leaves the corpse without rock smoke')
+
+  _expect(enemy.collision_layer == 0 and enemy.collision_mask == 0, 'corpse hit clears the blocking collider')
+  await create_timer(0.15).timeout
+  _expect(not is_instance_valid(enemy), 'corpse disappears after the second hit')
+  var dust := world.get_node_or_null('rock_crumble') as CPUParticles3D
+  _expect(dust != null and dust.emitting and dust.position.is_equal_approx(Vector3.ZERO), 'corpse emits rock smoke at its position')
+  if dust != null:
+    var audio := dust.get_node('audio') as AudioStreamPlayer3D
+    await (dust.get_node('impact_delay') as Timer).timeout
+    _expect(audio.playing, 'corpse plays the rock crumble sound')
 
 
 func _expect(condition: bool, message: String) -> void:
