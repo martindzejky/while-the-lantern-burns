@@ -50,13 +50,13 @@ head_variant = 0
 body_variant = 1
 eye_variant = 0
 
-[node name="enemy_2" parent="." instance=ExtResource("enemy")]
+[node name="enemy_2" parent="." groups=["enemy_alert_deep_cave_lower_room"] instance=ExtResource("enemy")]
 position = Vector3(-1, 0, 18)
 head_variant = 1
 body_variant = 2
 eye_variant = 1
 
-[node name="enemy_3" parent="." instance=ExtResource("enemy")]
+[node name="enemy_3" parent="." groups=["enemy_alert_deep_cave_lower_room"] instance=ExtResource("enemy")]
 position = Vector3(7, 0, 15)
 head_variant = 2
 body_variant = 0

@@ -60,46 +60,46 @@ head_variant = 2
 body_variant = 0
 eye_variant = 2
 
-[node name="enemy_4" parent="." instance=ExtResource("enemy")]
+[node name="enemy_4" parent="." groups=["enemy_alert_escape_second_room"] instance=ExtResource("enemy")]
 position = Vector3(13.3, 0, 3.6)
 head_variant = 0
 body_variant = 1
 eye_variant = 3
 
-[node name="enemy_5" parent="." instance=ExtResource("enemy")]
+[node name="enemy_5" parent="." groups=["enemy_alert_escape_second_room"] instance=ExtResource("enemy")]
 position = Vector3(17.5, 0, -0.4)
 head_variant = 1
 body_variant = 2
 eye_variant = 0
 
-[node name="enemy_6" parent="." instance=ExtResource("enemy")]
+[node name="enemy_6" parent="." groups=["enemy_alert_escape_second_room"] instance=ExtResource("enemy")]
 position = Vector3(18.2, 0, -4.8)
 head_variant = 2
 body_variant = 0
 eye_variant = 1
 
-[node name="enemy_7" parent="." instance=ExtResource("enemy")]
+[node name="enemy_7" parent="." groups=["enemy_alert_escape_final_room"] instance=ExtResource("enemy")]
 position = Vector3(31.4, 0, -5.4)
 head_variant = 0
 body_variant = 1
 eye_variant = 2
 engagement_distance = 10.5
 
-[node name="enemy_8" parent="." instance=ExtResource("enemy")]
+[node name="enemy_8" parent="." groups=["enemy_alert_escape_final_room"] instance=ExtResource("enemy")]
 position = Vector3(32.8, 0, -3.5)
 head_variant = 1
 body_variant = 2
 eye_variant = 3
 engagement_distance = 10.5
 
-[node name="enemy_9" parent="." instance=ExtResource("enemy")]
+[node name="enemy_9" parent="." groups=["enemy_alert_escape_final_room"] instance=ExtResource("enemy")]
 position = Vector3(35.1, 0, -3)
 head_variant = 2
 body_variant = 0
 eye_variant = 0
 engagement_distance = 10.5
 
-[node name="enemy_10" parent="." instance=ExtResource("enemy")]
+[node name="enemy_10" parent="." groups=["enemy_alert_escape_final_room"] instance=ExtResource("enemy")]
 position = Vector3(36, 0, -5.8)
 head_variant = 0
 body_variant = 1

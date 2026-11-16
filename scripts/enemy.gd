@@ -140,13 +140,22 @@ func _physics_process(delta: float) -> void:
   if not _engaged:
     if global_position.distance_squared_to(target.global_position) > engagement_distance * engagement_distance:
       return
-    _engaged = true
-    _growl_timer.start()
+    alert()
+    for group: StringName in get_groups():
+      if group.begins_with('enemy_alert_'):
+        get_tree().call_group(group, &'alert')
   if _within_bite_range():
     bite()
   else:
     velocity = global_position.direction_to(target.global_position) * speed
     move_and_slide()
+
+
+func alert() -> void:
+  if _engaged or _dead or preview or target == null or target.is_dead:
+    return
+  _engaged = true
+  _growl_timer.start()
 
 
 func is_chasing() -> bool:
