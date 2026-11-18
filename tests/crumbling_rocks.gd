@@ -133,6 +133,8 @@ func _check_enemy_corpse(world: Node3D, player: Player, musket: Musket) -> void:
   await physics_frame
   await physics_frame
 
+  var death_impact: CPUParticles3D
+  var death_audio: AudioStreamPlayer3D
   for shot: int in range(1, 3):
     musket.is_aiming = true
     musket.reload_state = Musket.ReloadState.LOADED
@@ -140,13 +142,20 @@ func _check_enemy_corpse(world: Node3D, player: Player, musket: Musket) -> void:
     var hit := musket.fire(player.position, Vector3.ZERO, player.get_rid())
     _expect(hit.get('collider') == enemy, 'musket shot %d hits the enemy' % shot)
     if shot == 1:
-      _expect(enemy.vocal_audio.playing, 'lethal hit starts the corpse sound')
+      death_impact = world.get_node('death_impact') as CPUParticles3D
+      death_audio = death_impact.get_node('audio') as AudioStreamPlayer3D
+      _expect(not death_impact.emitting, 'lethal hit plays sound without rock smoke')
+      _expect(not enemy.vocal_audio.playing and not death_audio.playing, 'lethal impact leaves a gap after the musket blast')
+      _expect(death_audio.global_position.is_equal_approx(enemy.global_position), 'lethal impact originates at the monster')
+      await (death_impact.get_node('impact_delay') as Timer).timeout
+      _expect(death_audio.playing, 'lethal hit starts the rock shattering sound')
       await create_timer(0.35).timeout
       _expect(not world.has_node('rock_crumble'), 'lethal hit leaves the corpse without rock smoke')
 
   _expect(enemy.collision_layer == 0 and enemy.collision_mask == 0, 'corpse hit clears the blocking collider')
   await create_timer(0.15).timeout
   _expect(not is_instance_valid(enemy), 'corpse disappears after the second hit')
+  _expect(is_instance_valid(death_audio) and death_audio.playing, 'lethal impact keeps playing after corpse destruction')
   var dust := world.get_node_or_null('rock_crumble') as CPUParticles3D
   _expect(dust != null and dust.emitting and dust.position.is_equal_approx(Vector3.ZERO), 'corpse emits rock smoke at its position')
   if dust != null:
@@ -154,6 +163,10 @@ func _check_enemy_corpse(world: Node3D, player: Player, musket: Musket) -> void:
     if not audio.playing:
       await (dust.get_node('impact_delay') as Timer).timeout
     _expect(audio.playing, 'corpse plays the rock crumble sound')
+    _expect(death_audio.stream == audio.stream and death_audio.bus == audio.bus, 'kill and corpse destruction share the sound and bus')
+    _expect(death_audio.volume_db == audio.volume_db and death_audio.unit_size == audio.unit_size and death_audio.max_db == audio.max_db, 'kill and corpse destruction share gain and distance settings')
+    await create_timer(3.6).timeout
+    _expect(not is_instance_valid(death_impact), 'lethal impact cleans up after its sound finishes')
 
 
 func _expect(condition: bool, message: String) -> void:

@@ -46,9 +46,9 @@ func _run() -> void:
   _expect(is_equal_approx(player.get_movement_speed(false), 2.24), 'other windup keeps slowdown after first lunge')
   enemies[1].take_shot()
   _expect(is_equal_approx(player.get_movement_speed(false), 3.2), 'killing final windup restores movement')
-  var death_audio := enemies[1].vocal_audio
-  _expect(death_audio.playing and death_audio.stream == preload('res://audio/rock_crumble/rock_crumble.tres'), 'lethal shot plays the rock crumble sound')
-  _expect(death_audio.bus == &'World SFX Heavy Reverb', 'lethal shot uses the world impact bus')
+  var death_audio := world.get_node('death_impact/audio') as AudioStreamPlayer3D
+  _expect(death_audio.stream == preload('res://audio/rock_crumble/rock_crumble.tres'), 'lethal shot uses the rock crumble sound')
+  _expect(death_audio.bus == &'World SFX', 'lethal shot uses the same bus as corpse destruction')
   enemy._finish_bite()
   enemy.bite()
   enemy._begin_lunge()

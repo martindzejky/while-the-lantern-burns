@@ -183,13 +183,21 @@ func take_shot() -> void:
   eyes.hide()
   mouth.hide()
   head_lift.position = Vector3.ZERO
-  vocal_audio.stream = death_stream
-  vocal_audio.bus = &'World SFX Heavy Reverb'
-  vocal_audio.volume_db += 3.0
-  vocal_audio.max_db = -12.0
-  vocal_audio.play()
+  vocal_audio.stop()
+  _play_death_sound()
   var tween := _flash_hit(hit_flash_duration)
   tween.tween_property(head, 'position:y', _head_base_y - head_collapse_distance, 0.25)
+
+
+func _play_death_sound() -> void:
+  var impact := ROCK_CRUMBLE.instantiate() as CPUParticles3D
+  impact.name = 'death_impact'
+  impact.emitting = false
+  impact.transform = transform
+  (impact.get_node('audio') as AudioStreamPlayer3D).stream = death_stream
+  # Match the corpse's brief flash plus impact delay, without emitting smoke.
+  (impact.get_node('impact_delay') as Timer).wait_time += 0.08
+  get_parent().add_child(impact)
 
 
 func _crumble_corpse() -> void:
