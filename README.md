@@ -2,10 +2,13 @@
 
 A game for the Ludum Dare #60 compo. Explore dark caverns, keep your lantern charged, and prepare your musket for what waits beyond the light.
 
+Development is complete. This repository preserves the game and its source, including updates made after the jam.
+
 ## Links
 
 - [Play the game on Itch](https://martindzejky.itch.io/while-the-lantern-burns)
-- [Rate on Ludum Dare](https://ldjam.com/events/ludum-dare/60/while-the-lantern-burns)
+- [Ludum Dare submission](https://ldjam.com/events/ludum-dare/60/while-the-lantern-burns)
+- [Illustrated how-to-play guide](https://martindzejky.itch.io/while-the-lantern-burns/devlog/1716534/how-to-play-the-game)
 
 ## Screenshots
 
@@ -24,24 +27,37 @@ A game for the Ludum Dare #60 compo. Explore dark caverns, keep your lantern cha
   </tr>
 </table>
 
-## Progress
+## How to play
+
+Play in a desktop browser with a keyboard and mouse. The main menu includes an illustrated **How to Play** guide and a **Controls** screen.
+
+| Input | Action |
+| --- | --- |
+| WASD / Arrow keys | Move |
+| E / Enter | Pick up an item or put down the lantern |
+| Left click on the lantern handle | Pump the lantern |
+| Left click on the musket barrel opening | Insert a ball |
+| Left click + drag the ramrod down | Load the musket |
+| R / Shift / Space beside a charged, grounded lantern | Light the loaded musket's fuse |
+| Hold right mouse + move the mouse | Aim |
+| Left click while aiming | Fire |
+| Escape | Pause |
+
+Put the lantern down to use the musket. Keep the lantern charged, and shoot rocks to clear blocked passages.
+
+## Saving progress
 
 The journey has three caves. Entering a cave saves a checkpoint; Retry restores that cave's entrance, equipment and tutorial progress, with its monsters reset. Continue resumes the checkpoint after closing the game. New Game replaces it, and escaping clears it.
 
-Discovered equipment follows you between caves. Lantern charge, reload progress and remaining fuse time carry over; transitions pause them. A pending trigger pull is cancelled when crossing, leaving the loaded shot available.
+Discovered equipment follows you between caves. Lantern charge, reload progress and remaining fuse time carry over.
 
-Web saves use the browser's storage for the current site. Native saves use Godot's `user://` directory.
+Web saves use the browser's storage for the current site. Clearing that storage removes your progress. Native saves use Godot's user data directory.
 
-To check checkpoints, level geometry, camera facing and monster threats:
+## Running the source
 
-```sh
-godot --headless --script res://tests/checkpoints.gd
-godot --headless --script res://tests/levels.gd
-godot --headless --script res://tests/camera_facing.gd
-godot --headless --script res://tests/monster_threat.gd
-godot --headless --script res://tests/crumbling_rocks.gd
-godot --headless --script res://tests/ending.gd
-```
+Open `project.godot` in **Godot 4.7.2** and press **F5** to play the full game. The project uses the Compatibility renderer and needs no additional plugins or dependencies to run.
+
+See [DEVELOPMENT.md](DEVELOPMENT.md) for validation, Web export and release instructions.
 
 ## Theme
 
@@ -49,7 +65,7 @@ godot --headless --script res://tests/ending.gd
 
 ## Goal
 
-My main goal was to make something tiny and original that doubles as a technical and artistic playground for my bigger project [Whisperlands](https://www.youtube.com/@martindzejky). I think I did manage to achieve that here. I experiment with many ideas and techniques that I wanted to try for a long time, and I learned a ton of new things with Godot.
+My main goal was to make something tiny and original that doubles as a technical and artistic playground for my bigger project [Whisperlands](https://www.youtube.com/@martindzejky). I think I did manage to achieve that here. I experimented with many ideas and techniques that I wanted to try for a long time, and I learned a ton of new things with Godot.
 
 ## Experiments
 
@@ -69,3 +85,11 @@ These are what I wanted to try out:
 - ElevenLabs - Used their audio samples for sound effects and ambience in the game.
 - Ableton - Editing and layering sounds.
 - LosslessCut - Quick cropping of audio samples.
+
+## License and credits
+
+Created by Martin Jakubík. The source code is available under the [MIT license](LICENSE).
+
+- The Barlow font is by The Barlow Project Authors, licensed under the [SIL Open Font License 1.1](resources/menu/OFL.txt).
+- Sound effects and ambience use samples from ElevenLabs, edited and layered for the game. These third-party samples are subject to their original licensing terms.
+- Editable rock artwork is in [art/rocks](art/rocks/README.md), and the Ableton music project is in `music/`.

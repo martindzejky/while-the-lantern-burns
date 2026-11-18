@@ -274,7 +274,6 @@ func _discharge(end: Vector3, hit: Dictionary) -> void:
   is_lit = false
   reload_changed.emit()
   lit_changed.emit(false)
-  print('Musket fired: ', hit.get('collider', 'miss'))
   fired.emit(hit)
 
 
