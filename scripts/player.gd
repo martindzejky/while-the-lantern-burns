@@ -18,6 +18,7 @@ signal ramrod_drag_changed(dragging: bool)
 @export var body_audio: AudioStreamPlayer3D
 @export var footstep_audio: AudioStreamPlayer3D
 @export var audio_listener: AudioListener3D
+@export var shape: CollisionShape3D
 @export var aim_height: float = 0.7
 @export var pickup_radius: float = 1.5
 @export var speed: float = 3.2
@@ -26,6 +27,7 @@ signal ramrod_drag_changed(dragging: bool)
 @export var darkness_grace: float = 2.0
 
 var is_dead: bool = false
+var is_escaping: bool = false
 var darkness_progress: float = 0.0
 var is_lit: bool:
   get:
@@ -56,6 +58,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+  if is_escaping:
+    return
   _update_equipment()
 
 
@@ -188,7 +192,7 @@ func _on_darkness_expired() -> void:
 
 
 func die() -> void:
-  if is_dead:
+  if is_dead or is_escaping:
     return
   is_dead = true
   _darkness_timer.stop()
@@ -206,6 +210,39 @@ func die() -> void:
   set_process_input(false)
   set_process_unhandled_input(false)
   died.emit()
+
+
+func begin_escape() -> void:
+  is_escaping = true
+  set_darkness_enabled(false)
+  _set_dragging_ramrod(false)
+  _shot_requested = false
+  _fuse_shot_requested = false
+  musket.set_aiming(false)
+  musket.process_mode = Node.PROCESS_MODE_DISABLED
+  lantern.process_mode = Node.PROCESS_MODE_DISABLED
+  aim_line.hide()
+  collision_layer = 0
+  collision_mask = 0
+  shape.disabled = true
+  set_process_input(false)
+  set_process_unhandled_input(false)
+  # the cave is frozen, but the player and walk animation keep running.
+  process_mode = Node.PROCESS_MODE_PAUSABLE
+  rig.set_frozen(false)
+  rig.set_facing(Vector2.UP)
+  rig.set_moving(true)
+  rig.set_equipment_pose(
+    CharacterRig.EquipmentPose.LANTERN if lantern.is_carried else CharacterRig.EquipmentPose.IDLE
+  )
+  _position_musket(false)
+
+
+func finish_escape() -> void:
+  velocity = Vector3.ZERO
+  rig.set_moving(false)
+  set_physics_process(false)
+  footstep_audio.stop()
 
 
 func _drop_equipment() -> void:
@@ -322,7 +359,7 @@ func _position_musket(in_hands: bool) -> void:
 
 func _aiming_requested() -> bool:
   return (
-    not is_dead and musket.is_owned and not lantern.is_carried and not _dragging_ramrod
+    not is_dead and not is_escaping and musket.is_owned and not lantern.is_carried and not _dragging_ramrod
     and (musket.is_trigger_pending or Input.is_action_pressed('aim_musket'))
   )
 
@@ -370,7 +407,11 @@ func get_movement_speed(aiming: bool) -> float:
   return movement_speed * 0.7 if _bite_threatened else movement_speed
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+  if is_escaping:
+    velocity = Vector3.FORWARD * speed
+    global_position += velocity * delta
+    return
   if not _darkness_timer.is_stopped():
     _set_darkness_progress(clampf(1.0 - _darkness_timer.time_left / darkness_grace, 0.0, 1.0))
   if musket.is_trigger_pending or rig.is_recoiling:
@@ -413,7 +454,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_rig_stepped() -> void:
-  if not is_dead and not velocity.is_zero_approx() and not musket.is_trigger_pending and not rig.is_recoiling:
+  if not is_dead and not velocity.is_zero_approx() and (is_escaping or not musket.is_trigger_pending) and not rig.is_recoiling:
     footstep_audio.play()
 
 

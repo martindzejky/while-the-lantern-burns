@@ -141,8 +141,11 @@ func _finish_level() -> void:
     level_completed.emit()
   else:
     equipment_hud.hide()
-    victory_screen.open()
+    player.begin_escape()
+    await get_tree().create_timer(1.6).timeout
     escaped.emit()
+    await victory_screen.open()
+    player.finish_escape()
 
 
 func _unhandled_input(event: InputEvent) -> void:

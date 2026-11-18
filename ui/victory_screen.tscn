@@ -5,12 +5,14 @@
 [ext_resource type="Script" uid="uid://cfrdjgss1fy2d" path="res://scripts/victory_screen.gd" id="script"]
 [ext_resource type="Theme" uid="uid://drxw11x7lxcwj" path="res://resources/menu/theme.tres" id="theme"]
 
-[node name="victory_screen" type="CanvasLayer" unique_id=220950513 node_paths=PackedStringArray("panel", "menu_button")]
+[node name="victory_screen" type="CanvasLayer" unique_id=220950513 node_paths=PackedStringArray("panel", "background", "title", "menu_button")]
 process_mode = 3
 layer = 100
 visible = false
 script = ExtResource("script")
 panel = NodePath("panel")
+background = NodePath("panel/background")
+title = NodePath("panel/center/column/title")
 menu_button = NodePath("panel/center/column/main_menu")
 
 [node name="panel" type="Control" parent="." unique_id=1168189035]

@@ -40,6 +40,7 @@ godot --headless --script res://tests/levels.gd
 godot --headless --script res://tests/camera_facing.gd
 godot --headless --script res://tests/monster_threat.gd
 godot --headless --script res://tests/crumbling_rocks.gd
+godot --headless --script res://tests/ending.gd
 ```
 
 ## Theme

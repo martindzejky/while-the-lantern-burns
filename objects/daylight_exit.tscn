@@ -1,0 +1,151 @@
+[gd_scene format=3]
+
+[ext_resource type="Shader" path="res://shaders/exit_grass.gdshader" id="grass_shader"]
+[ext_resource type="PackedScene" path="res://objects/grass_tuft.tscn" id="grass_tuft"]
+[ext_resource type="Shader" path="res://shaders/exit_daylight.gdshader" id="daylight_shader"]
+[ext_resource type="Texture2D" path="res://resources/ground/light_profile.tres" id="light_profile"]
+[ext_resource type="Texture2D" path="res://resources/ground/world_light_profile.tres" id="world_light_profile"]
+
+[sub_resource type="ShaderMaterial" id="grass_material"]
+shader = ExtResource("grass_shader")
+shader_parameter/ground_light_curve = ExtResource("light_profile")
+shader_parameter/world_light_curve = ExtResource("world_light_profile")
+
+[sub_resource type="ShaderMaterial" id="daylight_material"]
+shader = ExtResource("daylight_shader")
+
+[sub_resource type="QuadMesh" id="daylight_mesh"]
+size = Vector2(17, 16)
+
+[node name="daylight_exit" type="Node3D"]
+
+[node name="grass" type="CSGPolygon3D" parent="."]
+position = Vector3(0, 0.025, 0)
+rotation_degrees = Vector3(90, 0, 0)
+cast_shadow = 0
+polygon = PackedVector2Array(-6.0, 6, -6.3, 0, -7.1, -5, -8.5, -14, -12.5, -24, 14, -24, 10.0, -14, 7.2, -5, 6.5, 0, 6.0, 6)
+depth = 0.001
+material = SubResource("grass_material")
+
+[node name="tufts" type="Node3D" parent="."]
+
+[node name="tuft_1" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-5.1, 0.03, 1.5)
+scale = Vector3(1.0, 1.0, 1.0)
+
+[node name="tuft_2" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(4.9, 0.03, 0.3)
+scale = Vector3(0.85, 0.85, 0.85)
+
+[node name="tuft_3" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-5.8, 0.03, -3)
+scale = Vector3(1.2, 1.2, 1.2)
+
+[node name="tuft_4" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(6.2, 0.03, -4)
+scale = Vector3(0.95, 0.95, 0.95)
+
+[node name="tuft_5" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-6.7, 0.03, -7)
+scale = Vector3(0.9, 0.9, 0.9)
+
+[node name="tuft_6" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(7.1, 0.03, -9)
+scale = Vector3(1.1, 1.1, 1.1)
+
+[node name="tuft_7" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-7.4, 0.03, -11)
+scale = Vector3(1.25, 1.25, 1.25)
+
+[node name="tuft_8" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(8.4, 0.03, -13)
+scale = Vector3(1.0, 1.0, 1.0)
+
+[node name="tuft_9" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-3.3, 0.03, -9)
+scale = Vector3(0.7, 0.7, 0.7)
+
+[node name="tuft_10" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(3.8, 0.03, -13)
+scale = Vector3(0.85, 0.85, 0.85)
+
+[node name="tuft_11" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(1.8, 0.03, -19)
+scale = Vector3(1.0, 1.0, 1.0)
+
+[node name="tuft_12" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-8, 0.03, -19)
+scale = Vector3(1.15, 1.15, 1.15)
+
+[node name="tuft_13" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-3.8, 0.03, 0.2)
+scale = Vector3(0.75, 0.75, 0.75)
+
+[node name="tuft_14" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(3.4, 0.03, -1.8)
+scale = Vector3(0.9, 0.9, 0.9)
+
+[node name="tuft_15" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-4.7, 0.03, -5.2)
+scale = Vector3(1.05, 1.05, 1.05)
+
+[node name="tuft_16" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(5.2, 0.03, -6.4)
+scale = Vector3(0.8, 0.8, 0.8)
+
+[node name="tuft_17" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-1.9, 0.03, -7.5)
+scale = Vector3(0.65, 0.65, 0.65)
+
+[node name="tuft_18" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(2.5, 0.03, -10.5)
+scale = Vector3(0.9, 0.9, 0.9)
+
+[node name="tuft_19" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-5.6, 0.03, -13.5)
+scale = Vector3(1.15, 1.15, 1.15)
+
+[node name="tuft_20" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(6.6, 0.03, -16.2)
+scale = Vector3(1.0, 1.0, 1.0)
+
+[node name="tuft_21" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-2.8, 0.03, -17.3)
+scale = Vector3(0.85, 0.85, 0.85)
+
+[node name="tuft_22" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(4.7, 0.03, -20.5)
+scale = Vector3(1.1, 1.1, 1.1)
+
+[node name="tuft_23" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-9.2, 0.03, -22)
+scale = Vector3(1.2, 1.2, 1.2)
+
+[node name="tuft_24" parent="tufts" instance=ExtResource("grass_tuft")]
+position = Vector3(-0.6, 0.03, -22.4)
+scale = Vector3(0.95, 0.95, 0.95)
+
+[node name="daylight" type="Node3D" parent="."]
+
+[node name="spill" type="MeshInstance3D" parent="daylight"]
+position = Vector3(0, 1.8, -1.5)
+rotation_degrees = Vector3(-65, 0, -8)
+cast_shadow = 0
+mesh = SubResource("daylight_mesh")
+material_override = SubResource("daylight_material")
+
+[node name="morning_light" type="OmniLight3D" parent="daylight"]
+position = Vector3(0, 5, -7)
+light_color = Color(0.88, 0.95, 1, 1)
+light_energy = 0.8
+omni_range = 23.0
+omni_attenuation = 0.0
+shadow_enabled = true
+
+[node name="entrance_light" type="OmniLight3D" parent="daylight"]
+position = Vector3(0, 3, 2)
+light_color = Color(0.78, 0.88, 1, 1)
+light_energy = 0.45
+omni_range = 11.0
+omni_attenuation = 0.0
+shadow_enabled = true

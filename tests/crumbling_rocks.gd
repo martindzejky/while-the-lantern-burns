@@ -151,7 +151,8 @@ func _check_enemy_corpse(world: Node3D, player: Player, musket: Musket) -> void:
   _expect(dust != null and dust.emitting and dust.position.is_equal_approx(Vector3.ZERO), 'corpse emits rock smoke at its position')
   if dust != null:
     var audio := dust.get_node('audio') as AudioStreamPlayer3D
-    await (dust.get_node('impact_delay') as Timer).timeout
+    if not audio.playing:
+      await (dust.get_node('impact_delay') as Timer).timeout
     _expect(audio.playing, 'corpse plays the rock crumble sound')
 
 
