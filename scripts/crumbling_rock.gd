@@ -1,6 +1,8 @@
 class_name CrumblingRock
 extends StaticBody3D
 
+signal shot
+
 @export var sprite: Sprite3D
 @export var flash_shader: Shader
 @export var crumble_scene: PackedScene
@@ -15,6 +17,7 @@ func take_shot() -> void:
   _hit = true
   collision_layer = 0
   collision_mask = 0
+  shot.emit()
 
   var flash := ShaderMaterial.new()
   flash.shader = flash_shader

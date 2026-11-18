@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://ct5elay5mk4lb" path="res://objects/ground.tscn" id="ground"]
 [ext_resource type="PackedScene" uid="uid://c2k5x6ubue31m" path="res://objects/world_light.tscn" id="light"]
 [ext_resource type="Script" uid="uid://bp2dwudh415ft" path="res://scripts/cave_level.gd" id="script"]
+[ext_resource type="PackedScene" path="res://ui/world_hint.tscn" id="world_hint"]
+[ext_resource type="Script" path="res://scripts/rock_hint.gd" id="rock_hint"]
 
 [sub_resource type="BoxShape3D" id="exit_shape"]
 size = Vector3(3, 4, 5)
@@ -87,6 +89,14 @@ inner_radius = 2.0
 [node name="musket_refuge" parent="." unique_id=437207996 instance=ExtResource("focus")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 0)
 outer_radius = 8.5
+
+[node name="rock_hint" type="Node3D" parent="." node_paths=PackedStringArray("text", "rocks")]
+position = Vector3(24.5, 2.4, 1.7)
+script = ExtResource("rock_hint")
+text = NodePath("label/viewport/text")
+rocks = [NodePath("../rocks/random_big_rock80/rock"), NodePath("../rocks/random_big_rock81/rock"), NodePath("../rocks/random_big_rock82/rock"), NodePath("../rocks/random_big_rock83/rock")]
+
+[node name="label" parent="rock_hint" instance=ExtResource("world_hint")]
 
 [node name="rocks" type="Node3D" parent="." unique_id=929476774]
 
