@@ -26,11 +26,12 @@ ambient_light_color = Color(0.09, 0.18, 0.13, 1)
 ambient_light_energy = 0.11
 reflected_light_source = 2
 
-[node name="main_menu" type="Node3D" unique_id=462274930 node_paths=PackedStringArray("start_button", "continue_button", "quit_button", "title", "buttons", "settings", "settings_button", "controls", "controls_button", "how_to_play", "how_to_play_button")]
+[node name="main_menu" type="Node3D" unique_id=462274930 node_paths=PackedStringArray("start_button", "continue_button", "quit_button", "credits", "title", "buttons", "settings", "settings_button", "controls", "controls_button", "how_to_play", "how_to_play_button")]
 script = ExtResource("script")
 start_button = NodePath("ui/layout/column/buttons/start")
 continue_button = NodePath("ui/layout/column/buttons/continue")
 quit_button = NodePath("ui/layout/column/buttons/quit")
+credits = NodePath("ui/layout/credits")
 title = NodePath("ui/layout/column/title")
 buttons = NodePath("ui/layout/column/buttons")
 settings = NodePath("ui/layout/column/settings")
@@ -186,6 +187,56 @@ anchor_top = 0.065
 anchor_right = 0.915
 anchor_bottom = 0.94
 
+[node name="credits" type="VBoxContainer" parent="ui/layout"]
+layout_mode = 0
+anchor_left = 0.55
+anchor_top = 1.0
+anchor_right = 0.915
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_bottom = -30.0
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="submission" type="LinkButton" parent="ui/layout/credits"]
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.72, 0.73, 0.67, 1)
+theme_override_colors/font_hover_color = Color(1, 0.73, 0.4, 1)
+theme_override_colors/font_focus_color = Color(1, 0.73, 0.4, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.58, 0.24, 1)
+theme_override_font_sizes/font_size = 18
+text = "Made for Ludum Dare 60"
+underline = 1
+
+[node name="source" type="LinkButton" parent="ui/layout/credits"]
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.72, 0.73, 0.67, 1)
+theme_override_colors/font_hover_color = Color(1, 0.73, 0.4, 1)
+theme_override_colors/font_focus_color = Color(1, 0.73, 0.4, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.58, 0.24, 1)
+theme_override_font_sizes/font_size = 18
+text = "Open source on GitHub"
+underline = 1
+
+[node name="issues" type="LinkButton" parent="ui/layout/credits"]
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.72, 0.73, 0.67, 1)
+theme_override_colors/font_hover_color = Color(1, 0.73, 0.4, 1)
+theme_override_colors/font_focus_color = Color(1, 0.73, 0.4, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.58, 0.24, 1)
+theme_override_font_sizes/font_size = 18
+text = "Report bugs as GitHub issues"
+underline = 1
+
 [node name="ui_audio" parent="." unique_id=391869637 instance=ExtResource("ui_audio")]
 
 [connection signal="focus_entered" from="ui/layout/column/buttons/start" to="ui_audio" method="play_hover"]
@@ -216,3 +267,9 @@ anchor_bottom = 0.94
 [connection signal="pressed" from="ui/layout/column/buttons/continue" to="ui_audio" method="play_click"]
 [connection signal="focus_entered" from="ui/layout/column/buttons/continue" to="ui_audio" method="play_hover"]
 [connection signal="mouse_entered" from="ui/layout/column/buttons/continue" to="ui_audio" method="play_hover"]
+
+[connection signal="pressed" from="ui/layout/credits/submission" to="." method="_on_submission_pressed"]
+
+[connection signal="pressed" from="ui/layout/credits/source" to="." method="_on_source_pressed"]
+
+[connection signal="pressed" from="ui/layout/credits/issues" to="." method="_on_issues_pressed"]

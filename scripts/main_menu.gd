@@ -7,6 +7,7 @@ signal continue_requested
 @export var start_button: Button
 @export var continue_button: Button
 @export var quit_button: Button
+@export var credits: VBoxContainer
 @export var title: Label
 @export var buttons: VBoxContainer
 @export var settings: AudioSettings
@@ -36,11 +37,13 @@ func _on_start_pressed() -> void:
 func _on_settings_pressed() -> void:
   buttons.hide()
   title.hide()
+  credits.hide()
   settings.open()
 
 
 func _on_settings_closed() -> void:
   title.show()
+  credits.show()
   buttons.show()
   settings_button.grab_focus()
 
@@ -52,11 +55,13 @@ func _on_quit_pressed() -> void:
 func _on_controls_pressed() -> void:
   buttons.hide()
   title.hide()
+  credits.hide()
   controls.open()
 
 
 func _on_controls_closed() -> void:
   title.show()
+  credits.show()
   buttons.show()
   controls_button.grab_focus()
 
@@ -64,11 +69,13 @@ func _on_controls_closed() -> void:
 func _on_how_to_play_pressed() -> void:
   buttons.hide()
   title.hide()
+  credits.hide()
   how_to_play.open()
 
 
 func _on_how_to_play_closed() -> void:
   title.show()
+  credits.show()
   buttons.show()
   how_to_play_button.grab_focus()
 
@@ -82,3 +89,15 @@ func set_continue_available(available: bool) -> void:
 
 func _on_continue_pressed() -> void:
   continue_requested.emit()
+
+
+func _on_submission_pressed() -> void:
+  OS.shell_open('https://ldjam.com/events/ludum-dare/60/while-the-lantern-burns')
+
+
+func _on_source_pressed() -> void:
+  OS.shell_open('https://github.com/martindzejky/while-the-lantern-burns')
+
+
+func _on_issues_pressed() -> void:
+  OS.shell_open('https://github.com/martindzejky/while-the-lantern-burns/issues')
