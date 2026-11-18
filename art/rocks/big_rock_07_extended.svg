@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2010" height="3192" data-top-preserve="423" viewBox="0 0 2010 3192">
+<!-- Drawn widening body: asymmetric shoulders, exposed shelf and broad fracture planes. -->
+<g transform="translate(806 2) scale(3.98 5.28)">
+<defs><clipPath id="body"><path d="M2.88 80 L-2 143 L-39 194 L-56 285 L-111 371 L-151 605.167 L199 605.167 L162 456 L128 333 L125 215 L94 150 L85.5 80 Z"/></clipPath></defs>
+<g clip-path="url(#body)">
+<path fill="#8000ff" d="M-400 80 L500 80 L500 606.167 L-400 606.167 Z"/>
+<path fill="#0000ff" d="M35.28 80 L35.28 99 L1 206 L13 280 L-23 359 L-42 605.167 L500 606.167 L500 80 Z"/>
+<path fill="#00ffff" d="M66.13 80 L66.13 99 L91 216 L76 302 L134 605.167 L500 606.167 L500 80 Z"/>
+<path fill="#ff0000" d="M17.15 80 L17.15 99 L12 146 L-19 206 L-29 283 L-85 384 L-105 605.167 L-400 606.167 L-400 80 Z"/>
+<path fill="#00ff00" d="M76.26 80 L76.26 99 L81 157 L108 225 L106 338 L137 464 L170 605.167 L500 606.167 L500 80 Z"/>
+</g>
+</g>
+<g transform="translate(804 0)">
+<g transform="translate(2 2) scale(3.98 5.28)">
+<defs><clipPath id="outline"><path d="M1 88 L5 71 L18 52 L35 40 L46 24 L74 2 L96 18 Q99 23 99 31 L90 61 L81 99 H6 Z"/></clipPath></defs>
+<g clip-path="url(#outline)">
+<path fill="#8000ff" d="M0 0 H100 V100 H0 Z"/>
+<path fill="#0000ff" d="M54 0 V29 L46 61 L35 100 H66 L71 60 L78 16 V0 Z"/>
+<path fill="#00ffff" d="M78 0 V16 L71 60 L66 100 H100 V0 Z"/>
+<path fill="#ff0000" d="M0 0 H44 L37 40 L22 66 L17 100 H0 Z"/>
+<path fill="#00ff00" d="M94 0 V24 L86 61 L76 100 H100 V0 Z"/>
+<path fill="#ffff00" d="M0 0 H100 V24 L94 23 L78 16 L64 21 L54 29 L37 40 L0 54 Z"/>
+</g></g>
+</g>
+</svg>

@@ -19,11 +19,13 @@ func _initialize() -> void:
   for family in ['big', 'small']:
     for index in range(1, 9 if family == 'big' else 8):
       var stem := '%s_rock_%02d' % [family, index]
-      generate(stem, normals)
+      var top := generate(stem, normals)
+      if family == 'big':
+        generate(stem + '_extended', normals, top)
   quit()
 
 
-func generate(stem: String, normals: Array) -> void:
+func generate(stem: String, normals: Array, top: Array = []) -> Array:
   var faces := Image.new()
   var source := FileAccess.get_file_as_string('res://art/rocks/' + stem + '.svg')
   var error := faces.load_svg_from_string(source, 2.0)
@@ -46,6 +48,18 @@ func generate(stem: String, normals: Array) -> void:
   # Classify before downsampling so blended label colors cannot invent directions.
   for texture in [faces, albedo, normal]:
     texture.resize(texture.get_width() / 2, texture.get_height() / 2, Image.INTERPOLATE_BILINEAR)
+  var textures := [faces, albedo, normal]
+  if not top.is_empty():
+    # Preserve the crown exactly; lower flanks blend into the wider drawn body.
+    var attribute := RegEx.new()
+    attribute.compile('data-top-preserve="([0-9]+)"')
+    var preserved := attribute.search(source)
+    assert(preserved != null, 'Missing top preservation height for ' + stem)
+    var height := preserved.get_string(1).to_int()
+    var width: int = top[0].get_width()
+    var left := (faces.get_width() - width) / 2
+    for index in textures.size():
+      textures[index].blit_rect(top[index], Rect2i(0, 0, width, height), Vector2i(left, 0))
   var destination := 'res://sprites/'
   var arguments := OS.get_cmdline_user_args()
   if not arguments.is_empty():
@@ -54,6 +68,7 @@ func generate(stem: String, normals: Array) -> void:
   assert(albedo.save_png(destination + stem + '.png') == OK)
   assert(normal.save_png(destination + stem + '_normal.png') == OK)
   print('Generated ', stem, ' ', faces.get_size())
+  return textures
 
 
 func nearest_label(pixel: Color) -> int:

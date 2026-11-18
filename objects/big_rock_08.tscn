@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://83y3jq6y8mfw" path="res://sprites/big_rock_08.png" id="albedo"]
 [ext_resource type="Texture2D" uid="uid://bvq0h1ok47vu7" path="res://sprites/big_rock_08_normal.png" id="normal"]
 
+[ext_resource type="Texture2D" path="res://sprites/big_rock_08_extended.png" id="extended_albedo"]
+[ext_resource type="Texture2D" path="res://sprites/big_rock_08_extended_normal.png" id="extended_normal"]
+
 [ext_resource type="Shader" path="res://shaders/rock_hit_flash.gdshader" id="flash"]
 [ext_resource type="Script" path="res://scripts/crumbling_rock.gd" id="crumbling"]
 [ext_resource type="PackedScene" path="res://effects/rock_crumble.tscn" id="crumble"]
@@ -24,6 +27,20 @@ normal_texture = ExtResource("normal")
 billboard_mode = 1
 billboard_keep_scale = true
 
+[sub_resource type="StandardMaterial3D" id="extended_material"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+diffuse_mode = 1
+specular_mode = 2
+albedo_texture = ExtResource("extended_albedo")
+metallic_specular = 0.0
+normal_enabled = true
+normal_texture = ExtResource("extended_normal")
+billboard_mode = 1
+billboard_keep_scale = true
+
 [node name="big_rock_08" type="StaticBody3D" node_paths=PackedStringArray("sprite") unique_id=975787150]
 script = ExtResource("crumbling")
 sprite = NodePath("sprite")
@@ -36,13 +53,13 @@ shape = SubResource("shape")
 
 [node name="sprite" type="Sprite3D" parent="." unique_id=1035219019]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.26450000)
-material_override = SubResource("material")
+material_override = SubResource("extended_material")
 cast_shadow = 0
-offset = Vector2(0, 191.5)
+offset = Vector2(0, -766)
 pixel_size = 0.004
 billboard = 1
 alpha_cut = 1
-texture = ExtResource("albedo")
+texture = ExtResource("extended_albedo")
 
 [node name="shadow" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4727975, 0)
