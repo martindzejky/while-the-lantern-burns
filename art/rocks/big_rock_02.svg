@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="446" height="355" viewBox="0 0 446 355">
+<!-- Categorical face labels. Continuous facets; mostly straight shared edges. -->
+<g transform="translate(2 2) scale(4.42 3.51)">
+<defs><clipPath id="outline"><path d="M1 79 L3 34 Q5 26 12 20 L23 10 Q27 6 35 5 L58 4 Q69 4 77 8 L90 20 Q96 30 98 45 L99 67 L97 91 L94 99 L7 99 Z"/></clipPath></defs>
+<g clip-path="url(#outline)">
+<path fill="#8000ff" d="M0 0 H100 V100 H0 Z"/>
+<path fill="#0000ff" d="M34 0 L34 16 L31 57 L27 100 H78 L73 61 L68 15 V0 Z"/>
+<path fill="#00ffff" d="M68 0 V15 L73 61 L78 100 H100 V0 Z"/>
+<path fill="#ff0000" d="M0 0 H14 L12 21 L9 64 L12 100 H0 Z"/>
+<path fill="#00ff00" d="M94 0 V19 L91 55 L94 100 H100 V0 Z"/>
+<path fill="#ffff00" d="M0 0 H100 V26 L91 23 L68 15 L34 16 L12 22 L0 30 Z"/>
+</g></g></svg>
