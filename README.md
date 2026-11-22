@@ -14,16 +14,18 @@ Development is complete. This repository preserves the game and its source, incl
 
 <table>
   <tr>
-    <td width="25%"><a href="screenshots/main-menu.png"><img src="screenshots/main-menu.png" alt="Main menu" width="100%"></a></td>
-    <td width="25%"><a href="screenshots/lantern-discovery-blue.png"><img src="screenshots/lantern-discovery-blue.png" alt="Discovering the lantern" width="100%"></a></td>
-    <td width="25%"><a href="screenshots/lantern-winding-passage.png"><img src="screenshots/lantern-winding-passage.png" alt="Exploring a winding cave passage" width="100%"></a></td>
-    <td width="25%"><a href="screenshots/lantern-warm-chamber.png"><img src="screenshots/lantern-warm-chamber.png" alt="Lantern light in a cave chamber" width="100%"></a></td>
+    <td width="20%"><a href="screenshots/final/01-main-menu.png"><img src="screenshots/final/01-main-menu.png" alt="Main menu" width="100%"></a></td>
+    <td width="20%"><a href="screenshots/final/02-lantern-discovery.png"><img src="screenshots/final/02-lantern-discovery.png" alt="Discovering the lantern" width="100%"></a></td>
+    <td width="20%"><a href="screenshots/final/03-winding-passage.png"><img src="screenshots/final/03-winding-passage.png" alt="Exploring a winding cave passage" width="100%"></a></td>
+    <td width="20%"><a href="screenshots/final/04-musket-discovery.png"><img src="screenshots/final/04-musket-discovery.png" alt="Discovering the musket" width="100%"></a></td>
+    <td width="20%"><a href="screenshots/final/05-breaking-the-barrier.png"><img src="screenshots/final/05-breaking-the-barrier.png" alt="Firing the musket at a rock barrier" width="100%"></a></td>
   </tr>
   <tr>
-    <td width="25%"><a href="screenshots/musket-fired-smoke.png"><img src="screenshots/musket-fired-smoke.png" alt="Firing the musket" width="100%"></a></td>
-    <td width="25%"><a href="screenshots/monster-watchers.png"><img src="screenshots/monster-watchers.png" alt="Monsters watching from the darkness" width="100%"></a></td>
-    <td width="25%"><a href="screenshots/monster-surrounded.png"><img src="screenshots/monster-surrounded.png" alt="Surrounded by monsters" width="100%"></a></td>
-    <td width="25%"><a href="screenshots/monster-bite-threat.png"><img src="screenshots/monster-bite-threat.png" alt="A monster preparing to bite" width="100%"></a></td>
+    <td width="20%"><a href="screenshots/final/06-bite-in-the-dark.png"><img src="screenshots/final/06-bite-in-the-dark.png" alt="A monster preparing to bite" width="100%"></a></td>
+    <td width="20%"><a href="screenshots/final/07-escape-ledge.png"><img src="screenshots/final/07-escape-ledge.png" alt="Carrying the lantern along a ledge in the Escape cave" width="100%"></a></td>
+    <td width="20%"><a href="screenshots/final/08-watchers-in-the-chamber.png"><img src="screenshots/final/08-watchers-in-the-chamber.png" alt="Monsters watching from the darkness" width="100%"></a></td>
+    <td width="20%"><a href="screenshots/final/09-last-stand.png"><img src="screenshots/final/09-last-stand.png" alt="Facing the final monster group" width="100%"></a></td>
+    <td width="20%"><a href="screenshots/final/10-daylight-at-the-exit.png"><img src="screenshots/final/10-daylight-at-the-exit.png" alt="Approaching daylight near the cave exit" width="100%"></a></td>
   </tr>
 </table>
 
